@@ -92,6 +92,6 @@ NodeJs/.yarn-integrity
 # dotenv environment variables file
 NodeJs/.env
 
-
+NodeJs/package-lock.json
 
 # End of https://www.gitignore.io/api/node,angular
