@@ -3,18 +3,13 @@ var mongoose = require("mongoose");
 //seller ..............
 var Schema = mongoose.Schema;
 
-var users = new Schema(
+var sellers = new Schema(
 {
   //auto increment id
   // _id:{
-  //   type:Number,
-  //
-  // },
   name:{
     type:String,
     required:true
-
-    //required and unique
   },
   email:{
     type:String,
@@ -27,16 +22,9 @@ var users = new Schema(
   national_id:{
     type:Number,
     unique:true,
-    required:true
     //required 14 number
-  },
-  //in user
-   origin:{
-  //
-    type:String,
-    enum :["fb","G","N"]
-  },
-
+    required:true
+  }
 }) ;
-users.plugin(autoIncrement.plugin, 'users');
-module.exports = mongoose.model("users",users);
+sellers.plugin(autoIncrement.plugin, 'sellers');
+module.exports = mongoose.model("sellers",sellers);
