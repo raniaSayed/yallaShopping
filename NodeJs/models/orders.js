@@ -12,7 +12,7 @@ var orderProducts = new Schema({
   },
   quantity:{
     type:Number
-  }
+  },
   status:{
     type:String,
     enum :["ordered","received"]
