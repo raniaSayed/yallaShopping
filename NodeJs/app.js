@@ -46,11 +46,7 @@ server.get("", function (req, resp) {
 //     ]
 //   });
 
-server.get("/orders",function (req,resp) {
-	var orders = orderModel.find({},function (error,result) {
-			resp.json(result);
-	});
-});
+
 
 server.use(express.static("static"));
 
