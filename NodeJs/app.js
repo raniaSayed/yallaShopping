@@ -28,8 +28,11 @@ fs.readdirSync(path.join(__dirname, "models")).forEach( function(model) {
 
 server.use(express.static("static"));
 
-var usersRouter = require("./controllers/users")
+var usersRouter = require("./controllers/users");
 server.use("/users", usersRouter);
+
+var categoriesRouter = require("./controllers/categories");
+server.use("/categories", categoriesRouter);
 
 // var productsRouter = require("./controllers/products")
 // server.use("/products", productsRouter);
