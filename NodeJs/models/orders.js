@@ -1,21 +1,34 @@
 var mongoose =require("mongoose");
 var Schema = mongoose.Schema;
 
+var orderProducts = new Schema({
+    prodId     : {
+      type:Number,
+      ref:"products"
+  }
+  , sellerId     : {
+      type:Number,
+      ref:"sellers"
+  },
+  quantity:{
+    type:Number
+  }
+  status:{
+    type:String,
+    enum :["ordered","received"]
+  }
+});
+
 var orders = new Schema(
   {
-    timestamp:{
-      type:Number,
-      //set default current timestamp
-      //default:Now
+    timestamps: {
+         createdAt: 'created_at'
     },
     userId:{
       type:Number,
       ref:"users"
     },
-    products:{
-      type:Array //array of object {pid,sellerId,quantity}
-    }
-
+    orderProducts:[orderProducts]
   }
 
 );
