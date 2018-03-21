@@ -25,14 +25,19 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    unique: true,
-    required:true,
-    ref:"sellers"
+    //unique: true,
+    //required:true,
+    //ref:"sellers"
   },
-  subCategory_name:{
-    type:String,
+  //edit...
+  category:{
+    type:Number,
     required:true,
-    ref:"categories"
+    //ref:"categories"
+  },
+  subcategory:{
+    type:String,
+    required:true
   }
 }) ;
 products.plugin(autoIncrement.plugin, 'products');

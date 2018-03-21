@@ -4,6 +4,7 @@ var bodyParserUrlEnc = bodyParser.urlencoded();
 var router = express.Router();
 var mongoose = require("mongoose");
 var CategoriesModel = mongoose.model("categories");
+var ProductsModel = mongoose.model("products");
 
 router.use(function(req,resp,next){
     resp.header("Access-Control-Allow-Origin","*");
@@ -14,11 +15,16 @@ router.use(function(req,resp,next){
 
 router.get("/:subcategory", function(request, response){
     var subcategory = request.params.subcategory;
-    CategoriesModel.find({})
-    console.log(subcategory);
+    ProductsModel.find({subcategory:subcategory}, function(err, result){
+        if(!err){
+            console.log(result);
+        }
+    });
+    //console.log(subcategory);
     
     //var catProd = CategoriesModel.find
 });
+
 
 
 
