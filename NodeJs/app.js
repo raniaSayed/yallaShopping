@@ -25,6 +25,11 @@ fs.readdirSync(path.join(__dirname, "models")).forEach( function(model) {
 // user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
 // });
 
+server.get("/orders",function (req,resp) {
+	var orders = orderModel.find({},function (error,result) {
+			resp.json(result);
+	});
+});
 
 server.use(express.static("static"));
 
