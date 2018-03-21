@@ -34,7 +34,7 @@ var users = new Schema(
    origin:{
   //
     type:String,
-    enum :["fb","G","N"]
+    enum :["FB","G","N"]
   },
 
 }) ;
