@@ -95,3 +95,49 @@ NodeJs/.env
 NodeJs/package-lock.json
 
 # End of https://www.gitignore.io/api/node,angular
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+Angular/dist
+Angular/dist-server
+Angular/tmp
+Angular/out-tsc
+
+# dependencies
+Angular/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+Angular/.sass-cache
+Angular/connect.lock
+Angular/coverage
+Angular/libpeerconnection.log
+Angular/npm-debug.log
+Angular/yarn-error.log
+Angular/testem.log
+Angular/typings
+
+# e2e
+Angular/e2e/*.js
+Angular/e2e/*.map
+
+# System Files
+Angular/.DS_Store
+Angular/Thumbs.db
