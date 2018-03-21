@@ -33,7 +33,9 @@ server.get("", function (req, resp) {
   resp.send("Done");
 });
 
-
+//to be deleted..
+server.set("view engine","ejs");
+server.set("views","./views");
 
 
 // server.get("/add/order",function (req,resp) {
@@ -56,8 +58,12 @@ server.use("/users", usersRouter);
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
 
-// var productsRouter = require("./controllers/products")
-// server.use("/products", productsRouter);
+
+// var apiRouter = require("./controllers/api");
+// server.use("/api/products", apiRouter);
+
+var productsRouter = require("./controllers/products");
+server.use("/products", productsRouter);
 
 //to add a new product to try
 var ProductsModel = mongoose.model("products");

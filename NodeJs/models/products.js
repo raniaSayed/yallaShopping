@@ -32,12 +32,12 @@ var products = new Schema(
   //edit...
   category:{
     type:Number,
-    required:true,
+    // required:true,
     //ref:"categories"
   },
   subcategory:{
     type:String,
-    required:true
+    // required:true
   }
 }) ;
 products.plugin(autoIncrement.plugin, 'products');
