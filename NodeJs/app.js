@@ -47,6 +47,7 @@ server.get("", function (req, resp) {
 //   });
 
 
+
 server.use(express.static("static"));
 
 var usersRouter = require("./controllers/users");

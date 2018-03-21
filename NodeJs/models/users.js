@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
 
-//seller ..............
 var Schema = mongoose.Schema;
 
 var carts = new Schema({

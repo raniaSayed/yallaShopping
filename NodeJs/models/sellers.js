@@ -1,12 +1,9 @@
 var mongoose = require("mongoose");
 
-//seller ..............
 var Schema = mongoose.Schema;
 
 var sellers = new Schema(
 {
-  //auto increment id
-  // _id:{
   name:{
     type:String,
     required:true
