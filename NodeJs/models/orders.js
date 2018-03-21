@@ -3,11 +3,21 @@ var Schema = mongoose.Schema;
 
 var orders = new Schema(
   {
-    _id:{
+    timestamp:{
       type:Number,
-      //auto increment
+      //set default current timestamp
+      //default:Now
     },
-    
+    userId:{
+      type:Number,
+      ref:"users"
+    },
+    products:{
+      type:Array //array of object {pid,sellerId,quantity}
+    }
+
   }
 
 );
+orders.plugin(autoIncrement.plugin, 'orders');
+module.exports = mongoose.model("orders",orders);
