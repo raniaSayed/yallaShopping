@@ -22,7 +22,8 @@ var orderProducts = new Schema({
 var orders = new Schema(
   {
     timestamps: {
-         createdAt: 'created_at'
+         type: Date,
+         default: Date.now
     },
     userId:{
       type:Number,

@@ -2,37 +2,37 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-var carts = new Schema(
-  {
-    prodId:{
-      type:Number,
-      ref:"products"
-    },
-    quantity:{
-      type:Number
-    }
+var carts = new Schema({
+  prodId: {
+    type: Number,
+    ref: "products"
+  },
+  quantity: {
+    type: Number
   }
-);
+});
 
-var users = new Schema(
-{
-  name:{
-    type:String,
-    required:true
+var users = new Schema({
+  name: {
+    type: String,
+    required: true
   },
-  email:{
-    type:String,
+  email: {
+    type: String,
     unique: true,
-    required:true
+    required: true
   },
-  password:String,
-  picture:String , //base64
-  address:String,
-  cart:carts,
-  origin:{
-    type:String,
-    enum :["FB","G","N"]
+  password: {
+    type: String,
+    unique: true
+  },
+  picture: String, //base64
+  address: String,
+  cart: carts,
+  origin: {
+    type: String,
+    enum: ["FB", "G", "N"]
   }
-}) ;
+});
 users.plugin(autoIncrement.plugin, 'users');
-module.exports = mongoose.model("users",users);
+module.exports = mongoose.model("users", users);
