@@ -13,11 +13,15 @@ router.use(function(req,resp,next){
     next();
 });
 
+//get request http://localhost:9090/categories/subcategory_name
+//need to find all the products in this subcategory...
+
 router.get("/:subcategory", function(request, response){
     var subcategory = request.params.subcategory;
     ProductsModel.find({subcategory:subcategory}, function(err, result){
         if(!err){
             console.log(result);
+            response.send(result);
         }
     });
     //console.log(subcategory);

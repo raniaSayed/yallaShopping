@@ -19,19 +19,20 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 
 var userModel = mongoose.model("users");
 var orderModel = mongoose.model("orders");
+var ProductsModel = mongoose.model("products");
 
-server.get("", function (req, resp) {
-  var user = new userModel({
-    name: 'ahmed',
-    national_id: 234586,
-    email: "785",
-    origin: "G"
-  });
+// server.get("", function (req, resp) {
+//   var user = new userModel({
+//     name: 'ahmed',
+//     national_id: 234586,
+//     email: "785",
+//     origin: "G"
+//   });
 
-  //save user obj to db
-  user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
-  resp.send("Done");
-});
+//   //save user obj to db
+//   user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
+//   resp.send("Done");
+// });
 
 
 
@@ -56,13 +57,15 @@ server.use("/users", usersRouter);
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
 
-// var productsRouter = require("./controllers/products")
-// server.use("/products", productsRouter);
+var productsRouter = require("./controllers/products")
+server.use("/products", productsRouter);
+
+
 
 //to add a new product to try
-var ProductsModel = mongoose.model("products");
-var p = new ProductsModel({name:"iphone",desc:"iphone apple 7", price:17000,rate: 5,stock: 6,seller_id:1,category:2,subcategory:"mobiles"});
-p.save();
+
+// var p = new ProductsModel({name:"iphone",desc:"iphone apple 7", price:17000,rate: 5,stock: 6,seller_id:1,category:2,subcategory:"mobiles"});
+// p.save();
 
 server.listen("9090", function () {
   console.log("Starting....")
