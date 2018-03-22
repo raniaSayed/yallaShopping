@@ -21,16 +21,16 @@ var orderProducts = new Schema({
 });
 
 var orders = new Schema({
-    timestamps: {
-      type: Date,
-      default: Date.now
-    },
-    userId: {
-      type: Number,
-      ref: "users"
-    },
-    orderProducts: [orderProducts]
-  }
+  timestamps: {
+    type: Date,
+    default: Date.now
+  },
+  userId: {
+    type: Number,
+    ref: "users"
+  },
+  orderProducts: [orderProducts]
+}
 
 );
 
@@ -39,3 +39,12 @@ orders.plugin(autoIncrement.plugin, 'orders');
 
 // register orders model
 mongoose.model("orders", orders);
+
+var order = {};
+order.model = mongoose.model("orders");
+order.doConsoleLog = function () {
+  console.log("hhhhhhhhhhhhhhhhhh");
+}
+
+module.exports = order;
+
