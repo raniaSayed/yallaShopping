@@ -84,7 +84,7 @@ router.delete("/:id",function (req, resp) {
 
 
 router.get("/:id/cart",(req, resp)=>{
-	UserModel.find({_id:req.params.id},{cart:true, _id:false}).populate('cart.prodId').populate('cart.prodId.seller_id').exec((err, res)=>{
+	UserModel.find({_id:req.params.id},{cart:true, _id:false}).populate('cart.prodId').exec((err, res)=>{
 		if (!err && res.length>0) {
 			resp.json(res[0].cart)
 		}

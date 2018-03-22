@@ -1,17 +1,17 @@
 var mongoose = require("mongoose");
-
-//seller ..............
 var Schema = mongoose.Schema;
 
+<<<<<<< HEAD
 var connection = mongoose.createConnection("mongodb://localhost/souq");
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
 mongoose.connect("mongodb://localhost/souq");
 
+=======
+// products schema
+>>>>>>> a485b99db6a475ab0e501b903e6e033c1d157a05
 var products = new Schema(
 {
-  //auto increment id
-  // _id:{
   name:{
     type:String,
     required:true
@@ -30,19 +30,14 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    //unique: true,
-    //required:true,
-    //ref:"sellers"
+    unique: true,
+    required:true,
+    ref:"sellers"
   },
-  //edit...
-  category:{
-    type:Number,
-    // required:true,
-    //ref:"categories"
-  },
-  subcategory:{
+  subCategory_name:{
     type:String,
-    // required:true
+    required:true,
+    ref:"categories"
   }
 }) ;
 // products.plugin(autoIncrement.plugin, 'products');
@@ -55,4 +50,11 @@ var products = new Schema(
 // })
 // test.save((err, res)=>{console.log(err, res)})
 // Products.find({},(err, res)=>console.log(err, res))
-module.exports = mongoose.model("products",products);
+
+
+// products plugins
+products.plugin(autoIncrement.plugin, 'products');
+// paginate
+
+// register products model
+mongoose.model("products",products);

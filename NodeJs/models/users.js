@@ -8,6 +8,7 @@ autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
 mongoose.connect("mongodb://localhost/souq");
 
+// users schema
 var carts = new Schema({
   prodId: {
     type: Number,
@@ -62,4 +63,8 @@ users.plugin(autoIncrement.plugin, 'users');
 
 
 
-module.exports = mongoose.model("users", users);
+// users plugins
+users.plugin(autoIncrement.plugin, 'users');
+
+// register login models
+mongoose.model("users", users);

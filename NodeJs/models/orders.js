@@ -1,63 +1,41 @@
-var mongoose =require("mongoose");
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+// orders schema
 var orderProducts = new Schema({
-    prodId     : {
-      type:Number,
-      ref:"products"
-  }
-  , sellerId     : {
-      type:Number,
-      ref:"sellers"
+  prodId: {
+    type: Number,
+    ref: "products"
   },
-  quantity:{
-    type:Number
+  sellerId: {
+    type: Number,
+    ref: "sellers"
   },
-  status:{
-    type:String,
-    enum :["ordered","received"]
+  quantity: {
+    type: Number
+  },
+  status: {
+    type: String,
+    enum: ["ordered", "received"]
   }
 });
 
-var orders = new Schema(
-  {
+var orders = new Schema({
     timestamps: {
-         type: Date,
-         default: Date.now
+      type: Date,
+      default: Date.now
     },
-    userId:{
-      type:Number,
-      ref:"users"
+    userId: {
+      type: Number,
+      ref: "users"
     },
-    orderProducts:[orderProducts]
+    orderProducts: [orderProducts]
   }
 
 );
 
-
-//view user orders
-orders.viewUserAll = function(userId){
-  // server.get("/orders",function (req,resp) {
-  	var orders = orderModel.find({userId:userId},function (error,result) {
-  			// resp.json(result);
-        if(!error)
-          return result;
-        return error;
-
-  	});
-  // });
-}
-
-orders.viewById = function(id){
-  // server.get("/orders",function (req,resp) {
-  	var orders = orderModel.find({_id:id},function (error,result) {
-  			// resp.json(result);
-        if(!error)
-          return result;
-        return error;
-
-  	});
-  // });
-}
+// order plugins
 orders.plugin(autoIncrement.plugin, 'orders');
-module.exports = mongoose.model("orders",orders);
+
+// register orders model
+mongoose.model("orders", orders);
