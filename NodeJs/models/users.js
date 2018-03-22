@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
-
 var Schema = mongoose.Schema;
 
+// users schema
 var carts = new Schema({
   prodId: {
     type: Number,
@@ -34,5 +34,9 @@ var users = new Schema({
     enum: ["FB", "G", "N"]
   }
 });
+
+// users plugins
 users.plugin(autoIncrement.plugin, 'users');
-module.exports = mongoose.model("users", users);
+
+// register login models
+mongoose.model("users", users);

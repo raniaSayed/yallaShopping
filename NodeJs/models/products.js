@@ -1,12 +1,9 @@
 var mongoose = require("mongoose");
-
-//seller ..............
 var Schema = mongoose.Schema;
 
+// products schema
 var products = new Schema(
 {
-  //auto increment id
-  // _id:{
   name:{
     type:String,
     required:true
@@ -25,20 +22,20 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    //unique: true,
-    //required:true,
-    //ref:"sellers"
+    unique: true,
+    required:true,
+    ref:"sellers"
   },
-  //edit...
-  category:{
-    type:Number,
-    // required:true,
-    //ref:"categories"
-  },
-  subcategory:{
+  subCategory_name:{
     type:String,
-    // required:true
+    required:true,
+    ref:"categories"
   }
-}) ;
+});
+
+// products plugins
 products.plugin(autoIncrement.plugin, 'products');
-module.exports = mongoose.model("products",products);
+// paginate
+
+// register products model
+mongoose.model("products",products);
