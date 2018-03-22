@@ -33,7 +33,9 @@ server.get("", function (req, resp) {
   resp.send("Done");
 });
 
-
+//to be deleted..
+server.set("view engine","ejs");
+server.set("views","./views");
 
 
 // server.get("/add/order",function (req,resp) {
@@ -56,9 +58,17 @@ server.use("/users", usersRouter);
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
 
-// var productsRouter = require("./controllers/products")
-// server.use("/products", productsRouter);
 
+// var apiRouter = require("./controllers/api");
+// server.use("/api/products", apiRouter);
+
+var productsRouter = require("./controllers/products");
+server.use("/products", productsRouter);
+
+//to add a new product to try
+var ProductsModel = mongoose.model("products");
+var p = new ProductsModel({name:"iphone",desc:"iphone apple 7", price:17000,rate: 5,stock: 6,seller_id:1,category:2,subcategory:"mobiles"});
+p.save();
 
 server.listen("9090", function () {
   console.log("Starting....")

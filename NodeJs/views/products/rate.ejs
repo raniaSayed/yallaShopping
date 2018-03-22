@@ -1,0 +1,14 @@
+<%include ../layout/header.ejs %>
+
+<form class="" action="" method="post" enctype="multipart/form-data">
+  <p>
+    "<%= product._id %>"
+  </p>
+  <p>
+  "<%= product.name %>"
+  </p>
+  <input type="text" name="rate" value="<%= product.rate %>"><br>
+
+  <input type="submit" name="" value="rate">
+</form>
+<%include ../layout/footer.ejs %>
