@@ -19,6 +19,7 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 
 var userModel = mongoose.model("users");
 var orderModel = mongoose.model("orders");
+var ProductsModel = mongoose.model("products");
 
 server.get("", function (req, resp) {
   var user = new userModel({
@@ -29,11 +30,13 @@ server.get("", function (req, resp) {
   });
 
   //save user obj to db
-  user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
+  // user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
   resp.send("Done");
 });
 
-
+//to be deleted..
+server.set("view engine","ejs");
+server.set("views","./views");
 
 
 // server.get("/add/order",function (req,resp) {
@@ -61,9 +64,8 @@ server.use("/orders", ordersRouter);
 //category routes
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
-
-// var productsRouter = require("./controllers/products")
-// server.use("/products", productsRouter);
+var productsRouter = require("./controllers/products")
+server.use("/products", productsRouter);
 
 
 server.listen("9090", function () {

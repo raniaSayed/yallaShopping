@@ -1,0 +1,15 @@
+<%include ../layout/header.ejs %>
+
+<form class="" action="" method="post" enctype="multipart/form-data">
+  <input type="text" name="product_id" value="<%= product._id %>"><br>
+  <input type="text" name="product_name" value="<%= product.name %>"><br>
+  <input type="text" name="product_price" value="<%= product.price %>"><br>
+  <input type="text" name="desc" value="<%= product.desc %>"><br>
+  <input type="text" name="rate" value="<%= product.rate %>"><br>
+  <input type="text" name="stock" value="<%= product.stock %>"><br>
+
+  <input type="file" multiple="multiple" name="post_image" value=""><br>
+
+  <input type="submit" name="" value="Edit">
+</form>
+<%include ../layout/footer.ejs %>

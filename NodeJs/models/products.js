@@ -1,12 +1,9 @@
 var mongoose = require("mongoose");
-
-//seller ..............
 var Schema = mongoose.Schema;
 
+// products schema
 var products = new Schema(
 {
-  //auto increment id
-  // _id:{
   name:{
     type:String,
     required:true
@@ -35,5 +32,21 @@ var products = new Schema(
     ref:"categories"
   }
 }) ;
+// products.plugin(autoIncrement.plugin, 'products');
+// var Products = mongoose.model('products', products);
+
+// var test = new Products({
+//   name:"aajja",
+//   seller_id:4,
+//   subCategory_name:"bbb"
+// })
+// test.save((err, res)=>{console.log(err, res)})
+// Products.find({},(err, res)=>console.log(err, res))
+
+
+// products plugins
 products.plugin(autoIncrement.plugin, 'products');
+// paginate
+
+// register products model
 mongoose.model("products",products);

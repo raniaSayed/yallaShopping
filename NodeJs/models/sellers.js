@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
-
 var Schema = mongoose.Schema;
 
+// sellers schema
 var sellers = new Schema(
 {
   name:{
@@ -22,6 +22,10 @@ var sellers = new Schema(
     //required 14 number
     required:true
   }
-}) ;
+});
+
+// sellers plugins
 sellers.plugin(autoIncrement.plugin, 'sellers');
+
+// register sellers model
 mongoose.model("sellers",sellers);
