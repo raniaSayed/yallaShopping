@@ -36,4 +36,4 @@ var products = new Schema(
   }
 }) ;
 products.plugin(autoIncrement.plugin, 'products');
-module.exports = mongoose.model("products",products);
+mongoose.model("products",products);

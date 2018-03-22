@@ -24,4 +24,4 @@ var sellers = new Schema(
   }
 }) ;
 sellers.plugin(autoIncrement.plugin, 'sellers');
-module.exports = mongoose.model("sellers",sellers);
+mongoose.model("sellers",sellers);

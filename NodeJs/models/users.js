@@ -35,4 +35,4 @@ var users = new Schema({
   }
 });
 users.plugin(autoIncrement.plugin, 'users');
-module.exports = mongoose.model("users", users);
+mongoose.model("users", users);

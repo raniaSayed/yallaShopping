@@ -13,4 +13,4 @@ var categories = new Schema(
 
 );
 categories.plugin(autoIncrement.plugin, 'categories');
-module.exports = mongoose.model("categories",categories);
+mongoose.model("categories",categories);

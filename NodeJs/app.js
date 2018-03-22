@@ -50,9 +50,15 @@ server.get("", function (req, resp) {
 
 server.use(express.static("static"));
 
+//user routes
 var usersRouter = require("./controllers/users");
 server.use("/users", usersRouter);
 
+//order routes
+var ordersRouter = require("./controllers/orders");
+server.use("/orders", ordersRouter);
+
+//category routes
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
 

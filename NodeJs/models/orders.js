@@ -34,21 +34,8 @@ var orders = new Schema(
 
 );
 
-
-//view user orders
-orders.viewUserAll = function(userId){
-  // server.get("/orders",function (req,resp) {
-  	var orders = orderModel.find({userId:userId},function (error,result) {
-  			// resp.json(result);
-        if(!error)
-          return result;
-        return error;
-
-  	});
-  // });
-}
-
-orders.viewById = function(id){
+//view order products by seller id
+orders.viewById = function(sellerId){
   // server.get("/orders",function (req,resp) {
   	var orders = orderModel.find({_id:id},function (error,result) {
   			// resp.json(result);
@@ -60,4 +47,4 @@ orders.viewById = function(id){
   // });
 }
 orders.plugin(autoIncrement.plugin, 'orders');
-module.exports = mongoose.model("orders",orders);
+mongoose.model("orders",orders);
