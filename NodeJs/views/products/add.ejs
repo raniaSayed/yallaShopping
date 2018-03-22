@@ -1,0 +1,15 @@
+<%include ../layout/header.ejs %>
+
+<form class="" action="/products/add" method="post" enctype="multipart/form-data">
+product_name:  <input type="text" name="name" value=""><br>
+  product_price:<input type="text" name="price" value=""><br>
+  product_desc:<input type="text" name="desc" value=""><br>
+  <!-- product_category:<input type="text" name="category" value=""><br> -->
+  <!-- product_subcategory:<input type="text" name="subcategory" value=""><br> -->
+  product_stock:<input type="text" name="stock" value=""><br>
+  product_rate:<input type="text" name="rate" value=""><br>
+
+  <br>
+  <input type="submit" name="" value="Add">
+</form>
+<%include ../layout/footer.ejs %>
