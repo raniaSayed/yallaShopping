@@ -40,11 +40,19 @@ orders.plugin(autoIncrement.plugin, 'orders');
 // register orders model
 mongoose.model("orders", orders);
 
-var order = {};
-order.model = mongoose.model("orders");
-order.doConsoleLog = function () {
-  console.log("hhhhhhhhhhhhhhhhhh");
-}
+var OrderModel = {};
+OrderModel.model = mongoose.model("orders");
 
-module.exports = order;
+// add order
+
+// view orders
+
+// view user orders
+
+// view seller orders products
+
+// change order status
+
+
+module.exports = OrderModel;
 

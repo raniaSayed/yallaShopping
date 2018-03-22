@@ -68,3 +68,13 @@ users.plugin(autoIncrement.plugin, 'users');
 
 // register login models
 mongoose.model("users", users);
+
+var UserModel = {};
+UserModel.model = mongoose.model('users');
+UserModel.getUsers = function(callback) {
+  UserModel.model.find({}, { password: false }, function (err, result) {
+    callback(err, result);
+  });
+}
+
+module.exports = UserModel;

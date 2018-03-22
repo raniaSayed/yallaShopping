@@ -4,7 +4,7 @@ var JSONParsermid = bodyParser.json();
 var urlEncodedParsermid = bodyParser.urlencoded();
 var router = express.Router();
 var mongoose = require("mongoose");
-var UserModel = mongoose.model("users");
+var UserModel = require("../models/users");
 var multer = require("multer");
 var fileUploadMid = multer({dest:"./static/users"});
 var encryptPassword = require('./encryptPassword');
@@ -17,9 +17,13 @@ router.use(function(req,resp,next){
 });
 
 router.get("/", function (req, resp) {
-	UserModel.find({},{password: false}, function (err, result) {
-		resp.json(result);
-	});
+	UserModel.getUsers((err, result) => {
+		if(!err) {
+			resp.json(result);
+		} else {
+			resp.json(err);
+		}
+	})
 });
 
 
