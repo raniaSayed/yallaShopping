@@ -29,7 +29,7 @@ server.get("", function (req, resp) {
   });
 
   //save user obj to db
-  user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
+  // user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
   resp.send("Done");
 });
 
@@ -68,7 +68,7 @@ server.use("/products", productsRouter);
 //to add a new product to try
 var ProductsModel = mongoose.model("products");
 var p = new ProductsModel({name:"iphone",desc:"iphone apple 7", price:17000,rate: 5,stock: 6,seller_id:1,category:2,subcategory:"mobiles"});
-p.save();
+// p.save();
 
 server.listen("9090", function () {
   console.log("Starting....")

@@ -1,15 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-<<<<<<< HEAD
-var connection = mongoose.createConnection("mongodb://localhost/souq");
-autoIncrement = require('mongoose-auto-increment');
-autoIncrement.initialize(connection);
-mongoose.connect("mongodb://localhost/souq");
-
-=======
 // products schema
->>>>>>> a485b99db6a475ab0e501b903e6e033c1d157a05
 var products = new Schema(
 {
   name:{
