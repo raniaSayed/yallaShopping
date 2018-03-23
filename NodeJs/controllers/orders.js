@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var JSONParsermid = bodyParser.json();
-var urlEncodedParsermid = bodyParser.urlencoded();
+var urlEncodedParsermid = bodyParser.urlencoded({extended: true});
 var router = express.Router();
 //var fs = require("fs");
 var mongoose = require("mongoose");
