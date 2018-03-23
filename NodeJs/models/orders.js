@@ -43,7 +43,6 @@ mongoose.model("orders", orders);
 var OrderModel = {};
 
 OrderModel.model = mongoose.model("orders");
-console.log(OrderModel.model);
 
 // add order
 OrderModel.addOrder = function(userId, orderProducts, callback) {
