@@ -20,7 +20,7 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 var userModel = mongoose.model("users");
 var orderModel = mongoose.model("orders");
 var ProductsModel = mongoose.model("products");
-
+var CategoriesModel = mongoose.model("categories");
 server.get("", function (req, resp) {
   var user = new userModel({
     name: 'ahmed',
@@ -57,15 +57,16 @@ server.use(express.static("static"));
 var usersRouter = require("./controllers/users");
 server.use("/users", usersRouter);
 
+var productsRouter = require("./controllers/products")
+server.use("/products", productsRouter);
+
 //order routes
 var ordersRouter = require("./controllers/orders");
 server.use("/orders", ordersRouter);
 
-//category routes
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
-var productsRouter = require("./controllers/products")
-server.use("/products", productsRouter);
+
 
 
 server.listen("9090", function () {

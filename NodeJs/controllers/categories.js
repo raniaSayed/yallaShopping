@@ -3,8 +3,8 @@ var bodyParser = require("body-parser");
 var bodyParserUrlEnc = bodyParser.urlencoded();
 var router = express.Router();
 var mongoose = require("mongoose");
-var CategoriesModel = mongoose.model("categories");
-var ProductsModel = mongoose.model("products");
+// var CategoriesModel = mongoose.model("categories");
+var CategoriesModel = require("../models/categories");
 
 router.use(function(req,resp,next){
     resp.header("Access-Control-Allow-Origin","*");
@@ -17,14 +17,25 @@ router.use(function(req,resp,next){
 //need to find all the products in this subcategory...
 
 router.get("/:subcategory", function(request, response){
-    var subcategory = request.params.subcategory;
-    ProductsModel.find({subcategory:subcategory}, function(err, result){
-        if(!err){
-            console.log(result);
-            response.send(result);
-        }
+    console.log("subcat");
+    
+    CategoriesModel.getSubCategoryProducts(request.params.subcategory, function(err, result){
+        if(!err&&result.length>0){
+            console.log("finding serch Product with q ="+request.query.q);
+            response.json(result);
+          }
+          else{
+            response.json(err);
+          }
     });
-    //console.log(subcategory);
+    // var subcategory = request.params.subcategory;
+    // ProductsModel.find({subcategory:subcategory}, function(err, result){
+    //     if(!err){
+    //         console.log(result);
+    //         response.send(result);
+    //     }
+    // });
+    // //console.log(subcategory);
     
     //var catProd = CategoriesModel.find
 });
