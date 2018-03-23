@@ -4,7 +4,7 @@ var config = require('../config');
 
 var authMid = function (req, res, next) {
 
-    // check header or url parameters or post parameters for token
+    // check header
     var token = req.headers['x-access-token'];
 
     // decode token

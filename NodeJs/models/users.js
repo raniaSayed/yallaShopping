@@ -4,7 +4,7 @@ var product = require('./products.js')
 var encryptPassword = require('../controllers/encryptPassword');
 
 // users schema
-var carts = new Schema({
+var cartItems = new Schema({
   prodId: {
     type: Number,
     ref: "products"
@@ -30,7 +30,7 @@ var users = new Schema({
   },
   picture: String, //base64
   address: String,
-  cart: [carts],
+  cart: [cartItems],
   origin: {
     type: String,
     enum: ["FB", "G", "N"]
@@ -39,6 +39,11 @@ var users = new Schema({
 
 users.plugin(autoIncrement.plugin, {
     model: 'users',
+    startAt: 1,
+});
+
+cartItems.plugin(autoIncrement.plugin, {
+    model: 'cartItems',
     startAt: 1,
 });
 
@@ -99,7 +104,6 @@ UserModel.addUser = (data, callback)=>{
     var user = new UserModel.model(data);
     user.save((err, doc)=>{
       callback(err, doc)
-      console.log(err);
     });
   });
 }
