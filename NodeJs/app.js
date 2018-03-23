@@ -7,6 +7,7 @@ var authMid = require("./controllers/authMid");
 
 //connect to db and setup auto-increment
 var connection = mongoose.createConnection("mongodb://localhost/souq");
+var mongooseTextSearch = require("mongoose-text-search");
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
 mongoose.connect("mongodb://localhost/souq");
