@@ -39,20 +39,51 @@ orders.plugin(autoIncrement.plugin, 'orders');
 
 // register orders model
 mongoose.model("orders", orders);
-
 var OrderModel = {};
+
 OrderModel.model = mongoose.model("orders");
+console.log(OrderModel.model);
 
 // add order
 
-// view orders
-
+//view user order by id
+OrderModel.viewById = function (id,callback) {
+  OrderModel.model.findOne({_id:(+id)}).populate("orderProducts.sellerId")
+      .populate("orderProducts.prodId").exec((error,result)=> {
+        callback(error,result);
+      });
+}
 // view user orders
+OrderModel.viewUserAll = function(id,callback){
+    ///change id to session userId
+  	 OrderModel.model.find({userId:id},function (error,result) {
+      callback(error, result);
+  	});
+}
 
-// view seller orders products
+//view [single order] products that belongs to seller by order id
+OrderModel.viewSellerOrderProducts = function (id,callback) {
+  var products = OrderModel.model.aggregate([  {$match :{"_id":(+id)}},{
+        $project: {
+            "orderProducts": {
+                $filter: {
+                    input: "$orderProducts",
+                    as: "orderProduct",
+                    cond: {
+                      $and:[
+                        ///to be changed with auth sellerId
+                        {$eq: [ "$$orderProduct.sellerId",1 ]}
+                      // , {"$$orderProduct.sellerId":{$ne: null}}
+                      ]
+                    }
+                }
+            },"userId":1
+        }}],function (error,result) {
+            callback(error,result);
+  });
+}
 
 // change order status
 
 
 module.exports = OrderModel;
-

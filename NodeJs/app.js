@@ -53,14 +53,21 @@ server.set("views","./views");
 
 server.use(express.static("static"));
 
+//user routes
 var usersRouter = require("./controllers/users");
 server.use("/users", usersRouter);
 
 var productsRouter = require("./controllers/products")
 server.use("/products", productsRouter);
 
+//order routes
+var ordersRouter = require("./controllers/orders");
+server.use("/orders", ordersRouter);
+
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
+
+
 
 server.listen("9090", function () {
   console.log("Starting....")
