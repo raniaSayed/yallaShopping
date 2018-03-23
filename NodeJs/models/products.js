@@ -108,13 +108,18 @@ ProductsModel.addProduct = function(data,callbackFn){
 }
 
 
-ProductsModel.editProduct = function(Id, data, callback)=>{
-  ProductsModel.update({_id:data.id},{"$set":{name:data.name,
-     price:data.price,
-     desc: data.desc,
-     rate:data.rate,
-     stock:data.stock}},function(err,data){
+ProductsModel.editProduct = function(Id, data, callbackFn){
+  ProductsModel.model.update({_id:Id}, data,(err, result)=>{
     callback(err, result)
-  )}
+  })
+}
+
+ProductsModel.rateProduct = function(Id,data,callbackFn){
+  ProductsModel.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
+    if(!err)
+    ProductsModel.find({}, function (err, result) {
+      resp.json(result);
+    });
+  })
 }
 module.exports = ProductsModel;
