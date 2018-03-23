@@ -9,14 +9,7 @@ var multer = require("multer");
 var fileUploadMid = multer({dest:"./static/users"});
 var encryptPassword = require('./encryptPassword');
 
-router.use(function(req,resp,next){
-  resp.header("Access-Control-Allow-Origin","*");
-  resp.header("Access-Control-Allow-Headers","Content-Type");
-  resp.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE")
-  next();
-});
-
-router.get("/", function (req, resp) {
+router.get("/", (req, resp)=>{
 	UserModel.getUsers((err, result) => {
 		if(!err) {
 			resp.json(result);

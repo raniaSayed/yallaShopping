@@ -9,14 +9,6 @@ var config = require('../config');
 var encryptPassword = require('./encryptPassword');
 var jwt = require('jsonwebtoken');
 
-router.use(function(req,resp,next){
-  resp.header("Access-Control-Allow-Origin","*");
-  resp.header("Access-Control-Allow-Headers","Content-Type");
-  resp.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE")
-  next();
-});
-
-
 router.post("/", urlEncodedParsermid,function (req, resp) {
   console.log(req.body);
 	UserModel.findOne({
