@@ -132,6 +132,7 @@ UserModel.addUser = (data, callback)=>{
     });
     user.save((err, doc)=>{
       callback(err, doc)
+      console.log(err);
     });
   });
 }
