@@ -3,9 +3,11 @@ var express = require('express');
 var fs = require("fs");
 var server = express();
 var path = require('path');
+var authMid = require("./controllers/authMid");
 
 //connect to db and setup auto-increment
 var connection = mongoose.createConnection("mongodb://localhost/souq");
+var mongooseTextSearch = require("mongoose-text-search");
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
 mongoose.connect("mongodb://localhost/souq");
@@ -27,6 +29,12 @@ server.set("views","./views");
 
 // setup static files
 server.use(express.static("static"));
+
+server.use(authMid);
+
+//auth route
+var authRouter = require("./controllers/auth");
+server.use("/auth", authRouter);
 
 //user routes
 var usersRouter = require("./controllers/users");

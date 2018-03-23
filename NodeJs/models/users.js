@@ -99,6 +99,7 @@ UserModel.addUser = (data, callback)=>{
     var user = new UserModel.model(data);
     user.save((err, doc)=>{
       callback(err, doc)
+      console.log(err);
     });
   });
 }

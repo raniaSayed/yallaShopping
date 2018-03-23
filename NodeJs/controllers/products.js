@@ -20,8 +20,6 @@ router.use(function(req,resp,next){
 //get request http://localhost:9090/products/search?q=whatever
 // need to find any product having the word in the ""{q}""
 router.get("/search", function(request, response){
-  console.log(request.query.q);
- //response.send("search")
     ProductsModel.searchProducts(request.query.q, function(err, result){
       if(!err&&result.length>0){
         console.log("finding serch Product with q ="+request.query.q);
@@ -31,9 +29,6 @@ router.get("/search", function(request, response){
         response.json(err);
       }
     });
-
-    // console.log(request.query.q);
-    // response.send("serch about "+request.query.q);
 });
 
 //Menna's code...
@@ -71,53 +66,43 @@ router.put("/:id", JSONParsermid,(req, resp)=>{
 
 })
 
+router.get("/:id/rate", function(request, response){
 
+    if(request.params.id){
+      ProductsModel.getProductById(request.params.id, function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding Product with id ="+request.params.id);
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      ProductsModel.getAllProducts(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
+
+router.post("/:id/rate", JSONParsermid,function (req, resp) {
+	ProductsModel.rateProduct(req.body, (err, result)=>{
+		if(!err) {
+			resp.json({status:"ok"})
+		} else {
+			resp.json(err);
+		}
+	})
+
+})
 //end of my new code
-
-
-//to be delted...
-router.get("/edit/:id",function(req,resp){
-  ProductModel.findOne({_id:req.params.id},function(err,data){
-    resp.render("products/edit",{product:data});
-  });
-});
-
-
-router.post("/edit/:id",fileUploadMid.single("img"),function(req,resp){
-
-  // req.file.filename
-  ProductModel.update({_id:req.params.id},{"$set":{name:req.body.product_name,
-     price:req.body.product_price,
-     desc: req.body.desc,
-     rate:req.body.rate,
-     stock:req.body.stock}},function(err,data){
-    if(!err)
-    ProductModel.find({}, function (err, result) {
-      resp.json(result);
-    });
-  })
-});
-
-router.get("/rate/:id",function(req,resp){
-  ProductModel.findOne({_id:req.params.id},function(err,data){
-    resp.render("products/rate",{product:data});
-  });
-});
-
-
-router.post("/rate/:id",fileUploadMid.single("img"),function(req,resp){
-
-  // req.file.filename
-  ProductModel.update({_id:req.params.id},{"$set":{rate:req.body.rate}},function(err,data){
-    if(!err)
-    ProductModel.find({}, function (err, result) {
-      resp.json(result);
-    });
-  })
-});
-//end of delete..
-
-
 
 
 //get request http://localhost:9090/products
