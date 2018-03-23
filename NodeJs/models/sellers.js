@@ -13,19 +13,25 @@ var sellers = new Schema(
     unique: true,
     required:true
   },
+  password: {
+    type: String,
+    required: true
+  },
   address:{
     type:String
   },
   national_id:{
     type:Number,
     unique:true,
-    //required 14 number
     required:true
   }
 });
 
 // sellers plugins
-sellers.plugin(autoIncrement.plugin, 'sellers');
+sellers.plugin(autoIncrement.plugin, {
+    model: 'sellers',
+    startAt: 1,
+});
 
 // register sellers model
 mongoose.model("sellers",sellers);

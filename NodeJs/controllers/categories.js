@@ -1,6 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var bodyParserUrlEnc = bodyParser.urlencoded();
+var urlEncodedParsermid = bodyParser.urlencoded({ extended: true });
 var router = express.Router();
 var mongoose = require("mongoose");
 // var CategoriesModel = mongoose.model("categories");

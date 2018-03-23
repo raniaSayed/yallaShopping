@@ -1,73 +1,51 @@
-//template connection code  ==> succesed
 var mongoose = require("mongoose");
 var express = require('express');
 var fs = require("fs");
 var server = express();
 var path = require('path');
 
-//connect to db
+//connect to db and setup auto-increment
 var connection = mongoose.createConnection("mongodb://localhost/souq");
 var mongooseTextSearch = require("mongoose-text-search");
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
 mongoose.connect("mongodb://localhost/souq");
 
+// require all models
 fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
   require(path.join(__dirname, "models", model));
 });
 
+// get models prepared functions
 var userModel = mongoose.model("users");
 var orderModel = mongoose.model("orders");
 var ProductsModel = mongoose.model("products");
 var CategoriesModel = mongoose.model("categories");
-// server.get("", function (req, resp) {
-//   var user = new userModel({
-//     name: 'ahmed',
-//     national_id: 234586,
-//     email: "785",
-//     origin: "G"
-//   });
-
-//   //save user obj to db
-//   // user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
-//   resp.send("Done");
-// });
 
 //to be deleted..
 server.set("view engine","ejs");
 server.set("views","./views");
 
-
-// server.get("/add/order",function (req,resp) {
-//   var order = new orderModel({
-//     userId: 10,
-//     orderProducts: [
-//       {
-//         prod
-//       }
-//     ]
-//   });
-
-
-
+// setup static files
 server.use(express.static("static"));
 
 //user routes
 var usersRouter = require("./controllers/users");
 server.use("/users", usersRouter);
 
+//products routes
 var productsRouter = require("./controllers/products")
 server.use("/products", productsRouter);
 
-//order routes
+//orders routes
 var ordersRouter = require("./controllers/orders");
 server.use("/orders", ordersRouter);
 
+//categories routes
 var categoriesRouter = require("./controllers/categories");
 server.use("/categories", categoriesRouter);
 
-
-
+// server start listening ...
 server.listen("9090", function () {
   console.log("Starting....")
 });
