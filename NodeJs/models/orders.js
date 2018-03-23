@@ -35,15 +35,20 @@ var orders = new Schema({
 );
 
 // order plugins
-orders.plugin(autoIncrement.plugin, 'orders');
-orderProducts.plugin(autoIncrement.plugin, 'orderProducts');
+orders.plugin(autoIncrement.plugin, {
+    model: 'orders',
+    startAt: 1,
+});
+orderProducts.plugin(autoIncrement.plugin, {
+    model: 'orderProducts',
+    startAt: 1,
+});
 
 // register orders model
 mongoose.model("orders", orders);
 var OrderModel = {};
 
 OrderModel.model = mongoose.model("orders");
-console.log(OrderModel.model);
 
 // add order
 OrderModel.addOrder = function(userId, orderProducts, callback) {

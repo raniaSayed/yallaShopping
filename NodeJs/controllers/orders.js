@@ -1,21 +1,11 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var JSONParsermid = bodyParser.json();
-var urlEncodedParsermid = bodyParser.urlencoded();
+var urlEncodedParsermid = bodyParser.urlencoded({extended: true});
 var router = express.Router();
-//var fs = require("fs");
 var mongoose = require("mongoose");
 var orderModel = require("../models/orders");
 
-// var orderModel = mongoose.model("orders");
-// var sellerModel = mongoose.model("sellers");
-
-router.use(function (req, resp, next) {
-  resp.header("Access-Control-Allow-Origin", "*");
-  resp.header("Access-Control-Allow-Headers", "Content-Type");
-  resp.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE")
-  next();
-});
 
 //view user orders
 router.get("/",function(req,resp){
