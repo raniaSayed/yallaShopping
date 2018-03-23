@@ -62,7 +62,7 @@ router.put("/:id", JSONParsermid,(req, resp)=>{
 router.delete("/:id",function (req, resp) {
 	UserModel.deleteUser(req.params.id, (err, result) => {
 		if(!err) {
-			resp.json({status:"ok"})
+			resp.json({status:"User Deleted"});
 		} else {
 			resp.json(err);
 		}

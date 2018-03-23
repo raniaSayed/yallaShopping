@@ -32,6 +32,10 @@ server.use(express.static("static"));
 var usersRouter = require("./controllers/users");
 server.use("/users", usersRouter);
 
+//seller routes
+var sellersRouter = require("./controllers/sellers");
+server.use("/sellers", sellersRouter);
+
 //products routes
 var productsRouter = require("./controllers/products")
 server.use("/products", productsRouter);
