@@ -19,7 +19,7 @@ var products = new Schema(
   },
   desc:{
     type:String,
-    index: true
+    //index: true
   },
   price:{
     type:Number
@@ -112,5 +112,10 @@ ProductsModel.rateProduct = function(Id,data,callbackFn){
       resp.json(result);
     });
   })
+}
+
+ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callbackFn){
+  ProductsModel.model.where("price").gt(priceLow)
+  .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callbackFn);
 }
 module.exports = ProductsModel;

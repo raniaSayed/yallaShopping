@@ -13,32 +13,38 @@ router.use(function(req,resp,next){
     next();
 });
 
-//get request http://localhost:9090/categories/subcategory_name
+//get request http://localhost:9090/categories/sub/subcategory_name
 //need to find all the products in this subcategory...
 
-router.get("/:subcategory", function(request, response){
-    console.log("subcat");
-    
+router.get("/sub/:subcategory", function(request, response){ 
     CategoriesModel.getSubCategoryProducts(request.params.subcategory, function(err, result){
         if(!err&&result.length>0){
-            console.log("finding serch Product with q ="+request.query.q);
             response.json(result);
           }
           else{
             response.json(err);
           }
     });
-    // var subcategory = request.params.subcategory;
-    // ProductsModel.find({subcategory:subcategory}, function(err, result){
-    //     if(!err){
-    //         console.log(result);
-    //         response.send(result);
-    //     }
-    // });
-    // //console.log(subcategory);
-    
-    //var catProd = CategoriesModel.find
 });
+
+//get request http://localhost:9090/categories/catId
+//need to find all the subcategories in this category...
+
+router.get("/:id", function(request, response){
+    CategoriesModel.getSubCategories(request.params.id, function(err, result){
+        console.log("sub cats of cat with id:"+request.params.id);
+        
+        if(!err&&result.length>0){
+            response.json(result);
+          }
+          else{
+            response.json(err);
+          }
+    });
+});
+
+
+
 
 
 

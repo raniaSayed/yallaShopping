@@ -22,7 +22,7 @@ router.use(function(req,resp,next){
 router.get("/search", function(request, response){
     ProductsModel.searchProducts(request.query.q, function(err, result){
       if(!err&&result.length>0){
-        console.log("finding serch Product with q ="+request.query.q);
+        console.log("finding search Product with q "+request.query.q);
         response.json(result);
       }
       else{
@@ -104,7 +104,22 @@ router.post("/:id/rate", JSONParsermid,function (req, resp) {
 })
 //end of my new code
 
-
+router.post("/filter", urlEncodedMid, function(request, response){
+  var subcatArr = Array();
+  subcatArr.push(request.body.subcat1);
+  subcatArr.push(request.body.subcat2);
+  
+  ProductsModel.filter(request.body.priceLow,
+    request.body.priceHigh, request.body.subcatArr, function(err, result){
+    if(!err&&result.length>0){
+      console.log("filtering products");
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  })
+})
 //get request http://localhost:9090/products
 //need to find all the products
 //get request http://localhost:9090/products/id
