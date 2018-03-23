@@ -1,6 +1,6 @@
 var mongoose =require("mongoose");
 var Schema = mongoose.Schema;
-
+var ProductModel = require("./products");
 var categories = new Schema(
   {
     name:{
@@ -12,5 +12,19 @@ var categories = new Schema(
   }
 
 );
+// adding plugin and registeration...
 categories.plugin(autoIncrement.plugin, 'categories');
-module.exports = mongoose.model("categories",categories);
+mongoose.model("categories",categories);
+
+var CategoriesModel = {};
+CategoriesModel.model = mongoose.model("categories");
+
+CategoriesModel.getSubCategoryProducts = function(subcategory, callbackFn){
+  ProductModel.model.find({subcategory:subcategory}, function(err, result){
+    callbackFn(err, result);
+  });
+}
+
+// CategoriesModel.getSubcategories = function
+
+module.exports = CategoriesModel;

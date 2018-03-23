@@ -1,49 +1,36 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var router = express.Router();
-var ProductsModel = mongoose.model("products");
+// var ProductsModel = mongoose.model("products");
 var bodyParser = require("body-parser");
 var urlEncodedMid = bodyParser.urlencoded({extended:true});
 var JSONParsermid = bodyParser.json();
 var multer = require("multer");
 var fileUploadMid = multer({dest:"./static/users"});
-
+//adding the new exported ProductsModel....
+var ProductsModel = require("../models/products");
 router.use(function(req,resp,next){
     resp.header("Access-Control-Allow-Origin","*");
     resp.header("Access-Control-Allow-Headers","Content-Type");
     resp.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE")
     next();
 });
-//get request http://localhost:9090/products
-//need to find all the products
-//get request http://localhost:9090/products/id
-//need to find that specific product usind the id in the url...
-router.get("/:id?", function(request, response){
-    if(request.params.id){
-        ProductsModel.find({_id:request.params.id},function(err, result){
-            if(result){//this condition is not working...
-                console.log(err);                
-                console.log("find the product with id ="+request.params.id);
-                response.send(result);
-            }
-        });
-    }
-    else{
-        ProductsModel.find({},function(err, result){
-            if(!err){
-                console.log(err);
-                console.log("find all products");
-                response.send(result);
-            }
-        });
-    }
-});
 
 //seraching the products...
 //get request http://localhost:9090/products/search?q=whatever
 // need to find any product having the word in the ""{q}""
 router.get("/search", function(request, response){
-    console.log("search");
+  console.log(request.query.q);
+ //response.send("search")
+    ProductsModel.searchProducts(request.query.q, function(err, result){
+      if(!err&&result.length>0){
+        console.log("finding serch Product with q ="+request.query.q);
+        response.json(result);
+      }
+      else{
+        response.json(err);
+      }
+    });
     
     // console.log(request.query.q);
     // response.send("serch about "+request.query.q);
@@ -148,6 +135,35 @@ router.put("/:id",function(req,resp){
 
 });
 
+//get request http://localhost:9090/products
+//need to find all the products
+//get request http://localhost:9090/products/id
+//need to find that specific product usind the id in the url...
+router.get("/:id?", function(request, response){
+  
+    if(request.params.id){
+      ProductsModel.getProductById(request.params.id, function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding Product with id ="+request.params.id);
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      ProductsModel.getAllProducts(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
 
 
 

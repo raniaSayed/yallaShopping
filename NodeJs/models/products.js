@@ -1,4 +1,6 @@
 var mongoose = require("mongoose");
+// adding textsearch feature...
+var mongooseTextSearch = require("mongoose-text-search");
 var Schema = mongoose.Schema;
 
 // products schema
@@ -26,10 +28,14 @@ var products = new Schema(
     required:true,
     ref:"sellers"
   },
-  subCategory_name:{
-    type:String,
+  category:{
+    type:Number,
     required:true,
     ref:"categories"
+  },
+  subcategory:{
+    type:String,
+    required:true,
   }
 }) ;
 // products.plugin(autoIncrement.plugin, 'products');
@@ -48,5 +54,35 @@ var products = new Schema(
 products.plugin(autoIncrement.plugin, 'products');
 // paginate
 
+// adding textsearch plugin...
+products.plugin(mongooseTextSearch);
+products.index({name:"text",type:"text", desc:"text"})
+
 // register products model
 mongoose.model("products",products);
+
+//ya Menna noteee el ocject ahoo
+var ProductsModel = {};
+
+ProductsModel.model = mongoose.model("products");
+
+ProductsModel.getAllProducts = function(callbackFn){
+  ProductsModel.model.find({},function(err, result){
+    callbackFn(err, result);    
+  });   
+}
+
+ProductsModel.getProductById = function(Id, callbackFn){
+  ProductsModel.model.find({_id:Id}, function(err, result){
+    callbackFn(err, result);
+  });
+}
+
+ProductsModel.searchProducts = function(searchQuery, callbackFn){
+  ProductsModel.model.find({$text:{$search:searchQuery}}, function(err, result){
+    callbackFn(err, result);
+  });
+}
+
+
+module.exports = ProductsModel;
