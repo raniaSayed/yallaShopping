@@ -4,50 +4,46 @@ var app = express();
 // var bodyParser = require('body-parser');
 // var fs = require("fs");
 var mongoose = require("mongoose");
-var orderModel = mongoose.model("orders");
-var sellerModel = mongoose.model("sellers");
+
+// var orderModel = mongoose.model("orders");
+// var sellerModel = mongoose.model("sellers");
+var orderModel = require("../models/orders");
 
 //view user orders
-app.get("/viewUserAll",function(req,resp){
-
-    //change id to session userId
-  	var orders = orderModel.find({userId:1},function (error,result) {
-        if(!error)
-          resp.json( result );
-        resp.json( error );
-  	});
+app.get("/",function(req,resp){
+    ///change id to session userId
+    var id =1;
+    orderModel.viewUserAll(id,(err,result) => {
+      if(!err) {
+        resp.json(result);
+      } else {
+        resp.json(err);
+      }
+    });
 });
 
 //view user order by id
-//missing add product array and try it !!
 app.get("/:id",function(req,resp){
-  // server.get("/orders",function (req,resp) {
-  	var orders = orderModel.findOne({_id:req.params.id}).populate("orderProducts.sellerId").populate("orderProducts.prodId").exec((error,result)=> {
-  			// resp.json(result);
-        if(!error){
-          //get seller data
-          result.sellerId =551;
-          result._id =551;
-          console.log(result)
+      orderModel.viewById(req.params.id,(error,result) =>{
+      if(!error){
+        //get seller data
+      resp.json(result);
+      }
+      else
+        resp.json(error);
+      });
+	});
 
-        resp.json(result);
-        }
-        else
-          resp.json(error);
-  	});
-});
-
-//view order products by id
+//view [single order] products that belongs to seller by order id
 app.get("/:id/seller",function(req,resp){
-  // server.get("/orders",function (req,resp) {
-  	//get order products where selledId == auth sellerId
-
-    //problem with orderProducts.sellerId
-    var products = orderModel.find({orderProducts:{$elemMatch:{sellerId:1}}},function (error,result) {
-      //log error
+  orderModel.viewSellerOrderProducts(req.params.id,(error,result) =>{
+    if(!error){
       resp.send(result);
-    });
-    resp.send("error")
+    }else{
+      console.log(error);
+      resp.send("error");
+    }
+  });
 });
 
 module.exports = app;
