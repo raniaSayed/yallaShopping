@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 // adding textsearch feature...
-var mongooseTextSearch = require("mongoose-text-search");
+// var mongooseTextSearch = require("mongoose-text-search");
 var Schema = mongoose.Schema;
 
 // products schema
@@ -8,10 +8,12 @@ var products = new Schema(
 {
   name:{
     type:String,
-    required:true
+    required:true,
+    index: true
   },
   desc:{
-    type:String
+    type:String,
+    index: true
   },
   price:{
     type:Number
@@ -36,28 +38,17 @@ var products = new Schema(
   subcategory:{
     type:String,
     required:true,
+    index: true,
   }
 }) ;
-// products.plugin(autoIncrement.plugin, 'products');
-// var Products = mongoose.model('products', products);
-
-// var test = new Products({
-//   name:"aajja",
-//   seller_id:4,
-//   subCategory_name:"bbb"
-// })
-// test.save((err, res)=>{console.log(err, res)})
-// Products.find({},(err, res)=>console.log(err, res))
-
 
 // products plugins
 products.plugin(autoIncrement.plugin, 'products');
 // paginate
 
 // adding textsearch plugin...
-products.plugin(mongooseTextSearch);
-products.index({name:"text",type:"text", desc:"text"})
-
+// products.plugin(mongooseTextSearch);
+// products.index({name:"text",type:"text", desc:"text",subcategory:"text"});
 // register products model
 mongoose.model("products",products);
 

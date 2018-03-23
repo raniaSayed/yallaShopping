@@ -20,8 +20,6 @@ router.use(function(req,resp,next){
 //get request http://localhost:9090/products/search?q=whatever
 // need to find any product having the word in the ""{q}""
 router.get("/search", function(request, response){
-  console.log(request.query.q);
- //response.send("search")
     ProductsModel.searchProducts(request.query.q, function(err, result){
       if(!err&&result.length>0){
         console.log("finding serch Product with q ="+request.query.q);
@@ -31,9 +29,6 @@ router.get("/search", function(request, response){
         response.json(err);
       }
     });
-    
-    // console.log(request.query.q);
-    // response.send("serch about "+request.query.q);
 });
 
 //Menna's code...

@@ -7,11 +7,10 @@ var path = require('path');
 
 //connect to db
 var connection = mongoose.createConnection("mongodb://localhost/souq");
-
+var mongooseTextSearch = require("mongoose-text-search");
 autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(connection);
 mongoose.connect("mongodb://localhost/souq");
-
 
 fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
   require(path.join(__dirname, "models", model));
@@ -21,18 +20,18 @@ var userModel = mongoose.model("users");
 var orderModel = mongoose.model("orders");
 var ProductsModel = mongoose.model("products");
 var CategoriesModel = mongoose.model("categories");
-server.get("", function (req, resp) {
-  var user = new userModel({
-    name: 'ahmed',
-    national_id: 234586,
-    email: "785",
-    origin: "G"
-  });
+// server.get("", function (req, resp) {
+//   var user = new userModel({
+//     name: 'ahmed',
+//     national_id: 234586,
+//     email: "785",
+//     origin: "G"
+//   });
 
-  //save user obj to db
-  // user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
-  resp.send("Done");
-});
+//   //save user obj to db
+//   // user.save().then(() => console.log('done')).catch((ex) => console.log(ex));
+//   resp.send("Done");
+// });
 
 //to be deleted..
 server.set("view engine","ejs");
