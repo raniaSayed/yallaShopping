@@ -47,7 +47,7 @@ console.log(OrderModel.model);
 
 // add order
 OrderModel.addOrder = function(userId, orderProducts, callback) {
-  
+
   var order = new OrderModel.model({
     userId,
     orderProducts
