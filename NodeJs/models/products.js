@@ -3,11 +3,6 @@ var mongoose = require("mongoose");
 // var mongooseTextSearch = require("mongoose-text-search");
 var Schema = mongoose.Schema;
 
-var connection = mongoose.createConnection("mongodb://localhost/souq");
-autoIncrement = require('mongoose-auto-increment');
-autoIncrement.initialize(connection);
-mongoose.connect("mongodb://localhost/souq");
-
 
 // products schema
 var products = new Schema(

@@ -1,13 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var product = require('./products.js')
-// var product = mongoose.model("products");
 var encryptPassword = require('../controllers/encryptPassword');
-
-var connection = mongoose.createConnection("mongodb://localhost/souq");
-autoIncrement = require('mongoose-auto-increment');
-autoIncrement.initialize(connection);
-mongoose.connect("mongodb://localhost/souq");
 
 // users schema
 var carts = new Schema({
@@ -48,33 +42,13 @@ users.plugin(autoIncrement.plugin, {
     startAt: 1,
 });
 
-// var Users = mongoose.model('users', users);
-// var test = new Users({
-//   name:"ahed",
-//   email:"a@aaa.com",
-//   password:"1888234",
-//   picture:"aaaaaaaaaaaa",
-//   address:"23 St, Cairo",
-//   cart:[
-//   {prodId:1, quantity:2},
-//   {prodId:3, quantity:3}
-//   ],
-//   origin:"FB"
-// })
-
-// Users.find({_id:1},{cart:true, _id:false}).populate('cart.prodId').exec((err, res)=>{console.log(res)})
-// test.save((err, res)=>{console.log(err, res)})
-
-
-
 // users plugins
 users.plugin(autoIncrement.plugin, 'users');
-
 // register login models
 mongoose.model("users", users);
 
 var UserModel = {};
-UserModel.model = mongoose.model('users');
+UserModel.model = mongoose.model('users')
 UserModel.getUsers = (callback) => {
   UserModel.model.find({}, { password: false }, (err, result) => {
     callback(err, result);
@@ -89,7 +63,7 @@ UserModel.getUser = (Id, callback) =>{
 
 UserModel.deleteUser = (Id, callback)=>{
   UserModel.model.remove({_id:Id}, (err, result)=>{
-    resp.json({status:"User Deleted"});
+    callback(err, result)
   })
 }
 
@@ -121,17 +95,11 @@ UserModel.addCart = (Id, cart, callback)=>{
 UserModel.addUser = (data, callback)=>{
 
   encryptPassword.cryptPassword(data.password,(err, hashed)=>{
-    var user = new UserModel.model({
-      name: data.name,
-      email: data.email,
-      password: hashed,
-      picture: data.pic,
-      address: data.address,
-      origin: data.origin,
-      cart: data.cart
-    });
+    data.password = hashed
+    var user = new UserModel.model(data);
     user.save((err, doc)=>{
       callback(err, doc)
+      console.log(err);
     });
   });
 }
