@@ -54,9 +54,4 @@ router.post("/", urlEncodedParsermid, (req, resp)=>{
   });
 });
 
-router.get("/", (req, resp)=>{
-  resp.send("Hello");
-});
-
-
 module.exports = router;
