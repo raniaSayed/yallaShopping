@@ -43,7 +43,10 @@ var users = new Schema({
   }
 });
 
-users.plugin(autoIncrement.plugin, 'users');
+users.plugin(autoIncrement.plugin, {
+    model: 'users',
+    startAt: 1,
+});
 
 // var Users = mongoose.model('users', users);
 // var test = new Users({

@@ -13,7 +13,10 @@ var categories = new Schema(
 
 );
 // adding plugin and registeration...
-categories.plugin(autoIncrement.plugin, 'categories');
+categories.plugin(autoIncrement.plugin, {
+    model: 'categories',
+    startAt: 1,
+});
 mongoose.model("categories",categories);
 
 var CategoriesModel = {};
