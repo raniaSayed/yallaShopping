@@ -31,7 +31,7 @@ router.get("/search", function(request, response){
         response.json(err);
       }
     });
-    
+
     // console.log(request.query.q);
     // response.send("serch about "+request.query.q);
 });
@@ -48,30 +48,32 @@ router.get("/search", function(request, response){
 
 // });
 
-router.post("/add",fileUploadMid.single("img"),function(req,resp){
-  // console.log(req.body);
-	var product = new ProductModel({
-		_id: req.body.id,
-		name: req.body.name,
-		desc: req.body.desc,
-		price: req.body.price,
-    rate:req.body.rate,
-    stock:req.body.stock,
-    //category:req.body.category,
-    // subcategory:req.body.subcategory,
-		// img: req.file.filename
-	});
-	product.save(function (err, doc) {
-	    if(!err)
-	      // resp.json({status:"ok"});
-        ProductModel.find({}, function (err, result) {
-          resp.json(result);
-        });
-	    else
-	      resp.json(err);
+//my new code
+router.post("/", JSONParsermid,function (req, resp) {
+	ProductsModel.addProduct(req.body, (err, result)=>{
+		if(!err) {
+			resp.json({status:"ok"})
+		} else {
+			resp.json(err);
+		}
 	})
 
-});
+})
+
+router.put("/:id", JSONParsermid,(req, resp)=>{
+	ProductsModel.editProduct(req.params.id, req.body, (err, result)=>{
+		if(!err) {
+			resp.json({status:"ok"})
+		} else {
+			resp.json(err);
+		}
+	})
+
+})
+
+
+//end of my new code
+
 
 //to be delted...
 router.get("/edit/:id",function(req,resp){
@@ -116,31 +118,14 @@ router.post("/rate/:id",fileUploadMid.single("img"),function(req,resp){
 //end of delete..
 
 
-router.delete("/:id",urlEncodedMid,function(req,resp){
-  resp.json(req.body);
-});
 
-router.put("/:id",function(req,resp){
-  ProductModel.update({_id:req.params.id},{"$set":{name:req.body.product_name,
-    price:req.body.product_price,
-    desc: req.body.desc,
-    rate:req.body.rate,
-    stock:req.body.stock
-  }},function(err,data){
-    if(!err)
-    ProductModel.find({}, function (err, result) {
-      resp.json(result);
-    });
-  })
-
-});
 
 //get request http://localhost:9090/products
 //need to find all the products
 //get request http://localhost:9090/products/id
 //need to find that specific product usind the id in the url...
 router.get("/:id?", function(request, response){
-  
+
     if(request.params.id){
       ProductsModel.getProductById(request.params.id, function(err, result){
         if(!err&&result.length>0){
