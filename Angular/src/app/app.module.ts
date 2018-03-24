@@ -10,8 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BodyComponent } from './body/body.component';
 import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
 import { ProductDetailsComponent } from './body/product-details/product-details.component';
-import { AddProductComponent } from './body/add-product/add-product.component';
-
+import { LimitToPipe } from './limit-to.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: BodyComponent,
@@ -19,7 +18,6 @@ const appRoutes: Routes = [
     { path: '', redirectTo: 'overview', pathMatch: 'full' },
     { path: 'category/:subcategory', component: SubCategoryProductsComponent },
     { path: 'product/:id', component: ProductDetailsComponent },
-    { path: 'product/add', component: AddProductComponent },
     ]
   },
   { path: '**', component: BodyComponent }
@@ -35,7 +33,7 @@ const appRoutes: Routes = [
     BodyComponent,
     SubCategoryProductsComponent,
     ProductDetailsComponent,
-    AddProductComponent
+    LimitToPipe
   ],
   imports: [
     BrowserModule,
