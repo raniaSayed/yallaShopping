@@ -39,6 +39,13 @@ CategoriesModel.getCategories = function(callbackFn){
   });
 }
 
+CategoriesModel.getCatsAndSubCats = function(callbackFn){
+  CategoriesModel.model.find({}, function(err, result){
+    callbackFn(err, result);
+  });
+}
+
+
 CategoriesModel.addCategory = function(data, callbackFn){
   var category = new CategoriesModel.model(data);
   category.save((err, doc)=>{

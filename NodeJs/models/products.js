@@ -9,7 +9,7 @@ var products = new Schema(
 {
   name:{
     type:String,
-    // required:true,
+    required:true,
     index: true
   },
   desc:{
@@ -27,18 +27,18 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    //unique: true,
-    //required:true,
+    unique: true,
+    required:true,
     ref:"sellers"
   },
   category:{
     type:Number,
-    // required:true,
+    required:true,
     ref:"categories"
   },
   subcategory:{
     type:String,
-    // required:true,
+    required:true,
     index: true,
   }
 }) ;
@@ -58,26 +58,26 @@ var ProductsModel = {};
 
 ProductsModel.model = mongoose.model("products");
 
-ProductsModel.getAllProducts = function(callbackFn){
+ProductsModel.getAllProducts = function(callback){
   ProductsModel.model.find({},function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-ProductsModel.getProductById = function(Id, callbackFn){
+ProductsModel.getProductById = function(Id, callback){
   ProductsModel.model.find({_id:Id}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-ProductsModel.searchProducts = function(searchQuery, callbackFn){
+ProductsModel.searchProducts = function(searchQuery, callback){
   ProductsModel.model.find({$text:{$search:searchQuery}}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-ProductsModel.addProduct = function(data,callbackFn){
-  var product = new ProductsModel.model({
+ProductsModel.addProduct = function(data,callback){
+  var product = new ProductModel({
     _id: data.id,
     name: data.name,
     desc: data.desc,
@@ -89,28 +89,28 @@ ProductsModel.addProduct = function(data,callbackFn){
     // img: req.file.filename
   });
   product.save((err, doc)=>{
-    callbackFn(err, doc)
+    callback(err, doc)
   });
 }
 
 
-ProductsModel.editProduct = function(Id, data, callbackFn){
+ProductsModel.editProduct = function(Id, data, callback){
   ProductsModel.model.update({_id:Id}, data,(err, result)=>{
-    callbackFn(err, result)
+    callback(err, result)
   })
 }
 
-ProductsModel.rateProduct = function(Id,data,callbackFn){
-  ProductsModel.model.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
+ProductsModel.rateProduct = function(Id,data,callback){
+  ProductsModel.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
     if(!err)
-    ProductsModel.model.find({}, function (err, result) {
+    ProductsModel.find({}, function (err, result) {
       resp.json(result);
     });
   })
 }
 
-ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callbackFn){
+ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
   ProductsModel.model.where("price").gt(priceLow)
-  .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callbackFn);
+  .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
 }
 module.exports = ProductsModel;
