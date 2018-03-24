@@ -1,10 +1,12 @@
+//import { Mongoose } from 'mongoose';
+
 var express = require('express');
 var fs = require("fs");
 var server = express();
 var path = require('path');
 var authMid = require("./controllers/authMid");
 var config = require('./config');
-
+var mongoose = require("mongoose");
 
 // require all models
 fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
@@ -18,7 +20,7 @@ server.set("views","./views");
 // setup static files
 server.use(express.static("static"));
 
-server.use(authMid);
+// server.use(authMid);
 
 //auth route
 var authRouter = require("./controllers/auth");

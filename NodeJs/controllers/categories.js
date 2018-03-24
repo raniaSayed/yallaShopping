@@ -13,10 +13,10 @@ router.use(function(req,resp,next){
     next();
 });
 
-//get request http://localhost:9090/categories/sub/subcategory_name
+//get request http://localhost:9090/categories/catId/subcategory_name
 //need to find all the products in this subcategory...
 
-router.get("/sub/:subcategory", function(request, response){ 
+router.get("/:id/:subcategory", function(request, response){ 
     CategoriesModel.getSubCategoryProducts(request.params.subcategory, function(err, result){
         if(!err&&result.length>0){
             response.json(result);
@@ -30,17 +30,32 @@ router.get("/sub/:subcategory", function(request, response){
 //get request http://localhost:9090/categories/catId
 //need to find all the subcategories in this category...
 
-router.get("/:id", function(request, response){
-    CategoriesModel.getSubCategories(request.params.id, function(err, result){
-        console.log("sub cats of cat with id:"+request.params.id);
-        
-        if(!err&&result.length>0){
-            response.json(result);
-          }
-          else{
-            response.json(err);
-          }
-    });
+router.get("/:id?", function(request, response){
+    if(request.params.id){
+        CategoriesModel.getSubCategories(request.params.id, function(err, result){
+            console.log("sub cats of cat with id:"+request.params.id);
+            
+            if(!err&&result.length>0){
+                response.json(result);
+              }
+              else{
+                response.json(err);
+              }
+        });
+    }
+    else{
+        CategoriesModel.getCatsAndSubCats(function(err, result){
+            console.log("finding all cats and thier sub acts");
+            
+            if(!err&&result.length>0){
+                response.json(result);
+              }
+              else{
+                response.json(err);
+              }
+        })
+    }
+   
 });
 
 

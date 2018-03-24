@@ -10,7 +10,7 @@ var products = new Schema(
   name:{
     type:String,
     required:true,
-    index: true
+    // index: true
   },
   desc:{
     type:String,
@@ -39,7 +39,7 @@ var products = new Schema(
   subcategory:{
     type:String,
     required:true,
-    index: true,
+    // index: true,
   }
 }) ;
 
