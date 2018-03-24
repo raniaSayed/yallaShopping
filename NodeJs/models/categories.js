@@ -1,8 +1,7 @@
 var mongoose =require("mongoose");
 var Schema = mongoose.Schema;
 var ProductsModel = require("./products");
-var categories = new Schema(
-  {
+var categories = new Schema({
     name:{
       type:String,
     },
@@ -29,7 +28,13 @@ CategoriesModel.getSubCategoryProducts = function(subcategory, callbackFn){
 }
 
 CategoriesModel.getSubCategories = function(categoryId, callbackFn){
-  CategoriesModel.model.find({_id:categoryId},{subcategories:true}, function(err, result){
+  CategoriesModel.model.findOne({_id:categoryId},{subcategories:true}, function(err, result){
+    callbackFn(err, result.subcategories);
+  });
+}
+
+CategoriesModel.getCategories = function(callbackFn){
+  CategoriesModel.model.find({}, function(err, result){
     callbackFn(err, result);
   });
 }
@@ -40,6 +45,13 @@ CategoriesModel.getCatsAndSubCats = function(callbackFn){
   });
 }
 
+
+CategoriesModel.addCategory = function(data, callbackFn){
+  var category = new CategoriesModel.model(data);
+  category.save((err, doc)=>{
+    callbackFn(err, doc)
+  });
+}
 
 
 // CategoriesModel.getSubcategories = function

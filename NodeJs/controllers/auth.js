@@ -9,13 +9,10 @@ var config = require('../config');
 var encryptPassword = require('./encryptPassword');
 var jwt = require('jsonwebtoken');
 
-router.post("/", urlEncodedParsermid,function (req, resp) {
-  console.log(req.body);
+router.post("/", urlEncodedParsermid, (req, resp)=>{
 	UserModel.findOne({
     email: req.body.email
-  }, function(err, user) {
-    
-    console.log(user);
+  }, (err, user)=>{
     
     if(err) {
       throw err;
@@ -30,7 +27,7 @@ router.post("/", urlEncodedParsermid,function (req, resp) {
 
     else if (user) {
 
-      encryptPassword.comparePassword(req.body.password, user.password, function(err, isPasswordMatch) {
+      encryptPassword.comparePassword(req.body.password, user.password, (err, isPasswordMatch)=>{
         if (err || !isPasswordMatch) {
           resp.json({ success: false, message: 'Authentication failed. Wrong password.' });
         } else {
@@ -56,10 +53,5 @@ router.post("/", urlEncodedParsermid,function (req, resp) {
     }
   });
 });
-
-router.get("/", function(req, resp){
-  resp.send("Hello");
-});
-
 
 module.exports = router;

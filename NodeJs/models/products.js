@@ -27,13 +27,13 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    unique: true,
-    required:true,
+    //unique: true,
+    //required:true,
     ref:"sellers"
   },
   category:{
     type:Number,
-    required:true,
+    // required:true,
     ref:"categories"
   },
   subcategory:{
@@ -77,7 +77,7 @@ ProductsModel.searchProducts = function(searchQuery, callbackFn){
 }
 
 ProductsModel.addProduct = function(data,callbackFn){
-  var product = new ProductModel({
+  var product = new ProductsModel.model({
     _id: data.id,
     name: data.name,
     desc: data.desc,
@@ -89,21 +89,21 @@ ProductsModel.addProduct = function(data,callbackFn){
     // img: req.file.filename
   });
   product.save((err, doc)=>{
-    callback(err, doc)
+    callbackFn(err, doc)
   });
 }
 
 
 ProductsModel.editProduct = function(Id, data, callbackFn){
   ProductsModel.model.update({_id:Id}, data,(err, result)=>{
-    callback(err, result)
+    callbackFn(err, result)
   })
 }
 
 ProductsModel.rateProduct = function(Id,data,callbackFn){
-  ProductsModel.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
+  ProductsModel.model.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
     if(!err)
-    ProductsModel.find({}, function (err, result) {
+    ProductsModel.model.find({}, function (err, result) {
       resp.json(result);
     });
   })

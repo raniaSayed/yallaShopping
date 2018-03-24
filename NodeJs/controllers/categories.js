@@ -3,6 +3,8 @@ var bodyParser = require("body-parser");
 var urlEncodedParsermid = bodyParser.urlencoded({ extended: true });
 var router = express.Router();
 var mongoose = require("mongoose");
+var JSONParsermid = bodyParser.json();
+
 // var CategoriesModel = mongoose.model("categories");
 var CategoriesModel = require("../models/categories");
 
@@ -20,8 +22,7 @@ router.get("/:id/:subcategory", function(request, response){
     CategoriesModel.getSubCategoryProducts(request.params.subcategory, function(err, result){
         if(!err&&result.length>0){
             response.json(result);
-          }
-          else{
+          }else{
             response.json(err);
           }
     });
@@ -59,10 +60,14 @@ router.get("/:id?", function(request, response){
 });
 
 
-
-
-
-
-
+router.post("/", JSONParsermid,(request, response)=>{
+  CategoriesModel.addCategory(request.body, (err, result)=>{
+    if(!err){
+      response.json({status:"ok"});
+    }else{
+      response.json(err);
+    }
+  })
+})
 
 module.exports = router;
