@@ -5,8 +5,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { BodyComponent } from './body/body.component';
+// import { HeaderModule } from './header/index';
+
 
 
 @NgModule({
@@ -14,11 +15,11 @@ import { BodyComponent } from './body/body.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent,
     BodyComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    // HeaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
