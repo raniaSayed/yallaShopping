@@ -1,3 +1,4 @@
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -7,6 +8,22 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BodyComponent } from './body/body.component';
+import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
+import { ProductDetailsComponent } from './body/product-details/product-details.component';
+import { AddProductComponent } from './body/add-product/add-product.component';
+
+
+const appRoutes: Routes = [
+  { path: '', component: BodyComponent,
+    children: [
+    { path: '', redirectTo: 'overview', pathMatch: 'full' },
+    { path: 'category/:subcategory', component: SubCategoryProductsComponent },
+    { path: 'product/:id', component: ProductDetailsComponent },
+    { path: 'product/add', component: AddProductComponent },
+    ]
+  },
+  { path: '**', component: BodyComponent }
+];
 
 
 @NgModule({
@@ -15,10 +32,14 @@ import { BodyComponent } from './body/body.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    BodyComponent
+    BodyComponent,
+    SubCategoryProductsComponent,
+    ProductDetailsComponent,
+    AddProductComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
