@@ -83,7 +83,7 @@ UserModel.deleteCart = (Id, callback)=>{
 }
 
 UserModel.addCart = (Id, cart, callback)=>{
-    /* send data as 
+    /* send data as
    {"cart":[
     {"prodId":1, "quantity":60},
     {"prodId":3, "quantity":99}
