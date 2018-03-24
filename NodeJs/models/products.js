@@ -58,25 +58,25 @@ var ProductsModel = {};
 
 ProductsModel.model = mongoose.model("products");
 
-ProductsModel.getAllProducts = function(callbackFn){
+ProductsModel.getAllProducts = function(callback){
   ProductsModel.model.find({},function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-ProductsModel.getProductById = function(Id, callbackFn){
+ProductsModel.getProductById = function(Id, callback){
   ProductsModel.model.find({_id:Id}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-ProductsModel.searchProducts = function(searchQuery, callbackFn){
+ProductsModel.searchProducts = function(searchQuery, callback){
   ProductsModel.model.find({$text:{$search:searchQuery}}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-ProductsModel.addProduct = function(data,callbackFn){
+ProductsModel.addProduct = function(data,callback){
   var product = new ProductModel({
     _id: data.id,
     name: data.name,
@@ -94,13 +94,13 @@ ProductsModel.addProduct = function(data,callbackFn){
 }
 
 
-ProductsModel.editProduct = function(Id, data, callbackFn){
+ProductsModel.editProduct = function(Id, data, callback){
   ProductsModel.model.update({_id:Id}, data,(err, result)=>{
     callback(err, result)
   })
 }
 
-ProductsModel.rateProduct = function(Id,data,callbackFn){
+ProductsModel.rateProduct = function(Id,data,callback){
   ProductsModel.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
     if(!err)
     ProductsModel.find({}, function (err, result) {
@@ -109,8 +109,8 @@ ProductsModel.rateProduct = function(Id,data,callbackFn){
   })
 }
 
-ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callbackFn){
+ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
   ProductsModel.model.where("price").gt(priceLow)
-  .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callbackFn);
+  .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
 }
 module.exports = ProductsModel;
