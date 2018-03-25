@@ -28,6 +28,16 @@ router.get("/:id/:subcategory", function(request, response){
     });
 });
 
+//get all categories
+router.get("/",(request,response)=>{
+  CategoriesModel.getCategories((err,result)=>{
+    if(!err){
+      response.json(result);
+    }
+  });
+
+});
+
 //get request http://localhost:9090/categories/catId
 //need to find all the subcategories in this category...
 

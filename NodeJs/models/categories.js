@@ -33,17 +33,17 @@ CategoriesModel.getSubCategories = function(categoryId, callbackFn){
   });
 }
 
-CategoriesModel.getCategories = function(callbackFn){
+CategoriesModel.getCategories = function(callback){
   CategoriesModel.model.find({}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-CategoriesModel.getCatsAndSubCats = function(callbackFn){
-  CategoriesModel.model.find({}, function(err, result){
-    callbackFn(err, result);
-  });
-}
+// CategoriesModel.getCatsAndSubCats = function(callbackFn){
+//   CategoriesModel.model.find({}, function(err, result){
+//     callbackFn(err, result);
+//   });
+// }
 
 
 CategoriesModel.addCategory = function(data, callbackFn){
