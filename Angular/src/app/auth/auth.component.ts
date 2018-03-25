@@ -16,40 +16,27 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private socialAuthService: AuthService, private authService : AuthServiceService) { }
+  constructor(private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
 
   ngOnInit() {
   }
 
-  public socialSignIn(socialPlatform : string) {
-    let socialPlatformProvider;
-    if(socialPlatform == "facebook"){
-      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    }else if(socialPlatform == "google"){
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+
+    public socialSignIn(socialPlatform : string) {
+      let socialPlatformProvider;
+      if(socialPlatform == "facebook"){
+        socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+      }else if(socialPlatform == "google"){
+        socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+      }
+
+      this.socialAuthService.signIn(socialPlatformProvider).then(
+        (userData) => {
+          this.myAuthService.getUserToken(userData);
+          // console.log(socialPlatform+" sign in data : " , res);
+
+        }
+      );
     }
 
-    // this.socialAuthService.signIn(socialPlatformProvider).then(
-    //   (userData) => {
-    //     this.authService.getUserToken(userData).subscribe((res) => {
-    //       console.log(res)});
-    //       return userData;
-    //
-    //      // console.log(res);
-    //   //   this.authService.getUserToken(userData).subscribe((res)=>{
-    //   // console.log(res)});
-    //     // return userData;
-    //     // console.log(socialPlatform+" sign in data : " , userData);
-    //   }
-    // );
-
-  //   this.authService.getUserToken(socialPlatformProvider).then(
-  //     (userData) => {
-  //       // return userData;
-  //       console.log(socialPlatform+" sign in data : " , userData);
-  //     }
-  //   );
-  // }
-
-}
 }

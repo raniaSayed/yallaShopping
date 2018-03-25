@@ -6,11 +6,12 @@ export class AuthServiceService {
 public test = "hii";
   constructor(private http:HttpClient) {}
 
-    getUserToken(socialPlatform : any){
-      // return socialPlatform;
-    // console.log(userData);
-    // let headers = new Headers({'Content-Type':  'application/json'});
-    // return this.http.post('http://localhost:9090/auth', JSON.stringify(socialPlatform),{headers: headers});
+    getUserToken(userData : any){
+      // return "hello";
+      // return userData;
+    console.log(userData);
+    let headers = new HttpHeaders({'Content-Type':  'application/json'});
+    return this.http.post('localhost:9090/auth/tokens', JSON.stringify(userData),{headers: headers});
 
     }
   }
