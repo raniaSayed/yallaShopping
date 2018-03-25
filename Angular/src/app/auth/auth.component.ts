@@ -12,19 +12,32 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private socialAuthService: AuthService, private authService : AuthServiceService) { }
+  constructor(private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
 
   ngOnInit() {
   }
 
-  public socialSignIn(socialPlatform : string) {
-    let socialPlatformProvider;
-    if(socialPlatform == "facebook"){
-      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    }else if(socialPlatform == "google"){
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+
+<<<<<<< HEAD
+    public socialSignIn(socialPlatform : string) {
+      let socialPlatformProvider;
+      if(socialPlatform == "facebook"){
+        socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+      }else if(socialPlatform == "google"){
+        socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+      }
+
+      this.socialAuthService.signIn(socialPlatformProvider).then(
+        (userData) => {
+          this.myAuthService.getUserToken(userData);
+          // console.log(socialPlatform+" sign in data : " , res);
+
+        }
+      );
     }
 
+}
+=======
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         this.authService.getUserToken(userData).subscribe((res) => {
@@ -48,3 +61,4 @@ export class AuthComponent implements OnInit {
   // }
 
 }}
+>>>>>>> 2ffff7b3c84ff5253dc7fc4698d6141fb1b63540

@@ -11,8 +11,7 @@ import { BodyComponent } from './body/body.component';
 import { AuthComponent } from './auth/auth.component';
 
 
-import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider} from "angular5-social-login";
-
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
 
 import { AuthServiceService } from './auth-service.service';
 
@@ -20,10 +19,10 @@ import { AuthServiceService } from './auth-service.service';
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
       [
-        // {
-        //   id: FacebookLoginProvider.PROVIDER_ID,
-        //   provider: new FacebookLoginProvider("Your-Facebook-app-id")
-        // },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("Your-Facebook-app-id")
+        },
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider("521472444901-f0ijnmhagvoa5e5st8hm4q1orksj4v9j.apps.googleusercontent.com")
@@ -56,6 +55,13 @@ const appRoutes: Routes = [
     LimitToPipe
   ],
   imports: [
+    BrowserModule,
+    SocialLoginModule,
+    HttpClientModule,
+    SubCategoryProductsComponent,
+    ProductDetailsComponent,
+    // AddProductComponent,
+    LimitToPipe,
     BrowserModule,
     HeaderModule,
     RouterModule.forRoot(appRoutes)
