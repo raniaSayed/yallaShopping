@@ -14,7 +14,7 @@ var products = new Schema(
   },
   desc:{
     type:String,
-    //index: true
+    index: true
   },
   price:{
     type:Number
@@ -27,7 +27,6 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    required:true,
     ref:"sellers"
   },
   category:{
@@ -76,7 +75,19 @@ ProductsModel.searchProducts = function(searchQuery, callback){
 }
 
 ProductsModel.addProduct = function(data,callback){
-  var product = new ProductsModel.model(data);
+  console.log(data);
+  var product = new ProductsModel.model({
+    // _id: data.id,
+    name: data.name,
+    desc: data.desc,
+    price: data.price,
+    rate:data.rate,
+    stock:data.stock,
+    category:data.category,
+    subcategory:data.subcategory,
+    seller_id:data.seller_id
+    // img: req.file.filename
+  });
   product.save((err, doc)=>{
     callback(err, doc)
   });

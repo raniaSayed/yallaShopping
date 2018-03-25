@@ -38,7 +38,27 @@ router.delete("/:id",function (req, resp) {
 })
 
 //my new code
+
+router.get("/",function(req,response){
+    // var name ="samsung";
+    //   var seller_id =1;
+    //   var category="test";
+    //     var subcategory ="test";
+  ProductsModel.getAllProducts(function(err, result){
+    if(!err&&result.length>0){
+      console.log("finding All Products");
+      response.json(result);
+      // response.send("hii");
+    }
+    else{
+      response.json(err);
+    }
+  });
+})
+
+
 router.post("/", JSONParsermid,function (req, resp) {
+  // var name ="samsung";
 	ProductsModel.addProduct(req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})
@@ -46,6 +66,8 @@ router.post("/", JSONParsermid,function (req, resp) {
 			resp.json(err);
 		}
 	})
+  // console.log(req.body);
+  // resp.send("ok");
 
 })
 
@@ -102,7 +124,7 @@ router.post("/filter", urlEncodedMid, function(request, response){
   var subcatArr = Array();
   subcatArr.push(request.body.subcat1);
   subcatArr.push(request.body.subcat2);
-  
+
   ProductsModel.filter(request.body.priceLow,
     request.body.priceHigh, request.body.subcatArr, function(err, result){
     if(!err&&result.length>0){
