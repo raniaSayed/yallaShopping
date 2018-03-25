@@ -27,7 +27,6 @@ var products = new Schema(
   },
   seller_id:{
     type:Number,
-    unique: true,
     required:true,
     ref:"sellers"
   },
@@ -77,17 +76,7 @@ ProductsModel.searchProducts = function(searchQuery, callback){
 }
 
 ProductsModel.addProduct = function(data,callback){
-  var product = new ProductModel({
-    _id: data.id,
-    name: data.name,
-    desc: data.desc,
-    price: data.price,
-    rate:data.rate,
-    stock:data.stock,
-    //category:req.body.category,
-    // subcategory:req.body.subcategory,
-    // img: req.file.filename
-  });
+  var product = new ProductsModel.model(data);
   product.save((err, doc)=>{
     callback(err, doc)
   });
