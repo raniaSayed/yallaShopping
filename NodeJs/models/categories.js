@@ -4,6 +4,7 @@ var ProductsModel = require("./products");
 var categories = new Schema({
     name:{
       type:String,
+      uniqe:true
     },
     subcategories:{
       type:Array //array of string ["mobile", "speakers", "tablets"]
@@ -59,9 +60,5 @@ CategoriesModel.deleteCategory = function(Id, callback){
     callback(err, result)
   })
 }
-
-
-
-// CategoriesModel.getSubcategories = function
 
 module.exports = CategoriesModel;
