@@ -14,6 +14,8 @@ import { SubCategoryProductsComponent } from './body/sub-category-products/sub-c
 import { ProductDetailsComponent } from './body/product-details/product-details.component';
 import { LimitToPipe } from './limit-to.pipe';
 
+
+import { CategoryService } from './services/category.service';
 const appRoutes: Routes = [
   { path: '', component: BodyComponent,
     children: [
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
     HeaderModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
