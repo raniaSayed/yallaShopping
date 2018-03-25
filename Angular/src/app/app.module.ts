@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+// import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { BodyComponent } from './body/body.component';
+
+import { HeaderModule } from './header/index';
+
 import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
 import { ProductDetailsComponent } from './body/product-details/product-details.component';
 import { LimitToPipe } from './limit-to.pipe';
@@ -27,16 +29,16 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    // HeaderComponent,
     FooterComponent,
-    SidebarComponent,
-    BodyComponent,
+    BodyComponent
     SubCategoryProductsComponent,
     ProductDetailsComponent,
     LimitToPipe
   ],
   imports: [
     BrowserModule,
+    HeaderModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
