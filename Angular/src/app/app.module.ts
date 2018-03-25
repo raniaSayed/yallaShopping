@@ -15,7 +15,6 @@ import {
     SocialLoginModule,
     AuthServiceConfig,
     GoogleLoginProvider,
-    HttpClientModule,
 } from "angular5-social-login";
 
 
@@ -33,13 +32,12 @@ export function getAuthServiceConfigs() {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider("521472444901-f0ijnmhagvoa5e5st8hm4q1orksj4v9j.apps.googleusercontent.com")
         },
-      ];
-  )
+      ]);
   return config;
 }
 import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
 import { ProductDetailsComponent } from './body/product-details/product-details.component';
-import { AddProductComponent } from './body/add-product/add-product.component';
+// import { AddProductComponent } from './body/add-product/add-product.component';
 
 
 import { HeaderModule } from './header/index';
@@ -52,7 +50,6 @@ const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: '**', component: BodyComponent }
 ];
->>>>>>> cdd47264c2dffd1066ec58d10203657af7875c04
 
 
 @NgModule({
@@ -66,24 +63,23 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-  SocialLoginModule,
-HttpClientModule
+    SocialLoginModule,
+    HttpClientModule,
     SubCategoryProductsComponent,
     ProductDetailsComponent,
-    AddProductComponent
-    LimitToPipe
-  ],
-  imports: [
+    // AddProductComponent,
+    LimitToPipe,
     BrowserModule,
     HeaderModule,
     RouterModule.forRoot(appRoutes)
-    ],
+  ],
   providers: [{
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },
-    AuthServiceService],
-  providers: [CategoryService],
+    AuthServiceService,
+    CategoryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

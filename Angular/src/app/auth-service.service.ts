@@ -9,8 +9,8 @@ public test = "hii";
     getUserToken(socialPlatform : any){
       // return socialPlatform;
     // console.log(userData);
-    let headers = new Headers({'Content-Type':  'application/json'});
-    return this.http.post('http://localhost:9090/auth', JSON.stringify(socialPlatform),{headers: headers});
+    // let headers = new Headers({'Content-Type':  'application/json'});
+    // return this.http.post('http://localhost:9090/auth', JSON.stringify(socialPlatform),{headers: headers});
 
     }
   }
