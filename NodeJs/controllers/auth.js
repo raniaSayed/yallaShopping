@@ -9,11 +9,20 @@ var config = require('../config');
 var encryptPassword = require('./encryptPassword');
 var jwt = require('jsonwebtoken');
 
+
+//menna code to be deleted
+router.post("/tokens",urlEncodedParsermid,(req, resp)=>{
+	console.log(req.body);
+	console.log("hi");
+
+	// resp.send("ok");
+});
+
 router.post("/", urlEncodedParsermid, (req, resp)=>{
 	UserModel.findOne({
     email: req.body.email
   }, (err, user)=>{
-    
+
     if(err) {
       throw err;
     }
@@ -31,7 +40,7 @@ router.post("/", urlEncodedParsermid, (req, resp)=>{
         if (err || !isPasswordMatch) {
           resp.json({ success: false, message: 'Authentication failed. Wrong password.' });
         } else {
-          
+
           var payload = {
             userId: user._id,
             email: user.email
