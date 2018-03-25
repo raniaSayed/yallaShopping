@@ -5,7 +5,6 @@ var path = require('path')
 var authMid = require("./controllers/authMid")
 var config = require('./config')
 
-
 // require all models
 fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
   require(path.join(__dirname, "models", model))
@@ -18,7 +17,8 @@ server.set("views","./views")
 // setup static files
 server.use(express.static("static"))
 
-// server.use(authMid)
+// server.use(authMid);
+
 
 var authRouter = require("./controllers/auth")
 server.use("/auth", authRouter)

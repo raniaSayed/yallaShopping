@@ -102,6 +102,8 @@ UserModel.addUser = (data, callback)=>{
   encryptPassword.cryptPassword(data.password,(err, hashed)=>{
     data.password = hashed
     var user = new UserModel.model(data);
+    var error = user.validateSync();
+    console.log(error)
     user.save((err, doc)=>{
       callback(err, doc)
     });
