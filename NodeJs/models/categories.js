@@ -60,8 +60,4 @@ CategoriesModel.deleteCategory = function(Id, callback){
   })
 }
 
-
-
-// CategoriesModel.getSubcategories = function
-
 module.exports = CategoriesModel;
