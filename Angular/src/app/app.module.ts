@@ -33,25 +33,21 @@ export function getAuthServiceConfigs() {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider("521472444901-f0ijnmhagvoa5e5st8hm4q1orksj4v9j.apps.googleusercontent.com")
         },
-      ]);
+      ])
   return config;
 }
-import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
-import { ProductDetailsComponent } from './body/product-details/product-details.component';
-// import { AddProductComponent } from './body/add-product/add-product.component';
-
-
+import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HeaderModule } from './header/index';
-
 import { LimitToPipe } from  './limit-to.pipe';
-
 
 import { CategoryService } from './services/category.service';
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
-  { path: '**', component: BodyComponent }
+  { path: 'category/:subcategory', component: SubCategoryProductsComponent },
+  { path: '**', component: BodyComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
 ];
-
 
 @NgModule({
   declarations: [
@@ -59,11 +55,11 @@ const appRoutes: Routes = [
     // HeaderComponent,
     FooterComponent,
     BodyComponent,
-
     AuthComponent
   ],
   imports: [
     BrowserModule,
+<<<<<<< HEAD
     SocialLoginModule,
     HttpClientModule,
     // SubCategoryProductsComponent,
@@ -71,16 +67,16 @@ const appRoutes: Routes = [
     // AddProductComponent,
     // LimitToPipe,
     BrowserModule,
+=======
+>>>>>>> 2ffff7b3c84ff5253dc7fc4698d6141fb1b63540
     HeaderModule,
     RouterModule.forRoot(appRoutes)
-  ],
-  providers: [{
+    ],
+  providers: [CategoryService, {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },
-    AuthServiceService,
-    CategoryService
-  ],
+    AuthServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
