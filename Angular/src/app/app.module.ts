@@ -59,7 +59,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-<<<<<<< HEAD
+
     SocialLoginModule,
     HttpClientModule,
     // SubCategoryProductsComponent,
@@ -67,8 +67,6 @@ const appRoutes: Routes = [
     // AddProductComponent,
     // LimitToPipe,
     BrowserModule,
-=======
->>>>>>> 2ffff7b3c84ff5253dc7fc4698d6141fb1b63540
     HeaderModule,
     RouterModule.forRoot(appRoutes)
     ],
