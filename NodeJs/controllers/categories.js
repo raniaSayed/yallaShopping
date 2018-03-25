@@ -30,7 +30,6 @@ router.get("/:id/:subcategory", function(request, response){
 
 //get request http://localhost:9090/categories/catId
 //need to find all the subcategories in this category...
-
 router.get("/:id?", function(request, response){
     if(request.params.id){
         CategoriesModel.getSubCategories(request.params.id, function(err, result){
@@ -66,6 +65,17 @@ router.post("/", JSONParsermid,(request, response)=>{
       response.json({status:"ok"});
     }else{
       response.json(err);
+    }
+  })
+})
+
+
+router.delete("/:id", (req, resp)=>{
+  CategoriesModel.deleteCategory(req.params.id, (err, result) => {
+    if(!err) {
+      resp.json({status:"Category Deleted"});
+    } else {
+      resp.json(err);
     }
   })
 })

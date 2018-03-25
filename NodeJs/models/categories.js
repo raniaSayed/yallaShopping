@@ -53,6 +53,13 @@ CategoriesModel.addCategory = function(data, callback){
   });
 }
 
+CategoriesModel.deleteCategory = function(Id, callback){
+  CategoriesModel.model.remove({_id:Id}, (err, result)=>{
+    callback(err, result)
+  })
+}
+
+
 
 // CategoriesModel.getSubcategories = function
 
