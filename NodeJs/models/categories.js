@@ -4,6 +4,7 @@ var ProductsModel = require("./products");
 var categories = new Schema({
     name:{
       type:String,
+      uniqe:true
     },
     subcategories:{
       type:Array //array of string ["mobile", "speakers", "tablets"]
@@ -21,39 +22,43 @@ mongoose.model("categories",categories);
 var CategoriesModel = {};
 CategoriesModel.model = mongoose.model("categories");
 
-CategoriesModel.getSubCategoryProducts = function(subcategory, callbackFn){
+CategoriesModel.getSubCategoryProducts = function(subcategory, callback){
   ProductsModel.model.find({subcategory:subcategory}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-CategoriesModel.getSubCategories = function(categoryId, callbackFn){
+CategoriesModel.getSubCategories = function(categoryId, callback){
   CategoriesModel.model.findOne({_id:categoryId},{subcategories:true}, function(err, result){
-    callbackFn(err, result.subcategories);
+    callback(err, result.subcategories);
   });
 }
 
-CategoriesModel.getCategories = function(callbackFn){
+CategoriesModel.getCategories = function(callback){
   CategoriesModel.model.find({}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-CategoriesModel.getCatsAndSubCats = function(callbackFn){
-  CategoriesModel.model.find({}, function(err, result){
-    callbackFn(err, result);
-  });
-}
+// CategoriesModel.getCatsAndSubCats = function(callbackFn){
+//   CategoriesModel.model.find({}, function(err, result){
+//     callbackFn(err, result);
+//   });
+// }
 
 
-CategoriesModel.addCategory = function(data, callbackFn){
+
+CategoriesModel.addCategory = function(data, callback){
   var category = new CategoriesModel.model(data);
   category.save((err, doc)=>{
-    callbackFn(err, doc)
+    callback(err, doc)
   });
 }
 
-
-// CategoriesModel.getSubcategories = function
+CategoriesModel.deleteCategory = function(Id, callback){
+  CategoriesModel.model.remove({_id:Id}, (err, result)=>{
+    callback(err, result)
+  })
+}
 
 module.exports = CategoriesModel;
