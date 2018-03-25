@@ -4,6 +4,7 @@ var ProductsModel = require("./products");
 var categories = new Schema({
     name:{
       type:String,
+      uniqe:true
     },
     subcategories:{
       type:Array //array of string ["mobile", "speakers", "tablets"]
