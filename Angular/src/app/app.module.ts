@@ -11,13 +11,7 @@ import { BodyComponent } from './body/body.component';
 import { AuthComponent } from './auth/auth.component';
 
 
-import {
-  SocialLoginModule,
- AuthServiceConfig,
- GoogleLoginProvider,
- FacebookLoginProvider,
-} from "angular5-social-login";
-
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
 
 import { AuthServiceService } from './auth-service.service';
 
@@ -55,17 +49,19 @@ const appRoutes: Routes = [
     // HeaderComponent,
     FooterComponent,
     BodyComponent,
-    AuthComponent
+    AuthComponent,
+    SubCategoryProductsComponent,
+    ProductDetailsComponent,
+    LimitToPipe
   ],
   imports: [
     BrowserModule,
-
     SocialLoginModule,
     HttpClientModule,
-    // SubCategoryProductsComponent,
-    // ProductDetailsComponent,
+    SubCategoryProductsComponent,
+    ProductDetailsComponent,
     // AddProductComponent,
-    // LimitToPipe,
+    LimitToPipe,
     BrowserModule,
     HeaderModule,
     RouterModule.forRoot(appRoutes)
