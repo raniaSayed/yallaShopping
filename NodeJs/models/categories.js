@@ -21,15 +21,15 @@ mongoose.model("categories",categories);
 var CategoriesModel = {};
 CategoriesModel.model = mongoose.model("categories");
 
-CategoriesModel.getSubCategoryProducts = function(subcategory, callbackFn){
+CategoriesModel.getSubCategoryProducts = function(subcategory, callback){
   ProductsModel.model.find({subcategory:subcategory}, function(err, result){
-    callbackFn(err, result);
+    callback(err, result);
   });
 }
 
-CategoriesModel.getSubCategories = function(categoryId, callbackFn){
+CategoriesModel.getSubCategories = function(categoryId, callback){
   CategoriesModel.model.findOne({_id:categoryId},{subcategories:true}, function(err, result){
-    callbackFn(err, result.subcategories);
+    callback(err, result.subcategories);
   });
 }
 
@@ -46,12 +46,20 @@ CategoriesModel.getCategories = function(callback){
 // }
 
 
-CategoriesModel.addCategory = function(data, callbackFn){
+
+CategoriesModel.addCategory = function(data, callback){
   var category = new CategoriesModel.model(data);
   category.save((err, doc)=>{
-    callbackFn(err, doc)
+    callback(err, doc)
   });
 }
+
+CategoriesModel.deleteCategory = function(Id, callback){
+  CategoriesModel.model.remove({_id:Id}, (err, result)=>{
+    callback(err, result)
+  })
+}
+
 
 
 // CategoriesModel.getSubcategories = function

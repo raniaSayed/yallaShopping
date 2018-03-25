@@ -11,8 +11,8 @@ import { BodyComponent } from './body/body.component';
 import { HeaderModule } from './header/index';
 
 import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
-import { ProductDetailsComponent } from './body/product-details/product-details.component';
-import { LimitToPipe } from './limit-to.pipe';
+import { ProductDetailsComponent }  from './body/product-details/product-details.component';
+import { LimitToPipe } from  './limit-to.pipe';
 
 
 import { CategoryService } from './services/category.service';
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     AppComponent,
     // HeaderComponent,
     FooterComponent,
-    BodyComponent
+    BodyComponent,
     SubCategoryProductsComponent,
     ProductDetailsComponent,
     LimitToPipe
