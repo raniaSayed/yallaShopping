@@ -9,10 +9,10 @@ export class SubCategoryProductsComponent implements OnInit {
 	subCategory: String;
 	products:any[];
   constructor(private route: ActivatedRoute) { 
-//  	this.route.params.subscribe(params => {
-  //     this.subCategory = params['subcategory'];
-   //    this.products = [{name:"ppppppppp1", price:12, quantity:4, picture:"https://assets.servedby-buysellads.com/p/manage/asset/id/62491", desc:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}, {name:"ppppppppp1", price:12, quantity:4, picture:"https://assets.servedby-buysellads.com/p/manage/asset/id/62491", desc:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}];
- //	}
+   	this.route.params.subscribe(params => {
+        this.subCategory = params['subcategory'];
+        this.products = [{name:"ppppppppp1", price:12, quantity:4, picture:"https://assets.servedby-buysellads.com/p/manage/asset/id/62491", desc:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}, {name:"ppppppppp1", price:12, quantity:4, picture:"https://assets.servedby-buysellads.com/p/manage/asset/id/62491", desc:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]
+   	})
   }
 
 
