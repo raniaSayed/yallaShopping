@@ -41,7 +41,7 @@ var products = new Schema(
     required:true,
     index: true,
   }
-}) ;
+});
 
 // products plugins
 products.plugin(autoIncrement.plugin, 'products');
