@@ -39,7 +39,7 @@ var products = new Schema(
     required:true,
     index: true,
   }
-}) ;
+});
 
 // products plugins
 products.plugin(autoIncrement.plugin, 'products');
@@ -113,4 +113,12 @@ ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
   ProductsModel.model.where("price").gt(priceLow)
   .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
 }
+
+ProductsModel.deleteProduct = function(Id, callback){
+   ProductsModel.model.remove({_id:Id}, (err, result)=>{
+    callback(err, result)
+  })
+}
+
+
 module.exports = ProductsModel;

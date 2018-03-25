@@ -27,17 +27,15 @@ router.get("/search", function(request, response){
     });
 });
 
-//Menna's code...
-//comented as I am having this route on line 22...
-// router.get("/",function(req,resp){
-//   // ProductModel.find({}, function (err, result) {
-//   //   resp.json(result);
-//   // });
-
-//   //to be deleted
-//     resp.render("products/add");
-
-// });
+router.delete("/:id",function (req, resp) {
+  ProductsModel.deleteProduct(req.params.id, (err, result) => {
+    if(!err) {
+      resp.json({status:"Product Deleted"});
+    } else {
+      resp.json(err);
+    }
+  })
+})
 
 //my new code
 

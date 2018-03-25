@@ -4,11 +4,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+// import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { BodyComponent } from './body/body.component';
-<<<<<<< HEAD
+
 import { AuthComponent } from './auth/auth.component';
 
 
@@ -38,21 +37,19 @@ export function getAuthServiceConfigs() {
   )
   return config;
 }
-=======
 import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
 import { ProductDetailsComponent } from './body/product-details/product-details.component';
 import { AddProductComponent } from './body/add-product/add-product.component';
 
 
+import { HeaderModule } from './header/index';
+
+import { LimitToPipe } from  './limit-to.pipe';
+
+
+import { CategoryService } from './services/category.service';
 const appRoutes: Routes = [
-  { path: '', component: BodyComponent,
-    children: [
-    { path: '', redirectTo: 'overview', pathMatch: 'full' },
-    { path: 'category/:subcategory', component: SubCategoryProductsComponent },
-    { path: 'product/:id', component: ProductDetailsComponent },
-    { path: 'product/add', component: AddProductComponent },
-    ]
-  },
+  { path: '', component: BodyComponent },
   { path: '**', component: BodyComponent }
 ];
 >>>>>>> cdd47264c2dffd1066ec58d10203657af7875c04
@@ -61,32 +58,32 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    // HeaderComponent,
     FooterComponent,
-    SidebarComponent,
     BodyComponent,
-<<<<<<< HEAD
+
     AuthComponent
   ],
   imports: [
     BrowserModule,
   SocialLoginModule,
 HttpClientModule
-=======
     SubCategoryProductsComponent,
     ProductDetailsComponent,
     AddProductComponent
+    LimitToPipe
   ],
   imports: [
     BrowserModule,
+    HeaderModule,
     RouterModule.forRoot(appRoutes)
->>>>>>> cdd47264c2dffd1066ec58d10203657af7875c04
-  ],
+    ],
   providers: [{
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },
     AuthServiceService],
+  providers: [CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
