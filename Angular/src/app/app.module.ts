@@ -10,20 +10,12 @@ import { BodyComponent } from './body/body.component';
 
 import { HeaderModule } from './header/index';
 
-import { SubCategoryProductsComponent } from './body/sub-category-products/sub-category-products.component';
-import { ProductDetailsComponent }  from './body/product-details/product-details.component';
 import { LimitToPipe } from  './limit-to.pipe';
 
 
 import { CategoryService } from './services/category.service';
 const appRoutes: Routes = [
-  { path: '', component: BodyComponent,
-    children: [
-    { path: '', redirectTo: 'overview', pathMatch: 'full' },
-    { path: 'category/:subcategory', component: SubCategoryProductsComponent },
-    { path: 'product/:id', component: ProductDetailsComponent },
-    ]
-  },
+  { path: '', component: BodyComponent },
   { path: '**', component: BodyComponent }
 ];
 
@@ -34,8 +26,6 @@ const appRoutes: Routes = [
     // HeaderComponent,
     FooterComponent,
     BodyComponent,
-    SubCategoryProductsComponent,
-    ProductDetailsComponent,
     LimitToPipe
   ],
   imports: [
