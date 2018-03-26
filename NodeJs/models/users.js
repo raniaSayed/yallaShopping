@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+require('mongoose-type-email');
 var Schema = mongoose.Schema;
 var product = require('./products.js')
 var encryptPassword = require('../controllers/encryptPassword');
@@ -20,16 +21,20 @@ var users = new Schema({
     required: true
   },
   email: {
-    type: String,
+    type: mongoose.SchemaTypes.Email,
     unique: true,
-    required: true
+    required: true,
+    match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   },
   password: {
     type: String,
     required: true
   },
   picture: String, //base64
-  address: String,
+  address: {
+    type: String,
+    required: true
+  },
   cart: [cartItems],
   origin: {
     type: String,

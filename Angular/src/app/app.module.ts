@@ -1,8 +1,13 @@
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+//george ...
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import {Http} from '@angular/http';
+
+import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
 // import { HeaderComponent } from './header/header.component';
@@ -12,6 +17,12 @@ import { BodyComponent } from './body/body.component';
 import { AuthComponent } from './auth/auth.component';
 
 import { HeaderModule} from './header/index';
+//george...
+import { UserRegisterationService } from './user-registeration.service';
+import { SellerRegisterationServiceService } from './seller-registeration-service.service';
+
+
+
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
 
 import { AuthServiceService } from './auth-service.service';
@@ -36,8 +47,13 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { LimitToPipe } from  './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
+import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
+import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
+  { path: 'users/registeration', component: UserRegisterFormComponent },
+  { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
+  { path: '**', component: BodyComponent },
   { path: 'category/:subcategory', component: SubCategoryProductsComponent },
   { path: '**', component: BodyComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
@@ -49,24 +65,32 @@ const appRoutes: Routes = [
     // HeaderComponent,
     FooterComponent,
     BodyComponent,
+    LimitToPipe,
+    UserRegisterFormComponent,
+    SellerRegisterationFormComponent,
     AuthComponent,
     SubCategoryProductsComponent,
     ProductDetailsComponent,
-    LimitToPipe
   ],
   imports: [
     BrowserModule,
     SocialLoginModule,
     HttpClientModule,
-    // SubCategoryProductsComponent,
-    // ProductDetailsComponent,
+    //SubCategoryProductsComponent,
+    //ProductDetailsComponent,
     // AddProductComponent,
-    // LimitToPipe,
+    //LimitToPipe,
     BrowserModule,
     HeaderModule,
-    RouterModule.forRoot(appRoutes)
-    ],
-  providers: [CategoryService, {
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ImageUploadModule.forRoot(),
+  ],
+
+  providers: [
+    UserRegisterationService,
+    SellerRegisterationServiceService,
+    CategoryService, {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },

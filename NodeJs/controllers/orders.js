@@ -20,8 +20,15 @@ router.get("/",function(req,resp){
     });
 });
 
-router.get("/add", JSONParsermid, function (req, resp) {
+router.post("/", JSONParsermid, function (req, resp) {
   // get data from body and call addOrder
+  orderModel.addOrder(req.body, (err, result) => {
+    if(!err) {
+			resp.json({status:"ok"})
+		} else {
+			resp.json(err);
+		}
+  })
 });
 
 //view user order by id
