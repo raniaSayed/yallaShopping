@@ -21,6 +21,7 @@ router.get("/", (req, resp)=>{
 
 
 router.post("/", JSONParsermid,function (req, resp) {
+	console.log("post request to add user");
 	UserModel.addUser(req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})

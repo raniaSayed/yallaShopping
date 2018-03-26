@@ -6,9 +6,6 @@ declare var $: any;
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  
-  
-  
 
 })
 export class HeaderComponent implements OnInit {
@@ -24,10 +21,5 @@ export class HeaderComponent implements OnInit {
   collapse(){
     //toggle isActive class
     this.isActive = !this.isActive 
-    console.log("Collapse Clicked!");
-    console.log("parent" +this.isActive);
-    
   }
-
-
 }

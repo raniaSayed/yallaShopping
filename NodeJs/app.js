@@ -5,6 +5,13 @@ var path = require('path')
 var authMid = require("./controllers/authMid")
 var config = require('./config')
 
+server.use((req,resp,next)=>{
+  resp.header("Access-Control-Allow-Origin","*");
+  resp.header("Access-Control-Allow-Headers","Content-Type");
+  resp.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE")
+  next();
+});
+
 // require all models
 fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
   require(path.join(__dirname, "models", model))
