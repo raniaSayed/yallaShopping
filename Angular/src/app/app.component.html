@@ -16,10 +16,10 @@
                         <a href="#category-list" data-toggle="collapse" aria-expanded="false">Categories</a>
                         <ul class="list-unstyled" id="category-list">
                           <li  *ngFor="let category of categories">
-                                <a href="#{{category.name}}" data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
+                                <a data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
                                 <ul class="list-unstyled" id="{{category.name}}">
                                     <li *ngFor="let subcategory of category.subcategories">
-                                        <a href="#">{{subcategory}}</a>
+                                        <a routerLink="categories/{{category._id}}/{{ subcategory }}">{{subcategory}}</a>
                                     </li>
                                 </ul>
               

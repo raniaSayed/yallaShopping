@@ -67,9 +67,9 @@ const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
-  { path: 'category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
-  { path: '**', component: BodyComponent },
+  { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
+  // { path: '**', component: BodyComponent },
 ];
 
 @NgModule({
@@ -92,19 +92,10 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    // HeaderModule,
     HttpModule,
-    //SidebarComponent,
-
     SocialLoginModule,
     HttpClientModule,
-    //SubCategoryProductsComponent,
-    //ProductDetailsComponent,
-    // AddProductComponent,
-    //LimitToPipe,
     BrowserModule,
-   // HeaderModule,
-
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ],
