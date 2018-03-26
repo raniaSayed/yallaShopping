@@ -38,7 +38,8 @@ var products = new Schema(
     type:String,
     required:true,
     index: true,
-  }
+  },
+  picture: String
 });
 
 // products plugins
@@ -63,7 +64,7 @@ ProductsModel.getAllProducts = function(callback){
 }
 
 ProductsModel.getProductById = function(Id, callback){
-  ProductsModel.model.find({_id:Id}, function(err, result){
+  ProductsModel.model.findOne({_id:Id}, function(err, result){
     callback(err, result);
   });
 }

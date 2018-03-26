@@ -2,17 +2,12 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import {  CategoryService  } from './services/category.service';
 
+import { CartService } from "./services/cart.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-//  template:` <ul >
-//  <li *ngFor="let t of nums">
-//   <span >{{t}}</span>
-//  </li>
-// </ul>`, 
-//template:""
- styleUrls: ['./app.component.css'] 
+  styleUrls: ['./app.component.css'],
 
 })
 export class AppComponent {

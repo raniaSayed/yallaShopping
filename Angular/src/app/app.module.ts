@@ -20,6 +20,7 @@ import { BodyComponent } from './body/body.component';
 
 // import { HeaderModule } from './header/index';
 
+
 import { AuthComponent } from './auth/auth.component';
 
 import { HeaderModule} from './header/index';
@@ -48,11 +49,16 @@ export function getAuthServiceConfigs() {
       ])
   return config;
 }
-import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { LimitToPipe } from  './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
+
+import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
+import { SubCategoryProductService } from './services/sub-category-product.service';
+import { ProductDetailsService } from './services/product-details.service';
+import { CartService } from './services/cart.service';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
@@ -61,10 +67,9 @@ const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
-  { path: '**', component: BodyComponent },
   { path: 'category/:subcategory', component: SubCategoryProductsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
   { path: '**', component: BodyComponent },
-  { path: 'product/:id', component: ProductDetailsComponent },
 ];
 
 @NgModule({
@@ -73,14 +78,17 @@ const appRoutes: Routes = [
      //HeaderComponent,
     // HeaderModule,
    // SidebarComponent,
+
     FooterComponent,
     BodyComponent,
     LimitToPipe,
     UserRegisterFormComponent,
     SellerRegisterationFormComponent,
     AuthComponent,
-    SubCategoryProductsComponent,
     ProductDetailsComponent,
+    LimitToPipe,
+    SubCategoryProductsComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,
@@ -96,10 +104,10 @@ const appRoutes: Routes = [
     //LimitToPipe,
     BrowserModule,
    // HeaderModule,
+
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ImageUploadModule.forRoot(),
-  ],
+    ],
 
   providers: [
     UserRegisterationService,
@@ -108,7 +116,11 @@ const appRoutes: Routes = [
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },
-    AuthServiceService],
+    AuthServiceService,
+    SubCategoryProductService,
+    ProductDetailsService,
+    CartService,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
