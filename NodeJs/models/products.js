@@ -38,7 +38,8 @@ var products = new Schema(
     type:String,
     required:true,
     index: true,
-  }
+  },
+  picture: String
 });
 
 // products plugins

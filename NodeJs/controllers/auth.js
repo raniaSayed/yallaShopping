@@ -11,10 +11,9 @@ var jwt = require('jsonwebtoken');
 
 
 //menna code to be deleted
-router.post("/tokens",urlEncodedParsermid,(req, resp)=>{
-	console.log(req.body);
+router.post("/tokens",JSONParsermid,(req, resp)=>{
+	console.log(req.body.email);
 	console.log("hi");
-
 	// resp.send("ok");
 });
 

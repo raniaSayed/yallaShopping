@@ -144,7 +144,7 @@ router.get("/:id?", function(request, response){
 
     if(request.params.id){
       ProductsModel.getProductById(request.params.id, function(err, result){
-        if(!err&&result.length>0){
+        if(!err){
           console.log("finding Product with id ="+request.params.id);
           response.json(result);
         }

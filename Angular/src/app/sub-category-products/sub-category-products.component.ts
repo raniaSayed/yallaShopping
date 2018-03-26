@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SubCategoryProductService } from '../services/sub-category-product.service';
+import { DomSanitizer } from "@angular/platform-browser";
+
 @Component({
   selector: 'app-sub-category-products',
   templateUrl: './sub-category-products.component.html',
@@ -7,16 +10,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SubCategoryProductsComponent implements OnInit {
 	subCategory: String;
+	category: Number;
 	products:any[];
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private subCategoryProducts: SubCategoryProductService) { 
    	this.route.params.subscribe(params => {
         this.subCategory = params['subcategory'];
-        this.products = [{name:"ppppppppp1", price:12, quantity:4, picture:"https://assets.servedby-buysellads.com/p/manage/asset/id/62491", desc:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}, {name:"ppppppppp1", price:12, quantity:4, picture:"https://assets.servedby-buysellads.com/p/manage/asset/id/62491", desc:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]
+        this.category = params['category'];
+        this.subCategoryProducts.getProducts(this.category, this.subCategory).subscribe((data: Array<Object>)=>{
+        	this.products = data
+        	console.log(data)
+        })
    	})
   }
 
 
   ngOnInit() {
+  
   }
 
 }
