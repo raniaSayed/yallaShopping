@@ -28,8 +28,8 @@ export class AuthComponent implements OnInit {
 
       this.socialAuthService.signIn(socialPlatformProvider).then(
         (userData) => {
-          this.myAuthService.getUserToken(userData);
-          // console.log(socialPlatform+" sign in data : " , res);
+          this.myAuthService.getUserToken(userData).subscribe((res)=>{console.log(res)})
+          // console.log(socialPlatform+" sign in data : " , userData);
 
         }
       );

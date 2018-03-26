@@ -121,10 +121,10 @@ router.post("/:id/rate", JSONParsermid,function (req, resp) {
 //end of my new code
 
 router.post("/filter", urlEncodedMid, function(request, response){
-  var subcatArr = Array();
-  subcatArr.push(request.body.subcat1);
-  subcatArr.push(request.body.subcat2);
-
+  // var subcatArr = Array();
+  // subcatArr.push(request.body.subcat1);
+  // subcatArr.push(request.body.subcat2);
+  //subcatArr must be Array
   ProductsModel.filter(request.body.priceLow,
     request.body.priceHigh, request.body.subcatArr, function(err, result){
     if(!err&&result.length>0){

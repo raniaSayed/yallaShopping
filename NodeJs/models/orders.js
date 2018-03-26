@@ -51,14 +51,11 @@ var OrderModel = {};
 OrderModel.model = mongoose.model("orders");
 
 // add order
-OrderModel.addOrder = function(userId, orderProducts, callback) {
+OrderModel.addOrder = function(data, callback) {
 
-  var order = new OrderModel.model({
-    userId,
-    orderProducts
-  });
+  var order = new OrderModel.model(data);
 
-  order.save(order, function(err, doc){
+  order.save(function(err, doc){
     callback(err, doc);
   });
 }

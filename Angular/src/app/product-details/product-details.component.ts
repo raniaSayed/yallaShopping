@@ -12,7 +12,7 @@ import { CartService } from "../services/cart.service";
 })
 export class ProductDetailsComponent implements OnInit {
 	id: Number;
-	product: Object
+	product: any
 	cart: Array<Object>
 
   constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 

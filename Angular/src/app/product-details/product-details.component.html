@@ -1,7 +1,7 @@
 <div class="row m-1">
 
     <div class="col-sm-3">
-        <img id="book-cover" src="{{ product.picture }}">
+        <img id="book-cover" src="{{ product?.picture }}">
         <h5 class="subtitles">Current rating:  </h5>
         <div id="current-rating">
 
@@ -10,7 +10,7 @@
     <div class="col-sm-6">
 
         <!-- title -->
-        <h2>{{ product.name }}</h2>
+        <h2>{{ product?.name }}</h2>
 
         <!-- seller 
         <h5 class="subtitles">Title</h5>
@@ -18,9 +18,9 @@
 
         <!-- description -->
         <h5 class="subtitles">Description: </h5>
-        <p id="description">{{ product.desc}}</p>        
+        <p id="description">{{ product?.desc}}</p>        
         <h5 class="subtitles">Price: </h5>
-        <p id="description">{{ product.price}} L.E</p>
+        <p id="description">{{ product?.price}} L.E</p>
         <button type="button" class="btn btn-success" (click)="addToCart($event)">Add to Cart</button>
     </div>
     <div class="col-sm-3">

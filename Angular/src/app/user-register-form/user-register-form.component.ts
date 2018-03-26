@@ -1,0 +1,79 @@
+import { Component, OnInit } from '@angular/core';
+import { PatternValidator, NgForm } from '@angular/forms';
+import { UserRegisterationService } from '../user-registeration.service';
+
+
+@Component({
+  selector: 'app-user-register-form',
+  templateUrl: './user-register-form.component.html',
+  styleUrls: ['./user-register-form.component.css']
+})
+export class UserRegisterFormComponent implements OnInit {
+  private name: string;
+  private email: string;
+  private password: string;
+  private confirmPassword: string;
+  private picture: any;
+  private address: string;
+  private cart: object;
+  private valid: boolean = true;
+  private passCheck: boolean = true;
+  private serverErrors: string;
+
+  constructor(private userRegisterationService: UserRegisterationService) { }
+  fileUpload(files){
+  console.log(files[0]);
+  this.picture = files[0];
+  var myReader:FileReader = new FileReader();
+    myReader.readAsDataURL(this.picture);
+    myReader.onloadend = (e) => {
+    this.picture = myReader.result;
+    console.log(this.picture)
+  }
+}
+  register(){
+    this.userRegisterationService.sendDataToServer({
+      'name': this.name,
+      'email': this.email,
+      'password': this.password,
+      'address': this.address,
+      'picture': this.picture,
+      'origin': "N"
+    }).subscribe((res)=> {
+      
+      // if(res.status=="ok"){
+      //   console.log("user created");
+      
+      // }else{
+      //   console.log("error");
+      //   console.log(res.errors);
+      //   if(res.errors.email){
+      //     this.serverErrors = res.errors.email.message+" ";
+      //   }
+      //   if(res.errors.password){
+      //     this.serverErrors += res.errors.password.message+" ";
+      //   }
+      //   if(res.errors.name){
+      //     this.serverErrors += res.errors.name.message;
+      //   }
+      // }
+      
+    });
+  }
+
+  submitIt(){
+    console.log("submitFn");
+    if(this.password!=this.confirmPassword || this.password==""){
+      //
+    }
+    else{
+      this.register();
+    }
+  }
+
+  
+
+  ngOnInit() {
+  }
+
+}
