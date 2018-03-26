@@ -1,3 +1,32 @@
-<p>
-  product-details works!
-</p>
+<div class="row m-1">
+
+    <div class="col-sm-3">
+        <img id="book-cover" src="{{ product.picture }}">
+        <h5 class="subtitles">Current rating:  </h5>
+        <div id="current-rating">
+
+        </div>
+    </div>
+    <div class="col-sm-6">
+
+        <!-- title -->
+        <h2>{{ product.name }}</h2>
+
+        <!-- seller 
+        <h5 class="subtitles">Title</h5>
+        <a href="/library/author/}">Name</a>-->
+
+        <!-- description -->
+        <h5 class="subtitles">Description: </h5>
+        <p id="description">{{ product.desc}}</p>        
+        <h5 class="subtitles">Price: </h5>
+        <p id="description">{{ product.price}} L.E</p>
+        <button type="button" class="btn btn-success" (click)="addToCart($event)">Add to Cart</button>
+    </div>
+    <div class="col-sm-3">
+        <h5 class="subtitles" id="myrating">My rating</h5>
+
+        <div id="myrating-div">
+        </div>
+    </div>
+</div>

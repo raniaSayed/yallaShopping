@@ -4,10 +4,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-// import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
-
 import { AuthComponent } from './auth/auth.component';
 
 
@@ -30,47 +28,54 @@ export function getAuthServiceConfigs() {
       ])
   return config;
 }
-import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HeaderModule } from './header/index';
 import { LimitToPipe } from  './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
+import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
+import { SubCategoryProductService } from './services/sub-category-product.service';
+import { ProductDetailsService } from './services/product-details.service';
+import { CartService } from './services/cart.service';
+import { SafeHtmlPipe } from './safe-html.pipe';
+
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
-  { path: 'category/:subcategory', component: SubCategoryProductsComponent },
+  { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
   { path: '**', component: BodyComponent },
-  { path: 'product/:id', component: ProductDetailsComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent,
     FooterComponent,
     BodyComponent,
     AuthComponent,
-    SubCategoryProductsComponent,
     ProductDetailsComponent,
-    LimitToPipe
+    LimitToPipe,
+    SubCategoryProductsComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,
     SocialLoginModule,
     HttpClientModule,
-    SubCategoryProductsComponent,
-    ProductDetailsComponent,
-    // AddProductComponent,
-    LimitToPipe,
     BrowserModule,
     HeaderModule,
     RouterModule.forRoot(appRoutes)
     ],
-  providers: [CategoryService, {
+  providers: [
+    CategoryService, 
+    {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },
-    AuthServiceService],
+    AuthServiceService,
+    SubCategoryProductService,
+    ProductDetailsService,
+    CartService,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
