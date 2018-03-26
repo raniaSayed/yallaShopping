@@ -7,6 +7,7 @@ export class CategoryService {
 
   constructor(private http:Http) { }
   getAllCategoreis(){
+    //console.log(this.http.get("http://localhost:9090/categories").map(res =>res.json()));
     return this.http.get("http://localhost:9090/categories").map(res => res.json());
 
   }
