@@ -20,6 +20,7 @@ export class ProductDetailsComponent implements OnInit {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
         	this.product = data
+          console.log(data, "xxx")
         })
    	})
   }
@@ -29,7 +30,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(e){
-  	this.cartService.changeCart({prodId:this.product['_id'], quantity:1})
+  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>console.log(p))
   }
 
 }

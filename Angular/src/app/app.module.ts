@@ -22,6 +22,7 @@ import { BodyComponent } from './body/body.component';
 
 
 import { AuthComponent } from './auth/auth.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 import { HeaderModule} from './header/index';
 //george...
@@ -33,6 +34,8 @@ import { GetSellerProductsService } from './get-seller-products.service';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
 
 import { AuthServiceService } from './auth-service.service';
+import { AddProductService } from './add-product.service';
+import { EditProductService } from './edit-product.service';
 
 
 export function getAuthServiceConfigs() {
@@ -62,6 +65,7 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { HomeComponent } from './home/home.component';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 
 const appRoutes: Routes = [
@@ -88,6 +92,8 @@ const appRoutes: Routes = [
     SellerRegisterationFormComponent,
     AuthComponent,
     ProductDetailsComponent,
+    AddProductComponent,
+    EditProductComponent,
     LimitToPipe,
     SubCategoryProductsComponent,
     SafeHtmlPipe,
@@ -113,6 +119,8 @@ const appRoutes: Routes = [
       useFactory: getAuthServiceConfigs,
     },
     AuthServiceService,
+    AddProductService,
+    EditProductService,
     SubCategoryProductService,
     ProductDetailsService,
     CartService,
