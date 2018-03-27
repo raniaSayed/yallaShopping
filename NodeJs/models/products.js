@@ -121,5 +121,11 @@ ProductsModel.deleteProduct = function(Id, callback){
   })
 }
 
+ProductsModel.getProductsBySellerId = function(Id, callback){
+  ProductsModel.model.find({seller_id: Id}, function(err, result){
+    callback(err, result);
+  })
+}
+
 
 module.exports = ProductsModel;

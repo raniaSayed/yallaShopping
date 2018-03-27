@@ -18,7 +18,7 @@ import { HeaderModule} from './header/index';
 //george...
 import { UserRegisterationService } from './user-registeration.service';
 import { SellerRegisterationServiceService } from './seller-registeration-service.service';
-
+import { GetSellerProductsService } from './get-seller-products.service';
 
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
@@ -53,12 +53,14 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
+import { SellerProductsComponent } from './seller-products/seller-products.component';
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: '**', component: BodyComponent },
 ];
 
@@ -75,6 +77,7 @@ const appRoutes: Routes = [
     LimitToPipe,
     SubCategoryProductsComponent,
     SafeHtmlPipe,
+    SellerProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +99,7 @@ const appRoutes: Routes = [
     SubCategoryProductService,
     ProductDetailsService,
     CartService,
+    GetSellerProductsService,
     ],
   bootstrap: [AppComponent]
 })
