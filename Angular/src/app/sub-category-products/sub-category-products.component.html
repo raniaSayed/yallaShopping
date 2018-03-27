@@ -1,5 +1,5 @@
 <div class="card float-left m-3" style="width: 18rem;" [hidden] = 'ishidden' *ngFor="let product of products">
-  <a routerLink="/product/{{ product._id }}">
+  <a routerLink="/products/{{ product._id }}">
     <img class="card-img-top" src="{{ product.picture | safeHtml}}" alt="Card image cap">
   <div class="card-body mx-auto">
     <h4 class="card-title">{{ product.name }}</h4>

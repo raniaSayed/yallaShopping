@@ -1,5 +1,105 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-body></app-body>
+<!-- Page Content Holder -->
+<div class="wrapper">
+        <!-- Sidebar Holder -->
+        <!--app-sidebar [isActive]="isActive"></app-sidebar-->
+        <nav id="sidebar" [class.active] = "isActive">
+                <div class="sidebar-header">
+                    <!-- if user loged in -->
+                    <h3>
+                        <a href="#">Account</a>
+                    </h3>
+                </div>
+              
+                <ul class="list-unstyled components">
+                    <p>Yalla Shopping</p>
+                    <li class="active">
+                        <a href="#category-list" data-toggle="collapse" aria-expanded="false">Categories</a>
+                        <ul class="list-unstyled" id="category-list">
+                          <li  *ngFor="let category of categories">
+                                <a data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
+                                <ul class="list-unstyled" id="{{category.name}}">
+                                    <li *ngFor="let subcategory of category.subcategories">
+                                        <a routerLink="categories/{{category._id}}/{{ subcategory }}">{{subcategory}}</a>
+                                    </li>
+                                </ul>
+              
+                            </li>
+              
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                </ul>
+              </nav>
+              <!--end of sidebar-->
+        <div id="content">
+    
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+    
+                <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse"  (click)="collapse()" class="navbar-btn" [class.active] = "!isActive">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Yalla Shopping</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+    
+                            <!-- <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Dropdown
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </li> -->
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-1" id="searchInput" style="width:40%" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                            <li class="nav-item">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">
+                                    <i class="fa fa-sign-in"></i> Login</a>
+                            </li>
+    
+                            <li class="nav-item">
+                                <a href="#">
+                                    <i class="fa fa-shopping-cart fa-2x  icon-grey">
+                                        <span class="badge">17</span>
+                                    </i>
+                                </a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+    
+        </nav>
+        <router-outlet></router-outlet>
+        <app-body></app-body>
+        <!--app-auth></app-auth-->
+
+
+    </div>
+    </div>
+<!--app-header></app-header-->
 <app-footer></app-footer>
-<!-- <app-auth></app-auth> -->
+
+<app-footer></app-footer>

@@ -7,10 +7,6 @@ var orderProducts = new Schema({
     type: Number,
     ref: "products"
   },
-  sellerId: {
-    type: Number,
-    ref: "sellers"
-  },
   quantity: {
     type: Number
   },

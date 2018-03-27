@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import {  CategoryService  } from './services/category.service';
+
 import { CartService } from "./services/cart.service";
 
 @Component({
@@ -8,5 +11,24 @@ import { CartService } from "./services/cart.service";
 
 })
 export class AppComponent {
-  title = 'app';
+
+  isActive:boolean;
+  categories:any[];
+  
+  constructor(private categoryService:CategoryService) { 
+    //console.log()
+    this.isActive = false;
+
+    this.categoryService.getAllCategoreis().subscribe((res) => {
+      this.categories = res;
+      console.log("hello");
+
+      console.log(this.categories);
+    });
+
+  }
+  collapse(){
+    //toggle isActive class
+    this.isActive = !this.isActive 
+  }
 }

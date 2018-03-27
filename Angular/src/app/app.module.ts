@@ -1,6 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import { HttpModule } from '@angular/http';
+
 //george ...
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,8 +13,14 @@ import {Http} from '@angular/http';
 import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
+//import { HeaderComponent } from './header/header.component';
+//import { SidebarComponent } from './header/sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
+
+// import { HeaderModule } from './header/index';
+
+
 import { AuthComponent } from './auth/auth.component';
 
 import { HeaderModule} from './header/index';
@@ -44,12 +53,12 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { LimitToPipe } from  './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
+
 import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
 import { SubCategoryProductService } from './services/sub-category-product.service';
 import { ProductDetailsService } from './services/product-details.service';
 import { CartService } from './services/cart.service';
 import { SafeHtmlPipe } from './safe-html.pipe';
-
 
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
@@ -58,15 +67,19 @@ const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
-  { path: 'category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'products/seller/:id', component: SellerProductsComponent },
-  { path: '**', component: BodyComponent },
+  { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
+  // { path: '**', component: BodyComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+     //HeaderComponent,
+    // HeaderModule,
+   // SidebarComponent,
+
     FooterComponent,
     BodyComponent,
     LimitToPipe,
@@ -81,9 +94,10 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     SocialLoginModule,
     HttpClientModule,
-    HeaderModule,
+    BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ],
