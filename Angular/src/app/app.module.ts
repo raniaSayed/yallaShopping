@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 
 import { AuthComponent } from './auth/auth.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 import { HeaderModule} from './header/index';
 //george...
@@ -26,6 +27,8 @@ import { SellerRegisterationServiceService } from './seller-registeration-servic
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
 
 import { AuthServiceService } from './auth-service.service';
+import { AddProductService } from './add-product.service';
+import { EditProductService } from './edit-product.service';
 
 
 export function getAuthServiceConfigs() {
@@ -49,6 +52,7 @@ import { LimitToPipe } from  './limit-to.pipe';
 import { CategoryService } from './services/category.service';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
@@ -71,6 +75,8 @@ const appRoutes: Routes = [
     AuthComponent,
     SubCategoryProductsComponent,
     ProductDetailsComponent,
+    AddProductComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +100,10 @@ const appRoutes: Routes = [
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
     },
-    AuthServiceService],
+    AuthServiceService,
+    AddProductService,
+    EditProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

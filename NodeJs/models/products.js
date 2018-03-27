@@ -17,13 +17,16 @@ var products = new Schema(
     index: true
   },
   price:{
-    type:Number
+    type:Number,
+    required:true
   },
   rate:{
     type:Number
   },
   stock:{
-    type:Number
+    type:Number,
+    required:true
+
   },
   seller_id:{
     type:Number,
@@ -38,7 +41,8 @@ var products = new Schema(
     type:String,
     required:true,
     index: true,
-  }
+  },
+    picture: String
 });
 
 // products plugins
