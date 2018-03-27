@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 //george ...
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { UICarouselModule } from "ui-carousel";
 import {Http} from '@angular/http';
 
 import { ImageUploadModule } from "angular2-image-upload";
@@ -59,18 +59,19 @@ import { SubCategoryProductService } from './services/sub-category-product.servi
 import { ProductDetailsService } from './services/product-details.service';
 import { CartService } from './services/cart.service';
 import { SafeHtmlPipe } from './safe-html.pipe';
-
+import { HomeComponent } from './home/home.component';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 import { SellerProductsComponent } from './seller-products/seller-products.component';
+
 const appRoutes: Routes = [
-  { path: '', component: BodyComponent },
+  { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
-  // { path: '**', component: BodyComponent },
+  { path: '**', component: BodyComponent },
 ];
 
 @NgModule({
@@ -91,6 +92,7 @@ const appRoutes: Routes = [
     SubCategoryProductsComponent,
     SafeHtmlPipe,
     SellerProductsComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +102,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    UICarouselModule,
     ],
 
   providers: [
