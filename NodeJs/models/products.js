@@ -67,7 +67,7 @@ ProductsModel.getAllProducts = function(callback){
 }
 
 ProductsModel.getProductById = function(Id, callback){
-  ProductsModel.model.find({_id:Id}, function(err, result){
+  ProductsModel.model.find({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
     callback(err, result);
   });
 }
@@ -121,6 +121,12 @@ ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
 ProductsModel.deleteProduct = function(Id, callback){
    ProductsModel.model.remove({_id:Id}, (err, result)=>{
     callback(err, result)
+  })
+}
+
+ProductsModel.getProductsBySellerId = function(Id, callback){
+  ProductsModel.model.find({seller_id: Id}, function(err, result){
+    callback(err, result);
   })
 }
 

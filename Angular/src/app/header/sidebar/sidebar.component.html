@@ -1,4 +1,4 @@
-<nav id="sidebar">
+<nav id="sidebar" [class.active] = "isActive">
   <div class="sidebar-header">
       <!-- if user loged in -->
       <h3>
@@ -7,52 +7,15 @@
   </div>
 
   <ul class="list-unstyled components">
-      <p>Dummy Heading</p>
+      <p>Yalla Shopping</p>
       <li class="active">
-          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="true">Categories</a>
-          <ul class="list-unstyled" id="homeSubmenu">
-
-              <li>
-                  <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="true">Category 1</a>
-                  <ul class="list-unstyled" id="pageSubmenu1">
-                      <li>
-                          <a href="#">subcategory 1</a>
-                      </li>
-                      <li>
-                          <a href="#">subcategory 2</a>
-                      </li>
-                      <li>
-                          <a href="#">subcategory 3</a>
-                      </li>
-                  </ul>
-
-              </li>
-              <li>
-                  <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false">Category 2</a>
-                  <ul class="collapse list-unstyled" id="pageSubmenu2">
-                      <li>
-                          <a href="#">subcategory 1</a>
-                      </li>
-                      <li>
-                          <a href="#">subcategory 2</a>
-                      </li>
-                      <li>
-                          <a href="#">subcategory 3</a>
-                      </li>
-                  </ul>
-
-              </li>
-              <li>
-                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Category 3</a>
-                  <ul class="collapse list-unstyled" id="pageSubmenu">
-                      <li>
-                          <a href="#">subcategory 1</a>
-                      </li>
-                      <li>
-                          <a href="#">subcategory 2</a>
-                      </li>
-                      <li>
-                          <a href="#">subcategory 3</a>
+          <a href="#category-list" data-toggle="collapse" aria-expanded="false">Categories</a>
+          <ul class="list-unstyled" id="category-list">
+            <li  *ngFor="let category of categories">
+                  <a href="#{{category.name}}" data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
+                  <ul class="list-unstyled" id="{{category.name}}">
+                      <li *ngFor="let subcategory of category.subcategories">
+                          <a href="#">{{subcategory}}</a>
                       </li>
                   </ul>
 

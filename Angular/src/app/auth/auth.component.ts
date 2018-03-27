@@ -18,7 +18,6 @@ export class AuthComponent implements OnInit {
   }
 
 
-
     public socialSignIn(socialPlatform : string) {
       let socialPlatformProvider;
       if(socialPlatform == "facebook"){
@@ -35,6 +34,5 @@ export class AuthComponent implements OnInit {
         }
       );
     }
-
 
 }

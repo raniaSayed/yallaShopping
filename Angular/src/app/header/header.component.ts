@@ -5,16 +5,21 @@ declare var $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 
 })
 export class HeaderComponent implements OnInit {
-
+  isActive:boolean;
   constructor() {
-    console.log($('body'));
+    this.isActive = false;
+    
    }
 
   ngOnInit() {
   }
 
+  collapse(){
+    //toggle isActive class
+    this.isActive = !this.isActive 
+  }
 }

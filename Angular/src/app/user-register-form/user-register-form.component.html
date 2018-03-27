@@ -30,7 +30,7 @@
         <span color="red"><font color="red">*</font></span>        
       </td>
       <td>
-        <input class="form-control" type="password" required name="password" id="password" [(ngModel)]="password" #upassword="ngModel">
+        <input class="form-control" type="password" min="8" required name="password" id="password" [(ngModel)]="password" #upassword="ngModel">
       </td>
     </tr>
     <tr>
@@ -39,7 +39,7 @@
         <span color="red"><font color="red">*</font></span>
       </td>
       <td>
-        <input class="form-control" type="password" required name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" #uconfirmPassword="ngModel">
+        <input class="form-control" type="password" min="8" required name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" #uconfirmPassword="ngModel">
         <div [hidden]="uconfirmPassword.pristine || upassword.value == uconfirmPassword.value">Password mis-match</div>               
       </td>
     </tr>

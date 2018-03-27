@@ -9,6 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   declarations: [
     // components
     HeaderComponent,
+    
 
     // sub components
     SidebarComponent
