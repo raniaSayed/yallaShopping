@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CartService {
@@ -7,7 +9,7 @@ export class CartService {
   private cart = new BehaviorSubject<Array<Object>>([{prodId:0, quantity:1}])
   currentCart = this.cart.asObservable();
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
   	console.log(this.cart.getValue())
   }
 
@@ -26,5 +28,15 @@ export class CartService {
   	}
     this.cart.next(temp)
   	console.log(temp)
+  }
+
+  AddToCart(product){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    console.log(product)
+    return this.http.post('http://localhost:9090/users/1/cart', JSON.stringify(product), httpOptions);
   }
 }
