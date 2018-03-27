@@ -20,6 +20,7 @@ export class ProductDetailsComponent implements OnInit {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
         	this.product = data
+          console.log(data, "xxx")
         })
    	})
   }

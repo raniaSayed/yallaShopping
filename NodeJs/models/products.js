@@ -67,7 +67,7 @@ ProductsModel.getAllProducts = function(callback){
 }
 
 ProductsModel.getProductById = function(Id, callback){
-  ProductsModel.model.find({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
+  ProductsModel.model.findOne({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
     callback(err, result);
   });
 }
