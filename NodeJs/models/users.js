@@ -87,7 +87,7 @@ UserModel.deleteCart = (Id, callback)=>{
   })
 }
 
-UserModel.addCart = (Id, productToAdd, callback)=>{
+UserModel.addToCart = (Id, productToAdd, callback)=>{
     /* send data as
     {"prodId":1, "quantity":60}
    */
@@ -109,6 +109,12 @@ UserModel.addCart = (Id, productToAdd, callback)=>{
 
 UserModel.getCart = (Id, callback) =>{
     UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
+      callback(err, result)
+  })
+}
+UserModel.editCart = (Id, cart, callback) =>{
+  console.log(cart)
+    UserModel.model.update({_id:Id},{cart:cart}, (err, result) => {
       callback(err, result)
   })
 }

@@ -18,7 +18,6 @@ export class SubCategoryProductsComponent implements OnInit {
         this.category = params['category'];
         this.subCategoryProducts.getProducts(this.category, this.subCategory).subscribe((data: Array<Object>)=>{
         	this.products = data
-        	console.log(data)
         })
    	})
   }

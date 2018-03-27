@@ -67,12 +67,14 @@ import { UserRegisterFormComponent } from './user-register-form/user-register-fo
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { SellerProductsComponent } from './seller-products/seller-products.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'products/seller/:id', component: SellerProductsComponent },
+  { path: 'users/cart', component: UserCartComponent },
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   // { path: '**', component: BodyComponent },
 ];
@@ -97,6 +99,7 @@ const appRoutes: Routes = [
     SubCategoryProductsComponent,
     SafeHtmlPipe,
     SellerProductsComponent,
+    UserCartComponent,
   ],
   imports: [
     BrowserModule,
