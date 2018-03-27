@@ -17,13 +17,16 @@ var products = new Schema(
     index: true
   },
   price:{
-    type:Number
+    type:Number,
+    required:true
   },
   rate:{
     type:Number
   },
   stock:{
-    type:Number
+    type:Number,
+    required:true
+
   },
   seller_id:{
     type:Number,
@@ -39,7 +42,7 @@ var products = new Schema(
     required:true,
     index: true,
   },
-  picture: String
+    picture: String
 });
 
 // products plugins
@@ -64,7 +67,7 @@ ProductsModel.getAllProducts = function(callback){
 }
 
 ProductsModel.getProductById = function(Id, callback){
-  ProductsModel.model.findOne({_id:Id}, function(err, result){
+  ProductsModel.model.find({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
     callback(err, result);
   });
 }
@@ -118,6 +121,12 @@ ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
 ProductsModel.deleteProduct = function(Id, callback){
    ProductsModel.model.remove({_id:Id}, (err, result)=>{
     callback(err, result)
+  })
+}
+
+ProductsModel.getProductsBySellerId = function(Id, callback){
+  ProductsModel.model.find({seller_id: Id}, function(err, result){
+    callback(err, result);
   })
 }
 

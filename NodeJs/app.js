@@ -1,9 +1,15 @@
 var express = require('express')
+// var https = require('https');
+
 var fs = require("fs")
 var server = express()
 var path = require('path')
 var authMid = require("./controllers/authMid")
 var config = require('./config')
+// var options = {
+//   key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+//   cert: fs.readFileSync('test/fixtures/keys/agent2-cert.cert')
+// };
 
 server.use((req,resp,next)=>{
   resp.header("Access-Control-Allow-Origin","*");
@@ -45,7 +51,7 @@ server.use("/orders", ordersRouter)
 var categoriesRouter = require("./controllers/categories")
 server.use("/categories", categoriesRouter)
 
-// server start listening ...
+
 server.listen("9090", function () {
   console.log("Starting....")
 })
