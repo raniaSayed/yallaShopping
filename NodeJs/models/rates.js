@@ -63,6 +63,16 @@ RatesModel.getRateByUser = function(product_id, callback){
   });
 }
 
+RatesModel.getAvgRates = function(product_id, callback){
+  var user_id=3;
+
+  RatesModel.model.aggregate([
+  { $match: { product_id: product_id }},
+  { $group: { count: { $sum: 1 } } }
+], function (err, result) {
+        callback(err, result);
+    });
+}
 // ratesModel.getRate = function(Id, callback){
 //   ProductsModel.model.find({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
 //     callback(err, result);

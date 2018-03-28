@@ -60,5 +60,31 @@ router.get("/:productId?", function(request, response){
     }
 });
 
+router.get("/avg/:productId?", function(request, response){
+
+    if(request.params.productId){
+      RatesModel.getAvgRates(request.params.productId, function(err, result){
+        if(!err){
+          console.log("finding Product with id ="+request.params.productId);
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      RatesModel.getRate(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
+
 
 module.exports = router;
