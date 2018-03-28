@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdersSellerService } from '../services/orders-seller.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-seller-orders-details',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SellerOrdersDetailsComponent implements OnInit {
 
-  constructor() { }
+  order: Object;
+  id: number;
+
+  constructor(private route: ActivatedRoute,private ordersSellerService: OrdersSellerService) {
+    this.route.params.subscribe(
+      params => this.id = params['order_id']
+    )
+   }
 
   ngOnInit() {
+    this.ordersSellerService.getOrderById(this.id).subscribe(
+      order => {
+        this.order = order;
+        console.log(order);
+      }
+    );
   }
 
 }
