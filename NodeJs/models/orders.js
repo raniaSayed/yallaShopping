@@ -16,7 +16,8 @@ var orders = new Schema({
   },
   status: {
     type: String,
-    enum: ["ordered", "received"]
+    enum: ["ordered", "received"],
+    default: "ordered"
   },
   timestamps: {
     type: Date,
