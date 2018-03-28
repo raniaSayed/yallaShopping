@@ -37,18 +37,13 @@ router.delete("/:id",function (req, resp) {
   })
 })
 
-//my new code
+
 
 router.get("/",function(req,response){
-    // var name ="samsung";
-    //   var seller_id =1;
-    //   var category="test";
-    //     var subcategory ="test";
   ProductsModel.getAllProducts(function(err, result){
     if(!err&&result.length>0){
       console.log("finding All Products");
       response.json(result);
-      // response.send("hii");
     }
     else{
       response.json(err);
@@ -58,7 +53,6 @@ router.get("/",function(req,response){
 
 
 router.post("/", JSONParsermid,function (req, resp) {
-  // var name ="samsung";
 	ProductsModel.addProduct(req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})
@@ -118,7 +112,6 @@ router.post("/:id/rate", JSONParsermid,function (req, resp) {
 	})
 
 })
-//end of my new code
 
 router.post("/filter", urlEncodedMid, function(request, response){
   // var subcatArr = Array();

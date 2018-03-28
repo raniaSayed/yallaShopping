@@ -57,8 +57,8 @@
     "styleExt": "css",
     "component": {},
     "serve": {
-      "sslKey": "<relative path from .angular-cli.json>/server.key",
-      "sslCert": "<relative path from .angular-cli.json>/server.crt"
+      "sslKey": "./server.key",
+      "sslCert": "./server.crt"
     }
   }
 }

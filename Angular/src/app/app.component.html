@@ -1,10 +1,4 @@
-<!-- <app-header></app-header>
-<app-body></app-body>
-<app-footer></app-footer> -->
-<!-- <app-auth></app-auth> -->
-<!-- <app-add-product></app-add-product> -->
-<!-- <app-edit-product></app-edit-product> -->
-<!-- Page Content Holder -->
+
 
 <div class="wrapper">
         <!-- Sidebar Holder -->
@@ -16,7 +10,7 @@
                         <a href="#">Account</a>
                     </h3>
                 </div>
-              
+
                 <ul class="list-unstyled components">
                     <p>Yalla Shopping</p>
                     <li class="active">
@@ -29,9 +23,9 @@
                                         <a routerLink="categories/{{category._id}}/{{ subcategory }}">{{subcategory}}</a>
                                     </li>
                                 </ul>
-              
+
                             </li>
-              
+
                         </ul>
                     </li>
                     <li>
@@ -41,10 +35,10 @@
               </nav>
               <!--end of sidebar-->
         <div id="content">
-    
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-    
+
                 <div class="navbar-header">
                     <button type="button" id="sidebarCollapse"  (click)="collapse()" class="navbar-btn" [class.active] = "!isActive">
                         <span></span>
@@ -58,10 +52,10 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-    
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-    
+
                             <!-- <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -86,7 +80,7 @@
                                 <a [routerLink]="['/users/login']">
                                     <i class="fa fa-sign-in"></i> Login</a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a [routerLink]="['/users/cart']">
                                     <i class="fa fa-shopping-cart fa-2x  icon-grey">
@@ -97,7 +91,7 @@
                     </div>
                 </nav>
             </div>
-    
+
         </nav>
         <router-outlet></router-outlet>
         <app-body></app-body>
@@ -105,5 +99,3 @@
     </div>
     </div>
 <app-footer></app-footer>
-
-
