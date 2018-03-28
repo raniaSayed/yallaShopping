@@ -78,7 +78,7 @@ const appRoutes: Routes = [
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'products/add', component: AddProductComponent },
-  
+  { path: 'products/edit/:id', component: EditProductComponent},
   { path: 'products/:id', component: ProductDetailsComponent },
   
   { path: 'products/seller/:id', component: SellerProductsComponent },
