@@ -9,7 +9,7 @@
                         <a href="#">Account</a>
                     </h3>
                 </div>
-              
+                
                 <ul class="list-unstyled components">
                     <p>Yalla Shopping</p>
                     <li class="active">
@@ -17,14 +17,16 @@
                         <ul class="list-unstyled" id="category-list">
                           <li  *ngFor="let category of categories">
                                 <a href="#{{category.name}}" data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
-                                <ul class="list-unstyled" id="{{category.name}}">
-                                    <li *ngFor="let subcategory of category.subcategories">
-                                        <a href="#">{{subcategory}}</a>
-                                    </li>
-                                </ul>
-              
+                                 <form action="">
+                                
+                                    <ul class="list-unstyled" id="{{category.name}}">
+                                        <li *ngFor="let subcategory of category.subcategories">
+                                           <input type="checkbox" class="form-check-input" name="{{category.name}}{{subcategory}}"> <a class="form-check-label" href="#">{{subcategory}}</a>
+                                        </li>
+                                    </ul>
+                                </form>
+
                             </li>
-              
                         </ul>
                     </li>
                     <li>
@@ -67,9 +69,9 @@
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </li> -->
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-1" id="searchInput" style="width:40%" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <form (submit)="searchSubmit()" class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-1" name="searchWord" [(ngModel)]="searchWord" id="searchInput" style="width:40%" type="search" placeholder="Search" aria-label="Search">
+                                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
                             </form>
                             <li class="nav-item">
                                 <a href="#">
@@ -93,13 +95,10 @@
     
         </nav>
         <router-outlet></router-outlet>
-        <app-body></app-body>
         <!--app-auth></app-auth-->
 
 
     </div>
     </div>
 <!--app-header></app-header-->
-<app-footer></app-footer>
-
 <app-footer></app-footer>

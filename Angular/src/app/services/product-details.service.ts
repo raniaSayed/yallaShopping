@@ -12,4 +12,9 @@ export class ProductDetailsService {
 	  return this.http.get(`http://localhost:9090/products/${id}`)
   }
 
+  getMatchedProduct(searchWord){
+	  return this.http.get(`http://localhost:9090/products/search?q=${searchWord}`)
+  }
+  
+
 }
