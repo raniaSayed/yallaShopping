@@ -11,7 +11,7 @@ import { AuthServiceService } from '../auth-service.service';
   providers: [AuthServiceService]
 })
 export class AuthComponent implements OnInit {
-  user = {email:"", password:""}
+  user = {email:"", password:"", type:""}
   signInError = false
   formNotValid = false
   constructor(private route: Router, private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
@@ -41,16 +41,18 @@ export class AuthComponent implements OnInit {
    onSubmit({value, valid}){
 
     if(valid){
+      console.log(value)
       this.myAuthService.signIn(value).subscribe(res=>{
       if (res['success']) {
         localStorage.setItem("x-access-token", res['token'])
+        console.log(res)
         this.route.navigate([''])
       }else{
         this.signInError = true
         this.formNotValid = false
       }
     })
-    } else {
+    }else{
         this.signInError = false
         this.formNotValid = true
     }
