@@ -69,7 +69,6 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
-
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
