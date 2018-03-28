@@ -93,6 +93,8 @@ ProductsModel.addProduct = function(data,callback){
     // img: req.file.filename
   });
   product.save((err, doc)=>{
+    console.log("save");
+    
     callback(err, doc)
   });
 }
