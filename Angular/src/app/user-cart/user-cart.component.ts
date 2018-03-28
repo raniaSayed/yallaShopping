@@ -23,17 +23,21 @@ export class UserCartComponent implements OnInit {
   editCart(e){
   	this.tempCart = JSON.parse(JSON.stringify(this.cart))
   	this.tempCart.map(p=>p.prodId=p.prodId._id)
-  	clearTimeout(reqDebounce)
-  	var reqDebounce = setTimeout(()=>{
-  		this.cartService.editCart(this.tempCart).subscribe(res=>{
-  			console.log(res)
-  		})
-  	},500)
+		this.cartService.editCart(this.tempCart).subscribe(res=>{
+			console.log(res)
+	})
 
 
 
   }
   checkOut(e){
   	console.log(e)
+  }
+
+  removeFromCart(e, i){
+    this.cart.splice(i,1)
+    this.cartService.editCart(this.cart).subscribe(res=>{
+        console.log(res)
+      })
   }
 }

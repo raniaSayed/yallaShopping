@@ -11,8 +11,9 @@ import { CartService } from "../services/cart.service";
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-	id: Number;
+	id: Number
 	product: any
+  inCart: boolean
 
   constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
    	this.route.params.subscribe(params => {
@@ -21,13 +22,24 @@ export class ProductDetailsComponent implements OnInit {
         	this.product = data
         })
    	})
+
+    this.cartService.getCart().subscribe((cart: Array<Object>)=>{
+      cart.forEach(p=>{
+        if (p['prodId']['_id']==this.id) {
+           this.inCart = true
+         } 
+      })
+    })
   }
 
   ngOnInit() {
   }
 
   addToCart(e){
-  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>console.log(p))
+  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>{
+      console.log(p)
+      this.inCart = true
+    })
   }
 
 }

@@ -13,14 +13,21 @@
           </div>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><input [(ngModel)]="cart[i].quantity" type="number" min="1" max="{{p.prodId.stock}}"></li>
+          <li class="list-group-item">
+            <input [(ngModel)]="cart[i].quantity" type="number" min="1" max="{{p.prodId.stock}}">
+            <button type="button" class="btn btn-danger float-right" (click)="removeFromCart($event, i)">X</button>
+          </li>
+
           <li class="list-group-item">Price {{p.prodId.price}} LE.</li>
         </ul>
       </div>
     </div>
 
     <div class="col-2">
-      <button type="button" class="btn btn-success" (click)="checkOut($event)">Checkout</button>
+      <button *ngIf="cart.length > 0" type="button" class="btn btn-success" (click)="checkOut($event)">Checkout</button>
+    </div>
+    <div *ngIf="cart.length == 0">
+      <div class="alert alert-danger" role="alert">You have't added any product to your cart</div>
     </div>
   </div>
 </div>
