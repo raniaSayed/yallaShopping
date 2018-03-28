@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PatternValidator, NgForm } from '@angular/forms';
-import { SellerRegisterationServiceService } from '../seller-registeration-service.service';
+import { SellerRegisterationServiceService } from '../services/seller-registeration-service.service';
+import { Router  } from '@angular/router';
+
 @Component({
   selector: 'app-seller-registeration-form',
   templateUrl: './seller-registeration-form.component.html',
@@ -17,7 +19,7 @@ export class SellerRegisterationFormComponent implements OnInit {
   private passCheck: boolean = true;
   private serverErrors: string;
 
-  constructor(private sellerRegisterationService: SellerRegisterationServiceService) { }
+  constructor(private route: Router, private sellerRegisterationService: SellerRegisterationServiceService) { }
 
   register(){
     this.sellerRegisterationService.sendDataToServer({
@@ -27,7 +29,29 @@ export class SellerRegisterationFormComponent implements OnInit {
       'address': this.address,
       'national_id': this.national_id
     }).subscribe((res)=>{
-
+      console.log(res)
+      if(res['status']=="ok"){
+        console.log("user created");
+        this.route.navigate(['users/login'])
+      
+      }else{
+        console.log("error");
+        console.log(res['errors']);
+        if(res['errors']){
+          if(res['errors'].email){
+            this.serverErrors = res['errors'].email.message+" ";
+          }
+          if(res['errors'].password){
+            this.serverErrors += res['errors'].password.message+" ";
+          }
+          if(res['errors'].name){
+            this.serverErrors += res['errors'].name.message;
+          }
+        }else{
+            this.serverErrors = res['errmsg'];
+        }
+        
+      }
     })
   }
   submitIt(){

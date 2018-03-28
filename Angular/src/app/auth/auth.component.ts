@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, GoogleLoginProvider, FacebookLoginProvider } from 'angular5-social-login';
-
+import { Router  } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 
 
@@ -11,8 +11,10 @@ import { AuthServiceService } from '../auth-service.service';
   providers: [AuthServiceService]
 })
 export class AuthComponent implements OnInit {
-
-  constructor(private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
+  user = {email:"", password:""}
+  signInError = false
+  formNotValid = false
+  constructor(private route: Router, private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
 
   ngOnInit() {
   }
@@ -35,4 +37,22 @@ export class AuthComponent implements OnInit {
       );
     }
 
+
+   onSubmit({value, valid}){
+
+    if(valid){
+      this.myAuthService.signIn(value).subscribe(res=>{
+      if (res['success']) {
+        localStorage.setItem("x-access-token", res['token'])
+        this.route.navigate([''])
+      }else{
+        this.signInError = true
+        this.formNotValid = false
+      }
+    })
+    } else {
+        this.signInError = false
+        this.formNotValid = true
+    }
+   }
 }

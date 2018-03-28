@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PatternValidator, NgForm } from '@angular/forms';
-import { UserRegisterationService } from '../user-registeration.service';
+import { UserRegisterationService } from '../services/user-registeration.service';
+import { Router  } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class UserRegisterFormComponent implements OnInit {
   private passCheck: boolean = true;
   private serverErrors: string;
 
-  constructor(private userRegisterationService: UserRegisterationService) { }
+  constructor(private route: Router,private userRegisterationService: UserRegisterationService) { }
   fileUpload(files){
   console.log(files[0]);
   this.picture = files[0];
@@ -40,23 +41,29 @@ export class UserRegisterFormComponent implements OnInit {
       'picture': this.picture,
       'origin': "N"
     }).subscribe((res)=> {
-      console.log("sdfsdf",res)
-      // if(res.status=="ok"){
-      //   console.log("user created");
+      console.log(res)
+      if(res['status']=="ok"){
+        console.log("user created");
+        this.route.navigate(['users/login'])
       
-      // }else{
-      //   console.log("error");
-      //   console.log(res.errors);
-      //   if(res.errors.email){
-      //     this.serverErrors = res.errors.email.message+" ";
-      //   }
-      //   if(res.errors.password){
-      //     this.serverErrors += res.errors.password.message+" ";
-      //   }
-      //   if(res.errors.name){
-      //     this.serverErrors += res.errors.name.message;
-      //   }
-      // }
+      }else{
+        console.log("error");
+        console.log(res['errors']);
+        if(res['errors']){
+          if(res['errors'].email){
+            this.serverErrors = res['errors'].email.message+" ";
+          }
+          if(res['errors'].password){
+            this.serverErrors += res['errors'].password.message+" ";
+          }
+          if(res['errors'].name){
+            this.serverErrors += res['errors'].name.message;
+          }
+        }else{
+            this.serverErrors = "this email already exists";
+        }
+        
+      }
       
     });
   }
