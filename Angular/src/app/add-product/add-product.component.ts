@@ -54,12 +54,13 @@ export class AddProductComponent implements OnInit {
 
 
   submitIt(){
-    console.log("submitFn");
+     console.log("submitFn");
 
 
-      this.addProduct();
+     this.addProduct();
 
   }
+
   ngOnInit() {
   }
 

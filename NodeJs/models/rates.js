@@ -2,63 +2,36 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 
-// products schema
-var products = new Schema(
+// rates schema
+
+var rates = new Schema(
 {
-  name:{
+  product_id:{
     type:String,
     required:true,
-    index: true
-  },
-  desc:{
-    type:String,
-    index: true
-  },
-  price:{
-    type:Number,
-    required:true
+    ref:"products"
+
   },
   rate:{
     type:Number
   },
-  stock:{
-    type:Number,
-    required:true
-
-  },
-  seller_id:{
+  user_id:{
     type:Number,
     ref:"sellers"
-  },
-  category:{
-    type:Number,
-    required:true,
-    ref:"categories"
-  },
-  subcategory:{
-    type:String,
-    required:true,
-    index: true,
-  },
-    picture: String
+  }
 });
 
 // products plugins
-products.plugin(autoIncrement.plugin, 'products');
-// paginate
+rates.plugin(autoIncrement.plugin, 'rates');
 
-// adding textsearch plugin...
-// products.plugin(mongooseTextSearch);
-// products.index({name:"text",type:"text", desc:"text",subcategory:"text"});
-// register products model
-mongoose.model("products",products);
+mongoose.model("rates",rates);
 
 //ya Menna noteee el ocject ahoo
-var ProductsModel = {};
+var RatesModel = {};
 
-ProductsModel.model = mongoose.model("products");
+RatesModel.model = mongoose.model("rates");
 
-ProductsModel.getAllProducts = function(callback){
+RatesModel.getAllProducts = function(callback){
   ProductsModel.model.find({},function(err, result){
     callback(err, result);
   });
@@ -129,4 +102,4 @@ ProductsModel.getProductsBySellerId = function(Id, callback){
 }
 
 
-module.exports = ProductsModel;
+module.exports = RatesModel;

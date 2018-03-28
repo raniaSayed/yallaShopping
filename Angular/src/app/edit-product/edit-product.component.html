@@ -1,3 +1,70 @@
-<p>
-  edit-product works!
-</p>
+<h1>
+  Edit product
+</h1>
+
+<form  (ngSubmit)="submitIt()" action="#" method="post" #userRegisterForm="ngForm">
+
+  <table >
+    <tr>
+      <td>
+        Product Name
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="name" id="name" [(ngModel)] = "productData.name" #uname="ngModel" value = "{{productData.name}}" >
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Product Price
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="price" id="price" [(ngModel)]="productData.price" #uprice="ngModel" value= "{{productData.price}}">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Product Description
+      </td>
+      <td>
+        <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="productData.description" #udescriptoin="ngModel" value= "{{productData.description}}">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Stock Quantity
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="stock" id="stock" [(ngModel)]="productData.stock" #ustock="ngModel" value = "{{productData.stock}}">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Category
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="productData.category" #ucategory="ngModel" value="{{productData.category}}">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Sub_Category
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="productData.subcategory" #usubcategory="ngModel" value="{{productData.subcategory}}">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Image
+      </td>
+      <td>
+        <input type="file" class="form-control"  name="picture" id="picture" [(ngModel)]="productData.picture" #upicture (change)="productData.fileUpload(upicture.files)" value = "{{productData.picture}}">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input [disabled]="!userRegisterForm.valid" class="btn btn-primary mb-2" type="submit" value="Edit">
+      </td>
+    </tr>
+  </table>
+</form>

@@ -23,7 +23,6 @@ import { BodyComponent } from './body/body.component';
 
 import { AuthComponent } from './auth/auth.component';
 import { AddProductComponent } from './add-product/add-product.component';
-
 import { HeaderModule} from './header/index';
 //george...
 import { UserRegisterationService } from './user-registeration.service';

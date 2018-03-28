@@ -17,6 +17,6 @@ export class AddProductService {
         'Content-Type':  'application/json'
       })
     }
-    return this.http.post('http://localhost:9090/products/', JSON.stringify(userData), httpOptions);
+    return this.http.post('https://localhost:9090/products/', JSON.stringify(userData), httpOptions);
   }
 }

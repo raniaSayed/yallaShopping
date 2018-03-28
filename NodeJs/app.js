@@ -1,15 +1,25 @@
 var express = require('express')
-// var https = require('https');
 
 var fs = require("fs")
+var http = require('http');
+var https = require('https');
+// var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+// var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+
+// var credentials = {key: privateKey, cert: certificate};
+
 var server = express()
 var path = require('path')
 var authMid = require("./controllers/authMid")
 var config = require('./config')
-// var options = {
-//   key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-//   cert: fs.readFileSync('test/fixtures/keys/agent2-cert.cert')
-// };
+
+var options = {
+  key: fs.readFileSync(__dirname+"/server.key"),
+  cert: fs.readFileSync(__dirname+"/server.crt")
+};
+
+
+var httpsServer = https.createServer(options, server);
 
 server.use((req,resp,next)=>{
   resp.header("Access-Control-Allow-Origin","*");
@@ -52,6 +62,8 @@ var categoriesRouter = require("./controllers/categories")
 server.use("/categories", categoriesRouter)
 
 
-server.listen("9090", function () {
+httpsServer.listen("9090", function () {
   console.log("Starting....")
 })
+
+// httpsServer.listen(9090);
