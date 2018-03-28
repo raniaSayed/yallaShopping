@@ -17,6 +17,7 @@ export class UserCartComponent implements OnInit {
   }
 
   ngOnInit() {
+  	
   }
 
   editCart(e){
@@ -27,7 +28,7 @@ export class UserCartComponent implements OnInit {
   		this.cartService.editCart(this.tempCart).subscribe(res=>{
   			console.log(res)
   		})
-  	},1000)
+  	},500)
 
 
 

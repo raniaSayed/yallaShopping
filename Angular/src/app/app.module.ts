@@ -76,6 +76,7 @@ const appRoutes: Routes = [
   { path: 'products/:id', component: ProductDetailsComponent },
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
+  { path: 'users/login', component: AuthComponent },
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: '**', component: BodyComponent },
 ];
