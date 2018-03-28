@@ -71,6 +71,7 @@ import { SellerProductsComponent } from './seller-products/seller-products.compo
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
 import { OrdersSellerService } from './services/orders-seller.service';
+import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
 
 
 const appRoutes: Routes = [
@@ -112,6 +113,7 @@ const appRoutes: Routes = [
     UserCartComponent,
     HomeComponent,
     OrdersSellerComponent,
+    SellerOrdersDetailsComponent,
   ],
   imports: [
     BrowserModule,
