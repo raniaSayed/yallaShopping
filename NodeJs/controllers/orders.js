@@ -43,6 +43,24 @@ router.get("/sellers/:id", function (req, resp) {
     });
 });
 
+router.put("/", JSONParsermid, function (req, resp) {
+  orderModel.model.update({
+    _id: req.body.id
+  }, {
+    $set: {
+      status: req.body.status
+    }
+  }, function (err, doc) {
+    if (!err) {
+      resp.json({
+        status: "ok"
+      })
+    } else {
+      resp.json(err);
+    }
+  })
+});
+
 //view user orders
 router.get("/", function (req, resp) {
   ///change id to session userId
@@ -80,7 +98,9 @@ router.post("/", JSONParsermid, function (req, resp) {
           if (!err) {
             // modify stock!
             productDoc.stock -= req.body.quantity;
-            productModel.model.update({ _id: productDoc._id }, {
+            productModel.model.update({
+              _id: productDoc._id
+            }, {
               $set: {
                 stock: productDoc.stock
               }
