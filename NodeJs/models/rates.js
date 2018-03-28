@@ -32,21 +32,38 @@ var RatesModel = {};
 RatesModel.model = mongoose.model("rates");
 
 RatesModel.rateProduct = function(product_id,data,callback){
-  var user_id=1;
-  RatesModel.model.findOneAndUpdate
-  var rate = new RatesModel.model({
-    // _id: data.id,
-    product_id: product_id,
-    user_id : user_id,
-    rate:data.rate
-    // img: req.file.filename
-  });
-  rate.save((err, doc)=>{
+  var user_id=2;
+RatesModel.model.update( {product_id: product_id}, {product_id: product_id,user_id : user_id,rate:data.rate }, { upsert : true }, (err, doc)=>{
     callback(err, doc)
+  } );
+  //   var rate = new RatesModel.model({
+  //   // _id: data.id,
+  //   product_id: product_id,
+  //   user_id : user_id,
+  //   rate:data.rate
+  //   // img: req.file.filename
+  // });
+  // rate.save((err, doc)=>{
+  //   callback(err, doc)
+  // });
+}
+
+RatesModel.getRate = function(callback){
+  RatesModel.model.find({},function(err, result){
+    callback(err, result);
   });
 }
 
-// ProductsModel.getProductById = function(Id, callback){
+
+RatesModel.getRateByUser = function(product_id, callback){
+  var user_id=3;
+
+  RatesModel.model.findOne({product_id:product_id,user_id:user_id}).populate("user_id").exec(function(err, result){
+    callback(err, result);
+  });
+}
+
+// ratesModel.getRate = function(Id, callback){
 //   ProductsModel.model.find({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
 //     callback(err, result);
 //   });
