@@ -66,6 +66,7 @@ import { HomeComponent } from './home/home.component';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 
@@ -73,7 +74,10 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
+  { path: 'products/add', component: AddProductComponent },
+  
   { path: 'products/:id', component: ProductDetailsComponent },
+  
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
