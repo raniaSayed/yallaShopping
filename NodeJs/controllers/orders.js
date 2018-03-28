@@ -10,7 +10,9 @@ var orderModel = require("../models/orders");
 
 //  /order/sellers/id router
 router.get("/sellers/:id", function (req, resp) {
-  orderModel.model.find()
+  orderModel.model.find({
+    status: "ordered"
+  })
     .populate({
       path: 'userId',
       model: 'users'

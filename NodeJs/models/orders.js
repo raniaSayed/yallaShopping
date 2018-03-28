@@ -56,8 +56,16 @@ OrderModel.getOrders = (callback) => {
 OrderModel.viewById = function (id, callback) {
   OrderModel.model.findOne({
       _id: (+id)
-    }).populate("orderProducts.sellerId")
-    .populate("orderProducts.prodId").exec((error, result) => {
+    })
+    .populate({
+      path: 'userId',
+      model: 'users'
+    })
+    .populate({
+      path: 'prodId',
+      model: 'products'
+    })
+    .exec((error, result) => {
       callback(error, result);
     });
 }
