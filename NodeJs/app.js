@@ -13,7 +13,7 @@ var config = require('./config')
 
 server.use((req,resp,next)=>{
   resp.header("Access-Control-Allow-Origin","*");
-  resp.header("Access-Control-Allow-Headers","Content-Type");
+  resp.header("Access-Control-Allow-Headers","Content-Type,x-access-token");
   resp.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE")
   next();
 });

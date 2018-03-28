@@ -8,7 +8,10 @@ export class AuthServiceService {
 public test = "hii";
   constructor(private http : HttpClient) {}
     httpOptions = {
-      headers : new HttpHeaders({'Content-Type':  'application/json'})
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('x-access-token') ? localStorage.getItem('x-access-token') : ""
+      })
     }
     getUserToken(userData : any){
       // return "hello";
@@ -22,5 +25,9 @@ public test = "hii";
 
   signIn(data){
     return this.http.post('http://localhost:9090/auth/users', JSON.stringify(data), this.httpOptions);
+  }  
+
+  checkToken(){
+    return this.http.post('http://localhost:9090/auth/check', "" ,this.httpOptions);
   }
 }

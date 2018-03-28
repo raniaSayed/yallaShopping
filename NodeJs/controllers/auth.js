@@ -20,7 +20,6 @@ router.post("/tokens",JSONParsermid,(req, resp)=>{
 
 router.post("/users", JSONParsermid, (req, resp)=>{
   var model = req.body.usertype === "user" ? UserModel : SellerModel
-  console.log(model)
 	model.findOne({
     email: req.body.email
   }, (err, user)=>{
@@ -64,6 +63,18 @@ router.post("/users", JSONParsermid, (req, resp)=>{
 
     }
   });
+});
+
+
+router.post("/check",(req, resp)=>{
+    var token = req.headers['x-access-token'];
+    jwt.verify(token, config.jwtSecret , function (err, decoded) {
+      if (err) {
+          return resp.json({ isAuthenticated: false });
+      } else {
+          return resp.json({ isAuthenticated: true});
+      }
+    });
 });
 
 module.exports = router;
