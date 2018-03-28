@@ -12,6 +12,8 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class AuthComponent implements OnInit {
   user = {email:"", password:""}
+  signInError = false
+  formNotValid = false
   constructor(private route: Router, private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
 
   ngOnInit() {
@@ -35,13 +37,22 @@ export class AuthComponent implements OnInit {
       );
     }
 
-  signIn(e){
-    this.myAuthService.signIn(this.user).subscribe(res=>{
-      console.log(res)
+
+   onSubmit({value, valid}){
+
+    if(valid){
+      this.myAuthService.signIn(value).subscribe(res=>{
       if (res['success']) {
+        localStorage.setItem("x-access-token", res['token'])
         this.route.navigate([''])
+      }else{
+        this.signInError = true
+        this.formNotValid = false
       }
     })
-  }
-
+    } else {
+        this.signInError = false
+        this.formNotValid = true
+    }
+   }
 }
