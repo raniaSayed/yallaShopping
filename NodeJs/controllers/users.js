@@ -64,18 +64,17 @@ router.delete("/:id",function (req, resp) {
 })
 
 
-/* don't need it, its embedded in user object
 router.get("/:id/cart",(req, resp)=>{
 	UserModel.model.find({_id:req.params.id},{cart:true, _id:false}).populate('cart.prodId').exec((err, res)=>{
 		if (!err && res.length>0) {
 			resp.json(res[0].cart)
 		}
 		else {
-			resp.json(err)
+			resp.json([])
 		}
 	})
 })
-*/
+
 
 router.delete("/:id/cart",(req, resp)=>{
 	UserModel.deleteCart(req.params.id, (err, result)=>{
@@ -89,7 +88,7 @@ router.delete("/:id/cart",(req, resp)=>{
 })
 
 router.post("/:id/cart",JSONParsermid,(req, resp)=>{
-	UserModel.addCart(req.params.id , req.body.cart, (err, result)=>{
+	UserModel.addToCart(req.params.id , req.body, (err, result)=>{
 		if (!err) {
 			resp.json({status:"ok"})
 		}
@@ -98,5 +97,16 @@ router.post("/:id/cart",JSONParsermid,(req, resp)=>{
 		}
 	})
 })
+router.put("/:id/cart",JSONParsermid,(req, resp)=>{
+	UserModel.editCart(req.params.id , req.body, (err, result)=>{
+		if (!err) {
+			resp.json({status:"ok"})
+		}
+		else {
+			resp.json(err)
+		}
+	})
+})
+
 
 module.exports = router;

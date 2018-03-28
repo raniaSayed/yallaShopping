@@ -87,20 +87,38 @@ UserModel.deleteCart = (Id, callback)=>{
   })
 }
 
-UserModel.addCart = (Id, cart, callback)=>{
+UserModel.addToCart = (Id, productToAdd, callback)=>{
     /* send data as
-   {"cart":[
-    {"prodId":1, "quantity":60},
-    {"prodId":3, "quantity":99}
-   ]} */
-  UserModel.model.update({_id:Id},{
-    $set:{
-      cart
-    }
-  },(err, result)=>{
+    {"prodId":1, "quantity":60}
+   */
+  UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
+      var oldCart = result.cart
+      var exist = false
+      oldCart.map((p)=>{
+        if (p.prodId == productToAdd.prodId) {
+          p.quantity += 1
+          exist = true
+        }  
+      })
+      !exist && oldCart.push(productToAdd)
+      UserModel.model.update({_id:Id},{cart:oldCart},(err, result)=>{
+          callback(err, result)
+      })
+  })
+}
+
+UserModel.getCart = (Id, callback) =>{
+    UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
       callback(err, result)
   })
 }
+UserModel.editCart = (Id, cart, callback) =>{
+  console.log(cart)
+    UserModel.model.update({_id:Id},{cart:cart}, (err, result) => {
+      callback(err, result)
+  })
+}
+
 
 UserModel.addUser = (data, callback)=>{
 

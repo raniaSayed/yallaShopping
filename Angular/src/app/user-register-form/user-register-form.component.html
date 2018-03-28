@@ -1,10 +1,11 @@
-<h1>
+
+<h1 align="center" >
   User Registeration Form
 </h1>
+<div class="card col-12">
+<form (ngSubmit)="submitIt()" action="#" method="post" #userRegisterForm="ngForm">
 
-<form  (ngSubmit)="submitIt()" action="#" method="post" #userRegisterForm="ngForm">
-
-  <table >
+  <table class="form-group" align="center" >
     <tr>
       <td>
         Name
@@ -21,7 +22,7 @@
       </td>
       <td>
         <input class="form-control" type="text" required name="email" id="email" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' [(ngModel)]="email" #uemail="ngModel">
-        <div [hidden]="uemail.pristine||uemail.valid" >email is not valid</div>                
+        <div class="error" [hidden]="uemail.pristine||uemail.valid" >email is not valid</div>                
       </td>
     </tr>
     <tr>
@@ -30,7 +31,7 @@
         <span color="red"><font color="red">*</font></span>        
       </td>
       <td>
-        <input class="form-control" type="password" min="8" required name="password" id="password" [(ngModel)]="password" #upassword="ngModel">
+        <input class="form-control" type="password" pattern=".{8,}" required name="password" id="password" [(ngModel)]="password" #upassword="ngModel">
       </td>
     </tr>
     <tr>
@@ -39,8 +40,8 @@
         <span color="red"><font color="red">*</font></span>
       </td>
       <td>
-        <input class="form-control" type="password" min="8" required name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" #uconfirmPassword="ngModel">
-        <div [hidden]="uconfirmPassword.pristine || upassword.value == uconfirmPassword.value">Password mis-match</div>               
+        <input class="form-control" type="password" pattern=".{8,}" required name="confirmPassword" id="confirmPassword" [(ngModel)]="confirmPassword" #uconfirmPassword="ngModel">
+        <div class="error" [hidden]="uconfirmPassword.pristine || upassword.value == uconfirmPassword.value">Password mis-match</div>               
       </td>
     </tr>
     <tr>
@@ -62,14 +63,15 @@
     </tr>
     <tr>
       <td colspan="2">
-        <input [disabled]="!userRegisterForm.valid" class="btn btn-primary mb-2" type="submit" value="Register">
+        <input [disabled]="!userRegisterForm.valid" class="btn btn-success btn-block mb-2" type="submit" value="Register">
       </td>
     </tr>
   </table>
 </form>
-<div>
+<div align="center">
   <span>Any field with this sign<font color="red">*</font>is required</span>
 </div>
-<div>
+</div>
+<div align="center" class="error">
   {{serverErrors}}
 </div>

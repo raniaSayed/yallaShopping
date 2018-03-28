@@ -34,7 +34,7 @@ export class AddProductComponent implements OnInit {
 
 
   addProduct(){
-    this.seller_id=1;
+    this.seller_id=6;
     this.AddProductService.sendDataToServer({
       'name': this.name,
       'price': this.price,
@@ -43,7 +43,7 @@ export class AddProductComponent implements OnInit {
       'picture': this.picture,
       'category':this.category,
       'subcategory': this.subcategory,
-      'seller_id': this.seller_id
+      'seller_id': this.seller_id,
     }).subscribe((res)=> {
       console.log("hi")
        console.log(res)

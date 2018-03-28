@@ -20,8 +20,10 @@
         <h5 class="subtitles">Description: </h5>
         <p id="description">{{ product?.desc}}</p>        
         <h5 class="subtitles">Price: </h5>
-        <p id="description">{{ product?.price}} L.E</p>
-        <button type="button" class="btn btn-success" (click)="addToCart($event)">Add to Cart</button>
+        <p id="description">{{ product?.price}} L.E</p>        
+        <h5 class="subtitles">Stock: </h5>
+        <p id="description">{{ product?.stock>0 ? product.stock : 'Out of stock'}} </p>
+        <button type="button" class="btn btn-success" (click)="addToCart($event)" *ngIf="product?.stock>0">Add to Cart</button>
     </div>
     <div class="col-sm-3">
         <h5 class="subtitles" id="myrating">My rating</h5>

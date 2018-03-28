@@ -3,15 +3,15 @@
   <div class="card-header">
     <h3>{{product.name}}</h3>
   </div>
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <img class="card-img-top" src="{{product.picture}}" alt="Card image cap">
   <div class="card-body">
     <p class="card-text">{{product.desc}}</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">Price {{product.price}} LE.</li>
+    <li class="list-group-item">Price: {{product.price}} LE.</li>
     <li class="list-group-item">Subcategory: {{product.subcategory}} </li>
     <li class="list-group-item">Rate: {{product.rate}} </li>
     
   </ul>
-  <div class="card-footer bg-transparent border-success"> <a class="btn btn-primary"  href="http://localhost:4200/products/{{product._id}}">Add to cart</a> </div>
+  <div class="card-footer bg-transparent border-success"> <a class="btn btn-primary"  routerLink="/products/{{product._id}}">Add to cart</a> </div>
 </div>

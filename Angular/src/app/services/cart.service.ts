@@ -1,30 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CartService {
 
-  private cart = new BehaviorSubject<Array<Object>>([{prodId:0, quantity:1}])
-  currentCart = this.cart.asObservable();
-
-  constructor() { 
-  	console.log(this.cart.getValue())
+  httpOptions = {
+  	headers: new HttpHeaders({'Content-Type':  'application/json'})
+  }
+  constructor(private http: HttpClient) { 
   }
 
-  changeCart(product) {
-  	var temp = JSON.parse(JSON.stringify(this.cart.getValue()))
-  	var exist = false
-  	var length = temp.length
-  	for (var i = 0; i < length; i++) {
-  		if(temp[i].prodId == product.prodId){
-  			temp[i].quantity += 1
-  			exist = true
-  		}
-  	}
-  	if (!exist) {
-  		temp.push(product)
-  	}
-    this.cart.next(temp)
-  	console.log(temp)
+  AddToCart(product){
+    return this.http.post('http://localhost:9090/users/1/cart', JSON.stringify(product), this.httpOptions);
+  }
+
+  getCart(){
+  	return this.http.get('http://localhost:9090/users/1/cart');
+  }
+
+  editCart(newCart){
+  	// console.log(JSON.stringify(newCart))
+  	return this.http.put('http://localhost:9090/users/1/cart', JSON.stringify(newCart), this.httpOptions);
   }
 }

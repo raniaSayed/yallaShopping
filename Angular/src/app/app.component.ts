@@ -21,9 +21,6 @@ export class AppComponent {
 
     this.categoryService.getAllCategoreis().subscribe((res) => {
       this.categories = res;
-      console.log("hello");
-
-      console.log(this.categories);
     });
 
   }

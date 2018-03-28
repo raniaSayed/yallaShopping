@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 //george ...
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { UICarouselModule } from "ui-carousel";
 import {Http} from '@angular/http';
 
 import { ImageUploadModule } from "angular2-image-upload";
@@ -25,9 +25,9 @@ import { AuthComponent } from './auth/auth.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { HeaderModule} from './header/index';
 //george...
-import { UserRegisterationService } from './user-registeration.service';
-import { SellerRegisterationServiceService } from './seller-registeration-service.service';
-import { GetSellerProductsService } from './get-seller-products.service';
+import { UserRegisterationService } from './services/user-registeration.service';
+import { SellerRegisterationServiceService } from './services/seller-registeration-service.service';
+import { GetSellerProductsService } from './services/get-seller-products.service';
 
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
@@ -61,19 +61,33 @@ import { SubCategoryProductService } from './services/sub-category-product.servi
 import { ProductDetailsService } from './services/product-details.service';
 import { CartService } from './services/cart.service';
 import { SafeHtmlPipe } from './safe-html.pipe';
-
+import { HomeComponent } from './home/home.component';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+
 import { SellerProductsComponent } from './seller-products/seller-products.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
+import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
+import { OrdersSellerService } from './services/orders-seller.service';
+import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
+
+
 const appRoutes: Routes = [
-  { path: '', component: BodyComponent },
+  { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
+  { path: 'products/add', component: AddProductComponent },
+  
   { path: 'products/:id', component: ProductDetailsComponent },
+  
   { path: 'products/seller/:id', component: SellerProductsComponent },
+  { path: 'users/cart', component: UserCartComponent },
+  { path: 'users/login', component: AuthComponent },
+  { path: 'sellers/:id/orders', component: OrdersSellerComponent },
+  { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
-  // { path: '**', component: BodyComponent },
+  { path: '**', component: BodyComponent },
 ];
 
 @NgModule({
@@ -96,6 +110,10 @@ const appRoutes: Routes = [
     SubCategoryProductsComponent,
     SafeHtmlPipe,
     SellerProductsComponent,
+    UserCartComponent,
+    HomeComponent,
+    OrdersSellerComponent,
+    SellerOrdersDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +123,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    UICarouselModule,
     ],
 
   providers: [
@@ -121,6 +140,7 @@ const appRoutes: Routes = [
     ProductDetailsService,
     CartService,
     GetSellerProductsService,
+    OrdersSellerService,
     ],
   bootstrap: [AppComponent]
 })

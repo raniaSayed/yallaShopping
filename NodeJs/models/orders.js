@@ -2,7 +2,11 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // orders schema
-var orderProducts = new Schema({
+var orders = new Schema({
+  userId: {
+    type: Number,
+    ref: "users"
+  },
   prodId: {
     type: Number,
     ref: "products"
@@ -12,32 +16,19 @@ var orderProducts = new Schema({
   },
   status: {
     type: String,
-    enum: ["ordered", "received"]
-  }
-});
-
-var orders = new Schema({
+    enum: ["ordered", "received"],
+    default: "ordered"
+  },
   timestamps: {
     type: Date,
     default: Date.now
-  },
-  userId: {
-    type: Number,
-    ref: "users"
-  },
-  orderProducts: [orderProducts]
-}
-
-);
+  }
+});
 
 // order plugins
 orders.plugin(autoIncrement.plugin, {
-    model: 'orders',
-    startAt: 1,
-});
-orderProducts.plugin(autoIncrement.plugin, {
-    model: 'orderProducts',
-    startAt: 1,
+  model: 'orders',
+  startAt: 1,
 });
 
 // register orders model
@@ -47,53 +38,64 @@ var OrderModel = {};
 OrderModel.model = mongoose.model("orders");
 
 // add order
-OrderModel.addOrder = function(data, callback) {
-
+OrderModel.addOrder = function (data, callback) {
   var order = new OrderModel.model(data);
-
-  order.save(function(err, doc){
+  order.save(function (err, doc) {
     callback(err, doc);
   });
 }
 
-//view user order by id
-OrderModel.viewById = function (id,callback) {
-  OrderModel.model.findOne({_id:(+id)}).populate("orderProducts.sellerId")
-      .populate("orderProducts.prodId").exec((error,result)=> {
-        callback(error,result);
-      });
-}
-// view user orders
-OrderModel.viewUserAll = function(id,callback){
-    ///change id to session userId
-  	 OrderModel.model.find({userId:id},function (error,result) {
-      callback(error, result);
-  	});
-}
-
-//view [single order] products that belongs to seller by order id
-OrderModel.viewSellerOrderProducts = function (id,callback) {
-  var products = OrderModel.model.aggregate([  {$match :{"_id":(+id)}},{
-        $project: {
-            "orderProducts": {
-                $filter: {
-                    input: "$orderProducts",
-                    as: "orderProduct",
-                    cond: {
-                      $and:[
-                        ///to be changed with auth sellerId
-                        {$eq: [ "$$orderProduct.sellerId",1 ]}
-                      // , {"$$orderProduct.sellerId":{$ne: null}}
-                      ]
-                    }
-                }
-            },"userId":1
-        }}],function (error,result) {
-            callback(error,result);
+//view all orders
+OrderModel.getOrders = (callback) => {
+  OrderModel.model.find({}, (err, result) => {
+    callback(err, result);
   });
 }
 
-// change order status
+//view user order by id
+OrderModel.viewById = function (id, callback) {
+  OrderModel.model.findOne({
+      _id: (+id)
+    })
+    .populate({
+      path: 'userId',
+      model: 'users'
+    })
+    .populate({
+      path: 'prodId',
+      model: 'products'
+    })
+    .exec((error, result) => {
+      callback(error, result);
+    });
+}
+// view user orders
+OrderModel.viewUserAll = function (id, callback) {
+  ///change id to session userId
+  OrderModel.model.find({
+    userId: id
+  }, function (error, result) {
+    callback(error, result);
+  });
+}
 
+// view orders of specific seller -> /orders/sellers/id
+OrderModel.getSellerOrders = function (sellerId, callback) {
+  orderModel.model.find()
+    .populate({
+      path: 'userId',
+      model: 'users'
+    })
+    .populate({
+      path: 'prodId',
+      model: 'products',
+      populate: {
+        path: 'seller_id',
+        model: 'sellers'
+      }
+    })
+}
+
+// change order status
 
 module.exports = OrderModel;
