@@ -21,4 +21,11 @@ export class OrdersSellerService {
       .map(result => result.json());
   }
 
+  changeOrderStatus(id, status) {
+    return this.http.put('https://localhost:9090/orders', {
+      id,
+      status
+    });
+  }
+
 }
