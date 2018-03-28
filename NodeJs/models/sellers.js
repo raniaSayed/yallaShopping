@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var encryptPassword = require('../controllers/encryptPassword');
-
+require('mongoose-type-email');
 // sellers schema
 var sellers = new Schema(
 {
@@ -11,9 +11,11 @@ var sellers = new Schema(
     unique: true
   },
   email:{
-    type:String,
+    type: mongoose.SchemaTypes.Email,
     unique: true,
-    required:true
+    required:true,
+    match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    
   },
   password: {
     type: String,
@@ -25,7 +27,8 @@ var sellers = new Schema(
   national_id:{
     type:Number,
     unique:true,
-    required:true
+    required:true,
+    match: /[0-9]{14}/,
   }
 });
 

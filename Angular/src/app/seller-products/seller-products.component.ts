@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetSellerProductsService } from '../get-seller-products.service';
+import { GetSellerProductsService } from '../services/get-seller-products.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

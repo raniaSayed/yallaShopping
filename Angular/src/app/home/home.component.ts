@@ -12,11 +12,6 @@ export class HomeComponent implements OnInit {
       this.categories = res;
     })
   }
-  hover(){
-    console.log("kkkkk");
-    
-  }
-
   ngOnInit() {
   }
 

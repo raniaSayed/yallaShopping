@@ -26,9 +26,9 @@ import { AddProductComponent } from './add-product/add-product.component';
 
 import { HeaderModule} from './header/index';
 //george...
-import { UserRegisterationService } from './user-registeration.service';
-import { SellerRegisterationServiceService } from './seller-registeration-service.service';
-import { GetSellerProductsService } from './get-seller-products.service';
+import { UserRegisterationService } from './services/user-registeration.service';
+import { SellerRegisterationServiceService } from './services/seller-registeration-service.service';
+import { GetSellerProductsService } from './services/get-seller-products.service';
 
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
@@ -71,6 +71,7 @@ import { SellerProductsComponent } from './seller-products/seller-products.compo
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
 import { OrdersSellerService } from './services/orders-seller.service';
+import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
 
 
 const appRoutes: Routes = [
@@ -84,7 +85,8 @@ const appRoutes: Routes = [
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
-  { path: 'orders/seller/:id', component: OrdersSellerComponent },
+  { path: 'sellers/:id/orders', component: OrdersSellerComponent },
+  { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: '**', component: BodyComponent },
 ];
@@ -112,6 +114,7 @@ const appRoutes: Routes = [
     UserCartComponent,
     HomeComponent,
     OrdersSellerComponent,
+    SellerOrdersDetailsComponent,
   ],
   imports: [
     BrowserModule,
