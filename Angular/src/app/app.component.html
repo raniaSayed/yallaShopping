@@ -1,5 +1,11 @@
-
+<!-- <app-header></app-header>
+<app-body></app-body>
+<app-footer></app-footer> -->
+<!-- <app-auth></app-auth> -->
+<!-- <app-add-product></app-add-product> -->
+<!-- <app-edit-product></app-edit-product> -->
 <!-- Page Content Holder -->
+
 <div class="wrapper">
         <!-- Sidebar Holder -->
         <!--app-sidebar [isActive]="isActive"></app-sidebar-->
@@ -73,16 +79,16 @@
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             </form>
                             <li class="nav-item">
-                                <a href="#">
+                                <a [routerLink]="['/users/registeration']">
                                     <span class="glyphicon glyphicon-user"></span> Sign Up</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#">
+                                <a [routerLink]="['/users/login']">
                                     <i class="fa fa-sign-in"></i> Login</a>
                             </li>
     
                             <li class="nav-item">
-                                <a href="#">
+                                <a [routerLink]="['/users/cart']">
                                     <i class="fa fa-shopping-cart fa-2x  icon-grey">
                                         <span class="badge">17</span>
                                     </i>
@@ -96,11 +102,8 @@
         <router-outlet></router-outlet>
         <app-body></app-body>
         <!--app-auth></app-auth-->
-
-
     </div>
     </div>
-<!--app-header></app-header-->
 <app-footer></app-footer>
 
 

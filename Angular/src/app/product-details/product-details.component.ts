@@ -13,20 +13,17 @@ import { CartService } from "../services/cart.service";
 export class ProductDetailsComponent implements OnInit {
 	id: Number;
 	product: any
-	cart: Array<Object>
 
   constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
         	this.product = data
-          console.log(data, "xxx")
         })
    	})
   }
 
   ngOnInit() {
-  	this.cartService.currentCart.subscribe(res => {this.cart = res})
   }
 
   addToCart(e){

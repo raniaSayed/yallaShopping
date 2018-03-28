@@ -17,7 +17,7 @@ router.post("/tokens",JSONParsermid,(req, resp)=>{
 	// resp.send("ok");
 });
 
-router.post("/", urlEncodedParsermid, (req, resp)=>{
+router.post("/user", JSONParsermid, (req, resp)=>{
 	UserModel.findOne({
     email: req.body.email
   }, (err, user)=>{

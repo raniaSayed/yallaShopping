@@ -88,7 +88,17 @@ router.delete("/:id/cart",(req, resp)=>{
 })
 
 router.post("/:id/cart",JSONParsermid,(req, resp)=>{
-	UserModel.addCart(req.params.id , req.body, (err, result)=>{
+	UserModel.addToCart(req.params.id , req.body, (err, result)=>{
+		if (!err) {
+			resp.json({status:"ok"})
+		}
+		else {
+			resp.json(err)
+		}
+	})
+})
+router.put("/:id/cart",JSONParsermid,(req, resp)=>{
+	UserModel.editCart(req.params.id , req.body, (err, result)=>{
 		if (!err) {
 			resp.json({status:"ok"})
 		}
