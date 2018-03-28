@@ -14,7 +14,14 @@ export class AuthComponent implements OnInit {
   user = {email:"", password:"", type:""}
   signInError = false
   formNotValid = false
-  constructor(private route: Router, private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
+  constructor(private route: Router, private socialAuthService: AuthService, private AuthService: AuthServiceService) { 
+    this.AuthService.checkToken().subscribe(res=>{
+      if (res) {
+        route.navigate([''])
+      }
+    })
+
+  }
 
   ngOnInit() {
   }
@@ -30,7 +37,7 @@ export class AuthComponent implements OnInit {
 
       this.socialAuthService.signIn(socialPlatformProvider).then(
         (userData) => {
-          this.myAuthService.getUserToken(userData).subscribe((res)=>{console.log(res)})
+          this.AuthService.getUserToken(userData).subscribe((res)=>{console.log(res)})
           // console.log(socialPlatform+" sign in data : " , userData);
 
         }
@@ -42,7 +49,7 @@ export class AuthComponent implements OnInit {
 
     if(valid){
       console.log(value)
-      this.myAuthService.signIn(value).subscribe(res=>{
+      this.AuthService.signIn(value).subscribe(res=>{
       if (res['success']) {
         localStorage.setItem("x-access-token", res['token'])
         console.log(res)

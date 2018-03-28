@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatternValidator, NgForm } from '@angular/forms';
+import { AuthServiceService } from '../auth-service.service';
 import { UserRegisterationService } from '../services/user-registeration.service';
 import { Router  } from '@angular/router';
 
@@ -21,7 +22,14 @@ export class UserRegisterFormComponent implements OnInit {
   private passCheck: boolean = true;
   private serverErrors: string;
 
-  constructor(private route: Router,private userRegisterationService: UserRegisterationService) { }
+  constructor(private userRegisterationService: UserRegisterationService, private route: Router, private AuthService: AuthServiceService) { 
+    this.AuthService.checkToken().subscribe(res=>{
+      if (res) {
+        route.navigate([''])
+      }
+    })
+  }
+
   fileUpload(files){
   console.log(files[0]);
   this.picture = files[0];

@@ -16,4 +16,9 @@ export class OrdersSellerService {
       .map(result => result.json());
   }
 
+  getOrderById(id) {
+    return this.http.get(`http://localhost:9090/orders/${id}`)
+      .map(result => result.json());
+  }
+
 }
