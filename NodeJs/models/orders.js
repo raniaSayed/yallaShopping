@@ -38,12 +38,12 @@ var OrderModel = {};
 OrderModel.model = mongoose.model("orders");
 
 // add order
-OrderModel.addOrder = function (data, callback) {
-  var order = new OrderModel.model(data);
-  order.save(function (err, doc) {
-    callback(err, doc);
-  });
-}
+// OrderModel.addOrder = function (data, callback) {
+//   var order = new OrderModel.model(data);
+//   order.save(function (err, doc) {
+//     callback(err, doc);
+//   });
+// }
 
 //view all orders
 OrderModel.getOrders = (callback) => {
