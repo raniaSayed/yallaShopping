@@ -69,6 +69,9 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
+import { OrdersSellerService } from './services/orders-seller.service';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -81,6 +84,7 @@ const appRoutes: Routes = [
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
+  { path: 'orders/seller/:id', component: OrdersSellerComponent },
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: '**', component: BodyComponent },
 ];
@@ -107,6 +111,7 @@ const appRoutes: Routes = [
     SellerProductsComponent,
     UserCartComponent,
     HomeComponent,
+    OrdersSellerComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +138,7 @@ const appRoutes: Routes = [
     ProductDetailsService,
     CartService,
     GetSellerProductsService,
+    OrdersSellerService,
     ],
   bootstrap: [AppComponent]
 })
