@@ -55,5 +55,5 @@ var ratesRouter = require("./controllers/rates")
 server.use("/rates", ratesRouter)
 
 httpsServer.listen("9090", function () {
-  console.log("Starting at https://localhost:9090");
+  console.log("Starting in https server at port 9090..")
 })

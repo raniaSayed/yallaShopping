@@ -7,7 +7,7 @@
   <table >
     <tr>
       <td>
-        Product Name
+        Product Name:
       </td>
       <td>
         <input class="form-control" type="text" required name="name" id="name" [(ngModel)] = "productData.name" #uname="ngModel" value = "{{productData.name}}" >
@@ -15,7 +15,7 @@
     </tr>
     <tr>
       <td>
-        Product Price
+        Product Price:
       </td>
       <td>
         <input class="form-control" type="text" required name="price" id="price" [(ngModel)]="productData.price" #uprice="ngModel" value= "{{productData.price}}">
@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <td>
-        Product Description
+        Product Description:
       </td>
       <td>
         <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="productData.description" #udescriptoin="ngModel" value= "{{productData.description}}">
@@ -31,7 +31,7 @@
     </tr>
     <tr>
       <td>
-        Stock Quantity
+        Stock Quantity:
       </td>
       <td>
         <input class="form-control" type="text" required name="stock" id="stock" [(ngModel)]="productData.stock" #ustock="ngModel" value = "{{productData.stock}}">
@@ -39,7 +39,7 @@
     </tr>
     <tr>
       <td>
-        Category
+        Category:
       </td>
       <td>
         <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="productData.category" #ucategory="ngModel" value="{{productData.category}}">
@@ -47,7 +47,7 @@
     </tr>
     <tr>
       <td>
-        Sub_Category
+        Sub_Category:
       </td>
       <td>
         <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="productData.subcategory" #usubcategory="ngModel" value="{{productData.subcategory}}">
@@ -55,7 +55,7 @@
     </tr>
     <tr>
       <td>
-        Image
+        Image:
       </td>
       <td>
         <input type="file" class="form-control"  name="picture" id="picture" [(ngModel)]="productData.picture" #upicture (change)="productData.fileUpload(upicture.files)" value = "{{productData.picture}}">

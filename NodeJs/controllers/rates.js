@@ -24,6 +24,69 @@ router.post("/:productID", urlEncodedMid,function (req, resp) {
 
 
 
+router.get("/:productId?", function(request, response){
 
+    if(request.params.productId){
+      RatesModel.getRateByUser(request.params.productId, function(err, result){
+        if(!err){
+          console.log("finding Product with id ="+request.params.productId);
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      RatesModel.getRate(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
+
+router.get("/avg/:productId?", function(request, response){
+
+    if(request.params.productId){
+      RatesModel.getAvgRates(request.params.productId, function(err, result){
+        if(!err){
+          console.log("finding Product with id ="+request.params.productId);
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      RatesModel.getRate(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
+
+//just for testing..
+router.get("/",function(req,response){
+  RatesModel.getRate(function(err, result){
+    if(!err&&result.length>0){
+      console.log("finding All Products");
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  });
+})
 
 module.exports = router;

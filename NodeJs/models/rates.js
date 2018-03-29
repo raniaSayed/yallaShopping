@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 
+
 // rates schema
 
 var rates = new Schema(
@@ -13,7 +14,8 @@ var rates = new Schema(
 
   },
   rate:{
-    type:Number
+    type:Number,
+    enum:[1,2,3,4,5]
   },
   user_id:{
     type:Number,
@@ -21,7 +23,7 @@ var rates = new Schema(
   }
 });
 
-// products plugins
+// rates plugins
 rates.plugin(autoIncrement.plugin, 'rates');
 
 mongoose.model("rates",rates);
@@ -31,84 +33,42 @@ var RatesModel = {};
 
 RatesModel.model = mongoose.model("rates");
 
+
 RatesModel.rateProduct = function(product_id,data,callback){
-  var user_id=1;
-  RatesModel.model.findOneAndUpdate
-  var rate = new RatesModel.model({
-    // _id: data.id,
-    product_id: product_id,
-    user_id : user_id,
-    rate:data.rate
-    // img: req.file.filename
-  });
-  rate.save((err, doc)=>{
+  var user_id=5;
+  data.rate=2;
+RatesModel.model.update( {product_id: product_id,user_id : user_id}, {product_id: product_id,user_id : user_id,rate:data.rate }, { upsert : true }, (err, doc)=>{
     callback(err, doc)
+  } );
+
+}
+
+
+RatesModel.getRateByUser = function(product_id, callback){
+  var user_id=3;
+
+  RatesModel.model.findOne({product_id:product_id,user_id:user_id}).populate("user_id").exec(function(err, result){
+    callback(err, result);
   });
 }
 
-// ProductsModel.getProductById = function(Id, callback){
-//   ProductsModel.model.find({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
-//     callback(err, result);
-//   });
-// }
-//
-// ProductsModel.searchProducts = function(searchQuery, callback){
-//   ProductsModel.model.find({$text:{$search:searchQuery}}, function(err, result){
-//     callback(err, result);
-//   });
-// }
-//
-// ProductsModel.addProduct = function(data,callback){
-//   console.log(data);
-//   var product = new ProductsModel.model({
-//     // _id: data.id,
-//     name: data.name,
-//     desc: data.desc,
-//     price: data.price,
-//     rate:data.rate,
-//     stock:data.stock,
-//     category:data.category,
-//     subcategory:data.subcategory,
-//     seller_id:data.seller_id
-//     // img: req.file.filename
-//   });
-//   product.save((err, doc)=>{
-//     callback(err, doc)
-//   });
-// }
-//
-//
-// ProductsModel.editProduct = function(Id, data, callback){
-//   ProductsModel.model.update({_id:Id}, data,(err, result)=>{
-//     callback(err, result)
-//   })
-// }
-//
-// ProductsModel.rateProduct = function(Id,data,callback){
-//   ProductsModel.update({_id:data.id},{"$set":{rate:data.rate}},function(err,data){
-//     if(!err)
-//     ProductsModel.find({}, function (err, result) {
-//       resp.json(result);
-//     });
-//   })
-// }
-//
-// ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
-//   ProductsModel.model.where("price").gt(priceLow)
-//   .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
-// }
-//
-// ProductsModel.deleteProduct = function(Id, callback){
-//    ProductsModel.model.remove({_id:Id}, (err, result)=>{
-//     callback(err, result)
-//   })
-// }
-//
-// ProductsModel.getProductsBySellerId = function(Id, callback){
-//   ProductsModel.model.find({seller_id: Id}, function(err, result){
-//     callback(err, result);
-//   })
-// }
+RatesModel.getAvgRates = function(product_id, callback){
+  var user_id=3;
 
+  RatesModel.model.aggregate([
+  { $match: { product_id: product_id }},
+  { $group: { _id: product_id, count: { $sum: 1 },
+  average: { "$avg": "$rate" } } }
+], function (err, result) {
+        callback(err, result);
+    });
+}
+
+//just for testing
+RatesModel.getAllRate = function(callback){
+  RatesModel.model.find({},function(err, result){
+    callback(err, result);
+  });
+}
 
 module.exports = RatesModel;
