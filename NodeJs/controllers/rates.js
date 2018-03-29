@@ -22,17 +22,7 @@ router.post("/:productID", urlEncodedMid,function (req, resp) {
 
 })
 
-router.get("/",function(req,response){
-  RatesModel.getRate(function(err, result){
-    if(!err&&result.length>0){
-      console.log("finding All Products");
-      response.json(result);
-    }
-    else{
-      response.json(err);
-    }
-  });
-})
+
 
 router.get("/:productId?", function(request, response){
 
@@ -86,5 +76,17 @@ router.get("/avg/:productId?", function(request, response){
     }
 });
 
+//just for testing..
+router.get("/",function(req,response){
+  RatesModel.getRate(function(err, result){
+    if(!err&&result.length>0){
+      console.log("finding All Products");
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  });
+})
 
 module.exports = router;
