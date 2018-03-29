@@ -27,7 +27,10 @@ export class OrdersSellerComponent implements OnInit {
   
   ngOnInit() {
     this.ordersSellerService.getOrdersOfSeller(this.id).subscribe(
-      ordersSeller => this.ordersSeller = ordersSeller
+      ordersSeller => {
+        this.ordersSeller = ordersSeller;
+        console.log(this.ordersSeller);
+      }
     );
   }
 

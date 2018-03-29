@@ -1,34 +1,24 @@
 <div class="container">
 
-  <div *ngFor="let item of ordersSeller" class="row justify-content-center mt-5 mb-5">
-    <div class="card border-primary" style="width: 40rem; text-align:center;">
-      <div class="card-header">
-        <h3>{{ item.prodId.name }}</h3>
-      </div>
-      <img class="card-img-top" src="http://placehold.it/900x400" height="200" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">{{ item.prodId.desc }}</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <h4>{{ item.prodId.price }} LE</h4>
-        </li>
-        <li class="list-group-item">
-          <h4>{{ item.quantity }} ordered</h4>
-        </li>
-        <li class="list-group-item">
-          <h2>
-            <span class="text-warning">
-              <span *ngFor="let i of fillStars(item.prodId.rate)">&#9733;</span>
-              <span *ngFor="let i of fillStars(5 - item.prodId.rate)">&#9734;</span>
-            </span>
-          </h2>
-        </li>
-      </ul>
-      <a class="btn btn-primary" href="#" routerLink="{{item._id}}">
+  <div *ngFor="let item of ordersSeller" class="row border border-primary p-3 my-3" style="border-radius:10px;">
+    <div class="col-3">
+      <img class="border" style="height: 150px;" src="{{item.prodId.picture}}" alt="">
+    </div>
+    <div class="col-6">
+      <h2>{{ item.prodId.name }}</h2>
+      <h2>
+        <span class="text-warning">
+          <span *ngFor="let i of fillStars(item.prodId.rate)">&#9733;</span><span *ngFor="let i of fillStars(5 - item.prodId.rate)">&#9734;</span>
+        </span>
+      </h2>
+      <p>{{ item.prodId.desc }}</p>
+    </div>
+    <div class="col-3 text-center">
+      <h3>{{ item.prodId.price }} LE</h3>
+      <h3>{{item.quantity}} ordered</h3>
+      <a class="btn btn-primary mt-5" href="#" routerLink="{{item._id}}">
         <h4>view order details</h4>
       </a>
     </div>
   </div>
-
 </div>
