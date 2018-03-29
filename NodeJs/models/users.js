@@ -115,15 +115,26 @@ UserModel.addToCart = (Id, productToAdd, callback)=>{
 }
 
 UserModel.getCart = (Id, callback) =>{
-    UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
-      callback(err, result)
-  })
+    UserModel.model.findOne({_id:Id},{_id: false, cart: true}).populate('cart.prodId').exec((err, result)=>{
+      callback(err,result)
+    })
 }
 UserModel.editCart = (Id, cart, callback) =>{
-  console.log(cart)
-    UserModel.model.update({_id:Id},{cart:cart}, (err, result) => {
-      callback(err, result)
-  })
+    UserModel.getCart(Id, (err, r)=>{
+      var updatedCart = r.cart
+
+      cart.map((p)=>{
+        if (p.prodId == updatedCart[cart.indexOf(p)].prodId._id && p.quantity>updatedCart[cart.indexOf(p)].prodId.stock) {
+          p.quantity = updatedCart[cart.indexOf(p)].prodId.stock
+        }  
+      })
+      UserModel.model.update({_id:Id},{cart:cart}, (err, result) => {
+        // UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
+        //   callback(err, result)
+        // })
+        UserModel.getCart(Id, callback)
+      })
+    })
 }
 
 

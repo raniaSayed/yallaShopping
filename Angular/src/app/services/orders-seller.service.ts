@@ -12,13 +12,20 @@ export class OrdersSellerService {
   }
 
   getOrdersOfSeller(id){
-    return this.http.get(`http://localhost:9090/orders/sellers/${id}`)
+    return this.http.get(`https://localhost:9090/orders/sellers/${id}`)
       .map(result => result.json());
   }
 
   getOrderById(id) {
-    return this.http.get(`http://localhost:9090/orders/${id}`)
+    return this.http.get(`https://localhost:9090/orders/${id}`)
       .map(result => result.json());
+  }
+
+  changeOrderStatus(id, status) {
+    return this.http.put('https://localhost:9090/orders', {
+      id,
+      status
+    });
   }
 
 }

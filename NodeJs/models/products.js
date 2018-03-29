@@ -1,6 +1,4 @@
 var mongoose = require("mongoose");
-// adding textsearch feature...
-// var mongooseTextSearch = require("mongoose-text-search");
 var Schema = mongoose.Schema;
 
 

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
+import { AuthServiceService } from '../auth-service.service';
+
 
 
 @Component({
@@ -15,12 +17,15 @@ export class ProductDetailsComponent implements OnInit {
 	product: any
   inCart: boolean
 
-  constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
+  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
-        	this.product = data
+          this.product = data;
+          console.log(this.product);
+          
         })
+        this.AuthService.currentUser.subscribe(p=>console.log(p))
    	})
 
     this.cartService.getCart().subscribe((cart: Array<Object>)=>{

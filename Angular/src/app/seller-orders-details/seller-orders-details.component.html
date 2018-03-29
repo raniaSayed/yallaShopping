@@ -37,11 +37,13 @@
         <h2>Order status</h2>
       </div>
       <div class="row">
-        <select name="" id="">
-          <option value="" disabled selected>chane status</option>
+        <select [(ngModel)]="selectedValue" class="form-control">
           <option value="ordered">ordered</option>
           <option value="recieved">recieved</option>
         </select>
+      </div>
+      <div class="row pt-4">
+        <button class="form-control btn btn-primary" (click)="handleChangeStatus()">Change status</button>
       </div>
     </div>
   </div>

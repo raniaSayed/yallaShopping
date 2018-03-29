@@ -1,35 +1,30 @@
-<div class="row m-1">
-
-    <div class="col-sm-3">
-        <img id="book-cover" src="{{ product?.picture }}">
-        <h5 class="subtitles">Current rating:  </h5>
-        <div id="current-rating">
-
+<div class="container" >
+    <div class="row" >
+        <div class="col-6">
+            <h1> <strong>{{ product?.name }}</strong></h1>
+            <h6>by: <a routerLink="/products/seller/{{product?.seller_id?._id}}">{{ product?.seller_id?.name }}</a> </h6>            
+            <img width="100%" src="{{ product?.picture }}" alt="">
         </div>
-    </div>
-    <div class="col-sm-6">
-
-        <!-- title -->
-        <h2>{{ product?.name }}</h2>
-
-        <!-- seller 
-        <h5 class="subtitles">Title</h5>
-        <a href="/library/author/}">Name</a>-->
-
-        <!-- description -->
-        <h5 class="subtitles">Description: </h5>
-        <p id="description">{{ product?.desc}}</p>        
-        <h5 class="subtitles">Price: </h5>
-        <p id="description">{{ product?.price}} L.E</p>        
-        <h5 class="subtitles">Stock: </h5>
-        <p id="description">{{ product?.stock>0 ? product.stock : 'Out of stock'}} </p>
-        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success" (click)="addToCart($event)" >Add to Cart</button>
-        <button *ngIf="inCart" type="button" class="btn btn-success" (click)="addToCart($event)" [routerLink]="['/users/cart']">You added this in your cart</button>
-    </div>
-    <div class="col-sm-3">
-        <h5 class="subtitles" id="myrating">My rating</h5>
-
-        <div id="myrating-div">
+        <div class="col-6">
+            <h1 style="color: red; display:inline;"> <strong>{{ product?.price }} EGP</strong></h1>
+            <h5>
+                <strong>Description:</strong>
+                <p>
+                    {{ product?.desc}} 
+                </p>
+            </h5>
+            <h6>
+                <strong>Subcategory:</strong>
+                <br>
+                <a routerLink="/categories/{{ product?.category }}/{{ product?.subcategory }}">{{ product?.subcategory }}</a>
+            </h6>
+            <h5>
+                <strong>Stock:</strong>
+                <span>{{ product?.stock>0 ? product.stock : 'Out of stock'}}</span>
+            </h5>
         </div>
+        <br>
+        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg btn-block mt-3" (click)="addToCart($event)" >Add to Cart</button>
+        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg btn-block mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
     </div>
 </div>

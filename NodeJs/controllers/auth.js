@@ -41,21 +41,25 @@ router.post("/users", JSONParsermid, (req, resp)=>{
         if (err || !isPasswordMatch) {
           resp.json({ success: false, message: 'Authentication failed. Wrong password.' });
         } else {
+          user['password'] = ""
 
           var payload = {
             id: user._id,
             email: user.email,
-            isUser: req.body.usertype === "user" ? true : false
+            isUser: req.body.usertype === "user" ? true : false,
+            user: user
           }
 
           var token = jwt.sign(payload, config.jwtSecret, {
             expiresIn: 86400
           });
-
+          user['password'] = ""
+          console.log(user)
           resp.json({
             success: true,
             message: 'Authentication success!',
-            token: token
+            token: token,
+            user: user
           });
 
         }
@@ -72,7 +76,8 @@ router.post("/check",(req, resp)=>{
       if (err) {
           return resp.json({ isAuthenticated: false });
       } else {
-          return resp.json({ isAuthenticated: true});
+        console.log(decoded)
+          return resp.json({ isAuthenticated: true, user: decoded.user});
       }
     });
 });
