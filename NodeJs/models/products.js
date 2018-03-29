@@ -66,6 +66,7 @@ ProductsModel.getAllProducts = function(callback){
 
 ProductsModel.getProductById = function(Id, callback){
   ProductsModel.model.findOne({_id:Id}).populate("seller_id",{name:true}).exec(function(err, result){
+
     callback(err, result);
   });
 }
@@ -78,21 +79,9 @@ ProductsModel.searchProducts = function(searchQuery, callback){
 
 ProductsModel.addProduct = function(data,callback){
   console.log(data);
-  var product = new ProductsModel.model({
-    // _id: data.id,
-    name: data.name,
-    desc: data.desc,
-    price: data.price,
-    rate:data.rate,
-    stock:data.stock,
-    category:data.category,
-    subcategory:data.subcategory,
-    seller_id:data.seller_id
-    // img: req.file.filename
-  });
+  var product = new ProductsModel.model(data);
   product.save((err, doc)=>{
     console.log("save");
-    
     callback(err, doc)
   });
 }

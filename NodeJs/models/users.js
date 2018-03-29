@@ -28,12 +28,12 @@ var users = new Schema({
   },
   password: {
     type: String,
-    required: true
+    // required: true
   },
   picture: String, //base64
   address: {
     type: String,
-    required: true
+    // required: true
   },
   cart: [cartItems],
   origin: {
@@ -98,7 +98,7 @@ UserModel.addToCart = (Id, productToAdd, callback)=>{
         if (p.prodId == productToAdd.prodId) {
           p.quantity += 1
           exist = true
-        }  
+        }
       })
       !exist && oldCart.push(productToAdd)
       UserModel.model.update({_id:Id},{cart:oldCart},(err, result)=>{

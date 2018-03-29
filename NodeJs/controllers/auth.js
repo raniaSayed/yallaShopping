@@ -4,7 +4,7 @@ var JSONParsermid = bodyParser.json();
 var urlEncodedParsermid = bodyParser.urlencoded({extended: true});
 var router = express.Router();
 var mongoose = require("mongoose");
-var UserModel = mongoose.model("users");
+var UserModel = require("../models/users");
 var SellerModel = mongoose.model("sellers");
 var config = require('../config');
 var encryptPassword = require('./encryptPassword');
@@ -13,10 +13,48 @@ var jwt = require('jsonwebtoken');
 
 //menna code to be deleted
 router.post("/tokens",JSONParsermid,(req, resp)=>{
-	console.log(req.body.email);
+	// console.log(req.body);
 	console.log("hi");
-	// resp.send("ok");
+	// console.log(UserModel.model);
+
+	UserModel.model.findOne({email:req.body.email},{cart:false},(err,user)=>{
+		// console.log(err,user)
+		if (!user){
+			UserModel.addUser(req.body, (err, result)=>{
+				if(!err) {
+					console.log("!err");
+					console.log(result);
+					// resp.send("hereee");
+					// resp.json({status:"ok"})
+				} else {
+					console.log("err")
+					console.log(err)
+					// resp.json(err);
+				}
+			})
+		}
+	// 	var payload = {
+	// 		id: user._id,
+	// 		email: user.email,
+	// 		isUser: req.body.usertype === true
+	// 	}
+  //
+	// 	var token = jwt.sign(payload, config.jwtSecret, {
+	// 		expiresIn: 86400
+	// 	});
+  //
+	// 	resp.json({
+	// 		success: true,
+	// 		message: 'Authentication success!',
+	// 		token: token
+	// 	});
+  //
+	})
+
 });
+
+
+
 
 router.post("/users", JSONParsermid, (req, resp)=>{
   var model = req.body.usertype === "user" ? UserModel : SellerModel
