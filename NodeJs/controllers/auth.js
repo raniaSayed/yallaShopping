@@ -11,7 +11,7 @@ var encryptPassword = require('./encryptPassword');
 var jwt = require('jsonwebtoken');
 
 
-//menna code to be deleted
+
 router.post("/tokens",JSONParsermid,(req, resp)=>{
 	// console.log(req.body);
 	console.log("hi");
@@ -20,35 +20,53 @@ router.post("/tokens",JSONParsermid,(req, resp)=>{
 	UserModel.model.findOne({email:req.body.email},{cart:false},(err,user)=>{
 		// console.log(err,user)
 		if (!user){
-			UserModel.addUser(req.body, (err, result)=>{
-				if(!err) {
-					console.log("!err");
-					console.log(result);
-					// resp.send("hereee");
-					// resp.json({status:"ok"})
-				} else {
-					console.log("err")
-					console.log(err)
+
+			UserModel.addUser(req.body, (error, result)=>{
+				if(!error) {
+
+					var payload = {
+						id: user._id,
+						email: user.email,
+						isUser: req.body.usertype === true
+					}
+
+					var token = jwt.sign(payload, config.jwtSecret, {
+						expiresIn: 86400
+					});
+
+					resp.json({
+						success: true,
+						message: 'Authentication success!',
+						token: token
+					});
+
+					resp.json({status:"ok"})
+
+				}
+				 else {
+					console.log("errorrr")
+					console.log(error)
 					// resp.json(err);
 				}
-			})
+			} )
 		}
-	// 	var payload = {
-	// 		id: user._id,
-	// 		email: user.email,
-	// 		isUser: req.body.usertype === true
-	// 	}
-  //
-	// 	var token = jwt.sign(payload, config.jwtSecret, {
-	// 		expiresIn: 86400
-	// 	});
-  //
-	// 	resp.json({
-	// 		success: true,
-	// 		message: 'Authentication success!',
-	// 		token: token
-	// 	});
-  //
+
+		var payload = {
+			id: user._id,
+			email: user.email,
+			isUser: req.body.usertype === true
+		}
+
+		var token = jwt.sign(payload, config.jwtSecret, {
+			expiresIn: 86400
+		});
+
+		resp.json({
+			success: true,
+			message: 'Authentication success!',
+			token: token
+		});
+
 	})
 
 });
