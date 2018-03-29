@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 
+
 // rates schema
 
 var rates = new Schema(
@@ -21,7 +22,7 @@ var rates = new Schema(
   }
 });
 
-// products plugins
+// rates plugins
 rates.plugin(autoIncrement.plugin, 'rates');
 
 mongoose.model("rates",rates);
@@ -32,8 +33,9 @@ var RatesModel = {};
 RatesModel.model = mongoose.model("rates");
 
 RatesModel.rateProduct = function(product_id,data,callback){
-  var user_id=2;
-RatesModel.model.update( {product_id: product_id}, {product_id: product_id,user_id : user_id,rate:data.rate }, { upsert : true }, (err, doc)=>{
+  var user_id=5;
+  data.rate=2;
+RatesModel.model.update( {product_id: product_id,user_id : user_id}, {product_id: product_id,user_id : user_id,rate:data.rate }, { upsert : true }, (err, doc)=>{
     callback(err, doc)
   } );
   //   var rate = new RatesModel.model({
@@ -68,7 +70,8 @@ RatesModel.getAvgRates = function(product_id, callback){
 
   RatesModel.model.aggregate([
   { $match: { product_id: product_id }},
-  { $group: { count: { $sum: 1 } } }
+  { $group: { _id: product_id, count: { $sum: 1 },
+  average: { "$avg": "$rate" } } }
 ], function (err, result) {
         callback(err, result);
     });
