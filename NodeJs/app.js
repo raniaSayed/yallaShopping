@@ -26,12 +26,7 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
   require(path.join(__dirname, "models", model))
 })
 
-
-// setup static files
-server.use(express.static("static"))
-
 // server.use(authMid);
-
 
 var authRouter = require("./controllers/auth")
 server.use("/auth", authRouter)

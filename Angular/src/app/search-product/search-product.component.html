@@ -1,0 +1,62 @@
+<!--filter-->
+<ul class="category-list">
+  <li class="filter-list" *ngFor="let category of categories">
+      <div class="filter-checkbox">
+        <div class="category-name">{{category.name}}</div>
+      </div>
+      <div class="filter-list">
+      <div *ngFor="let subcategory of category.subcategories">
+          <div class="filter-checkbox">
+            <input id="ch1" type="checkbox">
+            <label for="ch1">{{subcategory}}</label>
+          </div>
+        </div>
+      </div>
+     <hr>
+  </li>
+</ul>
+
+<!--div class="filter-checkbox">
+  <input id="ch2" type="checkbox">
+  <label for="ch2">Check box 2</label>
+</div>
+<div class="filter-checkbox">
+  <input id="ch3" type="checkbox">
+  <label for="ch3">Check box 3</label>
+</div-->
+
+<!--results-->
+<div *ngFor="let product of matchedProducts" class="search-content row m-1">
+
+  <div class="col-sm-3">
+    <img id="book-cover" src="{{ product?.picture }}">
+    <h5 class="subtitles">Current rating: </h5>
+    <div id="current-rating">
+
+    </div>
+  </div>
+  <div class="col-sm-6">
+
+    <!-- title -->
+    <h2>{{ product?.name }}</h2>
+
+    <!-- seller 
+          <h5 class="subtitles">Title</h5>
+          <a href="/library/author/}">Name</a>-->
+
+    <!-- description -->
+    <h5 class="subtitles">Description: </h5>
+    <p id="description">{{ product?.desc}}</p>
+    <h5 class="subtitles">Price: </h5>
+    <p id="description">{{ product?.price}} L.E</p>
+    <h5 class="subtitles">Stock: </h5>
+    <p id="description">{{ product?.stock>0 ? product.stock : 'Out of stock'}} </p>
+    <button type="button" class="btn btn-success" (click)="addToCart($event)" *ngIf="product?.stock>0">Add to Cart</button>
+  </div>
+  <div class="col-sm-3">
+    <h5 class="subtitles" id="myrating">My rating</h5>
+
+    <div id="myrating-div">
+    </div>
+  </div>
+</div>

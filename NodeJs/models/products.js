@@ -72,7 +72,7 @@ ProductsModel.getProductById = function(Id, callback){
 }
 
 ProductsModel.searchProducts = function(searchQuery, callback){
-  ProductsModel.model.find({$text:{$search:searchQuery}}, function(err, result){
+  ProductsModel.model.find({$or :[{name:{$regex:searchQuery}},{desc:{$regex:searchQuery}}]}, function(err, result){
     callback(err, result);
   });
 }

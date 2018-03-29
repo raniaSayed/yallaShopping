@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from './sidebar/sidebar.component';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-header',

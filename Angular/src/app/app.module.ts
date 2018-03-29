@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 //george ...
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { UICarouselModule } from "ui-carousel";
+import { UICarouselModule } from "ui-carousel"
 import {Http} from '@angular/http';
 
 import { ImageUploadModule } from "angular2-image-upload";
@@ -73,11 +73,15 @@ import { OrdersSellerService } from './services/orders-seller.service';
 import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
 
 
+import { SearchProductComponent } from './search-product/search-product.component';
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'products/add', component: AddProductComponent },
+  { path: 'products/search', component: SearchProductComponent },
+  
   { path: 'products/edit/:id', component: EditProductComponent},
   { path: 'products/:id', component: ProductDetailsComponent },
   
@@ -112,6 +116,7 @@ const appRoutes: Routes = [
     SellerProductsComponent,
     UserCartComponent,
     HomeComponent,
+    SearchProductComponent,
     OrdersSellerComponent,
     SellerOrdersDetailsComponent,
   ],
