@@ -5,6 +5,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
 
 
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -18,7 +19,9 @@ export class ProductDetailsComponent implements OnInit {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
-        	this.product = data
+          this.product = data;
+          console.log(this.product);
+          
         })
    	})
   }

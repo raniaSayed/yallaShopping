@@ -37,21 +37,6 @@ var OrderModel = {};
 
 OrderModel.model = mongoose.model("orders");
 
-// add order
-OrderModel.addOrder = function (data, callback) {
-  var order = new OrderModel.model(data);
-  order.save(function (err, doc) {
-    callback(err, doc);
-  });
-}
-
-//view all orders
-OrderModel.getOrders = (callback) => {
-  OrderModel.model.find({}, (err, result) => {
-    callback(err, result);
-  });
-}
-
 //view user order by id
 OrderModel.viewById = function (id, callback) {
   OrderModel.model.findOne({
@@ -77,23 +62,6 @@ OrderModel.viewUserAll = function (id, callback) {
   }, function (error, result) {
     callback(error, result);
   });
-}
-
-// view orders of specific seller -> /orders/sellers/id
-OrderModel.getSellerOrders = function (sellerId, callback) {
-  orderModel.model.find()
-    .populate({
-      path: 'userId',
-      model: 'users'
-    })
-    .populate({
-      path: 'prodId',
-      model: 'products',
-      populate: {
-        path: 'seller_id',
-        model: 'sellers'
-      }
-    })
 }
 
 // change order status
