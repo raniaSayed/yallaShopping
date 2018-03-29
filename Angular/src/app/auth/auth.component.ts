@@ -11,8 +11,17 @@ import { AuthServiceService } from '../auth-service.service';
   providers: [AuthServiceService]
 })
 export class AuthComponent implements OnInit {
-  user = {email:"", password:""}
-  constructor(private route: Router, private socialAuthService: AuthService, private myAuthService: AuthServiceService) { }
+  user = {email:"", password:"", type:""}
+  signInError = false
+  formNotValid = false
+  constructor(private route: Router, private socialAuthService: AuthService, private AuthService: AuthServiceService) { 
+    this.AuthService.checkToken().subscribe(res=>{
+      if (res) {
+        route.navigate([''])
+      }
+    })
+
+  }
 
   ngOnInit() {
   }
@@ -28,20 +37,31 @@ export class AuthComponent implements OnInit {
 
       this.socialAuthService.signIn(socialPlatformProvider).then(
         (userData) => {
-          this.myAuthService.getUserToken(userData).subscribe((res)=>{console.log(res)})
+          this.AuthService.getUserToken(userData).subscribe((res)=>{console.log(res)})
           // console.log(socialPlatform+" sign in data : " , userData);
 
         }
       );
     }
 
-  signIn(e){
-    this.myAuthService.signIn(this.user).subscribe(res=>{
-      console.log(res)
+
+   onSubmit({value, valid}){
+
+    if(valid){
+      console.log(value)
+      this.AuthService.signIn(value).subscribe(res=>{
       if (res['success']) {
+        localStorage.setItem("x-access-token", res['token'])
+        console.log(res)
         this.route.navigate([''])
+      }else{
+        this.signInError = true
+        this.formNotValid = false
       }
     })
-  }
-
+    }else{
+        this.signInError = false
+        this.formNotValid = true
+    }
+   }
 }

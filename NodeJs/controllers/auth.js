@@ -5,6 +5,7 @@ var urlEncodedParsermid = bodyParser.urlencoded({extended: true});
 var router = express.Router();
 var mongoose = require("mongoose");
 var UserModel = mongoose.model("users");
+var SellerModel = mongoose.model("sellers");
 var config = require('../config');
 var encryptPassword = require('./encryptPassword');
 var jwt = require('jsonwebtoken');
@@ -18,7 +19,8 @@ router.post("/tokens",JSONParsermid,(req, resp)=>{
 });
 
 router.post("/users", JSONParsermid, (req, resp)=>{
-	UserModel.findOne({
+  var model = req.body.usertype === "user" ? UserModel : SellerModel
+	model.findOne({
     email: req.body.email
   }, (err, user)=>{
 
@@ -41,8 +43,9 @@ router.post("/users", JSONParsermid, (req, resp)=>{
         } else {
 
           var payload = {
-            userId: user._id,
-            email: user.email
+            id: user._id,
+            email: user.email,
+            isUser: req.body.usertype === "user" ? true : false
           }
 
           var token = jwt.sign(payload, config.jwtSecret, {
@@ -60,6 +63,18 @@ router.post("/users", JSONParsermid, (req, resp)=>{
 
     }
   });
+});
+
+
+router.post("/check",(req, resp)=>{
+    var token = req.headers['x-access-token'];
+    jwt.verify(token, config.jwtSecret , function (err, decoded) {
+      if (err) {
+          return resp.json({ isAuthenticated: false });
+      } else {
+          return resp.json({ isAuthenticated: true});
+      }
+    });
 });
 
 module.exports = router;

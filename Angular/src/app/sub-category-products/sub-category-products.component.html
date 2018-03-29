@@ -2,7 +2,7 @@
   <div class="card-header">
     <h3>{{product.name}}</h3>
   </div>
-  <img class="card-img-top" src="{{ product.picture | safeHtml}}" alt="{{product.name}}" >
+  <img class="card-img-top" src="{{ product?.picture | safeHtml}}" alt="{{product.name}}" >
   <div class="card-body">
     <p class="card-text">{{product.desc | limitTo:20}}</p>
   </div>

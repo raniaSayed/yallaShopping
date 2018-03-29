@@ -1,13 +1,13 @@
-<ul class="list-unstyled" id="" >
+<!-- <ul class="list-unstyled" id="" >
     <li style="display: inline;" *ngFor="let cat of categories; let i = index">
-        <a href="#{{i}}" style="display: inline;" class="navbar-brand"  data-toggle="collapse" data-toggle="collapse" aria-expanded="true">{{cat.name}}</a>
+        <a href="#{{i}}" style="display: inline;" class="navbar-brand"  data-toggle="collapse" aria-expanded="true">{{cat.name}}</a>
         <ul class="list-unstyled collapse" id="{{i}}">
             <li *ngFor="let subcat of cat.subcategories">
                 <a routerLink="/categories/{{cat._id}}/{{subcat}}">{{subcat}}</a>
             </li>
         </ul>
     </li>
-</ul>
+</ul> -->
 
 <div class="wrapper">
   <ui-carousel [infinite]="true" [fade]="true" [speed]="500" height="300px" width="700px">

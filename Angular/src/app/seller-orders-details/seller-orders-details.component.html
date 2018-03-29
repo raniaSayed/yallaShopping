@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col offset-1 " style="padding-left: 0px; padding-right:
+    0px;">
+      <h1>{{ order.prodId.name }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col offset-1 pt-5 justify-content-center " style="padding-left: 0px; padding-right: 0px;">
+      <img class="img-responsive" width="300" height="300" src="{{ order.prodId.picture }}" alt="">
+    </div>
+    <div class="col offset-1">
+      <h2 class="row justify-content-center">Client information</h2>
+      <ul class="list-group row">
+        <li class="list-group-item active">
+          <h3>Name</h3>
+        </li>
+        <li class="list-group-item">
+          <h4>{{ order.userId.name }}</h4>
+        </li>
+        <li class="list-group-item active">
+          <h3>Email</h3>
+        </li>
+        <li class="list-group-item">
+          <h4>{{ order.userId.email }}</h4>
+        </li>
+        <li class="list-group-item active">
+          <h3>Address</h3>
+        </li>
+        <li class="list-group-item">
+          <h4>{{ order.userId.address }}</h4>
+        </li>
+      </ul>
+    </div>
+    <div class="col offset-1">
+      <div class="row">
+        <h2>Order status</h2>
+      </div>
+      <div class="row">
+        <select [(ngModel)]="selectedValue" class="form-control">
+          <option value="ordered">ordered</option>
+          <option value="recieved">recieved</option>
+        </select>
+      </div>
+      <div class="row pt-4">
+        <button class="form-control btn btn-primary" (click)="handleChangeStatus()">Change status</button>
+      </div>
+    </div>
+  </div>
+</div>

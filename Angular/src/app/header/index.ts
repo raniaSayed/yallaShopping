@@ -12,7 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     
 
     // sub components
-    SidebarComponent
+    SidebarComponent,
   ],
   exports: [
     HeaderComponent,

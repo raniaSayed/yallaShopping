@@ -7,10 +7,13 @@ var urlEncodedParsermid = bodyParser.urlencoded({
 var router = express.Router();
 var mongoose = require("mongoose");
 var orderModel = require("../models/orders");
+var productModel = require("../models/products");
 
 //  /order/sellers/id router
 router.get("/sellers/:id", function (req, resp) {
-  orderModel.model.find()
+  orderModel.model.find({
+      status: "ordered"
+    })
     .populate({
       path: 'userId',
       model: 'users'
@@ -40,6 +43,25 @@ router.get("/sellers/:id", function (req, resp) {
     });
 });
 
+// change order status route
+router.patch("/", JSONParsermid, function (req, resp) {
+  orderModel.model.update({
+    _id: req.body.id
+  }, {
+    $set: {
+      status: req.body.status
+    }
+  }, function (err, doc) {
+    if (!err) {
+      resp.json({
+        status: "ok"
+      })
+    } else {
+      resp.json(err);
+    }
+  })
+});
+
 //view user orders
 router.get("/", function (req, resp) {
   ///change id to session userId
@@ -53,17 +75,53 @@ router.get("/", function (req, resp) {
   });
 });
 
+
+// add order router
 router.post("/", JSONParsermid, function (req, resp) {
-  // get data from body and call addOrder
-  orderModel.addOrder(req.body, (err, result) => {
-    if (!err) {
-      resp.json({
-        status: "ok"
-      })
-    } else {
-      resp.json(err);
+  var order = new orderModel.model(req.body);
+  var product = productModel.model.findOne({
+    _id: req.body.prodId
+  }, function (error, productDoc) {
+    if (!error) {
+      if (productDoc.stock == 0) {
+        resp.json({
+          status: "failure",
+          message: "stock is empty"
+        });
+      } else if (req.body.quantity > productDoc.stock) {
+        resp.json({
+          status: "failure",
+          message: 'no enough pieces in stock'
+        });
+      } else {
+        // save order
+        order.save(function (err, doc) {
+          if (!err) {
+            // modify stock!
+            productDoc.stock -= req.body.quantity;
+            productModel.model.update({
+              _id: productDoc._id
+            }, {
+              $set: {
+                stock: productDoc.stock
+              }
+            }, function (failure, doc) {
+              if (!failure) {
+                console.log('document updated successfully!');
+              } else {
+                console.log(failure);
+              }
+            });
+            resp.json({
+              status: "ok"
+            })
+          } else {
+            resp.json(err);
+          }
+        });
+      }
     }
-  })
+  });
 });
 
 //view user order by id

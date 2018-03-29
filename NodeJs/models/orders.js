@@ -16,7 +16,8 @@ var orders = new Schema({
   },
   status: {
     type: String,
-    enum: ["ordered", "received"]
+    enum: ["ordered", "received"],
+    default: "ordered"
   },
   timestamps: {
     type: Date,
@@ -36,27 +37,20 @@ var OrderModel = {};
 
 OrderModel.model = mongoose.model("orders");
 
-// add order
-OrderModel.addOrder = function (data, callback) {
-  var order = new OrderModel.model(data);
-  order.save(function (err, doc) {
-    callback(err, doc);
-  });
-}
-
-//view all orders
-OrderModel.getOrders = (callback) => {
-  OrderModel.model.find({}, (err, result) => {
-    callback(err, result);
-  });
-}
-
 //view user order by id
 OrderModel.viewById = function (id, callback) {
   OrderModel.model.findOne({
       _id: (+id)
-    }).populate("orderProducts.sellerId")
-    .populate("orderProducts.prodId").exec((error, result) => {
+    })
+    .populate({
+      path: 'userId',
+      model: 'users'
+    })
+    .populate({
+      path: 'prodId',
+      model: 'products'
+    })
+    .exec((error, result) => {
       callback(error, result);
     });
 }
@@ -68,23 +62,6 @@ OrderModel.viewUserAll = function (id, callback) {
   }, function (error, result) {
     callback(error, result);
   });
-}
-
-// view orders of specific seller -> /orders/sellers/id
-OrderModel.getSellerOrders = function (sellerId, callback) {
-  orderModel.model.find()
-    .populate({
-      path: 'userId',
-      model: 'users'
-    })
-    .populate({
-      path: 'prodId',
-      model: 'products',
-      populate: {
-        path: 'seller_id',
-        model: 'sellers'
-      }
-    })
 }
 
 // change order status

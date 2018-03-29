@@ -23,12 +23,11 @@ import { BodyComponent } from './body/body.component';
 
 import { AuthComponent } from './auth/auth.component';
 import { AddProductComponent } from './add-product/add-product.component';
-
 import { HeaderModule} from './header/index';
 //george...
-import { UserRegisterationService } from './user-registeration.service';
-import { SellerRegisterationServiceService } from './seller-registeration-service.service';
-import { GetSellerProductsService } from './get-seller-products.service';
+import { UserRegisterationService } from './services/user-registeration.service';
+import { SellerRegisterationServiceService } from './services/seller-registeration-service.service';
+import { GetSellerProductsService } from './services/get-seller-products.service';
 
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
@@ -69,6 +68,10 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
+import { OrdersSellerService } from './services/orders-seller.service';
+import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
+
 
 import { SearchProductComponent } from './search-product/search-product.component';
 
@@ -79,11 +82,14 @@ const appRoutes: Routes = [
   { path: 'products/add', component: AddProductComponent },
   { path: 'products/search', component: SearchProductComponent },
   
+  { path: 'products/edit/:id', component: EditProductComponent},
   { path: 'products/:id', component: ProductDetailsComponent },
   
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
+  { path: 'sellers/:id/orders', component: OrdersSellerComponent },
+  { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: '**', component: BodyComponent },
 ];
@@ -111,6 +117,8 @@ const appRoutes: Routes = [
     UserCartComponent,
     HomeComponent,
     SearchProductComponent,
+    OrdersSellerComponent,
+    SellerOrdersDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +145,7 @@ const appRoutes: Routes = [
     ProductDetailsService,
     CartService,
     GetSellerProductsService,
+    OrdersSellerService,
     ],
   bootstrap: [AppComponent]
 })
