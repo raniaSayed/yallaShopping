@@ -14,7 +14,7 @@ export class SellerRegisterationServiceService {
         'Content-Type':  'application/json'
       })
     }
-    return this.http.post('http://localhost:9090/sellers/', JSON.stringify(sellerData), httpOptions);
+    return this.http.post('https://localhost:9090/sellers/', JSON.stringify(sellerData), httpOptions);
   }
 
 }
