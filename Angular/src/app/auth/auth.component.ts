@@ -14,8 +14,7 @@ export class AuthComponent implements OnInit {
   user = {email:"", password:"", type:""}
   signInError = false
   formNotValid = false
-
-  constructor(private route: Router, private socialAuthService: AuthService, private AuthService: AuthServiceService) { 
+  constructor(private route: Router, private socialAuthService: AuthService, private AuthService: AuthServiceService) {
     this.AuthService.checkToken().subscribe(res=>{
       if (res['isAuthenticated']) {
         this.user = res['user']
@@ -40,7 +39,9 @@ export class AuthComponent implements OnInit {
 
       this.socialAuthService.signIn(socialPlatformProvider).then(
         (userData) => {
-          this.AuthService.getUserToken(userData).subscribe((res)=>{console.log(res)})
+          this.AuthService.getUserToken(userData).subscribe((res)=>{
+            localStorage.setItem("x-access-token", res['token']);
+            console.log(res)})
           // console.log(socialPlatform+" sign in data : " , userData);
 
         }
