@@ -2,16 +2,18 @@
 
   <div *ngFor="let item of ordersSeller" class="row border border-primary p-3 my-3" style="border-radius:10px;">
     <div class="col-3">
-      <img class="border" style="height: 150px;" src="{{item.prodId.picture}}" alt="">
+      <img class="border" style="height: 150px;" src="{{item?.prodId.picture}}" alt="">
     </div>
     <div class="col-6">
-      <h2>{{ item.prodId.name }}</h2>
+      <h2>{{ item?.prodId.name }}</h2>
       <h2>
         <span class="text-warning">
-          <span *ngFor="let i of fillStars(item.prodId.rate)">&#9733;</span><span *ngFor="let i of fillStars(5 - item.prodId.rate)">&#9734;</span>
+          <span *ngIf="item.prodId.rate">
+            <span *ngFor="let i of fillStars(item.prodId.rate)">&#9733;</span><span *ngFor="let i of fillStars(5 - item.prodId.rate)">&#9734;</span>
+          </span>
         </span>
       </h2>
-      <p>{{ item.prodId.desc }}</p>
+      <p>{{ item?.prodId.desc }}</p>
     </div>
     <div class="col-3 text-center">
       <h3>{{ item.prodId.price }} LE</h3>
