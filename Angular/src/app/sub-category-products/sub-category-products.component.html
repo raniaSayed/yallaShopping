@@ -1,13 +1,13 @@
-<div class="card float-left m-3" style="width: 18rem;" [hidden] = 'ishidden' *ngFor="let product of products">
-  <a routerLink="/product/{{ product._id }}">
-    <img class="card-img-top" src="{{ product.picture | safeHtml}}" alt="Card image cap">
-  <div class="card-body mx-auto">
-    <h4 class="card-title">{{ product.name }}</h4>
+<div *ngFor="let product of products" class="button card float-left m-3" style="width: 18rem; text-align:center; cursor: pointer;" routerLink="/products/{{ product._id }}" href="#">
+  <div class="card-header">
+    <h3>{{product.name}}</h3>
   </div>
-  <ul class="list-group list-group-flush mx-auto">
-    <li class="list-group-item mx-auto">{{ product.price }} L.E</li>
-    <li class="list-group-item mx-auto">{{ product.quantity }}</li>
-    <li class="list-group-item mx-auto">{{ product.desc | limitTo : 20 }}</li>
+  <img class="card-img-top" src="{{ product.picture | safeHtml}}" alt="{{product.name}}" >
+  <div class="card-body">
+    <p class="card-text">{{product.desc | limitTo:20}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Stock {{product.stock}} </li>
+    <li class="list-group-item">Price {{product.price}} LE.</li>
   </ul>
-  </a>
 </div>

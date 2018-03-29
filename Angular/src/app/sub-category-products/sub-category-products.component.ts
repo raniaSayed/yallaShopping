@@ -22,6 +22,7 @@ export class SubCategoryProductsComponent implements OnInit {
           console.log(this.category);
           
         	console.log(data)
+
         })
    	})
   }

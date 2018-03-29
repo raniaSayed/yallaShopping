@@ -40,7 +40,7 @@ export class UserRegisterFormComponent implements OnInit {
       'picture': this.picture,
       'origin': "N"
     }).subscribe((res)=> {
-      
+      console.log("sdfsdf",res)
       // if(res.status=="ok"){
       //   console.log("user created");
       

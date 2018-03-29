@@ -13,7 +13,6 @@ import { CartService } from "../services/cart.service";
 export class ProductDetailsComponent implements OnInit {
 	id: Number;
 	product: any
-	cart: Array<Object>
 
   constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
    	this.route.params.subscribe(params => {
@@ -25,11 +24,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.cartService.currentCart.subscribe(res => {this.cart = res})
   }
 
   addToCart(e){
-  	this.cartService.changeCart({prodId:this.product['_id'], quantity:1})
+  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>console.log(p))
   }
 
 }

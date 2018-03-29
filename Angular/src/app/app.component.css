@@ -244,8 +244,8 @@ i {
     font-size: 0.5em;
     display: block;
     position: absolute;
-    top: -0.95em;
-    right: 2.7em;
+    top: -1.1em;
+    right: 2.3em;
     width: 1.8em;
     height: 1.3em;
     line-height: 1em;
@@ -329,4 +329,8 @@ i {
 }
 #searchInput{
    width: 40% !important;
+}
+#main-navbar{
+    margin-right: 45px;
+    width:90%;
 }

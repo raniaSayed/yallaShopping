@@ -1,0 +1,81 @@
+<h1>
+  Add product
+</h1>
+
+<form  (ngSubmit)="submitIt()" action="#" method="post" #userRegisterForm="ngForm">
+
+  <table >
+    <tr>
+      <td>
+        Product Name
+        <span color="red"><font color="red">*</font></span>
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="name" id="name" [(ngModel)]="name" #uname="ngModel">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Product Price
+        <span color="red"><font color="red">*</font></span>
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="price" id="price" [(ngModel)]="price" #uprice="ngModel">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Product Description
+      </td>
+      <td>
+        <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="description" #udescriptoin="ngModel" >
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Stock Quantity
+        <span color="red"><font color="red">*</font></span>
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="stock" id="stock" [(ngModel)]="stock" #ustock="ngModel">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Category
+        <span color="red"><font color="red">*</font></span>
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="category" #ucategory="ngModel">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Sub_Category
+        <span color="red"><font color="red">*</font></span>
+      </td>
+      <td>
+        <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="subcategory" #usubcategory="ngModel">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Image
+      </td>
+      <td>
+        <input type="file" class="form-control"  name="picture" id="picture" [(ngModel)]="picture" #upicture (change)="fileUpload(upicture.files)" >
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input [disabled]="!userRegisterForm.valid" class="btn btn-primary mb-2" type="submit" value="Add">
+      </td>
+    </tr>
+  </table>
+</form>
+<div>
+  <span>Any field with this sign<font color="red">*</font> is required</span>
+</div>
+<div>
+  {{serverErrors}}
+</div>

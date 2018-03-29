@@ -19,14 +19,10 @@ export class AppComponent {
   matchedProducts;
   
   constructor(private categoryService:CategoryService,private productDetailsService:ProductDetailsService) { 
-    //console.log()
-    this.isActive = false;
+    this.isActive = true;
 
     this.categoryService.getAllCategoreis().subscribe((res) => {
       this.categories = res;
-      console.log("hello");
-
-      console.log(this.categories);
     });
 
 
@@ -39,12 +35,12 @@ export class AppComponent {
     //console.log("Submiteeeed");
     //send request to get products
     console.log(this.searchWord);
-    this.productDetailsService.getMatchedProduct(this.searchWord)
-    .subscribe(res => {
+    this.productDetailsService.navigateToSearchComponent(this.searchWord);
+   /* .subscribe(res => {
       this.matchedProducts = res;
       console.log(this.matchedProducts);
     }
-    );
+    );*/
     
   }
 }
