@@ -18,12 +18,12 @@
                         <a data-toggle="collapse" aria-expanded="false">Categories</a>
                         <ul class="list-unstyled" id="category-list">
                           <li  *ngFor="let category of categories">
-                                <a href="#{{category.name}}" data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
+                                <a  data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
                                  <form action="">
                                 
                                     <ul class="list-unstyled" id="{{category.name}}">
                                         <li *ngFor="let subcategory of category.subcategories">
-                                           <input type="checkbox" class="form-check-input" name="{{category.name}}{{subcategory}}"> <a class="form-check-label" href="#">{{subcategory}}</a>
+                                           <input type="checkbox" class="form-check-input" name="{{category.name}}{{subcategory}}"> <a class="form-check-label" routerLink="/categories/{{category._id}}/{{subcategory}}">{{subcategory}}</a>
                                         </li>
                                     </ul>
                                 </form>
