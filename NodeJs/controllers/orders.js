@@ -43,7 +43,8 @@ router.get("/sellers/:id", function (req, resp) {
     });
 });
 
-router.put("/", JSONParsermid, function (req, resp) {
+// change order status route
+router.patch("/", JSONParsermid, function (req, resp) {
   orderModel.model.update({
     _id: req.body.id
   }, {
