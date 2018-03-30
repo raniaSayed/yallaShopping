@@ -1,5 +1,6 @@
 <!--filter-->
 <ul class="category-list">
+  Categories
   <li class="filter-list" *ngFor="let category of categories">
       <div class="filter-checkbox">
         <div class="category-name">{{category.name}}</div>
@@ -7,13 +8,20 @@
       <div class="filter-list">
       <div *ngFor="let subcategory of category.subcategories">
           <div class="filter-checkbox">
-            <input id="ch1" type="checkbox">
-            <label for="ch1">{{subcategory}}</label>
+            <input  id="subcategory-category.name" name="subcategory-{{category.name}}" [checked]="categoryNames[subcategory]" (change)="change(subcategory)" type="checkbox">
+            <label for="subcategory-category.name">{{subcategory}}</label>
+            <!--{{categoryNames[subcategory]}}-->
+            <!--label>{{selectedCategories}}</label-->
           </div>
         </div>
       </div>
      <hr>
   </li>
+</ul>
+<ul class="category-list">
+    Price 
+    From <input [value]="low"  (keypress)="lowChange()" name="low" >
+    To   <input [value]="high" (keypress) = "highChange()" name="high">
 </ul>
 
 <!--div class="filter-checkbox">

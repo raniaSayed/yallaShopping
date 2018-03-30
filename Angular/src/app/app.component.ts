@@ -4,7 +4,7 @@ import {  CategoryService  } from './services/category.service';
 import { ProductDetailsService } from './services/product-details.service';
 
 import { CartService } from "./services/cart.service";
-
+// declare var $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -9,7 +9,7 @@ export class SubCategoryProductService {
   }
 
   getProducts(id, subcategory){
-	  return this.http.get(`http://localhost:9090/categories/${id}/${subcategory}`)
+	  return this.http.get(`https://localhost:9090/categories/${id}/${subcategory}`)
   }
 
 }

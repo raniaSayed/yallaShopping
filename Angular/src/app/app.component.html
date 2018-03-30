@@ -11,14 +11,13 @@
                     </h3>
                 </div>
 
-
                 <ul class="list-unstyled components">
                     <p>Yalla Shopping</p>
                     <li class="active">
-                        <a data-toggle="collapse" aria-expanded="false">Categories</a>
-                        <ul class="list-unstyled" id="category-list">
+                        <a href="#categoryList" data-toggle="collapse" aria-expanded="true">Categories</a>
+                        <ul id="categoryList" class="list-unstyled" >
                           <li  *ngFor="let category of categories">
-                                <a href="#{{category.name}}" data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
+                                <a  data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
                                  <form action="">
                                 
                                     <ul class="list-unstyled" id="{{category.name}}">
@@ -54,7 +53,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-navbar">
                     <a class="navbar-brand" href="#">Yalla Shopping</a>
                     
-                    <a class="nav-brand" href="#category-list">Categories &nbsp; </a>
+                    <a class="nav-brand">Categories &nbsp; </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
