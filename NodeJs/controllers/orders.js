@@ -43,6 +43,21 @@ router.get("/sellers/:id", function (req, resp) {
     });
 });
 
+router.get("/sellers/:id/count", function (req, resp) {
+  orderModel.model.find({
+      status: "ordered"
+    })
+   .count()
+    .exec(function (err, res) {
+      if (!err) {
+       
+        resp.json(res);
+      } else {
+        resp.json(err);
+      }
+    });
+});
+
 // change order status route
 router.put("/", JSONParsermid, function (req, resp) {
   orderModel.model.update({

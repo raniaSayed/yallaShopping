@@ -11,8 +11,13 @@ export class OrdersSellerService {
     
   }
 
-  getOrdersOfSeller(id){
-    return this.http.get(`https://localhost:9090/orders/sellers/${id}`)
+  getOrdersOfSeller(id,page,limit){
+    return this.http.get(`https://localhost:9090/orders/sellers/${id}?page=${page}&limit=${limit}`)
+      .map(result => result.json());
+  }
+
+  getOrdersOfSellerCount(id){
+    return this.http.get(`https://localhost:9090/orders/sellers${id}/count`)
       .map(result => result.json());
   }
 
