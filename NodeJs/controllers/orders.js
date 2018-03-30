@@ -148,12 +148,12 @@ router.get("/:id/seller", function (req, resp) {
 });
 
 // add cart .. check done in client side! route /orders/cart with post
-router.post('/carts', JSONParsermid, (req, resp) => {
+router.post('/cart', JSONParsermid, (req, resp) => {
   saveOrder(req.body, (i, j, call) => {
     call()
   }, () => {
     resp.json({
-      "status": "ok"
+      "status": true
     })
   })
 })

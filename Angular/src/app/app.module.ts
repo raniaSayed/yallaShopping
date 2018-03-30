@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpModule } from '@angular/http';
+// import {RatingModule} from "ngx-rating";
 
 //george ...
 import { FormsModule } from '@angular/forms';
@@ -56,7 +57,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { LimitToPipe } from  './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
-
+import { RateService } from './services/rate.service'
 import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
 import { SubCategoryProductService } from './services/sub-category-product.service';
 import { ProductDetailsService } from './services/product-details.service';
@@ -67,12 +68,13 @@ import { UserRegisterFormComponent } from './user-register-form/user-register-fo
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
+
+
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
 import { OrdersSellerService } from './services/orders-seller.service';
 import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
-
 
 import { SearchProductComponent } from './search-product/search-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -85,17 +87,17 @@ const appRoutes: Routes = [
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'products/add', component: AddProductComponent },
   { path: 'products/search', component: SearchProductComponent },
-  
+
   { path: 'products/edit/:id', component: EditProductComponent},
   { path: 'products/:id', component: ProductDetailsComponent },
-  
+
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
   { path: 'sellers/:id/orders', component: OrdersSellerComponent },
   { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
-  { path: 'aboutus', component: AboutUsComponent },  
+  { path: 'aboutus', component: AboutUsComponent },
   { path: 'forgetPassword', component: ForgetPasswordComponent},
   { path: '**', component: PageNotFoundComponent },
 ];
@@ -138,6 +140,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     UICarouselModule,
+    // RatingModule
     ],
 
   providers: [
@@ -155,6 +158,7 @@ const appRoutes: Routes = [
     CartService,
     GetSellerProductsService,
     OrdersSellerService,
+    RateService,
     ForgetPasswordService,
     ],
   bootstrap: [AppComponent]

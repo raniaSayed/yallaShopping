@@ -36,10 +36,22 @@ export class UserCartComponent implements OnInit {
   checkOut(e){
     console.log(this.tempCart)
     this.cartService.editCart(this.tempCart).subscribe(res=>{
+      this.cart.sort((a, b) =>{
+          return a.prodId - b.prdoId;
+      });
+      res['cart'].sort((a, b) =>{
+          return a.prodId - b.prdoId;
+      });
       console.log(JSON.stringify(this.cart) === JSON.stringify(res['cart']))
       if (JSON.stringify(this.cart) === JSON.stringify(res['cart'])) {
-        // add order here
-        console.log("checked")
+        this.cartService.checkOut(this.cart).subscribe((result)=>{
+          if (result['status']) {
+            console.log("DONE")
+            this.cartService.deleteCart().subscribe((delRes)=>{
+              console.log(delRes['status'])
+            })
+          }
+        })
       }else{
         this.cart = res['cart']
         this.stockErr = true

@@ -19,7 +19,7 @@
                           <li  *ngFor="let category of categories">
                                 <a  data-toggle="collapse"  aria-expanded="false">{{category.name}}</a>
                                  <form action="">
-                                
+
                                     <ul class="list-unstyled" id="{{category.name}}">
                                         <li *ngFor="let subcategory of category.subcategories">
                                            <input type="checkbox" class="form-check-input" name="{{category.name}}{{subcategory}}"> <a class="form-check-label" routerLink="/categories/{{category._id}}/{{subcategory}}">{{subcategory}}</a>
@@ -52,7 +52,7 @@
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-navbar">
                     <a class="navbar-brand" href="#">Yalla Shopping</a>
-                    
+
                     <a class="nav-brand">Categories &nbsp; </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -74,12 +74,12 @@
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </li> -->
-                                 
+
                             <form (submit)="searchSubmit()" class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-1" name="searchWord" [(ngModel)]="searchWord" id="searchInput" style="width:40%" type="search" placeholder="Search" aria-label="Search">
                                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
                             </form>
-                        
+
                             <li class="nav-item">
                                 <a [routerLink]="['/users/registeration']">
                                     <span class="glyphicon glyphicon-user"></span> Sign Up</a>
