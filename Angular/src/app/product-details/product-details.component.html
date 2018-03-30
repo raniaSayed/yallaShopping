@@ -6,7 +6,7 @@
             <img width="100%" src="{{ product?.picture }}" alt="">
         </div>
         <div class="col-6">
-            <h1 style="color: red; display:inline;"> <strong>{{ product?.price }} EGP</strong></h1>
+            <h1 style="color: rgb(36, 36, 252); display:inline;"> <strong>{{ product?.price }} EGP</strong></h1>
             <h5>
                 <strong>Description:</strong>
                 <p>
@@ -22,9 +22,10 @@
                 <strong>Stock:</strong>
                 <span>{{ product?.stock>0 ? product.stock : 'Out of stock'}}</span>
             </h5>
+            <br>
+        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
+        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg  mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
         </div>
-        <br>
-        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg btn-block mt-3" (click)="addToCart($event)" >Add to Cart</button>
-        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg btn-block mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
+        
     </div>
 </div>

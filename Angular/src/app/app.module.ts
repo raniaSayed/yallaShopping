@@ -75,6 +75,7 @@ import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-ord
 
 import { SearchProductComponent } from './search-product/search-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -92,6 +93,7 @@ const appRoutes: Routes = [
   { path: 'sellers/:id/orders', component: OrdersSellerComponent },
   { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
+  { path: 'aboutus', component: AboutUsComponent },  
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -121,6 +123,7 @@ const appRoutes: Routes = [
     OrdersSellerComponent,
     SellerOrdersDetailsComponent,
     PageNotFoundComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
