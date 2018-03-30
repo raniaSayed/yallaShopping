@@ -17,12 +17,8 @@ export class SellerProductsComponent implements OnInit {
   pages = [];
 
   constructor(private route: ActivatedRoute, private getSellerProducts: GetSellerProductsService) {
-    this.route.params.subscribe(params => {
-      this.sellerId = params["id"];
-      console.log(this.sellerId);
+      this.sellerId = 1
       this.getProducts(this.sellerId);
-
-    })
    }
    changePageNumber(i) {
     this.pageNumber = i;

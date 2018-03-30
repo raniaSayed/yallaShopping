@@ -21,6 +21,7 @@ export class ProductDetailsComponent implements OnInit {
   product_id: any;
   avg : any;
   userRate : Number;
+  currentUser;
   constructor(private route: Router,private AuthService: AuthServiceService, private router: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
    	this.router.params.subscribe(params => {
         this.id = params['id'];
@@ -29,7 +30,9 @@ export class ProductDetailsComponent implements OnInit {
           console.log(this.product);
 
         })
-        this.AuthService.currentUser.subscribe(p=>console.log(p))
+        this.AuthService.currentUser.subscribe(res=>{
+          this.currentUser = res
+        })
    	})
 
     this.cartService.getCart().subscribe((cart: any)=>{
@@ -45,9 +48,9 @@ export class ProductDetailsComponent implements OnInit {
 
   getAvgRate(){
     this.rateService.sendDataToServer(this.id).subscribe((res)=> {
-      this.avg=res.rate;
+      this.avg=res['rate'];
       console.log("hi");
-       // console.log(res.rate);
+       // console.log(res['rate']);
        console.log(this.avg);
 
 });
@@ -56,7 +59,7 @@ export class ProductDetailsComponent implements OnInit {
 
   getRateUser(){
     this.rateService.sendDataToServer2(this.id).subscribe((res)=> {
-      this.userRate=res.rate;
+      this.userRate=res['rate'];
       // console.log("hi");
        console.log(this.userRate);
        // console.log(this.avg);

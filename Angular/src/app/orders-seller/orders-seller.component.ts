@@ -23,7 +23,7 @@ export class OrdersSellerComponent implements OnInit {
 
   constructor(private route: Router, private router: ActivatedRoute, private ordersSellerService: OrdersSellerService) {
     this.router.params.subscribe(
-      params => this.id = params['id']
+      params => this.id = 1
     )
   }
 

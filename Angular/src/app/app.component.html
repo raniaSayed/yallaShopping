@@ -84,6 +84,19 @@
                                 <a [routerLink]="['/users/registeration']">
                                     <span class="glyphicon glyphicon-user"></span> Sign Up</a>
                             </li>
+                            <li class="nav-item" *ngIf="currentUser.isAuthenticated && !currentUser.isUser">
+                                <a [routerLink]="['/products/add']">
+                                    <span class="glyphicon glyphicon-user"></span>Add Products</a>
+                            </li>
+                            <li class="nav-item" *ngIf="currentUser.isAuthenticated && !currentUser.isUser">
+                                <a [routerLink]="['/products/seller']">
+                                    <span class="glyphicon glyphicon-user"></span>My products</a>
+                            </li>
+                            <li class="nav-item" *ngIf="currentUser.isAuthenticated && !currentUser.isUser">
+                                <a [routerLink]="['sellers/orders']">
+                                    <span class="glyphicon glyphicon-user"></span>Orders</a>
+                            </li>
+
                             <li class="nav-item" *ngIf="!currentUser.isAuthenticated">
                                 <a [routerLink]="['/users/login']">
                                     <!--i class="fa fa-sign-in"></i--> &nbsp;&nbsp;Login</a>

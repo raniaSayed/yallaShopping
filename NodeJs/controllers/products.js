@@ -214,7 +214,7 @@ router.post("/filter/count", JSONParsermid, function (request, response) {
 router.get("/:productId/rate", function (request, response) {
 
   RatesModel.getRateByUser(+request.params.productId, function (err, result) {
-    if (!err) {
+    if (!err && result) {
       console.log("finding Product with id =" + request.params.productId);
       response.json({
         status: "ok",

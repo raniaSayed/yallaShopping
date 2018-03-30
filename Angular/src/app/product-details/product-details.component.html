@@ -35,18 +35,18 @@
           >
   </rating>
             </h5>
-            <h5>
+           <!-- <h5  *ngIf="currentUser.isUser">
                 <strong>My Rate:</strong>
                 <rating (click)="rateProduct()"
-          [(ngModel)]="userRate"
-          [max]="5"
-          [readonly]="false"
-          >
-  </rating>
-            </h5>
+                  [(ngModel)]="userRate"
+                  [max]="5"
+                  [readonly]="false"
+                >
+                </rating>
+            </h5> -->
 
             <br>
-        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
+        <button *ngIf="!inCart && product?.stock>0 && currentUser.isUser" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
         <button *ngIf="inCart" type="button" class="btn btn-success btn-lg  mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
         </div>
 

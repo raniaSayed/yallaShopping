@@ -93,10 +93,10 @@ const appRoutes: Routes = [
   { path: 'products/edit/:id', component: EditProductComponent},
   { path: 'products/:id', component: ProductDetailsComponent },
 
-  { path: 'products/seller/:id', component: SellerProductsComponent },
+  { path: 'products/seller', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
-  { path: 'sellers/:id/orders', component: OrdersSellerComponent },
+  { path: 'sellers/orders', component: OrdersSellerComponent },
   { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'aboutus', component: AboutUsComponent },
@@ -161,7 +161,6 @@ const appRoutes: Routes = [
     RateService,
     ForgetPasswordService,
     NgbCarousel,
-    TopProductsService,
     ],
   bootstrap: [AppComponent]
 })

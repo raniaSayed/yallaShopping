@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "../services/cart.service";
-import { AuthServiceService } from '../auth-service.service';
+import { AuthServiceService } from '../services/auth-service.service';
 import { Router  } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ export class UserCartComponent implements OnInit {
         route.navigate([''])
       }
     })
-    
+
   	this.cartService.getCart().subscribe(data=>{
   		this.cart = data['cart']
       this.tempCart = JSON.parse(JSON.stringify(this.cart))
