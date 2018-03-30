@@ -243,15 +243,6 @@ router.get("/:productId/rate", function (request, response) {
   }
 });
 
-router.get("/:productId/avg", function (request, response) {
-  /*<<<<<<< HEAD
-  router.get("/seller/:id", function(request, response) {
-    ProductsModel.getProductsBySellerId(request, function(err, result){
-      if(!err&&result.length>0){
-        console.log("finding All Products for the seller wirh id: "+request.params.id);
-        response.json(result);
-  =======*/
-});
 router.get("/:productId?/avg", function (request, response) {
 
   if (+request.params.productId) {
