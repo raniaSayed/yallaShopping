@@ -16,7 +16,7 @@ var ProductsModel = require("../models/products");
 // need to find any product having the word in the ""{q}""
 router.get("/search", function(request, response){
   console.log("finding search Product with q "+request.query.q);
-    ProductsModel.searchProducts(request.query.q, function(err, result){
+    ProductsModel.searchProducts(request, function(err, result){
       if(!err&&result.length>0){
         console.log("finding search Product with q "+request.query.q);
         response.json(result);
@@ -121,8 +121,7 @@ router.post("/filter", JSONParsermid, function(request, response){
   // subcatArr.push(request.body.subcat1);
   // subcatArr.push(request.body.subcat2);
   //subcatArr must be Array
-  ProductsModel.filter(request.body.priceLow,
-    request.body.priceHigh, request.body.subcatArr, function(err, result){
+  ProductsModel.filter(request, function(err, result){
     if(!err&&result.length>0){
       console.log("filtering products");
       response.json(result);
@@ -163,7 +162,7 @@ router.get("/:id?", function(request, response){
 });
 
 router.get("/seller/:id", function(request, response) {
-  ProductsModel.getProductsBySellerId(request.params.id, function(err, result){
+  ProductsModel.getProductsBySellerId(request, function(err, result){
     if(!err&&result.length>0){
       console.log("finding All Products for the seller wirh id: "+request.params.id);
       response.json(result);
