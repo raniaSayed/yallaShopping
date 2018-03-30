@@ -161,6 +161,7 @@ const appRoutes: Routes = [
     RateService,
     ForgetPasswordService,
     NgbCarousel,
+    TopProductsService,
     ],
   bootstrap: [AppComponent]
 })

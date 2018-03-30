@@ -44,6 +44,8 @@ export class AppComponent {
   logout(){
     console.log("logout");
     localStorage.removeItem('x-access-token');
+    var auth = false
+    this.AuthService.user.next({isAuthenticated: auth})
     this.route.navigate([''])
     
   }

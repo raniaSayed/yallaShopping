@@ -14,6 +14,8 @@ var fileUploadMid = multer({
 //adding the new exported ProductsModel....
 var ProductsModel = require("../models/products");
 var RatesModel = require("../models/rates");
+var authMid = require('./authMid')
+var userAuthMid = require('./userAuthMid')
 
 
 //seraching the products...
@@ -125,7 +127,7 @@ router.get("/:id", function (request, response) {
       }
     });
   } else {
-    ProductsModel.getAllProducts(function (err, result) {
+    ProductsModel.getAllProducts(request,function (err, result) {
       if (!err && result.length > 0) {
         console.log("finding All Products");
         response.json(result);
@@ -161,7 +163,7 @@ router.get("/seller/:id/count", function (request, response) {
 //rate..
 // OK
 router.post("/:productID/rate", JSONParsermid, function (req, resp) {
-  RatesModel.rateProduct(req.params.productID, req.body.rate, (err, result) => {
+  RatesModel.rateProduct(+req.params.productID, +req.decoded.id, req.body.rate, (err, result) => {
     if (!err) {
       resp.json({
         status: "ok"
@@ -211,9 +213,9 @@ router.post("/filter/count", JSONParsermid, function (request, response) {
 
 
 // ok
-router.get("/:productId/rate", function (request, response) {
+router.get("/:productId/rate", [authMid],function (request, response) {
 
-  RatesModel.getRateByUser(+request.params.productId, function (err, result) {
+  RatesModel.getRateByUser(+request.params.productId, request.decoded.id, function (err, result) {
     if (!err && result) {
       console.log("finding Product with id =" + request.params.productId);
       response.json({

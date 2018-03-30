@@ -16,13 +16,13 @@ export class AuthComponent implements OnInit {
   formNotValid = false
   isLogged = true
   constructor(private route: Router, private socialAuthService: AuthService, private AuthService: AuthServiceService) {
-    console.log("sdfsdf")
     this.AuthService.checkToken().subscribe(res=>{
       console.log(res)
       if (res['isAuthenticated']) {
         this.user = res['user']
+        route.navigate(['']).catch(err=>console.log(err))
+
         this.AuthService.user.next(this.user)
-        route.navigate([''])
       }else{
         this.isLogged = false
       }
@@ -61,9 +61,10 @@ export class AuthComponent implements OnInit {
       if (res['success']) {
         localStorage.setItem("x-access-token", res['token'])
         this.user = res['user']
-        this.AuthService.user.next(this.user)
+
+        this.AuthService.user.next({isAuthenticated:true, user:this.user, isUser:res['isUser']})
         console.log(this.AuthService.currentUser.subscribe(p=>console.log(p)))
-        this.route.navigate([''])
+        this.route.navigate(['']).catch(err=>console.log(err))
       }else{
         this.signInError = true
         this.formNotValid = false
