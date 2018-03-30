@@ -22,18 +22,18 @@ export class ProductDetailsComponent implements OnInit {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
           this.product = data;
-          console.log(this.product);
-          
         })
         this.AuthService.currentUser.subscribe(p=>console.log(p))
    	})
 
-    this.cartService.getCart().subscribe((cart: Array<Object>)=>{
-      cart.forEach(p=>{
-        if (p['prodId']['_id']==this.id) {
-           this.inCart = true
-         } 
-      })
+    this.cartService.getCart().subscribe((cart: any)=>{
+      if (cart.length>0) {
+        cart.forEach(p=>{
+          if (p['prodId']['_id']==this.id) {
+             this.inCart = true
+           } 
+        })
+      }
     })
   }
 
@@ -42,7 +42,6 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(e){
   	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>{
-      console.log(p)
       this.inCart = true
     })
   }
