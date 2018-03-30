@@ -15,3 +15,7 @@
   </ul>
   <div class="card-footer bg-transparent border-success"> <a class="btn btn-primary"  routerLink="/products/edit/{{product._id}}">Edit</a> </div>
 </div>
+<div *ngIf="pages.length>0">Pages:
+  <li style="display: inline;"  *ngFor="let i  of pages"><button  class="pagging" name="pageNumber" (click)="changePageNumber(i)">{{i}}</button> </li>
+
+</div>

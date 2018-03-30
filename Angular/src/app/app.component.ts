@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import {  CategoryService  } from './services/category.service';
 import { ProductDetailsService } from './services/product-details.service';
-
+import { Router  } from '@angular/router';
 import { CartService } from "./services/cart.service";
 // declare var $: any;
 @Component({
@@ -11,6 +11,8 @@ import { CartService } from "./services/cart.service";
   styleUrls: ['./app.component.css'],
 
 })
+
+
 export class AppComponent {
   title: "yalla souq";
 
@@ -19,7 +21,7 @@ export class AppComponent {
   searchWord:string;
   matchedProducts;
   
-  constructor(private categoryService:CategoryService,private productDetailsService:ProductDetailsService) { 
+  constructor(private route: Router, private categoryService:CategoryService,private productDetailsService:ProductDetailsService) { 
     this.isActive = true;
 
     this.categoryService.getAllCategoreis().subscribe((res) => {
@@ -37,6 +39,7 @@ export class AppComponent {
   logout(){
     console.log("logout");
     localStorage.removeItem('x-access-token');
+    this.route.navigate([''])
     
   }
 

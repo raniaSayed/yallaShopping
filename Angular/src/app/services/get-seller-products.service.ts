@@ -18,8 +18,11 @@ export class GetSellerProductsService {
     }
   }
 
-  getProductsBySellerId(sellerId){
-    return this.http.get(`https://localhost:9090/products/seller/${sellerId}`, this.headersFactory())//.map(res => res.json());
+  getProductsBySellerId(sellerId,page,limit){
+    return this.http.get(`https://localhost:9090/products/seller/${sellerId}?page=${page}&limit=${limit}`, this.headersFactory())//.map(res => res.json());
+  }
+  getProductsBySellerIdCount(sellerId){
+    return this.http.get(`https://localhost:9090/products/seller/${sellerId}/count`, this.headersFactory())//.map(res => res.json());
   }
 
 }

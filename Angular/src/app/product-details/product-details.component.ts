@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
@@ -18,12 +19,10 @@ export class ProductDetailsComponent implements OnInit {
 	product: any
   inCart: boolean
   product_id: any;
-  avg : Number;
+  avg : any;
   userRate : Number;
-
-
-  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
-   	this.route.params.subscribe(params => {
+  constructor(private route: Router,private AuthService: AuthServiceService, private router: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
+   	this.router.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
           this.product = data;
@@ -87,9 +86,15 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(e){
-  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>{
+    console.log(e)
+    this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe((p)=>{
       this.inCart = true
+    }, err => {
+      if(!err.error.success){
+        this.route.navigate(['users/login'])
+      }
     })
   }
+
 
 }

@@ -53,7 +53,7 @@ export class UserRegisterFormComponent implements OnInit {
       'origin': "N"
     }).subscribe((res)=> {
       console.log(res)
-      if(res['status']=="ok"){
+      if(res['status']){
         console.log("user created");
         this.route.navigate(['users/login'])
 

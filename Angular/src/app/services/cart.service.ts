@@ -18,7 +18,6 @@ export class CartService {
   }
 
   AddToCart(product){
-    console.log(product)
     return this.http.post('https://localhost:9090/users/2/cart', JSON.stringify(product), this.headersFactory());
   }
 

@@ -137,8 +137,19 @@ router.get("/:id", function (request, response) {
 });
 
 router.get("/seller/:id", function (request, response) {
-  ProductsModel.getProductsBySellerId(request.params.id, function (err, result) {
+  ProductsModel.getProductsBySellerId(request, function (err, result) {
     if (!err && result.length > 0) {
+      console.log("finding All Products for the seller wirh id: " + request.params.id);
+      response.json(result);
+    } else {
+      response.json(err);
+    }
+  });
+});
+
+router.get("/seller/:id/count", function (request, response) {
+  ProductsModel.getProductsBySellerIdCount(request, function (err, result) {
+    if (!err) {
       console.log("finding All Products for the seller wirh id: " + request.params.id);
       response.json(result);
     } else {
