@@ -107,10 +107,10 @@ router.post("/filter", urlEncodedMid, function(request, response){
 //need to find all the products
 //get request http://localhost:9090/products/id
 //need to find that specific product usind the id in the url...
-router.get("/:id?", function(request, response){
+router.get("/:id", function(request, response){
 
-    if(request.params.id){
-      ProductsModel.getProductById(request.params.id, function(err, result){
+    if(+request.params.id){
+      ProductsModel.getProductById(+request.params.id, function(err, result){
         if(!err){
           console.log("finding Product with id ="+request.params.id);
           response.json(result);
@@ -147,7 +147,7 @@ router.get("/seller/:id", function(request, response) {
 
 //rate..
 
-router.post("/:productID?/rate", urlEncodedMid,function (req, resp) {
+router.post("/:productID/rate", urlEncodedMid,function (req, resp) {
 	RatesModel.rateProduct(req.params.productID,req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})
@@ -183,10 +183,10 @@ router.post("/filter", JSONParsermid, function(request, response){
 
 
 
-router.get("/:productId?/rate", function(request, response){
+router.get("/:productId/rate", function(request, response){
 
-    if(request.params.productId){
-      RatesModel.getRateByUser(request.params.productId, function(err, result){
+    if(+request.params.productId){
+      RatesModel.getRateByUser(+request.params.productId, function(err, result){
         if(!err){
           console.log("finding Product with id ="+request.params.productId);
           response.json(result);
@@ -209,11 +209,13 @@ router.get("/:productId?/rate", function(request, response){
     }
 });
 
-router.get("/:productId?/avg", function(request, response){
+router.get("/:productId/avg", function(request, response){
 
-    if(request.params.productId){
-      RatesModel.getAvgRates(request.params.productId, function(err, result){
+    if(+request.params.productId){
+      RatesModel.getAvgRates(+request.params.productId, function(err, result){
         if(!err){
+          console.log("HELOO");
+          console.log(result);
           // console.log("finding Product with id ="+request.params.productId);
 					// console.log(result[0].average);
           response.json(Math.round(result[0].average));
