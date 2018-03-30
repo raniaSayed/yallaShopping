@@ -1,12 +1,9 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-
-
 // rates schema
-
 var rates = new Schema({
-  product_id: {
+  prodId: {
     type: Number,
     required: true,
     ref: "products"
@@ -16,33 +13,32 @@ var rates = new Schema({
     type: Number,
     enum: [1, 2, 3, 4, 5]
   },
-  user_id: {
+  userId: {
     type: Number,
-    ref: "sellers"
+    ref: "users"
   }
 });
 
 // rates plugins
 rates.plugin(autoIncrement.plugin, 'rates');
-
 mongoose.model("rates", rates);
 
 //ya Menna noteee el ocject ahoo
 var RatesModel = {};
-
 RatesModel.model = mongoose.model("rates");
 
+RatesModel.rateProduct = function (prodId, rate, callback) {
 
-RatesModel.rateProduct = function (product_id, data, callback) {
-  var user_id = 6;
-  data.rate = 2;
+  // from token
+  var userId = 1;
+
   RatesModel.model.update({
-    product_id: product_id,
-    user_id: user_id
+    prodId: prodId,
+    userId: userId
   }, {
-    product_id: product_id,
-    user_id: user_id,
-    rate: data.rate
+    $set: {
+      rate: rate
+    }
   }, {
     upsert: true
   }, (err, doc) => {
@@ -52,38 +48,40 @@ RatesModel.rateProduct = function (product_id, data, callback) {
 }
 
 
-RatesModel.getRateByUser = function (product_id, callback) {
-  var user_id = 2;
+RatesModel.getRateByUser = function (prodId, callback) {
+
+  // from token
+  var userId = 0;
 
   RatesModel.model.findOne({
-    product_id: product_id,
-    user_id: user_id
-  }).populate("user_id").exec(function (err, result) {
+    prodId: prodId,
+    userId: userId
+  }, function (err, result) {
     callback(err, result);
   });
 }
 
-RatesModel.getAvgRates = function (product_id, callback) {
+RatesModel.getAvgRates = function (prodId, callback) {
   // var user_id=3;
 
   RatesModel.model.aggregate([{
       $match: {
-        product_id: product_id
+        prodId: prodId
       }
     },
     {
       $group: {
-        _id: product_id,
+        _id: prodId,
         count: {
           $sum: 1
         },
         average: {
-          "$avg": "$rate"
+          $avg: "$rate"
         }
       }
     }
   ], function (err, result) {
-    callback(err, result);
+    callback(err, result[0]);
   });
 }
 

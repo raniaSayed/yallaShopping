@@ -56,17 +56,6 @@ router.delete("/:id", function (req, resp) {
   })
 })
 
-router.get("/rates/", function (req, response) {
-  RatesModel.getAllRate(function (err, result) {
-    if (!err && result.length > 0) {
-      console.log("finding All Products");
-      response.json(result);
-    } else {
-      response.json(err);
-    }
-  });
-});
-
 
 router.get("/", function (req, response) {
   ProductsModel.getAllProducts(req, function (err, result) {
@@ -150,9 +139,9 @@ router.get("/seller/:id", function (request, response) {
 });
 
 //rate..
-
-router.post("/:productID/rate", urlEncodedMid, function (req, resp) {
-  RatesModel.rateProduct(req.params.productID, req.body, (err, result) => {
+// OK
+router.post("/:productID/rate", JSONParsermid, function (req, resp) {
+  RatesModel.rateProduct(req.params.productID, req.body.rate, (err, result) => {
     if (!err) {
       resp.json({
         status: "ok"
@@ -160,11 +149,8 @@ router.post("/:productID/rate", urlEncodedMid, function (req, resp) {
     } else {
       resp.json(err);
     }
-  })
-  // console.log(req.body.rate);
-  // resp.send("ok");
-
-})
+  });
+});
 
 router.post("/filter", JSONParsermid, function (request, response) {
   // var subcatArr = Array();
@@ -204,54 +190,45 @@ router.post("/filter/count", JSONParsermid, function (request, response) {
 //need to find that specific product usind the id in the url...
 
 
-
+// ok
 router.get("/:productId/rate", function (request, response) {
 
-  if (+request.params.productId) {
-    RatesModel.getRateByUser(+request.params.productId, function (err, result) {
-      if (!err) {
-        console.log("finding Product with id =" + request.params.productId);
-        response.json(result);
-      } else {
-        response.json(err);
-      }
-    });
-  } else {
-    RatesModel.getAllRate(function (err, result) {
-      if (!err && result.length > 0) {
-        console.log("finding All Products");
-        response.json(result);
-      } else {
-        response.json(err);
-      }
-    });
-  }
+  RatesModel.getRateByUser(+request.params.productId, function (err, result) {
+    if (!err) {
+      console.log("finding Product with id =" + request.params.productId);
+      response.json({
+        status: "ok",
+        rate: result.rate
+      });
+    } else {
+      response.json(err);
+    }
+  });
 });
+
 
 router.get("/:productId/avg", function (request, response) {
 
-  if (+request.params.productId) {
-    RatesModel.getAvgRates(+request.params.productId, function (err, result) {
-      if (!err) {
-        console.log("HELOO");
-        console.log(result);
-        // console.log("finding Product with id ="+request.params.productId);
-        // console.log(result[0].average);
-        response.json(Math.round(result[0].average));
+  RatesModel.getAvgRates(+request.params.productId, function (err, result) {
+    if (!err) {
+      console.log("HELOO");
+      console.log(result);
+      // console.log("finding Product with id ="+request.params.productId);
+      // console.log(result[0].average);
+      if (result) {
+        response.json({
+          status: "ok",
+          rate: Math.round(result.average)
+        });
       } else {
-        response.json(err);
+        response.json({
+          status: "failure"
+        });
       }
-    });
-  } else {
-    RatesModel.getRate(function (err, result) {
-      if (!err && result.length > 0) {
-        console.log("finding All Products");
-        response.json(result);
-      } else {
-        response.json(err);
-      }
-    });
-  }
+    } else {
+      response.json(err);
+    }
+  });
 });
 
 //just for rate testing..
