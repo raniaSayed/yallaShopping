@@ -45,6 +45,21 @@ router.get("/sellers/:id", [authMid, sellerAuthMid],(req, resp) =>{
     });
 });
 
+router.get("/sellers/:id/count", function (req, resp) {
+  orderModel.model.find({
+      status: "ordered"
+    })
+   .count()
+    .exec(function (err, res) {
+      if (!err) {
+       
+        resp.json(res);
+      } else {
+        resp.json(err);
+      }
+    });
+});
+
 // change order status route
 router.put("/", [authMid, sellerAuthMid, JSONParsermid],  (req, resp) =>{
   orderModel.model.update({
@@ -56,7 +71,7 @@ router.put("/", [authMid, sellerAuthMid, JSONParsermid],  (req, resp) =>{
   },  (err, doc) =>{
     if (!err) {
       resp.json({
-        status: "ok"
+        status: true
       })
     } else {
       resp.json(err);
@@ -84,7 +99,8 @@ router.post("/", JSONParsermid,  (req, resp) =>{
   var product = productModel.model.findOne({
     _id: req.body.prodId
   },  (error, productDoc) =>{
-    if (!error) {
+
+    if (!error && productDoc) {
       if (productDoc.stock == 0) {
         resp.json({
           status: "failure",
@@ -115,7 +131,7 @@ router.post("/", JSONParsermid,  (req, resp) =>{
               }
             });
             resp.json({
-              status: "ok"
+              status: true
             })
           } else {
             resp.json(err);
