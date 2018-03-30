@@ -10,7 +10,7 @@ export class RateService {
   constructor(private http: HttpClient) { }
 
   sendDataToServer(id){
-    // console.log(id);
+    console.log(id);
 
     // return userData;
     const httpOptions = {
