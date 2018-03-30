@@ -228,7 +228,7 @@ router.get("/:productId/rate", function (request, response) {
   }
 });
 
-router.get("/:productId?/avg", function (request, response) {
+router.get("/:productId/avg", function (request, response) {
 
   if (+request.params.productId) {
     RatesModel.getAvgRates(+request.params.productId, function (err, result) {
@@ -237,7 +237,7 @@ router.get("/:productId?/avg", function (request, response) {
         console.log(result);
         // console.log("finding Product with id ="+request.params.productId);
         // console.log(result[0].average);
-        response.json(Math.round(result[0].average));
+        // response.json(Math.round(result[0].average));
       } else {
         response.json(err);
       }

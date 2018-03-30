@@ -28,7 +28,7 @@
       <button *ngIf="cart.length > 0" type="button" class="btn btn-success" (click)="checkOut($event)">Checkout</button>
       <div *ngIf="stockErr" class="alert alert-danger mt-3" role="alert">Some products sotcks have been edited please review your order and checkout</div>
     </div>
-    <div *ngIf="cart.length == 0">
+    <div *ngIf="cart.length == 0 && isLoaded">
       <div class="alert alert-danger" role="alert">You have't added any product to your cart</div>
     </div>
   </div>
