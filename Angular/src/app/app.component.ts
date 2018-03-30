@@ -12,6 +12,7 @@ import { CartService } from "./services/cart.service";
 
 })
 export class AppComponent {
+  title: "yalla souq";
 
   isActive:boolean;
   categories:any[];
@@ -32,6 +33,13 @@ export class AppComponent {
     //toggle isActive class
     this.isActive = !this.isActive 
   }
+
+  logout(){
+    console.log("logout");
+    localStorage.removeItem('x-access-token');
+    
+  }
+
   searchSubmit(){
     //console.log("Submiteeeed");
     //send request to get products
