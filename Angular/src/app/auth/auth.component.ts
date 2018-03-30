@@ -20,8 +20,8 @@ export class AuthComponent implements OnInit {
     this.AuthService.checkToken().subscribe(res=>{
       console.log(res)
       if (res['isAuthenticated']) {
-        // this.user = res['user']
-        // this.AuthService.user.next(this.user)
+        this.user = res['user']
+        this.AuthService.user.next(this.user)
         route.navigate([''])
       }else{
         this.isLogged = false
@@ -60,9 +60,9 @@ export class AuthComponent implements OnInit {
       this.AuthService.signIn(value).subscribe(res=>{
       if (res['success']) {
         localStorage.setItem("x-access-token", res['token'])
-        // this.user = res['user']
-        // this.AuthService.user.next(this.user)
-        // console.log(this.AuthService.currentUser.subscribe(p=>console.log(p)))
+        this.user = res['user']
+        this.AuthService.user.next(this.user)
+        console.log(this.AuthService.currentUser.subscribe(p=>console.log(p)))
         this.route.navigate([''])
       }else{
         this.signInError = true

@@ -33,8 +33,8 @@ export class ProductDetailsComponent implements OnInit {
    	})
 
     this.cartService.getCart().subscribe((cart: any)=>{
-      if (cart.length>0) {
-        cart.forEach(p=>{
+      if (cart.cart.length>0) {
+        cart.cart.forEach(p=>{
           if (p['prodId']['_id']==this.id) {
              this.inCart = true
            }
