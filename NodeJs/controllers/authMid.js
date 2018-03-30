@@ -1,13 +1,13 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config');
 
-module.exports = function (req, res, next) {
+module.exports =  (req, res, next) =>{
     // check header
     var token = req.headers['x-access-token'];
     // decode token
     if (token) {
         // verifies secret and checks exp
-        jwt.verify(token, config.jwtSecret, function (err, decoded) {
+        jwt.verify(token, config.jwtSecret,  (err, decoded) =>{
             if (err) {
                 return res.json({
                     success: false,
