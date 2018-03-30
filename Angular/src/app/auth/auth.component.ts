@@ -38,7 +38,7 @@ export class AuthComponent implements OnInit {
       this.socialAuthService.signIn(socialPlatformProvider).then(
         (userData) => {
           this.AuthService.getUserToken(userData).subscribe((res)=>{
-            localStorage.setItem("x-access-token", res.token);
+            // localStorage.setItem("x-access-token", res.token);
             console.log(res)})
           // console.log(socialPlatform+" sign in data : " , userData);
 

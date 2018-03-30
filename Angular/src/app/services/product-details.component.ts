@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
+import {RatingModule} from "ngx-rating";
+import { RateService } from "../services/rate.service";
 
 
 
@@ -15,13 +17,13 @@ export class ProductDetailsComponent implements OnInit {
 	id: Number;
 	product: any
 
-  constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
+  constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService, private rateService : RateService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
           this.product = data;
           console.log(this.product);
-          
+
         })
    	})
   }
