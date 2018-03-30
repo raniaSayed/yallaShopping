@@ -14,8 +14,9 @@ var fileUploadMid = multer({
 //adding the new exported ProductsModel....
 var ProductsModel = require("../models/products");
 var RatesModel = require("../models/rates");
-var authMid = require('./authMid')
-var userAuthMid = require('./userAuthMid')
+var authMid = require('./authMid');
+var userAuthMid = require('./userAuthMid');
+var sellerAuthMid = require('./sellerAuthMid');
 
 
 //seraching the products...
@@ -46,7 +47,7 @@ router.get("/search/count", function (request, response) {
   });
 });
 
-router.delete("/:id", function (req, resp) {
+router.delete("/:id", [authMid, sellerAuthMid],function (req, resp) {
   ProductsModel.deleteProduct(req.params.id, (err, result) => {
     if (!err) {
       resp.json({
@@ -74,7 +75,7 @@ router.get("/", function (req, response) {
 })
 
 
-router.post("/", JSONParsermid, function (req, resp) {
+router.post("/", [authMid, sellerAuthMid, JSONParsermid], function (req, resp) {
   ProductsModel.addProduct(req.body, (err, result) => {
     if (!err) {
       resp.json({
@@ -97,7 +98,7 @@ router.get("/top", function(request, response){
   })
 })
 
-router.put("/:id", JSONParsermid, (req, resp) => {
+router.put("/:id", [authMid, sellerAuthMid, JSONParsermid], (req, resp) => {
   ProductsModel.editProduct(req.params.id, req.body, (err, result) => {
     if (!err) {
       resp.json({
@@ -138,7 +139,7 @@ router.get("/:id", function (request, response) {
   }
 });
 
-router.get("/seller/:id", function (request, response) {
+router.get("/seller/:id", [authMid, sellerAuthMid], function (request, response) {
   ProductsModel.getProductsBySellerId(request, function (err, result) {
     if (!err && result.length > 0) {
       console.log("finding All Products for the seller wirh id: " + request.params.id);
@@ -149,10 +150,10 @@ router.get("/seller/:id", function (request, response) {
   });
 });
 
-router.get("/seller/:id/count", function (request, response) {
+router.get("/seller/:id/count", [authMid, sellerAuthMid], function (request, response) {
   ProductsModel.getProductsBySellerIdCount(request, function (err, result) {
     if (!err) {
-      console.log("finding All Products for the seller wirh id: " + request.params.id);
+      console.log("finding All Products for the seller wirh id: " + +request.params.id);
       response.json(result);
     } else {
       response.json(err);
@@ -162,7 +163,7 @@ router.get("/seller/:id/count", function (request, response) {
 
 //rate..
 // OK
-router.post("/:productID/rate", JSONParsermid, function (req, resp) {
+router.post("/:productID/rate", [authMid, userAuthMid], function (req, resp) {
   RatesModel.rateProduct(+req.params.productID, +req.decoded.id, req.body.rate, (err, result) => {
     if (!err) {
       resp.json({
@@ -213,8 +214,7 @@ router.post("/filter/count", JSONParsermid, function (request, response) {
 
 
 // ok
-router.get("/:productId/rate", [authMid],function (request, response) {
-
+router.get("/:productId/rate", [authMid, userAuthMid],function (request, response) {
   RatesModel.getRateByUser(+request.params.productId, request.decoded.id, function (err, result) {
     if (!err && result) {
       console.log("finding Product with id =" + request.params.productId);
@@ -229,7 +229,7 @@ router.get("/:productId/rate", [authMid],function (request, response) {
 });
 
 
-router.get("/:productId/avg", function (request, response) {
+router.get("/:productId/avg", [authMid, userAuthMid], function (request, response) {
 
   RatesModel.getAvgRates(+request.params.productId, function (err, result) {
     if (!err) {
