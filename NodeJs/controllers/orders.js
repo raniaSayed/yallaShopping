@@ -147,5 +147,29 @@ router.get("/:id/seller", function (req, resp) {
   });
 });
 
+router.post('/test', JSONParsermid,(req, resp)=>{
+  saveOrder(req.body, (i, j, call)=>{call()}, ()=>{resp.json({"a":"done"})})
+}) 
 
+var saveOrder = (data, processData, done)=>{
+  if (data.length > 0) {
+    var loop = (data, i, processData, done)=>{
+      processData(data[i], i, ()=>{
+        console.log(data[i])
+        var order = new orderModel.model(data[i])
+        order.save((err, res)=>{
+          console.log(err, res, "aaaaa")
+          if (++i < data.length) {
+            loop(data, i, processData, done);
+          } else {
+            done();
+          }
+        })
+      });
+    };
+    loop(data, 0, processData, done);
+  } else {
+    done();
+  }
+}
 module.exports = router;

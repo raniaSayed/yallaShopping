@@ -113,7 +113,7 @@ router.post("/:id/rate", JSONParsermid,function (req, resp) {
 
 })
 
-router.post("/filter", urlEncodedMid, function(request, response){
+router.post("/filter", JSONParsermid, function(request, response){
   // var subcatArr = Array();
   // subcatArr.push(request.body.subcat1);
   // subcatArr.push(request.body.subcat2);
