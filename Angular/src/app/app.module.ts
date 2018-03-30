@@ -1,6 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http';
 // import {RatingModule} from "ngx-rating";
@@ -10,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UICarouselModule } from "ui-carousel"
 import {Http} from '@angular/http';
-
+import { NgxSlideshowModule } from 'ngx-slideshow';
 import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
@@ -140,6 +142,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     UICarouselModule,
+    NgxSlideshowModule.forRoot(),
+    NgbModule.forRoot(),
     // RatingModule
     ],
 
@@ -160,6 +164,7 @@ const appRoutes: Routes = [
     OrdersSellerService,
     RateService,
     ForgetPasswordService,
+    NgbCarousel,
     ],
   bootstrap: [AppComponent]
 })
