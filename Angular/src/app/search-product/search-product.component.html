@@ -8,9 +8,9 @@
     <div class="filter-list">
       <div *ngFor="let subcategory of category.subcategories">
         <div class="filter-checkbox">
-          <input id="subcategory-{{category.name}}" name="subcategory-{{category.name}}" [checked]="categoryNames[subcategory]" (change)="change(subcategory)"
+          <input id="{{subcategory}}-{{category.name}}" name="subcategory-{{category.name}}" [checked]="categoryNames[subcategory]" (change)="change(subcategory)"
             type="checkbox">
-          <label for="subcategory-{{category.name}}">{{subcategory}}</label>
+          <label for="{{subcategory}}-{{category.name}}">{{subcategory}}</label>
         </div>
       </div>
     </div>
@@ -39,7 +39,10 @@
 </ul-->
 
 <!--results-->
+
 <div *ngIf="!matchedProducts"><h2>Sorry, No Products Matched Your Search</h2></div>
+Pages:
+<li style="display: inline;"  *ngFor="let i  of pages"><button name="pageNumber" (click)="changePageNumber(i)" href="#">{{i}}</button> </li>
 <div *ngFor="let product of matchedProducts" class="search-content row m-1">
 
   <div class="col-sm-3">

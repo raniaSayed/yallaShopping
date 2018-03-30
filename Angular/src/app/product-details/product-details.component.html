@@ -1,8 +1,12 @@
 <div class="container" >
     <div class="row" >
+
+
+    </div>
+    <div class="row" >
         <div class="col-6">
             <h1> <strong>{{ product?.name }}</strong></h1>
-            <h6>by: <a routerLink="/products/seller/{{product?.seller_id?._id}}">{{ product?.seller_id?.name }}</a> </h6>            
+            <h6>by: <a routerLink="/products/seller/{{product?.seller_id?._id}}">{{ product?.seller_id?.name }}</a> </h6>
             <img width="100%" src="{{ product?.picture }}" alt="">
         </div>
         <div class="col-6">
@@ -10,7 +14,7 @@
             <h5>
                 <strong>Description:</strong>
                 <p>
-                    {{ product?.desc}} 
+                    {{ product?.desc}}
                 </p>
             </h5>
             <h6>
@@ -22,10 +26,13 @@
                 <strong>Stock:</strong>
                 <span>{{ product?.stock>0 ? product.stock : 'Out of stock'}}</span>
             </h5>
+            <h5>
+              <strong>Available QTY:</strong>
+            </h5>
             <br>
         <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
         <button *ngIf="inCart" type="button" class="btn btn-success btn-lg  mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
         </div>
-        
+
     </div>
 </div>

@@ -4,6 +4,7 @@ var authMid = require("./controllers/authMid")
 var server = express()
 var path = require('path')
 var config = require('./config')
+const paginate = require('express-paginate')
 
 var https = require('https');
 var options = {
@@ -28,6 +29,9 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 
 // server.use(authMid);
 
+//make pagination
+server.use(paginate.middleware(5,10))
+
 var authRouter = require("./controllers/auth")
 server.use("/auth", authRouter)
 
@@ -46,8 +50,8 @@ server.use("/orders", ordersRouter)
 var categoriesRouter = require("./controllers/categories")
 server.use("/categories", categoriesRouter)
 
-var ratesRouter = require("./controllers/rates")
-server.use("/rates", ratesRouter)
+// var ratesRouter = require("./controllers/rates")
+// server.use("/rates", ratesRouter)
 
 httpsServer.listen("9090", function () {
   console.log("Starting in https server at port 9090..")

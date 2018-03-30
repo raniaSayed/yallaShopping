@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
+// import {RatingModule} from "ngx-rating";
+import { RateService } from "../services/rate.service";
 import { AuthServiceService } from '../auth-service.service';
 
 
@@ -16,12 +18,16 @@ export class ProductDetailsComponent implements OnInit {
 	id: Number
 	product: any
   inCart: boolean
-
-  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
+  product_id: any;
+  avg : any;
+  
+  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
           this.product = data;
+          console.log(this.product);
+
         })
         this.AuthService.currentUser.subscribe(p=>console.log(p))
    	})
@@ -31,13 +37,25 @@ export class ProductDetailsComponent implements OnInit {
         cart.cart.forEach(p=>{
           if (p['prodId']['_id']==this.id) {
              this.inCart = true
-           } 
+           }
         })
       }
     })
   }
 
+  getAvgRate(){
+    this.rateService.sendDataToServer(this.id).subscribe((res)=> {
+      this.avg=res;
+       // console.log(res);
+       console.log(this.avg);
+
+});
+
+  }
+
+
   ngOnInit() {
+    this.getAvgRate();
   }
 
   addToCart(e){

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AddProductService } from '../add-product.service';
 import { CategoryService } from '../services/category.service';
 import { ArrayType } from '@angular/compiler/src/output/output_ast';
+import { Router  } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -23,7 +24,7 @@ export class AddProductComponent implements OnInit {
   private categoriesName: any;
   private subcategories: any;
 
-  constructor(private catService: CategoryService,private AddProductService : AddProductService) {
+  constructor(private router:Router, private catService: CategoryService,private AddProductService : AddProductService) {
     this.getCats();
    }
 
@@ -44,9 +45,7 @@ export class AddProductComponent implements OnInit {
       })
   }
 
-  setSelectedCat(){
-    console.log("k");
-    
+  setSelectedCat(){   
     this.categoriesName.forEach(cat => {
       if(cat._id == this.categoryId){
         this.subcategories = cat.subcategories; 
@@ -67,7 +66,9 @@ export class AddProductComponent implements OnInit {
       'seller_id': this.seller_id,
     }).subscribe((res)=> {
       console.log("hi")
-       console.log(res)
+      if(res['status']=="ok"){
+        this.router.navigate([`/categories/${this.categoryId}/${this.subcategory}`])
+      }
 });
 
   }
