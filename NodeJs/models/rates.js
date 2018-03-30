@@ -27,10 +27,10 @@ mongoose.model("rates", rates);
 var RatesModel = {};
 RatesModel.model = mongoose.model("rates");
 
-RatesModel.rateProduct = function (prodId, rate, callback) {
+RatesModel.rateProduct = function (prodId,userId, rate, callback) {
 
   // from token
-  var userId = 2;
+  // var userId = 2;
 
   RatesModel.model.update({
     prodId: prodId,
@@ -48,10 +48,10 @@ RatesModel.rateProduct = function (prodId, rate, callback) {
 }
 
 
-RatesModel.getRateByUser = function (prodId, callback) {
+RatesModel.getRateByUser = function (prodId, userId, callback) {
 
   // from token
-  var userId = 2;
+  // var userId = 2;
 
   RatesModel.model.findOne({
     prodId: prodId,

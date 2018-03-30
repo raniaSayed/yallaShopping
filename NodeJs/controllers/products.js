@@ -161,7 +161,7 @@ router.get("/seller/:id/count", function (request, response) {
 //rate..
 // OK
 router.post("/:productID/rate", JSONParsermid, function (req, resp) {
-  RatesModel.rateProduct(req.params.productID, req.body.rate, (err, result) => {
+  RatesModel.rateProduct(+req.params.productID, +req.decoded.id, req.body.rate, (err, result) => {
     if (!err) {
       resp.json({
         status: "ok"
@@ -213,7 +213,7 @@ router.post("/filter/count", JSONParsermid, function (request, response) {
 // ok
 router.get("/:productId/rate", function (request, response) {
 
-  RatesModel.getRateByUser(+request.params.productId, function (err, result) {
+  RatesModel.getRateByUser(+request.params.productId, req.decoded.id, function (err, result) {
     if (!err) {
       console.log("finding Product with id =" + request.params.productId);
       response.json({
