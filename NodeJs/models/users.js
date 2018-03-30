@@ -92,7 +92,7 @@ UserModel.addToCart = (Id, productToAdd, callback)=>{
     /* send data as
     {"prodId":1, "quantity":60}
    */
-  ProductModel.model.findOne({_id:12},(e,r)=>{
+  ProductModel.model.findOne({_id:1},(e,r)=>{
     if (!e && r.stock) {
       UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
           var oldCart = result.cart
