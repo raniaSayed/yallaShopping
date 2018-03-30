@@ -66,12 +66,13 @@ import { UserRegisterFormComponent } from './user-register-form/user-register-fo
 import { SellerRegisterationFormComponent } from './seller-registeration-form/seller-registeration-form.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
+
+
 import { SellerProductsComponent } from './seller-products/seller-products.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { OrdersSellerComponent } from './orders-seller/orders-seller.component';
 import { OrdersSellerService } from './services/orders-seller.service';
 import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-orders-details.component';
-
 
 import { SearchProductComponent } from './search-product/search-product.component';
 
@@ -81,10 +82,10 @@ const appRoutes: Routes = [
   { path: 'sellers/registeration', component: SellerRegisterationFormComponent },
   { path: 'products/add', component: AddProductComponent },
   { path: 'products/search', component: SearchProductComponent },
-  
+
   { path: 'products/edit/:id', component: EditProductComponent},
-  { path: 'products/:id', component: ProductDetailsComponent },
-  
+  // { path: 'products/:id', component: ProductDetailsComponent },
+
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },

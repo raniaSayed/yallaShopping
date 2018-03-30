@@ -16,7 +16,7 @@ import { RateService } from "../services/rate.service";
 export class ProductDetailsComponent implements OnInit {
 	id: Number;
 	product: any
-
+  product_id: Number;
   constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService, private rateService : RateService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
@@ -28,7 +28,16 @@ export class ProductDetailsComponent implements OnInit {
    	})
   }
 
+  getAvgRate(){
+
+    this.product_id=2;
+    this.rateService.sendDataToServer(this.product_id)
+
+  }
+
+
   ngOnInit() {
+    this.getAvgRate();
   }
 
   addToCart(e){
