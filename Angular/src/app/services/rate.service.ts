@@ -10,15 +10,14 @@ export class RateService {
   constructor(private http: HttpClient) { }
 
   sendDataToServer(id){
-    console.log(id);
+    // console.log(id);
 
     // return userData;
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type':  'application/json'
-  //     })
-  //   }
-  //   return this.http.get(`https://localhost:9090/products/${id}/avg`, httpOptions);
-  // }
-}
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.get(`https://localhost:9090/products/${id}/avg`, httpOptions);
+  }
 }

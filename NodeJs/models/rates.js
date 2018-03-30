@@ -53,7 +53,7 @@ RatesModel.getRateByUser = function(product_id, callback){
 }
 
 RatesModel.getAvgRates = function(product_id, callback){
-  var user_id=3;
+  // var user_id=3;
 
   RatesModel.model.aggregate([
   { $match: { product_id: product_id }},

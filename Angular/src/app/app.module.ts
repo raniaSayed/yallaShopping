@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpModule } from '@angular/http';
+// import {RatingModule} from "ngx-rating";
 
 //george ...
 import { FormsModule } from '@angular/forms';
@@ -55,7 +56,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { LimitToPipe } from  './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
-
+import { RateService } from './services/rate.service'
 import { SubCategoryProductsComponent } from './sub-category-products/sub-category-products.component';
 import { SubCategoryProductService } from './services/sub-category-product.service';
 import { ProductDetailsService } from './services/product-details.service';
@@ -84,7 +85,7 @@ const appRoutes: Routes = [
   { path: 'products/search', component: SearchProductComponent },
 
   { path: 'products/edit/:id', component: EditProductComponent},
-  // { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
 
   { path: 'products/seller/:id', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
@@ -130,6 +131,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     UICarouselModule,
+    // RatingModule
     ],
 
   providers: [
@@ -147,6 +149,7 @@ const appRoutes: Routes = [
     CartService,
     GetSellerProductsService,
     OrdersSellerService,
+    RateService
     ],
   bootstrap: [AppComponent]
 })

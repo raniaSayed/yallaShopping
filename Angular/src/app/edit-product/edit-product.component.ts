@@ -27,7 +27,7 @@ private serverErrors: string;
 
   getProduct(){
 
-    this.product_id=1;
+    this.product_id=2;
     this.editProductService.sendDataToServer(this.product_id).subscribe((res)=> {
       this.productData=res[0];
        // console.log(res);
