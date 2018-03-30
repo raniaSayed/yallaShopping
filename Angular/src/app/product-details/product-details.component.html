@@ -26,9 +26,6 @@
                 <strong>Stock:</strong>
                 <span>{{ product?.stock>0 ? product.stock : 'Out of stock'}}</span>
             </h5>
-            <h5>
-              <strong>Available QTY:</strong>
-            </h5>
             <br>
         <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
         <button *ngIf="inCart" type="button" class="btn btn-success btn-lg  mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>

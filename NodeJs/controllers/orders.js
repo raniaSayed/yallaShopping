@@ -68,7 +68,7 @@ router.put("/", [authMid, sellerAuthMid, JSONParsermid],  (req, resp) =>{
 router.get("/", [authMid, userAuthMid], (req, resp) =>{
   ///change id to session userId
   var id = 1;
-  orderModel.viewUserAll(id, (err, result) => {
+  orderModel.viewUserAll(req.decoded.id, (err, result) => {
     if (!err) {
       resp.json(result);
     } else {
