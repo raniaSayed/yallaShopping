@@ -35,7 +35,7 @@ export class OrdersSellerComponent implements OnInit {
         this.ordersSeller = ordersSeller;
         this.ordersSellerService.getOrdersOfSellerCount(this.id).subscribe(
           count => {
-            this.totalCount = count;
+            this.totalCount = parseInt(count.toString());
             var pageCount = this.totalCount/this.limit;
             this.pages = Array(pageCount).fill(1).map((x, i) => i + 1); // [1,2,3,4,5]
 
