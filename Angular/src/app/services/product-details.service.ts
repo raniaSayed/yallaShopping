@@ -19,7 +19,7 @@ export class ProductDetailsService {
   }
 
   getProduct(id){
-	  return this.http.get(`http://localhost:9090/products/${id}`)
+	  return this.http.get(`https://localhost:9090/products/${id}`)
   }  
   // addProduct(id){
 	//   return this.http.get(`http://localhost:9090/products/${id}`)

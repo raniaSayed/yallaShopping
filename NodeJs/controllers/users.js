@@ -65,12 +65,11 @@ router.delete("/:id",function (req, resp) {
 
 
 router.get("/:id/cart",(req, resp)=>{
-	UserModel.model.find({_id:req.params.id},{cart:true, _id:false}).populate('cart.prodId').exec((err, res)=>{
-		if (!err && res.length>0) {
-			resp.json(res[0].cart)
-		}
-		else {
-			resp.json([])
+	UserModel.getCart(req.params.id, (err, result) => {
+		if(!err) {
+			resp.json(result);
+		} else {
+			resp.json(err);
 		}
 	})
 })
@@ -100,7 +99,7 @@ router.post("/:id/cart",JSONParsermid,(req, resp)=>{
 router.put("/:id/cart",JSONParsermid,(req, resp)=>{
 	UserModel.editCart(req.params.id , req.body, (err, result)=>{
 		if (!err) {
-			resp.json({status:"ok"})
+			resp.json(result)
 		}
 		else {
 			resp.json(err)

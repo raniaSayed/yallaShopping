@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PatternValidator, NgForm } from '@angular/forms';
 import { SellerRegisterationServiceService } from '../services/seller-registeration-service.service';
-import { Router  } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seller-registeration-form',
@@ -21,45 +21,39 @@ export class SellerRegisterationFormComponent implements OnInit {
 
   constructor(private route: Router, private sellerRegisterationService: SellerRegisterationServiceService) { }
 
-  register(){
+  register() {
     this.sellerRegisterationService.sendDataToServer({
       'name': this.name,
       'email': this.email,
       'password': this.password,
       'address': this.address,
       'national_id': this.national_id
-    }).subscribe((res)=>{
-      console.log(res)
-      if(res['status']=="ok"){
-        console.log("user created");
+    }).subscribe((res) => {
+      if (res['status'] == "ok") {
         this.route.navigate(['users/login'])
-      
-      }else{
-        console.log("error");
-        console.log(res['errors']);
-        if(res['errors']){
-          if(res['errors'].email){
-            this.serverErrors = res['errors'].email.message+" ";
+      } else {
+        if (res['errors']) {
+          if (res['errors'].email) {
+            this.serverErrors = res['errors'].email.message + " ";
           }
-          if(res['errors'].password){
-            this.serverErrors += res['errors'].password.message+" ";
+          if (res['errors'].password) {
+            this.serverErrors += res['errors'].password.message + " ";
           }
-          if(res['errors'].name){
+          if (res['errors'].name) {
             this.serverErrors += res['errors'].name.message;
           }
-        }else{
-            this.serverErrors = res['errmsg'];
+        } else {
+          this.serverErrors = res['errmsg'];
         }
-        
+
       }
     })
   }
-  submitIt(){
-    console.log("submitFn");
-    if(this.password!=this.confirmPassword || this.password==""){
+  submitIt() {
+    if (this.password != this.confirmPassword || this.password == "") {
       //
     }
-    else{
+    else {
       this.register();
     }
   }

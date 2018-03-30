@@ -14,7 +14,7 @@ export class GetSellerProductsService {
       'Content-Type':  'application/json'
     });
 
-    return this.http.get(`http://localhost:9090/products/seller/${sellerId}`)//.map(res => res.json());
+    return this.http.get(`https://localhost:9090/products/seller/${sellerId}`)//.map(res => res.json());
   }
 
 }

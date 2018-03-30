@@ -22,7 +22,7 @@ export class OrdersSellerService {
   }
 
   changeOrderStatus(id, status) {
-    return this.http.patch('https://localhost:9090/orders', {
+    return this.http.put('https://localhost:9090/orders', {
       id,
       status
     });

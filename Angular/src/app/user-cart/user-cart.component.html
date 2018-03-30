@@ -2,7 +2,7 @@
   <div class="row">
 
     <div class="col-10">
-      <div *ngFor="let p of cart; let i = index" class="button card float-left m-2" style="width: 18rem; text-align:center; cursor: pointer;" (input)=editCart($event)>
+      <div *ngFor="let p of cart; let i = index" class="button card float-left m-2" style="width: 18rem; text-align:center; cursor: pointer;" (input)="editCart($event, i)">
         <div routerLink="/products/{{ p.prodId._id }}">  
           <div class="card-header">
             <h3>{{p.prodId.name}}</h3>
@@ -10,17 +10,26 @@
           <img class="card-img-top" src="{{ p.prodId.picture | safeHtml}}" alt="{{p.prodId.name}}" >
           <div class="card-body">
             <p class="card-text">{{p.prodId.desc }}</p>
+            <p class="card-text"><strong>Stock:</strong> {{p.prodId.stock }}</p>
           </div>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><input [(ngModel)]="cart[i].quantity" type="number" min="1" max="{{p.prodId.stock}}"></li>
+          <li class="list-group-item">
+            <input  type="number" min="1" max="{{p.prodId.stock}}" value="{{cart[i].quantity<=p.prodId.stock?cart[i].quantity:p.prodId.stock}}">
+            <button type="button" class="btn btn-danger float-right" (click)="removeFromCart($event, i)">X</button>
+          </li>
+
           <li class="list-group-item">Price {{p.prodId.price}} LE.</li>
         </ul>
       </div>
     </div>
 
     <div class="col-2">
-      <button type="button" class="btn btn-success" (click)="checkOut($event)">Checkout</button>
+      <button *ngIf="cart.length > 0" type="button" class="btn btn-success" (click)="checkOut($event)">Checkout</button>
+      <div *ngIf="stockErr" class="alert alert-danger mt-3" role="alert">Some products sotcks have been edited please review your order and checkout</div>
+    </div>
+    <div *ngIf="cart.length == 0">
+      <div class="alert alert-danger" role="alert">You have't added any product to your cart</div>
     </div>
   </div>
 </div>

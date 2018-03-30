@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
+import { AuthServiceService } from '../auth-service.service';
 
 
 
@@ -12,10 +13,11 @@ import { CartService } from "../services/cart.service";
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-	id: Number;
+	id: Number
 	product: any
+  inCart: boolean
 
-  constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
+  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) { 
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
@@ -23,14 +25,26 @@ export class ProductDetailsComponent implements OnInit {
           console.log(this.product);
           
         })
+        this.AuthService.currentUser.subscribe(p=>console.log(p))
    	})
+
+    this.cartService.getCart().subscribe((cart: Array<Object>)=>{
+      cart.forEach(p=>{
+        if (p['prodId']['_id']==this.id) {
+           this.inCart = true
+         } 
+      })
+    })
   }
 
   ngOnInit() {
   }
 
   addToCart(e){
-  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>console.log(p))
+  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>{
+      console.log(p)
+      this.inCart = true
+    })
   }
 
 }

@@ -13,15 +13,15 @@ export class CartService {
   }
 
   AddToCart(product){
-    return this.http.post('http://localhost:9090/users/1/cart', JSON.stringify(product), this.httpOptions);
+    return this.http.post('https://localhost:9090/users/1/cart', JSON.stringify(product), this.httpOptions);
   }
 
   getCart(){
-  	return this.http.get('http://localhost:9090/users/1/cart');
+  	return this.http.get('https://localhost:9090/users/1/cart');
   }
 
   editCart(newCart){
   	// console.log(JSON.stringify(newCart))
-  	return this.http.put('http://localhost:9090/users/1/cart', JSON.stringify(newCart), this.httpOptions);
+  	return this.http.put('https://localhost:9090/users/1/cart', JSON.stringify(newCart), this.httpOptions);
   }
 }

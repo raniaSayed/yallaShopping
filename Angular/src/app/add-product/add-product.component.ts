@@ -34,7 +34,7 @@ export class AddProductComponent implements OnInit {
 
 
   addProduct(){
-    this.seller_id=6;
+    this.seller_id=2;
     this.AddProductService.sendDataToServer({
       'name': this.name,
       'price': this.price,

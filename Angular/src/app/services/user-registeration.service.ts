@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHeaders } from '@angular/common/http';
- 
+
 @Injectable()
 export class UserRegisterationService {
 
@@ -15,7 +15,7 @@ export class UserRegisterationService {
         'Content-Type':  'application/json'
       })
     }
-    return this.http.post('http://localhost:9090/users/', JSON.stringify(userData), httpOptions);
+    return this.http.post('https://localhost:9090/users/', JSON.stringify(userData), httpOptions);
   }
 
 }

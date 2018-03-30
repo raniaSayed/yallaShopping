@@ -3,6 +3,7 @@ require('mongoose-type-email');
 var Schema = mongoose.Schema;
 var product = require('./products.js')
 var encryptPassword = require('../controllers/encryptPassword');
+var ProductModel = require("./products");
 
 // users schema
 var cartItems = new Schema({
@@ -91,32 +92,49 @@ UserModel.addToCart = (Id, productToAdd, callback)=>{
     /* send data as
     {"prodId":1, "quantity":60}
    */
-  UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
-      var oldCart = result.cart
-      var exist = false
-      oldCart.map((p)=>{
-        if (p.prodId == productToAdd.prodId) {
-          p.quantity += 1
-          exist = true
-        }  
+  ProductModel.model.findOne({_id:12},(e,r)=>{
+    if (!e && r.stock) {
+      UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
+          var oldCart = result.cart
+          var exist = false
+          oldCart.map((p)=>{
+            if (p.prodId == productToAdd.prodId && p.quantity+1<=r.stock) {
+              p.quantity += 1
+              exist = true
+            }  
+          })
+          !exist && oldCart.push(productToAdd)
+          console.log(result.cart === oldCart)
+          UserModel.model.update({_id:Id},{cart:oldCart},(err, result)=>{
+              callback(err, result)
+          })
       })
-      !exist && oldCart.push(productToAdd)
-      UserModel.model.update({_id:Id},{cart:oldCart},(err, result)=>{
-          callback(err, result)
-      })
+    }
   })
+
 }
 
 UserModel.getCart = (Id, callback) =>{
-    UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
-      callback(err, result)
-  })
+    UserModel.model.findOne({_id:Id},{_id: false, cart: true}).populate('cart.prodId').exec((err, result)=>{
+      callback(err,result)
+    })
 }
 UserModel.editCart = (Id, cart, callback) =>{
-  console.log(cart)
-    UserModel.model.update({_id:Id},{cart:cart}, (err, result) => {
-      callback(err, result)
-  })
+    UserModel.getCart(Id, (err, r)=>{
+      var updatedCart = r.cart
+
+      cart.map((p)=>{
+        if (p.prodId == updatedCart[cart.indexOf(p)].prodId._id && p.quantity>updatedCart[cart.indexOf(p)].prodId.stock) {
+          p.quantity = updatedCart[cart.indexOf(p)].prodId.stock
+        }  
+      })
+      UserModel.model.update({_id:Id},{cart:cart}, (err, result) => {
+        // UserModel.model.findOne({_id:Id},{_id: false, cart: true}, (err, result) => {
+        //   callback(err, result)
+        // })
+        UserModel.getCart(Id, callback)
+      })
+    })
 }
 
 

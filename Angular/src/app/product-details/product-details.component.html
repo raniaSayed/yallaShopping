@@ -1,8 +1,5 @@
 <div class="container" >
     <div class="row" >
-        
-    </div>
-    <div class="row" >
         <div class="col-6">
             <h1> <strong>{{ product?.name }}</strong></h1>
             <h6>by: <a routerLink="/products/seller/{{product?.seller_id?._id}}">{{ product?.seller_id?.name }}</a> </h6>            
@@ -22,13 +19,12 @@
                 <a routerLink="/categories/{{ product?.category }}/{{ product?.subcategory }}">{{ product?.subcategory }}</a>
             </h6>
             <h5>
-                <strong>Available QTY:</strong>
-                <strong>{{ product?.stock }}</strong>
+                <strong>Stock:</strong>
+                <span>{{ product?.stock>0 ? product.stock : 'Out of stock'}}</span>
             </h5>
         </div>
         <br>
-        <button class="btn btn-success btn-lg btn-block" routerLink="" >
-                Add to cart
-        </button>
+        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg btn-block mt-3" (click)="addToCart($event)" >Add to Cart</button>
+        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg btn-block mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
     </div>
 </div>
