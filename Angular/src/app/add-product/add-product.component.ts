@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddProductService } from '../add-product.service';
+import { CategoryService } from '../services/category.service';
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add-product',
@@ -15,11 +17,15 @@ export class AddProductComponent implements OnInit {
   private description: string;
   private stock: number;
   private picture: any;
-  private category: number;
+  private categoryId: number;
   private subcategory: string;
   private serverErrors: string;
+  private categoriesName: any;
+  private subcategories: any;
 
-  constructor(private AddProductService : AddProductService) { }
+  constructor(private catService: CategoryService,private AddProductService : AddProductService) {
+    this.getCats();
+   }
 
   fileUpload(files){
   console.log(files[0]);
@@ -28,20 +34,35 @@ export class AddProductComponent implements OnInit {
     myReader.readAsDataURL(this.picture);
     myReader.onloadend = (e) => {
     this.picture = myReader.result;
-    console.log(this.picture)
+    // console.log(this.picture)
   }
 }
 
+  getCats(){
+    this.catService.getAllCategoreis().subscribe((res) => {
+        this.categoriesName = res; 
+      })
+  }
+
+  setSelectedCat(){
+    console.log("k");
+    
+    this.categoriesName.forEach(cat => {
+      if(cat._id == this.categoryId){
+        this.subcategories = cat.subcategories; 
+      }
+    });
+  }
 
   addProduct(){
     this.seller_id=2;
     this.AddProductService.sendDataToServer({
       'name': this.name,
       'price': this.price,
-      'description': this.description,
+      'desc': this.description,
       'stock': this.stock,
       'picture': this.picture,
-      'category':this.category,
+      'category':this.categoryId,
       'subcategory': this.subcategory,
       'seller_id': this.seller_id,
     }).subscribe((res)=> {
@@ -54,14 +75,13 @@ export class AddProductComponent implements OnInit {
 
 
   submitIt(){
-     console.log("submitFn");
-
-
+     console.log("submitFn");  
      this.addProduct();
-
   }
 
   ngOnInit() {
   }
+  
+  
 
 }
