@@ -10,7 +10,7 @@
         Product Name:
       </td>
       <td>
-        <input class="form-control" type="text" required name="name" id="name" [(ngModel)] = "productData.name" #uname="ngModel" value = "{{productData.name}}" >
+        <input class="form-control" type="text" required name="name" id="name" [(ngModel)] = "productData.name" #uname="ngModel" value = "{{productData?.name}}" >
       </td>
     </tr>
     <tr>
@@ -18,7 +18,7 @@
         Product Price:
       </td>
       <td>
-        <input class="form-control" type="text" required name="price" id="price" [(ngModel)]="productData.price" #uprice="ngModel" value= "{{productData.price}}">
+        <input class="form-control" type="text" required name="price" id="price" [(ngModel)]="productData.price" #uprice="ngModel" value= "{{productData?.price}}">
       </td>
     </tr>
     <tr>
@@ -26,7 +26,8 @@
         Product Description:
       </td>
       <td>
-        <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="productData.description" #udescriptoin="ngModel" value= "{{productData.description}}">
+        <textarea class="form-control"  name="description" id="description" [(ngModel)]="productData.desc" #udescriptoin="ngModel" value= "{{productData?.desc}}" cols="30" rows="10"></textarea>
+        <!-- <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="productData.desc" #udescriptoin="ngModel" value= "{{productData?.desc}}"> -->
       </td>
     </tr>
     <tr>
@@ -34,7 +35,7 @@
         Stock Quantity:
       </td>
       <td>
-        <input class="form-control" type="text" required name="stock" id="stock" [(ngModel)]="productData.stock" #ustock="ngModel" value = "{{productData.stock}}">
+        <input class="form-control" type="text" required name="stock" id="stock" [(ngModel)]="productData.stock" #ustock="ngModel" value = "{{productData?.stock}}">
       </td>
     </tr>
     <tr>
@@ -42,7 +43,7 @@
         Category:
       </td>
       <td>
-        <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="productData.category" #ucategory="ngModel" value="{{productData.category}}">
+        <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="productData.category" #ucategory="ngModel" value="{{productData?.category}}">
       </td>
     </tr>
     <tr>
@@ -50,7 +51,7 @@
         Sub_Category:
       </td>
       <td>
-        <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="productData.subcategory" #usubcategory="ngModel" value="{{productData.subcategory}}">
+        <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="productData.subcategory" #usubcategory="ngModel" value="{{productData?.subcategory}}">
       </td>
     </tr>
     <tr>

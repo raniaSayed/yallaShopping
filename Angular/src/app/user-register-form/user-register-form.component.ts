@@ -26,6 +26,8 @@ export class UserRegisterFormComponent implements OnInit {
     this.AuthService.checkToken().subscribe(res=>{
       if (res['isAuthenticated']) {
         route.navigate([''])
+        this.isLogged = true
+      }else{
         this.isLogged = false
       }
     })

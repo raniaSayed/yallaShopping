@@ -50,8 +50,8 @@ server.use("/orders", ordersRouter)
 var categoriesRouter = require("./controllers/categories")
 server.use("/categories", categoriesRouter)
 
-var ratesRouter = require("./controllers/rates")
-server.use("/rates", ratesRouter)
+// var ratesRouter = require("./controllers/rates")
+// server.use("/rates", ratesRouter)
 
 httpsServer.listen("9090", function () {
   console.log("Starting in https server at port 9090..")

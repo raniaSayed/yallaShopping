@@ -18,13 +18,9 @@ var products = new Schema(
     type:Number,
     required:true
   },
-  rate:{
-    type:Number
-  },
   stock:{
     type:Number,
     required:true
-
   },
   seller_id:{
     type:Number,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EditProductService } from '../edit-product.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router  } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -8,28 +10,30 @@ import { EditProductService } from '../edit-product.service';
   styleUrls: ['./edit-product.component.css']
 })
 export class EditProductComponent implements OnInit {
-private product_id;
-private productData;
+private product_id: number;
+private productData: any;
 private name: string;
 private price: number;
-private description: string;
+private desc: string;
 private stock: number;
 private picture: any;
 private category: number;
 private subcategory: string;
 private serverErrors: string;
 
-  constructor( private editProductService : EditProductService) { }
+  constructor(private router:Router, private route: ActivatedRoute, private editProductService : EditProductService) {
+    this.route.params.subscribe(params => {
+      this.product_id = params["id"];
+    });
+    this.getProduct(this.product_id);
+   }
 
   ngOnInit() {
-    this.getProduct()
   }
 
-  getProduct(){
-
-    this.product_id=1;
-    this.editProductService.sendDataToServer(this.product_id).subscribe((res)=> {
-      this.productData=res[0];
+  getProduct(id){
+    this.editProductService.sendDataToServer(id).subscribe((res)=> {
+      this.productData=res;
        // console.log(res);
        console.log(this.productData);
 
@@ -38,11 +42,10 @@ private serverErrors: string;
   }
 
   editProduct(){
-    this.product_id=1;
     this.editProductService.sendDataToServerTwo(this.product_id,{
       'name': this.productData.name,
       'price': this.productData.price,
-      'description': this.productData.description,
+      'desc': this.productData.desc,
       'stock': this.productData.stock,
       'picture': this.productData.picture,
       'category':this.productData.category,
@@ -51,7 +54,10 @@ private serverErrors: string;
       // this.productData=res;
       console.log("hi")
       // console.log(this.productData)
-
+      if(res['status']=="ok"){
+        this.router.navigate([`/categories/${this.productData.category}/${this.productData.subcategory}`])
+      }
+      
       // console.log(this.productData);
 
 });
