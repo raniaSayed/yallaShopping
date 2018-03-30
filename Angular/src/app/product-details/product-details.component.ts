@@ -20,6 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   inCart: boolean
   product_id: any;
   avg : any;
+  
   constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
