@@ -35,7 +35,7 @@ import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLogi
 
 import { AuthServiceService } from './services/auth-service.service';
 import { AddProductService } from './services/add-product.service';
-import { EditProductService } from './edit-product.service';
+import { EditProductService } from './services/edit-product.service';
 import { ForgetPasswordService } from './services/forget-password.service';
 
 
