@@ -50,6 +50,7 @@ export class UserCartComponent implements OnInit {
             console.log("DONE")
             this.cartService.deleteCart().subscribe((delRes)=>{
               console.log(delRes['status'])
+              this.cart = []
             })
           }
         })

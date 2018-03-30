@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersSellerService } from '../services/orders-seller.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,8 +21,8 @@ export class OrdersSellerComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private ordersSellerService: OrdersSellerService) {
-    this.route.params.subscribe(
+  constructor(private route: Router, private router: ActivatedRoute, private ordersSellerService: OrdersSellerService) {
+    this.router.params.subscribe(
       params => this.id = params['id']
     )
   }
@@ -53,8 +54,12 @@ export class OrdersSellerComponent implements OnInit {
       ordersSeller => {
         this.ordersSeller = ordersSeller;
         console.log(this.ordersSeller);
+      }, err => {
+        if(!err.error.success){
+          this.route.navigate(['users/login'])
+        }
       }
-    );
+    )
   }
 
 }

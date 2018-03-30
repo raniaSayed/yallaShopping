@@ -22,6 +22,7 @@ module.exports =  (req, res, next) =>{
     } else {
         // if there is no token
         // return an error
+                console.log('aaaaaaaaaaa')
         return res.status(403).send({
             success: false,
             message: 'No token provided.'

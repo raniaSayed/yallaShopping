@@ -3,17 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Headers, RequestOptions,Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Router  } from '@angular/router';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthServiceService {
   public user = new BehaviorSubject<Object>({});
   public currentUser = this.user.asObservable();
-  constructor(private http : HttpClient) {
+  constructor(private route: Router ,private http : HttpClient) {
     this.checkToken().subscribe(res=>{
       console.log(res)
       if (res['isAuthenticated']) {
         this.user.next(res['user'])
-       }
+      }else{
+        this.route.navigate(['users/login'])
+      }
     })
   }
 
