@@ -59,7 +59,7 @@ ProductsModel.getAllProducts = function(req,callback){
   //console.log("linit"+req.query.limit);
   
   // var skip = (parseInt(req.query.page)-1) * parseInt(limit);
-  ProductsModel.model.find({}).exec(function(err, result){
+  ProductsModel.model.find({},function(err, result){
     callback(err, result);
   });
   //.limit(limit)
@@ -160,11 +160,20 @@ ProductsModel.deleteProduct = function(Id, callback){
 
 ProductsModel.getProductsBySellerId = function(req, callback){
   var Id = req.params.id;
-  // var limit = parseInt(req.query.limit);
-  // var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  var limit = parseInt(req.query.limit);
+  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
   ProductsModel.model.find({seller_id: Id})
-  //.limit(limit)
-  //.skip(skip)
+  .limit(limit)
+  .skip(skip)
+  .exec(function(err, result){
+    callback(err, result);
+});
+};
+
+ProductsModel.getProductsBySellerIdCount = function(req, callback){
+  var Id = req.params.id;
+  ProductsModel.model.find({seller_id: Id})
+  .count()
   .exec(function(err, result){
     callback(err, result);
 });
