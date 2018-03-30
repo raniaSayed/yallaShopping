@@ -8,8 +8,10 @@ var SellerModel = require("../models/sellers");
 var multer = require("multer");
 var fileUploadMid = multer({dest:"./static/sellers"});
 var encryptPassword = require('./encryptPassword');
+var authMid = require('./authMid')
+var sellerAuthMid = require('./sellerAuthMid')
 
-router.get("/", function (req, resp) {
+router.get("/",  (req, resp) =>{
 	SellerModel.getSellers((err, result) => {
 		if(!err) {
 			resp.json(result);
@@ -20,7 +22,7 @@ router.get("/", function (req, resp) {
 });
 
 
-router.post("/", JSONParsermid,function (req, resp) {
+router.post("/", JSONParsermid, (req, resp) =>{
 	SellerModel.addSeller(req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})
@@ -31,7 +33,7 @@ router.post("/", JSONParsermid,function (req, resp) {
 
 })
 
-router.get("/:id", (req, resp) => {
+router.get("/:id", [authMid, sellerAuthMid],(req, resp) => {
 	SellerModel.getSeller(req.params.id, (err, result) => {
 		if(!err) {
 			resp.json(result);
@@ -41,7 +43,7 @@ router.get("/:id", (req, resp) => {
 	})
 })
 
-router.put("/:id", JSONParsermid,(req, resp)=>{
+router.put("/:id", [authMid, sellerAuthMid, JSONParsermid],(req, resp)=>{
 	SellerModel.editSeller(req.params.id, req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})
@@ -52,7 +54,7 @@ router.put("/:id", JSONParsermid,(req, resp)=>{
 
 })
 
-router.delete("/:id",function (req, resp) {
+router.delete("/:id", [authMid, sellerAuthMid], (req, resp) =>{
 	SellerModel.deleteSeller(req.params.id, (err, result) => {
 		if(!err) {
 			resp.json({status:"Seller Deleted"});

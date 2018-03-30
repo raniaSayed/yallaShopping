@@ -8,9 +8,11 @@ var router = express.Router();
 var mongoose = require("mongoose");
 var orderModel = require("../models/orders");
 var productModel = require("../models/products");
-
+var authMid = require('./authMid')
+var sellerAuthMid = require('./sellerAuthMid')
+var userAuthMid = require('./userAuthMid')
 //  /order/sellers/id router
-router.get("/sellers/:id", function (req, resp) {
+router.get("/sellers/:id", [authMid, sellerAuthMid],(req, resp) =>{
   orderModel.model.find({
       status: "ordered"
     })
@@ -26,7 +28,7 @@ router.get("/sellers/:id", function (req, resp) {
         model: 'sellers'
       }
     })
-    .exec(function (err, docs) {
+    .exec( (err, docs) =>{
       if (!err) {
         let sellerOrders = [];
 
@@ -44,14 +46,14 @@ router.get("/sellers/:id", function (req, resp) {
 });
 
 // change order status route
-router.put("/", JSONParsermid, function (req, resp) {
+router.put("/", [authMid, sellerAuthMid, JSONParsermid],  (req, resp) =>{
   orderModel.model.update({
     _id: req.body.id
   }, {
     $set: {
       status: req.body.status
     }
-  }, function (err, doc) {
+  },  (err, doc) =>{
     if (!err) {
       resp.json({
         status: "ok"
@@ -63,7 +65,7 @@ router.put("/", JSONParsermid, function (req, resp) {
 });
 
 //view user orders
-router.get("/", function (req, resp) {
+router.get("/", [authMid, userAuthMid], (req, resp) =>{
   ///change id to session userId
   var id = 1;
   orderModel.viewUserAll(id, (err, result) => {
@@ -77,11 +79,11 @@ router.get("/", function (req, resp) {
 
 
 // add order router
-router.post("/", JSONParsermid, function (req, resp) {
+router.post("/", JSONParsermid,  (req, resp) =>{
   var order = new orderModel.model(req.body);
   var product = productModel.model.findOne({
     _id: req.body.prodId
-  }, function (error, productDoc) {
+  },  (error, productDoc) =>{
     if (!error) {
       if (productDoc.stock == 0) {
         resp.json({
@@ -95,7 +97,7 @@ router.post("/", JSONParsermid, function (req, resp) {
         });
       } else {
         // save order
-        order.save(function (err, doc) {
+        order.save( (err, doc) =>{
           if (!err) {
             // modify stock!
             productDoc.stock -= req.body.quantity;
@@ -105,7 +107,7 @@ router.post("/", JSONParsermid, function (req, resp) {
               $set: {
                 stock: productDoc.stock
               }
-            }, function (failure, doc) {
+            },  (failure, doc) =>{
               if (!failure) {
                 console.log('document updated successfully!');
               } else {
@@ -125,7 +127,7 @@ router.post("/", JSONParsermid, function (req, resp) {
 });
 
 //view user order by id
-router.get("/:id", function (req, resp) {
+router.get("/:id", [authMid, userAuthMid],(req, resp) =>{
   orderModel.viewById(req.params.id, (error, result) => {
     if (!error) {
       //get seller data
@@ -136,7 +138,7 @@ router.get("/:id", function (req, resp) {
 });
 
 //view [single order] products that belongs to seller by order id
-router.get("/:id/seller", function (req, resp) {
+router.get("/:id/seller",  [authMid, sellerAuthMid],(req, resp) =>{
   orderModel.viewSellerOrderProducts(req.params.id, (error, result) => {
     if (!error) {
       resp.send(result);
@@ -148,7 +150,7 @@ router.get("/:id/seller", function (req, resp) {
 });
 
 // add cart .. check done in client side! route /orders/cart with post
-router.post('/cart', JSONParsermid, (req, resp) => {
+router.post('/cart', [authMid, userAuthMid, JSONParsermid], (req, resp) => {
   saveOrder(req.body, (i, j, call) => {
     call()
   }, () => {
