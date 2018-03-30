@@ -74,6 +74,7 @@ import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-ord
 
 
 import { SearchProductComponent } from './search-product/search-product.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -91,7 +92,7 @@ const appRoutes: Routes = [
   { path: 'sellers/:id/orders', component: OrdersSellerComponent },
   { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
-  { path: '**', component: BodyComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -119,6 +120,7 @@ const appRoutes: Routes = [
     SearchProductComponent,
     OrdersSellerComponent,
     SellerOrdersDetailsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

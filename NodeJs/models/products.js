@@ -82,6 +82,8 @@ ProductsModel.addProduct = function(data,callback){
   var product = new ProductsModel.model(data);
   product.save((err, doc)=>{
     console.log("save");
+    console.log(err);
+    console.log(doc);
     callback(err, doc)
   });
 }
