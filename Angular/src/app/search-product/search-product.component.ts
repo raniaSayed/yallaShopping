@@ -35,7 +35,7 @@ export class SearchProductComponent {
           productDetailsService.getMatchedProductDataCount(res)
           .subscribe(count => {
             this.totalCount = parseInt(count.toString());
-            this.updatePagging();
+            this.updatePagging(count);
           });
         });
     });
@@ -50,11 +50,11 @@ export class SearchProductComponent {
     });
   }
 
-  updatePagging() {
+  updatePagging(count) {
    
     
     console.log("totalCount = " + this.totalCount)
-    this.pageCount = Math.ceil(this.totalCount / 5);
+    this.pageCount = Math.ceil(count / 5);
     console.log(this.pageCount);
     this.pages = Array(this.pageCount).fill(1).map((x, i) => i + 1); // [1,2,3,4,5]
   }
@@ -66,7 +66,7 @@ export class SearchProductComponent {
       this.selectedCategories,this.pageNumber,5)
      .subscribe(res => { 
        this.matchedProducts = res;
-       this.updatePagging();
+       //this.updatePagging();
 
        console.log("count = "+this.pages) 
 
@@ -91,7 +91,17 @@ export class SearchProductComponent {
       this.selectedCategories, this.pageNumber, 5)
       .subscribe(res => {
         this.matchedProducts = res;
-        this.updatePagging();
+
+        this.productDetailsService.getFilteredProductDataCount(this.low, this.high,
+          this.selectedCategories)
+            .subscribe(count => {
+              console.log("cooooount"+count);
+              this.totalCount = parseInt(count.toString());
+              console.log("total cooooount"+this.totalCount);
+              
+              this.updatePagging(count);
+            });
+       // this.updatePagging();
 
         console.log("count = " + this.pages)
 
@@ -107,13 +117,15 @@ export class SearchProductComponent {
       this.selectedCategories,this.pageNumber,5)
      .subscribe(res => { 
        this.matchedProducts = res;
+
        this.productDetailsService.getFilteredProductDataCount(this.low, this.high,
         this.selectedCategories)
           .subscribe(count => {
-            console.log("count")
-            console.log(count)
-            //this.totalCount = parseInt(count.toString());
-            this.updatePagging();
+            console.log("cooooount"+count);
+            this.totalCount = parseInt(count.toString());
+            console.log("total cooooount"+this.totalCount);
+            
+            this.updatePagging(count);
           });
      });
 
@@ -125,11 +137,15 @@ export class SearchProductComponent {
       this.selectedCategories,this.pageNumber,5)
      .subscribe(res => { 
        this.matchedProducts = res;
+
        this.productDetailsService.getFilteredProductDataCount(this.low, this.high,
         this.selectedCategories)
           .subscribe(count => {
+            console.log("cooooount"+count);
+            
             this.totalCount = parseInt(count.toString());
-            this.updatePagging();
+            
+            this.updatePagging(count);
             console.log(this.pageCount);
             
           });

@@ -41,8 +41,9 @@
 <!--results-->
 
 <div *ngIf="!matchedProducts"><h2>Sorry, No Products Matched Your Search</h2></div>
-Pages:
+<div *ngIf="pages.length>0">Pages:
 <li style="display: inline;"  *ngFor="let i  of pages"><button name="pageNumber" (click)="changePageNumber(i)" href="#">{{i}}</button> </li>
+</div>
 <div *ngFor="let product of matchedProducts" class="search-content row m-1">
 
   <div class="col-sm-3">

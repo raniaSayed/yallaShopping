@@ -41,6 +41,7 @@ export class ProductDetailsService {
 
   }
   getFilteredProductDataCount(lowPrice,highPrice,subcategories){
+    
     var obj = {
       "subcatArr": subcategories,
       "priceLow":lowPrice,

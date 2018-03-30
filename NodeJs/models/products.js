@@ -90,6 +90,7 @@ ProductsModel.searchProductsCount = function(req, callback){
   });
 }
 ProductsModel.filter = function(req, callback){
+  console.log(req);
   var priceLow = req.body.priceLow;
   var priceHigh = req.body.priceHigh;
   var subcategoryArr =req.body.subcatArr;
