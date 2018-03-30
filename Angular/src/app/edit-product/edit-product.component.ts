@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { EditProductService } from '../services/edit-product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router  } from '@angular/router';
-
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',

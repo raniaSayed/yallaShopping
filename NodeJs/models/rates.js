@@ -30,7 +30,7 @@ RatesModel.model = mongoose.model("rates");
 RatesModel.rateProduct = function (prodId, rate, callback) {
 
   // from token
-  var userId = 1;
+  var userId = 2;
 
   RatesModel.model.update({
     prodId: prodId,
@@ -51,7 +51,7 @@ RatesModel.rateProduct = function (prodId, rate, callback) {
 RatesModel.getRateByUser = function (prodId, callback) {
 
   // from token
-  var userId = 0;
+  var userId = 2;
 
   RatesModel.model.findOne({
     prodId: prodId,

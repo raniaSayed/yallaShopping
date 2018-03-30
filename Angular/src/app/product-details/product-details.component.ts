@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
-// import {RatingModule} from "ngx-rating";
 import { RateService } from "../services/rate.service";
 import { AuthServiceService } from '../services/auth-service.service';
 
@@ -19,7 +18,9 @@ export class ProductDetailsComponent implements OnInit {
 	product: any
   inCart: boolean
   product_id: any;
-  avg : any;
+  avg : Number;
+  userRate : Number;
+
 
   constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
    	this.route.params.subscribe(params => {
@@ -45,17 +46,44 @@ export class ProductDetailsComponent implements OnInit {
 
   getAvgRate(){
     this.rateService.sendDataToServer(this.id).subscribe((res)=> {
-      // this.avg=res;
-       console.log(res);
-       // console.log(this.avg);
+      this.avg=res.rate;
+      console.log("hi");
+       // console.log(res.rate);
+       console.log(this.avg);
 
 });
 
   }
 
+  getRateUser(){
+    this.rateService.sendDataToServer2(this.id).subscribe((res)=> {
+      this.userRate=res.rate;
+      // console.log("hi");
+       console.log(this.userRate);
+       // console.log(this.avg);
+
+  });
+
+  }
+
+  editRate(){
+    this.rateService.sendDataToServer3(this.id,this.userRate).subscribe((res)=> {
+      // this.userRate=res;
+      console.log(this.userRate)
+      // console.log(this.productData)
+      // console.log(this.productData);
+
+});
+
+  }
+
+  rateProduct(){
+    this.editRate();
+  }
 
   ngOnInit() {
     this.getAvgRate();
+    this.getRateUser()
   }
 
   addToCart(e){

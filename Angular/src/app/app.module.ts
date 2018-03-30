@@ -5,7 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http';
-// import {RatingModule} from "ngx-rating";
+import {RatingModule} from "ngx-rating";
 
 //george ...
 import { FormsModule } from '@angular/forms';
@@ -140,7 +140,7 @@ const appRoutes: Routes = [
     UICarouselModule,
     NgxSlideshowModule.forRoot(),
     NgbModule.forRoot(),
-    // RatingModule
+    RatingModule
     ],
 
   providers: [
