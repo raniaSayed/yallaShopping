@@ -19,7 +19,6 @@ export class UserCartComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log(this.AuthService.currentUser.subscribe(p=>console.log(p)))
   }
 
   editCart(e, i){
