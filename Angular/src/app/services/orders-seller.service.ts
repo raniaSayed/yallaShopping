@@ -11,6 +11,7 @@ export class OrdersSellerService {
     
   }
 
+
   headersFactory = ()=> {
     return { headers : new HttpHeaders({
         'Content-Type': 'application/json',
@@ -19,9 +20,12 @@ export class OrdersSellerService {
     }
   }
 
-  getOrdersOfSeller(id){
-    return this.http.get(`https://localhost:9090/orders/sellers/${id}`, this.headersFactory())
+  getOrdersOfSeller(id,page,limit){
+    return this.http.get(`https://localhost:9090/orders/sellers/${id}?page=${page}&limit=${limit}`, this.headersFactory())
   }
+  getOrdersOfSellerCount(id){
+    return this.http.get(`https://localhost:9090/orders/sellers${id}/count`,this.headersFactory());
+}
 
   getOrderById(id) {
     return this.http.get(`https://localhost:9090/orders/${id}`, this.headersFactory())

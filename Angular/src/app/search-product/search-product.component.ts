@@ -52,6 +52,8 @@ export class SearchProductComponent {
 
   updatePagging(count) {
    
+    //reset pageNumber to 1
+    this.pageNumber =1;
     
     console.log("totalCount = " + this.totalCount)
     this.pageCount = Math.ceil(count / 5);
@@ -111,7 +113,7 @@ export class SearchProductComponent {
   highChange() {
     console.log("highChange");
     this.matchedProducts = [];
-
+    //if(!this.high) this.high=0;
 
     this.productDetailsService.getFilteredProductData(this.low, this.high,
       this.selectedCategories,this.pageNumber,5)
@@ -121,10 +123,7 @@ export class SearchProductComponent {
        this.productDetailsService.getFilteredProductDataCount(this.low, this.high,
         this.selectedCategories)
           .subscribe(count => {
-            console.log("cooooount"+count);
             this.totalCount = parseInt(count.toString());
-            console.log("total cooooount"+this.totalCount);
-            
             this.updatePagging(count);
           });
      });
@@ -132,6 +131,7 @@ export class SearchProductComponent {
   }
   lowChange() {
     this.matchedProducts = [];
+    //if(!this.low) this.low=0;
 
     this.productDetailsService.getFilteredProductData(this.low, this.high,
       this.selectedCategories,this.pageNumber,5)

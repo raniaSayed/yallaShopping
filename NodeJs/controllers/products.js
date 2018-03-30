@@ -85,6 +85,15 @@ router.post("/", JSONParsermid, function (req, resp) {
   // console.log(req.body);
   // resp.send("ok");
 })
+router.get("/top", function(request, response){
+  ProductsModel.getTop(function(err, result){
+    if (!err && result.length > 0) {
+      response.json(result);
+    } else {
+      response.json(err);
+    }
+  })
+})
 
 router.put("/:id", JSONParsermid, (req, resp) => {
   ProductsModel.editProduct(req.params.id, req.body, (err, result) => {
@@ -228,6 +237,7 @@ router.get("/:productId/avg", function (request, response) {
 });
 
 //just for rate testing..
+
 
 
 

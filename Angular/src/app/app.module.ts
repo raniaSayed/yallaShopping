@@ -82,7 +82,7 @@ import { SearchProductComponent } from './search-product/search-product.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-
+import { TopProductsService } from './services/top-products.service';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
@@ -161,6 +161,7 @@ const appRoutes: Routes = [
     RateService,
     ForgetPasswordService,
     NgbCarousel,
+    TopProductsService,
     ],
   bootstrap: [AppComponent]
 })
