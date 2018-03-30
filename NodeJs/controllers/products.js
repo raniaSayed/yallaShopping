@@ -26,6 +26,20 @@ router.get("/search", function(request, response){
       }
     });
 });
+router.get("/search/count",function(request,response){
+  
+  ProductsModel.searchProductsCount(request, function(err, result){
+    console.log(result);
+    
+    if(!err){
+      console.log("finding search Product with q "+request.query.q);
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  });
+});
 
 router.delete("/:id",function (req, resp) {
   ProductsModel.deleteProduct(req.params.id, (err, result) => {
@@ -131,6 +145,25 @@ router.post("/filter", JSONParsermid, function(request, response){
     }
   })
 })
+
+router.post("/filter/count", JSONParsermid, function(request, response){
+  // var subcatArr = Array();
+  // subcatArr.push(request.body.subcat1);
+  // subcatArr.push(request.body.subcat2);
+  //subcatArr must be Array
+  ProductsModel.filterCount(request, function(err, result){
+    if(!err){
+      console.log(result);
+      response.json(result);
+    }
+    else{
+      console.log(err);
+
+      response.json(err);
+    }
+  })
+})
+
 //get request http://localhost:9090/products
 //need to find all the products
 //get request http://localhost:9090/products/id

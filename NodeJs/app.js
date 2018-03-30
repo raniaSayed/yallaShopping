@@ -30,7 +30,7 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 // server.use(authMid);
 
 //make pagination
-server.use(paginate.middleware(10,10))
+server.use(paginate.middleware(5,10))
 
 var authRouter = require("./controllers/auth")
 server.use("/auth", authRouter)

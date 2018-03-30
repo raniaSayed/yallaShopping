@@ -7,15 +7,20 @@ import { CategoryService } from '../services/category.service';
   templateUrl: './search-product.component.html',
   styleUrls: ['./search-product.component.css']
 })
-export class SearchProductComponent  {
+export class SearchProductComponent {
   searchWord: string;
   matchedProducts;
   categories;
   categoryNames = {};
   selectedCategories = [];
   saveUsername: boolean;
+
+  pageCount = 0;
+  pages = [];
+  totalCount = 0;
   low = 1;
   high = 10000;
+  pageNumber = 1;
 
   constructor(private productDetailsService: ProductDetailsService,
     private categoryService: CategoryService) {
@@ -23,8 +28,16 @@ export class SearchProductComponent  {
     //console.log(this.productDetailsService.myMethodSubject.getValue());
     this.productDetailsService.myMethod$.subscribe(res => {
 
-      productDetailsService.getMatchedProductData(res)
-                           .subscribe(data => this.matchedProducts = data);
+      productDetailsService.getMatchedProductData(res,this.pageNumber,5)
+        .subscribe(data => {
+          this.matchedProducts = data;
+          //get total count of results
+          productDetailsService.getMatchedProductDataCount(res)
+          .subscribe(count => {
+            this.totalCount = parseInt(count.toString());
+            this.updatePagging();
+          });
+        });
     });
 
     //get all categories and subcategories
@@ -35,6 +48,29 @@ export class SearchProductComponent  {
       });
 
     });
+  }
+
+  updatePagging() {
+   
+    
+    console.log("totalCount = " + this.totalCount)
+    this.pageCount = Math.ceil(this.totalCount / 5);
+    console.log(this.pageCount);
+    this.pages = Array(this.pageCount).fill(1).map((x, i) => i + 1); // [1,2,3,4,5]
+  }
+  changePageNumber(i) {
+    this.pageNumber = i;
+    console.log("page Number = "+this.pageNumber);
+
+    this.productDetailsService.getFilteredProductData(this.low, this.high,
+      this.selectedCategories,this.pageNumber,5)
+     .subscribe(res => { 
+       this.matchedProducts = res;
+       this.updatePagging();
+
+       console.log("count = "+this.pages) 
+
+     });
   }
   change(subcategory) {
 
@@ -51,8 +87,15 @@ export class SearchProductComponent  {
       .filter(i => this.categoryNames[i] == true ? this.selectedCategories.push(i) : "");
 
     this.matchedProducts = [];
-    this.productDetailsService.getFilteredProductData(this.low, this.high, this.selectedCategories)
-      .subscribe(res => { this.matchedProducts = res });
+    this.productDetailsService.getFilteredProductData(this.low, this.high,
+      this.selectedCategories, this.pageNumber, 5)
+      .subscribe(res => {
+        this.matchedProducts = res;
+        this.updatePagging();
+
+        console.log("count = " + this.pages)
+
+      });
 
   }
   highChange() {
@@ -60,15 +103,37 @@ export class SearchProductComponent  {
     this.matchedProducts = [];
 
 
-    this.productDetailsService.getFilteredProductData(this.low, this.high, this.selectedCategories)
-      .subscribe(res => { this.matchedProducts = res });
+    this.productDetailsService.getFilteredProductData(this.low, this.high,
+      this.selectedCategories,this.pageNumber,5)
+     .subscribe(res => { 
+       this.matchedProducts = res;
+       this.productDetailsService.getFilteredProductDataCount(this.low, this.high,
+        this.selectedCategories)
+          .subscribe(count => {
+            console.log("count")
+            console.log(count)
+            //this.totalCount = parseInt(count.toString());
+            this.updatePagging();
+          });
+     });
 
   }
   lowChange() {
     this.matchedProducts = [];
 
-    this.productDetailsService.getFilteredProductData(this.low, this.high, this.selectedCategories)
-      .subscribe(res => { this.matchedProducts = res });
+    this.productDetailsService.getFilteredProductData(this.low, this.high,
+      this.selectedCategories,this.pageNumber,5)
+     .subscribe(res => { 
+       this.matchedProducts = res;
+       this.productDetailsService.getFilteredProductDataCount(this.low, this.high,
+        this.selectedCategories)
+          .subscribe(count => {
+            this.totalCount = parseInt(count.toString());
+            this.updatePagging();
+            console.log(this.pageCount);
+            
+          });
+     });
 
   }
 }

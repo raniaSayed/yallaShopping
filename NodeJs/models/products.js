@@ -78,8 +78,18 @@ ProductsModel.searchProducts = function(req, callback){
   var searchQuery = req.query.q;
   var limit = parseInt(req.query.limit);
   var skip = (parseInt(req.query.page)-1) * parseInt(limit);
-  ProductsModel.model.find({$or :[{name:{$regex:searchQuery}},{desc:{$regex:searchQuery}}]}).limit(limit)
+  console.log(limit)
+  console.log(skip)
+  ProductsModel.model.find({$or :[{name:{$regex:searchQuery,$options : 'i'}},{desc:{$regex:searchQuery,$options : 'i'}}]}).limit(limit)
   .skip(skip).exec(function(err, result){
+    callback(err, result);
+  });
+}
+ProductsModel.searchProductsCount = function(req, callback){
+  var searchQuery = req.query.q;
+ 
+  ProductsModel.model.find({$or :[{name:{$regex:searchQuery,$options : 'i'}},{desc:{$regex:searchQuery,$options : 'i'}}]})
+  .count().exec(function(err, result){
     callback(err, result);
   });
 }
@@ -98,7 +108,19 @@ ProductsModel.filter = function(req, callback){
   .skip(skip).exec(function(err, result){
     callback(err, result);
   });
-  //{ dim_cm: { $gt: 15, $lt: 20 } }
+}
+
+ProductsModel.filterCount = function(req, callback){
+  var priceLow = req.body.priceLow;
+  var priceHigh = req.body.priceHigh;
+  var subcategoryArr =req.body.subcatArr;
+
+  ProductsModel.model.find({$or :[{$and: [{price:{ $lte:priceHigh}} ,{price:{$gte:priceLow }}]},
+  {subcategory:{$in:subcategoryArr}}]}).count().exec(function(err, result){
+    console.log("countttt")
+    console.log(result)
+    callback(err, result);
+  });
 }
 
 ProductsModel.addProduct = function(data,callback){
@@ -146,6 +168,5 @@ ProductsModel.getProductsBySellerId = function(req, callback){
     callback(err, result);
 });
 };
-
 
 module.exports = ProductsModel;
