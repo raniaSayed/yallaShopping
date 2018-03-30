@@ -55,12 +55,16 @@ var ProductsModel = {};
 ProductsModel.model = mongoose.model("products");
 
 ProductsModel.getAllProducts = function(req,callback){
-  var limit = parseInt(req.query.limit);
-  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
-  ProductsModel.model.find({}).limit(limit)
-  .skip(skip).exec(function(err, result){
+  //var limit = parseInt(req.query.limit);
+  //console.log("linit"+req.query.limit);
+  
+  // var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  ProductsModel.model.find({}).exec(function(err, result){
     callback(err, result);
   });
+  //.limit(limit)
+  //.skip(skip)
+  
 }
 
 ProductsModel.getProductById = function(Id, callback){
@@ -156,11 +160,11 @@ ProductsModel.deleteProduct = function(Id, callback){
 
 ProductsModel.getProductsBySellerId = function(req, callback){
   var Id = req.params.id;
-  var limit = parseInt(req.query.limit);
-  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  // var limit = parseInt(req.query.limit);
+  // var skip = (parseInt(req.query.page)-1) * parseInt(limit);
   ProductsModel.model.find({seller_id: Id})
-  .limit(limit)
-  .skip(skip)
+  //.limit(limit)
+  //.skip(skip)
   .exec(function(err, result){
     callback(err, result);
 });
