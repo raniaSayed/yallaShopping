@@ -65,7 +65,7 @@ router.get("/rates/", function (req, response) {
       response.json(err);
     }
   });
-})
+});
 
 
 router.get("/", function (req, response) {
@@ -257,7 +257,6 @@ router.get("/:productId?/avg", function (request, response) {
         response.json(err);
       }
     });
-    //>>>>>>> 19c72f897ae61c2c857d01904bad3415c0f09646
   } else {
     RatesModel.getRate(function (err, result) {
       if (!err && result.length > 0) {
