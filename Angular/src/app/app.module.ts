@@ -35,6 +35,7 @@ import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLogi
 import { AuthServiceService } from './auth-service.service';
 import { AddProductService } from './add-product.service';
 import { EditProductService } from './edit-product.service';
+import { ForgetPasswordService } from './services/forget-password.service';
 
 
 export function getAuthServiceConfigs() {
@@ -76,6 +77,7 @@ import { SellerOrdersDetailsComponent } from './seller-orders-details/seller-ord
 import { SearchProductComponent } from './search-product/search-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -94,6 +96,7 @@ const appRoutes: Routes = [
   { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'aboutus', component: AboutUsComponent },  
+  { path: 'forgetPassword', component: ForgetPasswordComponent},
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -124,9 +127,10 @@ const appRoutes: Routes = [
     SellerOrdersDetailsComponent,
     PageNotFoundComponent,
     AboutUsComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     HttpModule,
     SocialLoginModule,
     HttpClientModule,
@@ -151,6 +155,7 @@ const appRoutes: Routes = [
     CartService,
     GetSellerProductsService,
     OrdersSellerService,
+    ForgetPasswordService,
     ],
   bootstrap: [AppComponent]
 })

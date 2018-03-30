@@ -33,7 +33,7 @@
   </form>
   <div class="dropdown-divider"></div>
   <a class="dropdown-item" [routerLink]="['/users/registeration']">New around here? Sign up</a>
-  <a class="dropdown-item" href="#">Forgot password?</a>
+  <a class="dropdown-item" routerLink="/forgetPassword">Forgot password?</a>
   <div class="dropdown-divider"></div>
   <button type="button" class="btn btn-primary m-2" (click)="socialSignIn('facebook')">Facebook</button>
   <button type="button" class="btn btn-success m-2" (click)="socialSignIn('google')">Google</button>

@@ -16,7 +16,9 @@ export class AuthComponent implements OnInit {
   formNotValid = false
   isLogged = true
   constructor(private route: Router, private socialAuthService: AuthService, private AuthService: AuthServiceService) {
+    console.log("sdfsdf")
     this.AuthService.checkToken().subscribe(res=>{
+      console.log(res)
       if (res['isAuthenticated']) {
         // this.user = res['user']
         // this.AuthService.user.next(this.user)

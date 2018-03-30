@@ -147,24 +147,38 @@ router.get("/:id/seller", function (req, resp) {
   });
 });
 
-router.post('/test', JSONParsermid,(req, resp)=>{
-  saveOrder(req.body, (i, j, call)=>{call()}, ()=>{resp.json({"a":"done"})})
-}) 
+// add cart .. check done in client side! route /orders/cart with post
+router.post('/carts', JSONParsermid, (req, resp) => {
+  saveOrder(req.body, (i, j, call) => {
+    call()
+  }, () => {
+    resp.json({
+      "status": "ok"
+    })
+  })
+})
 
-var saveOrder = (data, processData, done)=>{
+var saveOrder = (data, processData, done) => {
   if (data.length > 0) {
-    var loop = (data, i, processData, done)=>{
-      processData(data[i], i, ()=>{
-        console.log(data[i])
-        var order = new orderModel.model(data[i])
-        order.save((err, res)=>{
-          console.log(err, res, "aaaaa")
-          if (++i < data.length) {
-            loop(data, i, processData, done);
-          } else {
-            done();
-          }
-        })
+    var loop = (data, i, processData, done) => {
+      processData(data[i], i, () => {
+        var order = new orderModel.model(data[i]);
+        order.save((err, res) => {
+          console.log(res);
+          productModel.model.update({
+            _id: res.prodId
+          }, {
+            $inc: {
+              stock: -res.quantity
+            }
+          }, (error, res) => {
+            if (++i < data.length) {
+              loop(data, i, processData, done);
+            } else {
+              done();
+            }
+          });
+        });
       });
     };
     loop(data, 0, processData, done);
@@ -172,4 +186,5 @@ var saveOrder = (data, processData, done)=>{
     done();
   }
 }
+
 module.exports = router;
