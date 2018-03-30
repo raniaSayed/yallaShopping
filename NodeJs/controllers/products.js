@@ -9,6 +9,7 @@ var multer = require("multer");
 var fileUploadMid = multer({dest:"./static/users"});
 //adding the new exported ProductsModel....
 var ProductsModel = require("../models/products");
+var RatesModel = require("../models/rates");
 
 
 //seraching the products...
@@ -37,6 +38,17 @@ router.delete("/:id",function (req, resp) {
   })
 })
 
+router.get("/rates/",function(req,response){
+  RatesModel.getAllRate(function(err, result){
+    if(!err&&result.length>0){
+      console.log("finding All Products");
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  });
+})
 
 
 router.get("/",function(req,response){
@@ -62,48 +74,10 @@ router.post("/", JSONParsermid,function (req, resp) {
 	})
   // console.log(req.body);
   // resp.send("ok");
-
 })
 
 router.put("/:id", JSONParsermid,(req, resp)=>{
 	ProductsModel.editProduct(req.params.id, req.body, (err, result)=>{
-		if(!err) {
-			resp.json({status:"ok"})
-		} else {
-			resp.json(err);
-		}
-	})
-
-})
-
-router.get("/:id/rate", function(request, response){
-
-    if(request.params.id){
-      ProductsModel.getProductById(request.params.id, function(err, result){
-        if(!err&&result.length>0){
-          console.log("finding Product with id ="+request.params.id);
-          response.json(result);
-        }
-        else{
-          response.json(err);
-        }
-      });
-    }
-    else{
-      ProductsModel.getAllProducts(function(err, result){
-        if(!err&&result.length>0){
-          console.log("finding All Products");
-          response.json(result);
-        }
-        else{
-          response.json(err);
-        }
-      });
-    }
-});
-
-router.post("/:id/rate", JSONParsermid,function (req, resp) {
-	ProductsModel.rateProduct(req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:"ok"})
 		} else {
@@ -170,6 +144,78 @@ router.get("/seller/:id", function(request, response) {
     }
   });
 });
+
+//rate..
+
+router.post("/:productID?/rate", urlEncodedMid,function (req, resp) {
+	RatesModel.rateProduct(req.params.productID,req.body, (err, result)=>{
+		if(!err) {
+			resp.json({status:"ok"})
+		} else {
+			resp.json(err);
+		}
+	})
+  // console.log(req.body.rate);
+  // resp.send("ok");
+
+})
+
+
+
+router.get("/:productId?/rate", function(request, response){
+
+    if(request.params.productId){
+      RatesModel.getRateByUser(request.params.productId, function(err, result){
+        if(!err){
+          console.log("finding Product with id ="+request.params.productId);
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      RatesModel.getAllRate(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
+
+router.get("/:productId?/avg", function(request, response){
+
+    if(request.params.productId){
+      RatesModel.getAvgRates(request.params.productId, function(err, result){
+        if(!err){
+          // console.log("finding Product with id ="+request.params.productId);
+					// console.log(result[0].average);
+          response.json(Math.round(result[0].average));
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+    else{
+      RatesModel.getRate(function(err, result){
+        if(!err&&result.length>0){
+          console.log("finding All Products");
+          response.json(result);
+        }
+        else{
+          response.json(err);
+        }
+      });
+    }
+});
+
+//just for rate testing..
 
 
 

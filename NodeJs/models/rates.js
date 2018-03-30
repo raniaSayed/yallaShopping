@@ -35,7 +35,7 @@ RatesModel.model = mongoose.model("rates");
 
 
 RatesModel.rateProduct = function(product_id,data,callback){
-  var user_id=5;
+  var user_id=6;
   data.rate=2;
 RatesModel.model.update( {product_id: product_id,user_id : user_id}, {product_id: product_id,user_id : user_id,rate:data.rate }, { upsert : true }, (err, doc)=>{
     callback(err, doc)
@@ -45,7 +45,7 @@ RatesModel.model.update( {product_id: product_id,user_id : user_id}, {product_id
 
 
 RatesModel.getRateByUser = function(product_id, callback){
-  var user_id=3;
+  var user_id=2;
 
   RatesModel.model.findOne({product_id:product_id,user_id:user_id}).populate("user_id").exec(function(err, result){
     callback(err, result);
