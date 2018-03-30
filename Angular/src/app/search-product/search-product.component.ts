@@ -23,9 +23,8 @@ export class SearchProductComponent  {
     //console.log(this.productDetailsService.myMethodSubject.getValue());
     this.productDetailsService.myMethod$.subscribe(res => {
 
-      productDetailsService.getMatchedProductData(res).subscribe(data => {
-        this.matchedProducts = data;
-      });
+      productDetailsService.getMatchedProductData(res)
+                           .subscribe(data => this.matchedProducts = data);
     });
 
     //get all categories and subcategories
