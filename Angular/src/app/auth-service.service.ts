@@ -12,11 +12,9 @@ export class AuthServiceService {
   constructor(private route: Router ,private http : HttpClient) {
     this.checkToken().subscribe(res=>{
       console.log(res)
-      if (res['isAuthenticated']) {
-        this.user.next(res['user'])
-      }else{
-        this.route.navigate(['users/login'])
-      }
+      // if (res['isAuthenticated']) {
+        this.user.next(res)
+      // }
     })
   }
 

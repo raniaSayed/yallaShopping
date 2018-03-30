@@ -29,7 +29,7 @@ export class SellerRegisterationFormComponent implements OnInit {
       'address': this.address,
       'national_id': this.national_id
     }).subscribe((res) => {
-      if (res['status'] == "ok") {
+      if (res['status']) {
         this.route.navigate(['users/login'])
       } else {
         if (res['errors']) {

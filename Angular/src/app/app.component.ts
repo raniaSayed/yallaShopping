@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
-import {  CategoryService  } from './services/category.service';
+import { CategoryService } from './services/category.service';
 import { ProductDetailsService } from './services/product-details.service';
 import { Router  } from '@angular/router';
 import { CartService } from "./services/cart.service";
-// declare var $: any;
+import { AuthServiceService } from './auth-service.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,10 +21,14 @@ export class AppComponent {
   categories:any[];
   searchWord:string;
   matchedProducts;
+  currentUser;
   
-  constructor(private route: Router, private categoryService:CategoryService,private productDetailsService:ProductDetailsService) { 
+  constructor(private AuthService: AuthServiceService ,private route: Router, private categoryService:CategoryService,private productDetailsService:ProductDetailsService) { 
+    this.AuthService.currentUser.subscribe(res=>{
+      this.currentUser = res
+      console.log(this.currentUser)
+    })
     this.isActive = true;
-
     this.categoryService.getAllCategoreis().subscribe((res) => {
       this.categories = res;
       console.log(res)

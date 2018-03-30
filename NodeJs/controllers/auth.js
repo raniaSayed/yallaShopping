@@ -141,8 +141,9 @@ router.post("/check", (req, resp) => {
       });
     } else {
       console.log(decoded)
-      UserModel.getUser(decoded.id, (err, userDoc)=>{
-        console.log(userDoc)
+      var model = decoded.isUser ? UserModel : SellerModel
+      model.model.findOne({_id:decoded.id},{name:true, picture:true}, (err, userDoc)=>{
+        console.log(err, userDoc)
         return resp.json({
           isAuthenticated: true,
           user: userDoc,

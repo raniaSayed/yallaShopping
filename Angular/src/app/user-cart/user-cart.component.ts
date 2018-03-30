@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "../services/cart.service";
 import { AuthServiceService } from '../auth-service.service';
+import { Router  } from '@angular/router';
 
 @Component({
   selector: 'app-user-cart',
@@ -12,7 +13,13 @@ export class UserCartComponent implements OnInit {
   tempCart: any
   stockErr: boolean
   isLoaded: boolean
-  constructor(private cartService: CartService, private AuthService: AuthServiceService) { 
+  constructor(private route: Router, private cartService: CartService, private AuthService: AuthServiceService) { 
+    AuthService.currentUser.subscribe(res=>{
+      console.log(res)
+      if (!res['isUser']) {
+        route.navigate([''])
+      }
+    })
   	this.cartService.getCart().subscribe(data=>{
   		this.cart = data['cart']
       this.tempCart = JSON.parse(JSON.stringify(this.cart))
