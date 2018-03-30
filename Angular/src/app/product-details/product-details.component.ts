@@ -45,7 +45,7 @@ export class ProductDetailsComponent implements OnInit {
 
   getAvgRate(){
     this.rateService.sendDataToServer(this.id).subscribe((res)=> {
-      this.avg=res.rate;
+      // this.avg=res.rate;
       console.log("hi");
        // console.log(res.rate);
        console.log(this.avg);
@@ -56,7 +56,7 @@ export class ProductDetailsComponent implements OnInit {
 
   getRateUser(){
     this.rateService.sendDataToServer2(this.id).subscribe((res)=> {
-      this.userRate=res.rate;
+      // this.userRate=res.rate;
       // console.log("hi");
        console.log(this.userRate);
        // console.log(this.avg);

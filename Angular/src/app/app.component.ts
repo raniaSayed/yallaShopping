@@ -4,7 +4,7 @@ import { CategoryService } from './services/category.service';
 import { ProductDetailsService } from './services/product-details.service';
 import { Router  } from '@angular/router';
 import { CartService } from "./services/cart.service";
-import { AuthServiceService } from './auth-service.service';
+import { AuthServiceService } from './services/auth-service.service';
 
 @Component({
   selector: 'app-root',
