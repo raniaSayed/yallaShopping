@@ -105,10 +105,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-     //HeaderComponent,
-    // HeaderModule,
-   // SidebarComponent,
-
     FooterComponent,
     BodyComponent,
     LimitToPipe,

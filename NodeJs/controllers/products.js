@@ -17,7 +17,7 @@ var RatesModel = require("../models/rates");
 // need to find any product having the word in the ""{q}""
 router.get("/search", function(request, response){
   console.log("finding search Product with q "+request.query.q);
-    ProductsModel.searchProducts(request.query.q, function(err, result){
+    ProductsModel.searchProducts(request, function(err, result){
       if(!err&&result.length>0){
         console.log("finding search Product with q "+request.query.q);
         response.json(result);
@@ -26,6 +26,20 @@ router.get("/search", function(request, response){
         response.json(err);
       }
     });
+});
+router.get("/search/count",function(request,response){
+  
+  ProductsModel.searchProductsCount(request, function(err, result){
+    console.log(result);
+    
+    if(!err){
+      console.log("finding search Product with q "+request.query.q);
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  });
 });
 
 router.delete("/:id",function (req, resp) {
@@ -52,7 +66,10 @@ router.get("/rates/",function(req,response){
 
 
 router.get("/",function(req,response){
-  ProductsModel.getAllProducts(function(err, result){
+  ProductsModel.getAllProducts(req,function(err, result){
+   
+    console.log("Paggination check")
+    console.log(req.query.page)
     if(!err&&result.length>0){
       console.log("finding All Products");
       response.json(result);
@@ -165,8 +182,7 @@ router.post("/filter", JSONParsermid, function(request, response){
   // subcatArr.push(request.body.subcat1);
   // subcatArr.push(request.body.subcat2);
   //subcatArr must be Array
-  ProductsModel.filter(request.body.priceLow,
-    request.body.priceHigh, request.body.subcatArr, function(err, result){
+  ProductsModel.filter(request, function(err, result){
     if(!err&&result.length>0){
       console.log("filtering products");
       response.json(result);
@@ -176,6 +192,25 @@ router.post("/filter", JSONParsermid, function(request, response){
     }
   })
 })
+
+router.post("/filter/count", JSONParsermid, function(request, response){
+  // var subcatArr = Array();
+  // subcatArr.push(request.body.subcat1);
+  // subcatArr.push(request.body.subcat2);
+  //subcatArr must be Array
+  ProductsModel.filterCount(request, function(err, result){
+    if(!err){
+      console.log(result);
+      response.json(result);
+    }
+    else{
+      console.log(err);
+
+      response.json(err);
+    }
+  })
+})
+
 //get request http://localhost:9090/products
 //need to find all the products
 //get request http://localhost:9090/products/id
@@ -209,7 +244,18 @@ router.get("/:productId/rate", function(request, response){
     }
 });
 
+<<<<<<< HEAD
 router.get("/:productId/avg", function(request, response){
+=======
+/*<<<<<<< HEAD
+router.get("/seller/:id", function(request, response) {
+  ProductsModel.getProductsBySellerId(request, function(err, result){
+    if(!err&&result.length>0){
+      console.log("finding All Products for the seller wirh id: "+request.params.id);
+      response.json(result);
+=======*/
+router.get("/:productId?/avg", function(request, response){
+>>>>>>> 81ec558fbaf5ffdeed25a133a79cdb54c9d0f0bf
 
     if(+request.params.productId){
       RatesModel.getAvgRates(+request.params.productId, function(err, result){
@@ -224,6 +270,7 @@ router.get("/:productId/avg", function(request, response){
           response.json(err);
         }
       });
+//>>>>>>> 19c72f897ae61c2c857d01904bad3415c0f09646
     }
     else{
       RatesModel.getRate(function(err, result){

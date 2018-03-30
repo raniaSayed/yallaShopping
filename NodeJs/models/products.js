@@ -54,8 +54,11 @@ var ProductsModel = {};
 
 ProductsModel.model = mongoose.model("products");
 
-ProductsModel.getAllProducts = function(callback){
-  ProductsModel.model.find({},function(err, result){
+ProductsModel.getAllProducts = function(req,callback){
+  var limit = parseInt(req.query.limit);
+  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  ProductsModel.model.find({}).limit(limit)
+  .skip(skip).exec(function(err, result){
     callback(err, result);
   });
 }
@@ -67,8 +70,51 @@ ProductsModel.getProductById = function(Id, callback){
   });
 }
 
-ProductsModel.searchProducts = function(searchQuery, callback){
-  ProductsModel.model.find({$or :[{name:{$regex:searchQuery}},{desc:{$regex:searchQuery}}]}, function(err, result){
+ProductsModel.searchProducts = function(req, callback){
+  var searchQuery = req.query.q;
+  var limit = parseInt(req.query.limit);
+  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  console.log(limit)
+  console.log(skip)
+  ProductsModel.model.find({$or :[{name:{$regex:searchQuery,$options : 'i'}},{desc:{$regex:searchQuery,$options : 'i'}}]}).limit(limit)
+  .skip(skip).exec(function(err, result){
+    callback(err, result);
+  });
+}
+ProductsModel.searchProductsCount = function(req, callback){
+  var searchQuery = req.query.q;
+ 
+  ProductsModel.model.find({$or :[{name:{$regex:searchQuery,$options : 'i'}},{desc:{$regex:searchQuery,$options : 'i'}}]})
+  .count().exec(function(err, result){
+    callback(err, result);
+  });
+}
+ProductsModel.filter = function(req, callback){
+  var priceLow = req.body.priceLow;
+  var priceHigh = req.body.priceHigh;
+  var subcategoryArr =req.body.subcatArr;
+
+  var limit = parseInt(req.query.limit);
+  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+
+ // ProductsModel.model.where("price").gt(priceLow)
+  //.where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
+  ProductsModel.model.find({$or :[{$and: [{price:{ $lte:priceHigh}} ,{price:{$gte:priceLow }}]},
+  {subcategory:{$in:subcategoryArr}}]}).limit(limit)
+  .skip(skip).exec(function(err, result){
+    callback(err, result);
+  });
+}
+
+ProductsModel.filterCount = function(req, callback){
+  var priceLow = req.body.priceLow;
+  var priceHigh = req.body.priceHigh;
+  var subcategoryArr =req.body.subcatArr;
+
+  ProductsModel.model.find({$or :[{$and: [{price:{ $lte:priceHigh}} ,{price:{$gte:priceLow }}]},
+  {subcategory:{$in:subcategoryArr}}]}).count().exec(function(err, result){
+    console.log("countttt")
+    console.log(result)
     callback(err, result);
   });
 }
@@ -100,13 +146,6 @@ ProductsModel.rateProduct = function(Id,data,callback){
   })
 }
 
-ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
- // ProductsModel.model.where("price").gt(priceLow)
-  //.where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
-  ProductsModel.model.find({$or :[{$and: [{price:{ $lte:priceHigh}} ,{price:{$gte:priceLow }}]},
-  {subcategory:{$in:subcategoryArr}}]}).exec(callback);
-  //{ dim_cm: { $gt: 15, $lt: 20 } }
-}
 
 ProductsModel.deleteProduct = function(Id, callback){
    ProductsModel.model.remove({_id:Id}, (err, result)=>{
@@ -114,11 +153,16 @@ ProductsModel.deleteProduct = function(Id, callback){
   })
 }
 
-ProductsModel.getProductsBySellerId = function(Id, callback){
-  ProductsModel.model.find({seller_id: Id}, function(err, result){
+ProductsModel.getProductsBySellerId = function(req, callback){
+  var Id = req.params.id;
+  var limit = parseInt(req.query.limit);
+  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  ProductsModel.model.find({seller_id: Id})
+  .limit(limit)
+  .skip(skip)
+  .exec(function(err, result){
     callback(err, result);
-  })
-}
-
+});
+};
 
 module.exports = ProductsModel;
