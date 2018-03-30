@@ -30,7 +30,6 @@
             </h5>
             <h5>
               <strong>Available QTY:</strong>
-               <rating [(ngModel)]="starsCount"></rating>
             </h5>
             <br>
         <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
