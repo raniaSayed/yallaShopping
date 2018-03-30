@@ -22,3 +22,15 @@
 .price-range{
     align-items: center
 }
+
+.pagging{
+    background:none!important;
+     color:#7386D5;
+     border:#7386D5; 
+     margin: 5px;
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     border-bottom:1px solid #7386D5; 
+     cursor: pointer;
+}

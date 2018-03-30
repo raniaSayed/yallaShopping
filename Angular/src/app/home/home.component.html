@@ -9,6 +9,8 @@
     </li>
 </ul> 
 
+
+
 <div class="wrapper">
   <ui-carousel [infinite]="true" [fade]="true" [speed]="500" height="300px" width="700px">
       <ui-carousel-item>
@@ -23,3 +25,42 @@
   </ui-carousel>
 </div>
 -->
+
+<!-- Slideshow container -->
+
+<div class="wrapper">
+<ngb-carousel class="wrapper" align="center">
+    <ng-template ngbSlide interval="100">
+        <img src="../assets/images/sliders/4.webp" alt="Random first slide">
+    </ng-template>
+    <ng-template ngbSlide interval="100">
+        <img src="../assets/images/sliders/1.webp" alt="Random second slide">
+    </ng-template>
+    <ng-template ngbSlide interval="100">
+        <img src="../assets/images/sliders/3.webp" alt="Random third slide">
+    </ng-template>
+    <ng-template ngbSlide interval="100">
+            <img src="../assets/images/sliders/5.webp" alt="Random first slide">
+    </ng-template>
+</ngb-carousel>
+</div>
+
+<!-- products div  -->
+
+<div class="container">
+    <br>
+    <h5>Top Rated products</h5>
+    <div *ngFor="let product of topPs" class="button card float-left m-3" style="width: 18rem; text-align:center; cursor: pointer;" routerLink="/products/{{ product._id }}" href="#">
+        <div class="card-header">
+            <h3>{{product?.name}}</h3>
+        </div>
+        <img class="card-img-top" src="{{ product?.picture | safeHtml}}" alt="{{product.name}}" >
+        <div class="card-body">
+            <p class="card-text">{{product?.desc | limitTo:20}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Stock {{product?.stock}} </li>
+            <li class="list-group-item">Price {{product?.price}} LE.</li>
+        </ul>
+        </div>          
+</div>

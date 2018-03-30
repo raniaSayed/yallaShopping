@@ -9,12 +9,17 @@ export class GetSellerProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getProductsBySellerId(sellerId){
-    const httpOptions = new HttpHeaders({
-      'Content-Type':  'application/json'
-    });
 
-    return this.http.get(`https://localhost:9090/products/seller/${sellerId}`)//.map(res => res.json());
+  headersFactory = ()=> {
+    return { headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('x-access-token') ? localStorage.getItem('x-access-token') : ""
+      })
+    }
+  }
+
+  getProductsBySellerId(sellerId){
+    return this.http.get(`https://localhost:9090/products/seller/${sellerId}`, this.headersFactory())//.map(res => res.json());
   }
 
 }

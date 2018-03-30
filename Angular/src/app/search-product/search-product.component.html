@@ -24,11 +24,11 @@
       </label>
       <br>
       <label> From
-        <input [(ngModel)]="low" (input)="lowChange()" name="low">
+        <input [(ngModel)]="low" (input)="lowChange()" name="low" type="number" min="1">
       </label>
       <br>
       <label> To
-        <input [(ngModel)]="high" (input)="highChange()" name="high" style="margin-left: 19px">
+        <input [(ngModel)]="high" (input)="highChange()" name="high" style="margin-left: 19px" type="number" min="1">
       </label>
     </div>
   </li>
@@ -46,11 +46,11 @@
   <h2>Sorry, No Products Matched Your Search</h2>
 </div>
 <div *ngIf="pages.length>0">Pages:
-  <li style="display: inline;" *ngFor="let i  of pages">
-    <button name="pageNumber" (click)="changePageNumber(i)" href="#">{{i}}</button>
-  </li>
+    <li style="display: inline;"  *ngFor="let i  of pages"><button  class="pagging" name="pageNumber" (click)="changePageNumber(i)">{{i}}</button> </li>
+
 </div>
-<div *ngFor="let product of matchedProducts" class="search-content row m-1">
+<div  class="search-content row">
+<div style="width:50%" *ngFor="let product of matchedProducts">
 
   <div class="col-sm-3">
     <img id="book-cover" src="{{ product?.picture }}" width="150">
@@ -83,4 +83,7 @@
     <div id="myrating-div">
     </div>
   </div>
+ 
 </div>
+</div>
+

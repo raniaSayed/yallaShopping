@@ -1,6 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http';
 // import {RatingModule} from "ngx-rating";
@@ -10,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UICarouselModule } from "ui-carousel"
 import {Http} from '@angular/http';
-
+import { NgxSlideshowModule } from 'ngx-slideshow';
 import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
@@ -80,7 +82,7 @@ import { SearchProductComponent } from './search-product/search-product.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-
+import { TopProductsService } from './services/top-products.service';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users/registeration', component: UserRegisterFormComponent },
@@ -136,6 +138,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     UICarouselModule,
+    NgxSlideshowModule.forRoot(),
+    NgbModule.forRoot(),
     // RatingModule
     ],
 
@@ -156,6 +160,8 @@ const appRoutes: Routes = [
     OrdersSellerService,
     RateService,
     ForgetPasswordService,
+    NgbCarousel,
+    TopProductsService,
     ],
   bootstrap: [AppComponent]
 })
