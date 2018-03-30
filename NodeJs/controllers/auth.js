@@ -7,7 +7,7 @@ var urlEncodedParsermid = bodyParser.urlencoded({
 var router = express.Router();
 var mongoose = require("mongoose");
 var UserModel = require("../models/users");
-var SellerModel = mongoose.model("sellers");
+var SellerModel = require("../models/sellers");
 var config = require('../config');
 var encryptPassword = require('./encryptPassword');
 var jwt = require('jsonwebtoken');
@@ -120,7 +120,8 @@ router.post("/users", JSONParsermid, (req, resp) => {
             success: true,
             message: 'Authentication success!',
             token: token,
-            user: user
+            user: user,
+            isUser : payload.isUser
           });
 
         }
@@ -139,10 +140,13 @@ router.post("/check", (req, resp) => {
         isAuthenticated: false
       });
     } else {
+      console.log(decoded)
       UserModel.getUser(decoded.id, (err, userDoc)=>{
+        console.log(userDoc)
         return resp.json({
           isAuthenticated: true,
-          user: userDoc
+          user: userDoc,
+          isUser: decoded.isUser
         });
       })
     }
