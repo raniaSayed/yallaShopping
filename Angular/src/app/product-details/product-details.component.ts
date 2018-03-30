@@ -18,8 +18,9 @@ export class ProductDetailsComponent implements OnInit {
 	id: Number
 	product: any
   inCart: boolean
-
-  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) {
+  product_id: any;
+  avg : any;
+  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
