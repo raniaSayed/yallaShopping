@@ -5,7 +5,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
 // import {RatingModule} from "ngx-rating";
 import { RateService } from "../services/rate.service";
-import { AuthServiceService } from '../auth-service.service';
+import { AuthServiceService } from '../services/auth-service.service';
 
 
 
@@ -20,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   inCart: boolean
   product_id: any;
   avg : any;
-  
+
   constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService ,private rateService:RateService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
