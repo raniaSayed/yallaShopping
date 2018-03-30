@@ -8,8 +8,8 @@
     <div class="filter-list">
       <div *ngFor="let subcategory of category.subcategories">
         <div class="filter-checkbox">
-          <input id="{{subcategory}}-{{category.name}}" name="subcategory-{{category.name}}" [checked]="categoryNames[subcategory]" (change)="change(subcategory)"
-            type="checkbox">
+          <input id="{{subcategory}}-{{category.name}}" name="subcategory-{{category.name}}" [checked]="categoryNames[subcategory]"
+            (change)="change(subcategory)" type="checkbox">
           <label for="{{subcategory}}-{{category.name}}">{{subcategory}}</label>
         </div>
       </div>
@@ -17,10 +17,12 @@
     <hr>
   </li>
   <li class="filter-list">
-      <div class="price-range">
+    <div class="price-range">
 
-    <label><h3>Price</h3></label>
-    <br>
+      <label>
+        <h3>Price</h3>
+      </label>
+      <br>
       <label> From
         <input [(ngModel)]="low" (input)="lowChange()" name="low">
       </label>
@@ -40,14 +42,18 @@
 
 <!--results-->
 
-<div *ngIf="!matchedProducts"><h2>Sorry, No Products Matched Your Search</h2></div>
+<div *ngIf="!matchedProducts">
+  <h2>Sorry, No Products Matched Your Search</h2>
+</div>
 <div *ngIf="pages.length>0">Pages:
-<li style="display: inline;"  *ngFor="let i  of pages"><button name="pageNumber" (click)="changePageNumber(i)" href="#">{{i}}</button> </li>
+  <li style="display: inline;" *ngFor="let i  of pages">
+    <button name="pageNumber" (click)="changePageNumber(i)" href="#">{{i}}</button>
+  </li>
 </div>
 <div *ngFor="let product of matchedProducts" class="search-content row m-1">
 
   <div class="col-sm-3">
-    <img id="book-cover" src="{{ product?.picture }}">
+    <img id="book-cover" src="{{ product?.picture }}" width="150">
     <h5 class="subtitles">Current rating: </h5>
     <div id="current-rating">
 
