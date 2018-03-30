@@ -10,13 +10,14 @@ export class AuthServiceService {
   public currentUser = this.user.asObservable();
   constructor(private http : HttpClient) {
     this.checkToken().subscribe(res=>{
+      console.log(res)
       if (res['isAuthenticated']) {
         this.user.next(res['user'])
        }
     })
   }
 
-  headersFactory(){
+  headersFactory = ()=> {
     return { headers : new HttpHeaders({
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('x-access-token') ? localStorage.getItem('x-access-token') : ""

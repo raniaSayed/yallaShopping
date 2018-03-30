@@ -8,8 +8,10 @@ var UserModel = require("../models/users");
 var multer = require("multer");
 var fileUploadMid = multer({dest:"./static/users"});
 var encryptPassword = require('./encryptPassword');
+var authMid = require('./authMid')
+var userAuthMid = require('./userAuthMid')
 
-router.get("/", (req, resp)=>{
+router.get("/", authMid,(req, resp)=>{
 	UserModel.getUsers((err, result) => {
 		if(!err) {
 			resp.json(result);
@@ -32,8 +34,8 @@ router.post("/", JSONParsermid,function (req, resp) {
 
 })
 
-router.get("/:id", (req, resp) => {
-	UserModel.getUser(req.params.id, (err, result) => {
+router.get("/:id", [authMid, userAuthMid],(req, resp) => {
+	UserModel.getUser(req.decoded.id, (err, result) => {
 		if(!err) {
 			resp.json(result);
 		} else {
@@ -42,8 +44,8 @@ router.get("/:id", (req, resp) => {
 	})
 })
 
-router.put("/:id", JSONParsermid,(req, resp)=>{
-	UserModel.editUser(req.params.id, req.body, (err, result)=>{
+router.put("/:id", [authMid, userAuthMid,JSONParsermid],(req, resp)=>{
+	UserModel.editUser(req.decoded.id, req.body, (err, result)=>{
 		if(!err) {
 			resp.json({status:true})
 		} else {
@@ -53,7 +55,7 @@ router.put("/:id", JSONParsermid,(req, resp)=>{
 
 })
 
-router.delete("/:id",function (req, resp) {
+router.delete("/:id", [authMid, userAuthMid],(req, resp) =>{
 	UserModel.deleteUser(req.params.id, (err, result) => {
 		if(!err) {
 			resp.json({status:"User Deleted"});
@@ -64,8 +66,8 @@ router.delete("/:id",function (req, resp) {
 })
 
 
-router.get("/:id/cart",(req, resp)=>{
-	UserModel.getCart(req.params.id, (err, result) => {
+router.get("/:id/cart", [authMid, userAuthMid],(req, resp)=>{
+	UserModel.getCart(req.decoded.id, (err, result) => {
 		if(!err) {
 			resp.json(result);
 		} else {
@@ -75,8 +77,8 @@ router.get("/:id/cart",(req, resp)=>{
 })
 
 
-router.delete("/:id/cart",(req, resp)=>{
-	UserModel.deleteCart(req.params.id, (err, result)=>{
+router.delete("/:id/cart", [authMid, userAuthMid],(req, resp)=>{
+	UserModel.deleteCart(req.decoded.id, (err, result)=>{
 		if (!err) {
 			resp.json({status:true})
 		}
@@ -86,8 +88,8 @@ router.delete("/:id/cart",(req, resp)=>{
 	})
 })
 
-router.post("/:id/cart",JSONParsermid,(req, resp)=>{
-	UserModel.addToCart(req.params.id , req.body, (err, result)=>{
+router.post("/:id/cart", [authMid, userAuthMid, JSONParsermid],(req, resp)=>{
+	UserModel.addToCart(req.decoded.id , req.body, (err, result)=>{
 		if (!err) {
 			resp.json({status:true})
 		}
@@ -96,8 +98,8 @@ router.post("/:id/cart",JSONParsermid,(req, resp)=>{
 		}
 	})
 })
-router.put("/:id/cart",JSONParsermid,(req, resp)=>{
-	UserModel.editCart(req.params.id , req.body, (err, result)=>{
+router.put("/:id/cart",[authMid, userAuthMid, JSONParsermid],(req, resp)=>{
+	UserModel.editCart(req.decoded.id , req.body, (err, result)=>{
 		if (!err) {
 			resp.json(result)
 		}

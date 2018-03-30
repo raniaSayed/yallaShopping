@@ -21,27 +21,38 @@ export class ProductDetailsService {
   getProduct(id){
 	  return this.http.get(`https://localhost:9090/products/${id}`)
   }  
-  // addProduct(id){
-	//   return this.http.get(`http://localhost:9090/products/${id}`)
-  // }
 
   navigateToSearchComponent(searchWord){
-    //this.http.get(`http://localhost:9090/products/search?q=${searchWord}`);
     this.myMethodSubject.next(searchWord);
     this.router.navigate(['products/search']);
-
   }
-  getFilteredProductData(lowPrice,highPrice,subcategories){
+
+  getFilteredProductData(lowPrice,highPrice,subcategories,page,limit){
     var obj = {
       "subcatArr": subcategories,
       "priceLow":lowPrice,
       "priceHigh":highPrice
-  };
-    return this.http.post('https://localhost:9090/products/filter',JSON.stringify(obj),this.httpOptions);
+    };
+    return this.http.post(`https://localhost:9090/products/filter?page=${page}&limit=${limit}`,JSON.stringify(obj),this.httpOptions);
 
   }
-  getMatchedProductData(searchWord){
-    return this.http.get(`https://localhost:9090/products/search?q=${searchWord}`);
+
+  getFilteredProductDataCount(lowPrice,highPrice,subcategories){
+    
+    var obj = {
+      "subcatArr": subcategories,
+      "priceLow":lowPrice,
+      "priceHigh":highPrice
+    }
+    return this.http.post(`https://localhost:9090/products/filter/count`,JSON.stringify(obj),this.httpOptions);
+  }
+
+  getMatchedProductData(searchWord,page,limit){
+    return this.http.get(`https://localhost:9090/products/search?q=${searchWord}&page=${page}&limit=${limit}`);
+  }
+
+  getMatchedProductDataCount(searchWord){
+    return this.http.get(`https://localhost:9090/products/search/count?q=${searchWord}`);
   }
 
 }

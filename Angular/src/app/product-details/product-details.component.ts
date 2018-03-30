@@ -33,8 +33,8 @@ export class ProductDetailsComponent implements OnInit {
    	})
 
     this.cartService.getCart().subscribe((cart: any)=>{
-      if (cart.length>0) {
-        cart.forEach(p=>{
+      if (cart.cart.length>0) {
+        cart.cart.forEach(p=>{
           if (p['prodId']['_id']==this.id) {
              this.inCart = true
            }
@@ -44,9 +44,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getAvgRate(){
-
-    this.product_id=2;
-    this.rateService.sendDataToServer(this.product_id).subscribe((res)=> {
+    this.rateService.sendDataToServer(this.id).subscribe((res)=> {
       this.avg=res;
        // console.log(res);
        console.log(this.avg);

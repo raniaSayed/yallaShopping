@@ -11,15 +11,16 @@ export class UserCartComponent implements OnInit {
   cart = []
   tempCart: any
   stockErr: boolean
+  isLoaded: boolean
   constructor(private cartService: CartService, private AuthService: AuthServiceService) { 
   	this.cartService.getCart().subscribe(data=>{
   		this.cart = data['cart']
       this.tempCart = JSON.parse(JSON.stringify(this.cart))
+      this.isLoaded = true
   	})
   }
 
   ngOnInit() {
-      console.log(this.AuthService.currentUser.subscribe(p=>console.log(p)))
   }
 
   editCart(e, i){

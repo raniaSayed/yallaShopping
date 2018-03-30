@@ -82,7 +82,7 @@ router.post("/tokens", JSONParsermid, (req, resp) => {
 
 router.post("/users", JSONParsermid, (req, resp) => {
   var model = req.body.usertype === "user" ? UserModel : SellerModel
-  model.model.findOne({
+  model.findOne({
     email: req.body.email
   }, (err, user) => {
 
@@ -110,14 +110,12 @@ router.post("/users", JSONParsermid, (req, resp) => {
             id: user._id,
             email: user.email,
             isUser: req.body.usertype === "user" ? true : false,
-            user: user
           }
 
           var token = jwt.sign(payload, config.jwtSecret, {
             expiresIn: 86400
           });
           user['password'] = ""
-          console.log(user)
           resp.json({
             success: true,
             message: 'Authentication success!',
@@ -141,17 +139,17 @@ router.post("/check", (req, resp) => {
         isAuthenticated: false
       });
     } else {
-      console.log(decoded)
-      return resp.json({
-        isAuthenticated: true,
-        user: decoded.user
-      });
+      UserModel.getUser(decoded.id, (err, userDoc)=>{
+        return resp.json({
+          isAuthenticated: true,
+          user: userDoc
+        });
+      })
     }
   });
 });
 
 router.post('/forget', JSONParsermid, (req, resp) => {
-  console.log(req.body);
 
   var password = generator.generate({
     length: 8,
