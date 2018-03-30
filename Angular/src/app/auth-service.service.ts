@@ -17,7 +17,7 @@ export class AuthServiceService {
     })
   }
 
-  headersFactory(){
+  headersFactory = ()=> {
     return { headers : new HttpHeaders({
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('x-access-token') ? localStorage.getItem('x-access-token') : ""

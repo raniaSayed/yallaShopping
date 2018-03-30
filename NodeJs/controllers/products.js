@@ -211,10 +211,6 @@ router.get("/:productId/avg", function (request, response) {
 
   RatesModel.getAvgRates(+request.params.productId, function (err, result) {
     if (!err) {
-      console.log("HELOO");
-      console.log(result);
-      // console.log("finding Product with id ="+request.params.productId);
-      // console.log(result[0].average);
       if (result) {
         response.json({
           status: "ok",

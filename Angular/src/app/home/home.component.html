@@ -9,6 +9,8 @@
     </li>
 </ul> 
 
+
+
 <div class="wrapper">
   <ui-carousel [infinite]="true" [fade]="true" [speed]="500" height="300px" width="700px">
       <ui-carousel-item>
@@ -23,3 +25,22 @@
   </ui-carousel>
 </div>
 -->
+
+<!-- Slideshow container -->
+
+<div class="wrapper">
+<ngb-carousel class="wrapper" align="center">
+    <ng-template ngbSlide interval="100">
+        <img src="../assets/images/sliders/4.webp" alt="Random first slide">
+    </ng-template>
+    <ng-template ngbSlide interval="100">
+        <img src="../assets/images/sliders/1.webp" alt="Random second slide">
+    </ng-template>
+    <ng-template ngbSlide interval="100">
+        <img src="../assets/images/sliders/3.webp" alt="Random third slide">
+    </ng-template>
+    <ng-template ngbSlide interval="100">
+            <img src="../assets/images/sliders/5.webp" alt="Random first slide">
+    </ng-template>
+</ngb-carousel>
+</div>

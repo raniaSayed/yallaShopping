@@ -82,7 +82,7 @@ router.post("/tokens", JSONParsermid, (req, resp) => {
 
 router.post("/users", JSONParsermid, (req, resp) => {
   var model = req.body.usertype === "user" ? UserModel : SellerModel
-  model.model.findOne({
+  model.findOne({
     email: req.body.email
   }, (err, user) => {
 
