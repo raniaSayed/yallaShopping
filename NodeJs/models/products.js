@@ -58,8 +58,11 @@ var ProductsModel = {};
 
 ProductsModel.model = mongoose.model("products");
 
-ProductsModel.getAllProducts = function(callback){
-  ProductsModel.model.find({},function(err, result){
+ProductsModel.getAllProducts = function(req,callback){
+  var limit = parseInt(req.query.limit);
+  var skip = (parseInt(req.query.page)-1) * parseInt(limit);
+  ProductsModel.model.find({}).limit(limit)
+  .skip(skip).exec(function(err, result){
     callback(err, result);
   });
 }

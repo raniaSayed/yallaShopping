@@ -40,7 +40,10 @@ router.delete("/:id",function (req, resp) {
 
 
 router.get("/",function(req,response){
-  ProductsModel.getAllProducts(function(err, result){
+  ProductsModel.getAllProducts(req,function(err, result){
+   
+    console.log("Paggination check")
+    console.log(req.query.page)
     if(!err&&result.length>0){
       console.log("finding All Products");
       response.json(result);

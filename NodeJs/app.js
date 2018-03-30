@@ -4,6 +4,7 @@ var authMid = require("./controllers/authMid")
 var server = express()
 var path = require('path')
 var config = require('./config')
+const paginate = require('express-paginate')
 
 var https = require('https');
 var options = {
@@ -27,6 +28,9 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
 })
 
 // server.use(authMid);
+
+//make pagination
+server.use(paginate.middleware(10,10))
 
 var authRouter = require("./controllers/auth")
 server.use("/auth", authRouter)
