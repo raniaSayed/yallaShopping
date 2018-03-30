@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AddProductService } from '../add-product.service';
+import { AddProductService } from '../services/add-product.service';
 import { CategoryService } from '../services/category.service';
 import { ArrayType } from '@angular/compiler/src/output/output_ast';
 import { Router  } from '@angular/router';
@@ -41,14 +41,14 @@ export class AddProductComponent implements OnInit {
 
   getCats(){
     this.catService.getAllCategoreis().subscribe((res) => {
-        this.categoriesName = res; 
+        this.categoriesName = res;
       })
   }
 
-  setSelectedCat(){   
+  setSelectedCat(){
     this.categoriesName.forEach(cat => {
       if(cat._id == this.categoryId){
-        this.subcategories = cat.subcategories; 
+        this.subcategories = cat.subcategories;
       }
     });
   }
@@ -76,13 +76,13 @@ export class AddProductComponent implements OnInit {
 
 
   submitIt(){
-     console.log("submitFn");  
+     console.log("submitFn");
      this.addProduct();
   }
 
   ngOnInit() {
   }
-  
-  
+
+
 
 }

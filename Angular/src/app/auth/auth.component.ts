@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, GoogleLoginProvider, FacebookLoginProvider } from 'angular5-social-login';
 import { Router  } from '@angular/router';
-import { AuthServiceService } from '../auth-service.service';
+import { AuthServiceService } from '../services/auth-service.service';
 
 
 @Component({

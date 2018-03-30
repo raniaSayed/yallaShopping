@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { EditProductService } from '../edit-product.service';
+import { EditProductService } from '../services/edit-product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router  } from '@angular/router';
-
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -57,7 +56,7 @@ private serverErrors: string;
       if(res['status']=="ok"){
         this.router.navigate([`/categories/${this.productData.category}/${this.productData.subcategory}`])
       }
-      
+
       // console.log(this.productData);
 
 });

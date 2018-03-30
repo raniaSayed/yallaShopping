@@ -20,6 +20,7 @@ export class UserCartComponent implements OnInit {
         route.navigate([''])
       }
     })
+    
   	this.cartService.getCart().subscribe(data=>{
   		this.cart = data['cart']
       this.tempCart = JSON.parse(JSON.stringify(this.cart))

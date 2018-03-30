@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatternValidator, NgForm } from '@angular/forms';
-import { AuthServiceService } from '../auth-service.service';
+import { AuthServiceService } from '../services/auth-service.service';
 import { UserRegisterationService } from '../services/user-registeration.service';
 import { Router  } from '@angular/router';
 
@@ -22,7 +22,7 @@ export class UserRegisterFormComponent implements OnInit {
   private passCheck: boolean = true;
   private serverErrors: string;
   isLogged = true
-  constructor(private userRegisterationService: UserRegisterationService, private route: Router, private AuthService: AuthServiceService) { 
+  constructor(private userRegisterationService: UserRegisterationService, private route: Router, private AuthService: AuthServiceService) {
     this.AuthService.checkToken().subscribe(res=>{
       if (res['isAuthenticated']) {
         route.navigate([''])
@@ -56,7 +56,7 @@ export class UserRegisterFormComponent implements OnInit {
       if(res['status']){
         console.log("user created");
         this.route.navigate(['users/login'])
-      
+
       }else{
         console.log("error");
         console.log(res['errors']);
@@ -73,9 +73,9 @@ export class UserRegisterFormComponent implements OnInit {
         }else{
             this.serverErrors = "this email already exists";
         }
-        
+
       }
-      
+
     });
   }
 
@@ -89,7 +89,7 @@ export class UserRegisterFormComponent implements OnInit {
     }
   }
 
-  
+
 
   ngOnInit() {
   }
