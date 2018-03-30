@@ -15,27 +15,24 @@ export class AuthServiceService {
        }
     })
   }
-    httpOptions = {
-      headers : new HttpHeaders({
+
+  headersFactory(){
+    return { headers : new HttpHeaders({
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('x-access-token') ? localStorage.getItem('x-access-token') : ""
       })
     }
-    getUserToken(userData : any){
-      // return "hello";
-      // return userData;
-    console.log(userData);
-
-    // let headers = new Headers({'Content-Type':  'application/json'});
+  }
+  
+  getUserToken(userData : any){
     return this.http.post('https://localhost:9090/auth/tokens',userData );
-
-    }
+  }
 
   signIn(data){
-    return this.http.post('https://localhost:9090/auth/users', JSON.stringify(data), this.httpOptions);
+    return this.http.post('https://localhost:9090/auth/users', JSON.stringify(data), this.headersFactory());
   }  
 
   checkToken(){
-    return this.http.post('https://localhost:9090/auth/check', "" ,this.httpOptions);
+    return this.http.post('https://localhost:9090/auth/check', "" ,this.headersFactory());
   }
 }
