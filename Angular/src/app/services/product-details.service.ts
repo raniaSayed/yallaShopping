@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+
 
 @Injectable()
 export class ProductDetailsService {
   public myMethod$: any;
-  private myMethodSubject = new Subject<any>();
+  public myMethodSubject = new BehaviorSubject<any>({});
+  httpOptions = {
+  	headers: new HttpHeaders({'Content-Type':  'application/json'})
+  }
 
   constructor(private http: HttpClient,private router: Router) { 
    
@@ -14,7 +19,7 @@ export class ProductDetailsService {
   }
 
   getProduct(id){
-	  return this.http.get(`http://localhost:9090/products/${id}`)
+	  return this.http.get(`https://localhost:9090/products/${id}`)
   }  
   // addProduct(id){
 	//   return this.http.get(`http://localhost:9090/products/${id}`)
@@ -26,10 +31,17 @@ export class ProductDetailsService {
     this.router.navigate(['products/search']);
 
   }
-  getMatchedProductData(searchWord){
-    return this.http.get(`http://localhost:9090/products/search?q=${searchWord}`);
+  getFilteredProductData(lowPrice,highPrice,subcategories){
+    var obj = {
+      "subcatArr": subcategories,
+      "priceLow":lowPrice,
+      "priceHigh":highPrice
+  };
+    return this.http.post('https://localhost:9090/products/filter',JSON.stringify(obj),this.httpOptions);
 
   }
-  
+  getMatchedProductData(searchWord){
+    return this.http.get(`https://localhost:9090/products/search?q=${searchWord}`);
+  }
 
 }

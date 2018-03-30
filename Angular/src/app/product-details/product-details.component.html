@@ -1,15 +1,18 @@
 <div class="container" >
     <div class="row" >
+<<<<<<< HEAD
 
     </div>
     <div class="row" >
+=======
+>>>>>>> eafa96b92949344e30e56b13d4247d7dc68252ee
         <div class="col-6">
             <h1> <strong>{{ product?.name }}</strong></h1>
             <h6>by: <a routerLink="/products/seller/{{product?.seller_id?._id}}">{{ product?.seller_id?.name }}</a> </h6>
             <img width="100%" src="{{ product?.picture }}" alt="">
         </div>
         <div class="col-6">
-            <h1 style="color: red; display:inline;"> <strong>{{ product?.price }} EGP</strong></h1>
+            <h1 style="color: rgb(36, 36, 252); display:inline;"> <strong>{{ product?.price }} EGP</strong></h1>
             <h5>
                 <strong>Description:</strong>
                 <p>
@@ -22,17 +25,17 @@
                 <a routerLink="/categories/{{ product?.category }}/{{ product?.subcategory }}">{{ product?.subcategory }}</a>
             </h6>
             <h5>
-                <strong>Available QTY:</strong>
-                <strong>{{ product?.stock }}</strong>
+                <strong>Stock:</strong>
+                <span>{{ product?.stock>0 ? product.stock : 'Out of stock'}}</span>
             </h5>
             <h5>
               <strong>Available QTY:</strong>
                <rating [(ngModel)]="starsCount"></rating>
             </h5>
+            <br>
+        <button *ngIf="!inCart && product?.stock>0" type="button" class="btn btn-success btn-lg mt-3" (click)="addToCart($event)" >Add to Cart</button>
+        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg  mt-3" [routerLink]="['/users/cart']">You added this in your cart</button>
         </div>
-        <br>
-        <button class="btn btn-success btn-lg btn-block" routerLink="" >
-                Add to cart
-        </button>
+
     </div>
 </div>

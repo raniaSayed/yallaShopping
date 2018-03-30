@@ -24,7 +24,7 @@ router.post("/", JSONParsermid,function (req, resp) {
 	console.log("post request to add user");
 	UserModel.addUser(req.body, (err, result)=>{
 		if(!err) {
-			resp.json({status:"ok"})
+			resp.json({status:true})
 		} else {
 			resp.json(err);
 		}
@@ -45,7 +45,7 @@ router.get("/:id", (req, resp) => {
 router.put("/:id", JSONParsermid,(req, resp)=>{
 	UserModel.editUser(req.params.id, req.body, (err, result)=>{
 		if(!err) {
-			resp.json({status:"ok"})
+			resp.json({status:true})
 		} else {
 			resp.json(err);
 		}
@@ -65,12 +65,11 @@ router.delete("/:id",function (req, resp) {
 
 
 router.get("/:id/cart",(req, resp)=>{
-	UserModel.model.find({_id:req.params.id},{cart:true, _id:false}).populate('cart.prodId').exec((err, res)=>{
-		if (!err && res.length>0) {
-			resp.json(res[0].cart)
-		}
-		else {
-			resp.json([])
+	UserModel.getCart(req.params.id, (err, result) => {
+		if(!err) {
+			resp.json(result);
+		} else {
+			resp.json(err);
 		}
 	})
 })
@@ -79,7 +78,7 @@ router.get("/:id/cart",(req, resp)=>{
 router.delete("/:id/cart",(req, resp)=>{
 	UserModel.deleteCart(req.params.id, (err, result)=>{
 		if (!err) {
-			resp.json({status:"ok"})
+			resp.json({status:true})
 		}
 		else {
 			resp.json(err)
@@ -90,7 +89,7 @@ router.delete("/:id/cart",(req, resp)=>{
 router.post("/:id/cart",JSONParsermid,(req, resp)=>{
 	UserModel.addToCart(req.params.id , req.body, (err, result)=>{
 		if (!err) {
-			resp.json({status:"ok"})
+			resp.json({status:true})
 		}
 		else {
 			resp.json(err)
@@ -100,7 +99,7 @@ router.post("/:id/cart",JSONParsermid,(req, resp)=>{
 router.put("/:id/cart",JSONParsermid,(req, resp)=>{
 	UserModel.editCart(req.params.id , req.body, (err, result)=>{
 		if (!err) {
-			resp.json({status:"ok"})
+			resp.json(result)
 		}
 		else {
 			resp.json(err)

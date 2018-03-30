@@ -160,6 +160,27 @@ router.post("/:productID?/rate", urlEncodedMid,function (req, resp) {
 
 })
 
+router.post("/filter", JSONParsermid, function(request, response){
+  // var subcatArr = Array();
+  // subcatArr.push(request.body.subcat1);
+  // subcatArr.push(request.body.subcat2);
+  //subcatArr must be Array
+  ProductsModel.filter(request.body.priceLow,
+    request.body.priceHigh, request.body.subcatArr, function(err, result){
+    if(!err&&result.length>0){
+      console.log("filtering products");
+      response.json(result);
+    }
+    else{
+      response.json(err);
+    }
+  })
+})
+//get request http://localhost:9090/products
+//need to find all the products
+//get request http://localhost:9090/products/id
+//need to find that specific product usind the id in the url...
+
 
 
 router.get("/:productId?/rate", function(request, response){

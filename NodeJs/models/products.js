@@ -78,6 +78,8 @@ ProductsModel.addProduct = function(data,callback){
   var product = new ProductsModel.model(data);
   product.save((err, doc)=>{
     console.log("save");
+    console.log(err);
+    console.log(doc);
     callback(err, doc)
   });
 }
@@ -99,8 +101,11 @@ ProductsModel.rateProduct = function(Id,data,callback){
 }
 
 ProductsModel.filter = function(priceLow,priceHigh, subcategoryArr, callback){
-  ProductsModel.model.where("price").gt(priceLow)
-  .where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
+ // ProductsModel.model.where("price").gt(priceLow)
+  //.where("price").lt(priceHigh).where("subcategory").in(subcategoryArr).exec(callback);
+  ProductsModel.model.find({$or :[{$and: [{price:{ $lte:priceHigh}} ,{price:{$gte:priceLow }}]},
+  {subcategory:{$in:subcategoryArr}}]}).exec(callback);
+  //{ dim_cm: { $gt: 15, $lt: 20 } }
 }
 
 ProductsModel.deleteProduct = function(Id, callback){

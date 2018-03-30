@@ -28,7 +28,8 @@
         Product Description
       </td>
       <td>
-        <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="description" #udescriptoin="ngModel" >
+        <textarea class="form-control"  name="description" id="description" [(ngModel)]="description" #udescriptoin="ngModel" cols="30" rows="10"></textarea>
+        <!-- <input type="textarea" class="form-control"  name="description" id="description" [(ngModel)]="description" #udescriptoin="ngModel" > -->
       </td>
     </tr>
     <tr>
@@ -46,7 +47,10 @@
         <span color="red"><font color="red">*</font></span>
       </td>
       <td>
-        <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="category" #ucategory="ngModel">
+        <!-- <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="category" #ucategory="ngModel"> -->
+        <select class="form-control" required name="category" id="category" (change)="setSelectedCat()" [(ngModel)]="categoryId" #ucategory="ngModel">
+          <option  *ngFor="let cat of categoriesName" value="{{cat._id}}">{{cat.name}}</option>
+        </select>
       </td>
     </tr>
     <tr>
@@ -55,7 +59,10 @@
         <span color="red"><font color="red">*</font></span>
       </td>
       <td>
-        <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="subcategory" #usubcategory="ngModel">
+        <!-- <input class="form-control" type="text" required name="subcategory" id="subcategory" [(ngModel)]="subcategory" #usubcategory="ngModel"> -->
+        <select class="form-control" required name="subcategory" id="subcategory"  [(ngModel)]="subcategory" #usubcategory="ngModel">
+          <option *ngFor="let subcat of subcategories" value="{{subcat}}">{{subcat}}</option>
+        </select>
       </td>
     </tr>
     <tr>

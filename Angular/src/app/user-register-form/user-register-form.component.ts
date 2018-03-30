@@ -21,11 +21,14 @@ export class UserRegisterFormComponent implements OnInit {
   private valid: boolean = true;
   private passCheck: boolean = true;
   private serverErrors: string;
-
+  isLogged = true
   constructor(private userRegisterationService: UserRegisterationService, private route: Router, private AuthService: AuthServiceService) { 
     this.AuthService.checkToken().subscribe(res=>{
-      if (res) {
+      if (res['isAuthenticated']) {
         route.navigate([''])
+        this.isLogged = true
+      }else{
+        this.isLogged = false
       }
     })
   }

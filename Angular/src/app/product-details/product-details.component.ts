@@ -5,6 +5,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { CartService } from "../services/cart.service";
 // import {RatingModule} from "ngx-rating";
 import { RateService } from "../services/rate.service";
+import { AuthServiceService } from '../auth-service.service';
 
 
 
@@ -14,11 +15,11 @@ import { RateService } from "../services/rate.service";
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-	id: Number;
-	product: any;
-  product_id: Number;
-  avg:any;
-  constructor(private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService, private rateService : RateService) {
+	id: Number
+	product: any
+  inCart: boolean
+
+  constructor(private AuthService: AuthServiceService, private route: ActivatedRoute, private productDetails: ProductDetailsService, private cartService: CartService) {
    	this.route.params.subscribe(params => {
         this.id = params['id'];
         this.productDetails.getProduct(this.id).subscribe((data)=>{
@@ -26,7 +27,18 @@ export class ProductDetailsComponent implements OnInit {
           console.log(this.product);
 
         })
+        this.AuthService.currentUser.subscribe(p=>console.log(p))
    	})
+
+    this.cartService.getCart().subscribe((cart: any)=>{
+      if (cart.length>0) {
+        cart.forEach(p=>{
+          if (p['prodId']['_id']==this.id) {
+             this.inCart = true
+           }
+        })
+      }
+    })
   }
 
   getAvgRate(){
@@ -47,7 +59,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(e){
-  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>console.log(p))
+  	this.cartService.AddToCart({prodId:this.product['_id'], quantity:1}).subscribe(p=>{
+      this.inCart = true
+    })
   }
 
 }
