@@ -34,7 +34,7 @@ import { GetSellerProductsService } from './services/get-seller-products.service
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular5-social-login";
 
 import { AuthServiceService } from './auth-service.service';
-import { AddProductService } from './add-product.service';
+import { AddProductService } from './services/add-product.service';
 import { EditProductService } from './edit-product.service';
 import { ForgetPasswordService } from './services/forget-password.service';
 
