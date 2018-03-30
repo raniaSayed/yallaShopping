@@ -44,3 +44,23 @@
     </ng-template>
 </ngb-carousel>
 </div>
+
+<!-- products div  -->
+
+<div class="container">
+    <br>
+    <h5>Top Rated products</h5>
+    <div *ngFor="let product of topPs" class="button card float-left m-3" style="width: 18rem; text-align:center; cursor: pointer;" routerLink="/products/{{ product._id }}" href="#">
+        <div class="card-header">
+            <h3>{{product?.name}}</h3>
+        </div>
+        <img class="card-img-top" src="{{ product?.picture | safeHtml}}" alt="{{product.name}}" >
+        <div class="card-body">
+            <p class="card-text">{{product?.desc | limitTo:20}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Stock {{product?.stock}} </li>
+            <li class="list-group-item">Price {{product?.price}} LE.</li>
+        </ul>
+        </div>          
+</div>

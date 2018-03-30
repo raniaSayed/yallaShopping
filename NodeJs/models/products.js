@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
+var random = require('mongoose-query-random');
 
 // products schema
 var products = new Schema(
@@ -170,4 +170,9 @@ ProductsModel.getProductsBySellerId = function(req, callback){
 });
 };
 
+ProductsModel.getTop = function(callback){
+  ProductsModel.model.find().random(6, true, function(err, result){
+    callback(err, result);
+  })
+}
 module.exports = ProductsModel;
