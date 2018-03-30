@@ -158,7 +158,7 @@ const appRoutes: Routes = [
     CartService,
     GetSellerProductsService,
     OrdersSellerService,
-    RateService
+    RateService,
     ForgetPasswordService,
     ],
   bootstrap: [AppComponent]
