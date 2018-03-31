@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
     this.slider.interval = 0;
     this.topProducts.getTopProducts().subscribe(res=>{
       this.topPs = res;
-      console.log(res);
-      
     })
   }
   ngOnInit() {

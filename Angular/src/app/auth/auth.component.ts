@@ -63,7 +63,7 @@ export class AuthComponent implements OnInit {
         this.user = res['user']
 
         this.AuthService.user.next({isAuthenticated:true, user:this.user, isUser:res['isUser']})
-        console.log(this.AuthService.currentUser.subscribe(p=>console.log(p)))
+        this.AuthService.currentUser.subscribe(p=>console.log(p));
         this.route.navigate(['']).catch(err=>console.log(err))
       }else{
         this.signInError = true

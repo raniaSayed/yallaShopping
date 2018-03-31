@@ -27,7 +27,6 @@ export class OrdersSellerComponent implements OnInit {
     this.ordersSellerService.getOrdersOfSeller().subscribe(
       ordersSeller => {
         this.ordersSeller = ordersSeller;
-        console.log(this.ordersSeller);
       }, err => {
         if (!err.error.success) {
           this.route.navigate(['users/login'])

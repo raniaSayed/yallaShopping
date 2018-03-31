@@ -2,20 +2,20 @@
   <!-- Sidebar Holder -->
   <!--app-sidebar [isActive]="isActive"></app-sidebar-->
   <nav id="sidebar" [class.active]="isActive">
-    <div class="sidebar-header">
+    <div *ngIf="currentUser?.isAuthenticated" class="sidebar-header">
       <!-- if user loged in -->
-      <h3>
-        <a href="#">Account</a>
-      </h3>
+      <h2 class="text-center">
+        <a routerLink="">{{ currentUser?.user.name }}</a>
+      </h2>
     </div>
 
     <ul class="list-unstyled components">
-      <p>Yalla Shopping</p>
+      <h2 class="text-center">Yalla Shopping</h2>
       <li class="active">
-        <a href="#categoryList" data-toggle="collapse" aria-expanded="true">Categories</a>
+        <a href="#categoryList">Categories</a>
         <ul id="categoryList" class="list-unstyled">
           <li *ngFor="let category of categories">
-            <a data-toggle="collapse" aria-expanded="false">{{category.name}}</a>
+            <a>{{category.name}}</a>
             <form action="">
 
               <ul class="list-unstyled" id="{{category.name}}">
@@ -60,40 +60,43 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-
-              <form (submit)="searchSubmit()" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-1" name="searchWord" [(ngModel)]="searchWord" id="searchInput" style="width:40%" type="search"
-                  placeholder="Search" aria-label="Search">
-                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
-              </form>
-
-              <li class="nav-item mr-2" *ngIf="!currentUser.isAuthenticated">
-                <a [routerLink]="['/users/registeration']">
-                  <span class="glyphicon glyphicon-user"></span>Sign Up</a>
+              <li class="nav-item mr-2" *ngIf="!currentUser?.isAuthenticated">
+                <a [routerLink]="['/users/registeration']" class="glyphicon glyphicon-user" class="nav-link">Sign Up</a>
               </li>
-              <li class="nav-item mr-2" *ngIf="currentUser.isAuthenticated && !currentUser.isUser">
+              <li class="nav-item mr-2" *ngIf="currentUser?.isAuthenticated && !currentUser?.isUser">
                 <a [routerLink]="['/products/add']" class="nav-link">Add Products</a>
               </li>
-              <li class="nav-item mr-2" *ngIf="currentUser.isAuthenticated && !currentUser.isUser">
+              <li class="nav-item mr-2" *ngIf="currentUser?.isAuthenticated && !currentUser?.isUser">
                 <a [routerLink]="['/products/seller']" class="nav-link">My products</a>
               </li>
-              <li class="nav-item mr-2" *ngIf="currentUser.isAuthenticated && !currentUser.isUser">
+              <li class="nav-item mr-2" *ngIf="currentUser?.isAuthenticated && !currentUser?.isUser">
                 <a [routerLink]="['sellers/orders']" class="nav-link">My Orders</a>
               </li>
 
-              <li class="nav-item mr-2" *ngIf="!currentUser.isAuthenticated">
-                <a [routerLink]="['/users/login']">Login</a>
-              </li>
-              <li class="nav-item" *ngIf="currentUser.isAuthenticated">
-                <a (click)="logout()" routerLink="" class="nav-link">Logout</a>
-              </li>
+              <li class="nav-item mr-2" *ngIf="!currentUser?.isAuthenticated">
+                <a [routerLink]="['/users/login']" class="nav-link">Login</a>
 
-              <li class="nav-item" *ngIf="currentUser.isUser">
+              </li>
+              <li class="nav-item" *ngIf="currentUser?.isUser">
                 <a [routerLink]="['/users/cart']">
                   <i class="fa fa-shopping-cart fa-2x  icon-grey">
                     <span class="badge">17</span>
                   </i>
                 </a>
+              </li>
+              <li>
+                <form (submit)="searchSubmit()" class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-1" name="searchWord" [(ngModel)]="searchWord" id="searchInput" style="width:40%" type="search"
+                    placeholder="Search" aria-label="Search">
+                  <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
+                </form>
+              </li>
+              <li class="nav-item" *ngIf="currentUser.isAuthenticated">
+                <a routerLink="" class="nav-link">{{ currentUser?.user.name }}</a>
+              </li>
+              <li class="nav-item" *ngIf="currentUser.isAuthenticated">
+                <a (click)="logout()" routerLink="" class="nav-link">Logout</a>
+              </li>
             </ul>
           </div>
         </nav>
