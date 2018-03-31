@@ -11,8 +11,10 @@ var productModel = require("../models/products");
 var authMid = require('./authMid')
 var sellerAuthMid = require('./sellerAuthMid')
 var userAuthMid = require('./userAuthMid')
+
+
 //  /order/sellers/id router
-router.get("/sellers/:id", [authMid, sellerAuthMid],(req, resp) =>{
+router.get("/sellers", [authMid, sellerAuthMid],(req, resp) =>{
   orderModel.model.find({
       status: "ordered"
     })
@@ -33,27 +35,12 @@ router.get("/sellers/:id", [authMid, sellerAuthMid],(req, resp) =>{
         let sellerOrders = [];
 
         for (let order of docs) {
-          if (order.prodId.seller_id._id === +req.params.id) {
+          if (order.prodId.seller_id._id === req.decoded.id) {
             sellerOrders.push(order);
           }
 
         }
         resp.json(sellerOrders);
-      } else {
-        resp.json(err);
-      }
-    });
-});
-
-router.get("/sellers/:id/count", function (req, resp) {
-  orderModel.model.find({
-      status: "ordered"
-    })
-   .count()
-    .exec(function (err, res) {
-      if (!err) {
-       
-        resp.json(res);
       } else {
         resp.json(err);
       }
@@ -142,11 +129,9 @@ router.post("/", JSONParsermid,  (req, resp) =>{
   });
 });
 
-//view user order by id
-router.get("/:id", [authMid, userAuthMid],(req, resp) =>{
+router.get("/:id", [authMid, sellerAuthMid],(req, resp) =>{
   orderModel.viewById(req.params.id, (error, result) => {
     if (!error) {
-      //get seller data
       resp.json(result);
     } else
       resp.json(error);
@@ -154,16 +139,16 @@ router.get("/:id", [authMid, userAuthMid],(req, resp) =>{
 });
 
 //view [single order] products that belongs to seller by order id
-router.get("/:id/seller",  [authMid, sellerAuthMid],(req, resp) =>{
-  orderModel.viewSellerOrderProducts(req.params.id, (error, result) => {
-    if (!error) {
-      resp.send(result);
-    } else {
-      console.log(error);
-      resp.send("error");
-    }
-  });
-});
+// router.get("/:id/seller",  [authMid, sellerAuthMid],(req, resp) =>{
+//   orderModel.viewSellerOrderProducts(req.params.id, (error, result) => {
+//     if (!error) {
+//       resp.send(result);
+//     } else {
+//       console.log(error);
+//       resp.send("error");
+//     }
+//   });
+// });
 
 // add cart .. check done in client side! route /orders/cart with post
 router.post('/cart', [authMid, userAuthMid, JSONParsermid], (req, resp) => {
