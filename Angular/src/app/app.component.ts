@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CategoryService } from './services/category.service';
 import { ProductDetailsService } from './services/product-details.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, Event } from '@angular/router';
 import { CartService } from "./services/cart.service";
 import { AuthServiceService } from './services/auth-service.service';
 
@@ -31,7 +31,16 @@ export class AppComponent {
     this.categoryService.getAllCategoreis().subscribe((res) => {
       this.categories = res;
     });
-
+    
+    route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url=="/") {
+        this.AuthService.currentUser.subscribe(res => {
+          console.log(res)
+          this.currentUser = res;
+          console.log(this.currentUser)
+        })
+      } 
+    });
 
   }
   collapse() {
@@ -42,10 +51,8 @@ export class AppComponent {
   logout() {
     console.log("logout");
     localStorage.removeItem('x-access-token');
-    var auth = false
-    this.AuthService.user.next({ isAuthenticated: auth })
+    this.AuthService.user.next({ isAuthenticated: false })
     this.route.navigate([''])
-
   }
 
   searchSubmit() {
@@ -59,5 +66,8 @@ export class AppComponent {
      }
      );*/
 
+  }
+  onChange(){
+    console.log('aaaaa')
   }
 }
