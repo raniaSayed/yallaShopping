@@ -17,17 +17,14 @@ import { NgxSlideshowModule } from 'ngx-slideshow';
 import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
-//import { HeaderComponent } from './header/header.component';
-//import { SidebarComponent } from './header/sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 
-// import { HeaderModule } from './header/index';
 
 
 import { AuthComponent } from './auth/auth.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import { HeaderModule } from './header/index';
+
 //george...
 import { UserRegisterationService } from './services/user-registeration.service';
 import { SellerRegisterationServiceService } from './services/seller-registeration-service.service';
