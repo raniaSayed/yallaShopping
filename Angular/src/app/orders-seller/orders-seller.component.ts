@@ -13,6 +13,7 @@ export class OrdersSellerComponent implements OnInit {
 
   ordersSeller: Object;
   stars: number[];
+  p: number = 1;
 
   constructor(private route: Router, private router: ActivatedRoute, private ordersSellerService: OrdersSellerService) {
   }

@@ -1,17 +1,18 @@
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http';
-import {RatingModule} from "ngx-rating";
+import { RatingModule } from "ngx-rating";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 //george ...
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UICarouselModule } from "ui-carousel"
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 import { NgxSlideshowModule } from 'ngx-slideshow';
 import { ImageUploadModule } from "angular2-image-upload";
 
@@ -26,7 +27,7 @@ import { BodyComponent } from './body/body.component';
 
 import { AuthComponent } from './auth/auth.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import { HeaderModule} from './header/index';
+import { HeaderModule } from './header/index';
 //george...
 import { UserRegisterationService } from './services/user-registeration.service';
 import { SellerRegisterationServiceService } from './services/seller-registeration-service.service';
@@ -43,20 +44,20 @@ import { ForgetPasswordService } from './services/forget-password.service';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
-      [
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider("566145113759448")
-        },
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider("521472444901-f0ijnmhagvoa5e5st8hm4q1orksj4v9j.apps.googleusercontent.com")
-        },
-      ])
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider("566145113759448")
+      },
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider("521472444901-f0ijnmhagvoa5e5st8hm4q1orksj4v9j.apps.googleusercontent.com")
+      },
+    ])
   return config;
 }
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { LimitToPipe } from  './limit-to.pipe';
+import { LimitToPipe } from './limit-to.pipe';
 
 import { CategoryService } from './services/category.service';
 import { RateService } from './services/rate.service'
@@ -90,17 +91,17 @@ const appRoutes: Routes = [
   { path: 'products/add', component: AddProductComponent },
   { path: 'products/search', component: SearchProductComponent },
 
-  { path: 'products/edit/:id', component: EditProductComponent},
+  { path: 'products/edit/:id', component: EditProductComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
 
   { path: 'products/seller', component: SellerProductsComponent },
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
   { path: 'sellers/orders', component: OrdersSellerComponent },
-  { path: 'sellers/orders/:order_id', component: SellerOrdersDetailsComponent},
+  { path: 'sellers/orders/:order_id', component: SellerOrdersDetailsComponent },
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'aboutus', component: AboutUsComponent },
-  { path: 'forgetPassword', component: ForgetPasswordComponent},
+  { path: 'forgetPassword', component: ForgetPasswordComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -130,7 +131,7 @@ const appRoutes: Routes = [
     ForgetPasswordComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     HttpModule,
     SocialLoginModule,
     HttpClientModule,
@@ -140,8 +141,9 @@ const appRoutes: Routes = [
     UICarouselModule,
     NgxSlideshowModule.forRoot(),
     NgbModule.forRoot(),
-    RatingModule
-    ],
+    RatingModule,
+    NgxPaginationModule,
+  ],
 
   providers: [
     UserRegisterationService,
@@ -162,7 +164,7 @@ const appRoutes: Routes = [
     ForgetPasswordService,
     NgbCarousel,
     TopProductsService,
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

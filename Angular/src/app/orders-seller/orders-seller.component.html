@@ -1,6 +1,7 @@
 <div class="container">
 
-  <div *ngFor="let item of ordersSeller" class="row border border-primary p-3 my-3" style="border-radius:10px;">
+  <div *ngFor="let item of ordersSeller | paginate: {itemsPerPage: 3, currentPage: p}" class="row border border-primary p-3 my-3"
+    style="border-radius:10px;">
     <div class="col-3">
       <img class="border" style="height: 150px;" src="{{item?.prodId.picture}}" alt="">
     </div>
@@ -22,5 +23,9 @@
         <h4>view order details</h4>
       </a>
     </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
