@@ -7,6 +7,8 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class OrdersSellerService {
 
+  token: Object;
+
   constructor(public http: HttpClient) { 
     
   }
@@ -20,12 +22,9 @@ export class OrdersSellerService {
     }
   }
 
-  getOrdersOfSeller(id,page,limit){
-    return this.http.get(`https://localhost:9090/orders/sellers/${id}?page=${page}&limit=${limit}`, this.headersFactory())
+  getOrdersOfSeller(){
+    return this.http.get(`https://localhost:9090/orders/sellers`, this.headersFactory())
   }
-  getOrdersOfSellerCount(id){
-    return this.http.get(`https://localhost:9090/orders/sellers${id}/count`,this.headersFactory());
-}
 
   getOrderById(id) {
     return this.http.get(`https://localhost:9090/orders/${id}`, this.headersFactory())

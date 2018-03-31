@@ -15,7 +15,7 @@ var generator = require('generate-password');
 
 router.post("/tokens", JSONParsermid, (req, resp) => {
   // console.log(req.body);
-  console.log("hi");
+  // console.log("hi");
   // console.log(UserModel.model);
 
   UserModel.model.findOne({
@@ -50,7 +50,7 @@ router.post("/tokens", JSONParsermid, (req, resp) => {
           })
 
         } else {
-          console.log("errorrr")
+          // console.log("errorrr")
           console.log(error)
           // resp.json(err);
         }

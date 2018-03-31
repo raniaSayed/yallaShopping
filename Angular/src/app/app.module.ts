@@ -97,7 +97,7 @@ const appRoutes: Routes = [
   { path: 'users/cart', component: UserCartComponent },
   { path: 'users/login', component: AuthComponent },
   { path: 'sellers/orders', component: OrdersSellerComponent },
-  { path: 'sellers/:id/orders/:order_id', component: SellerOrdersDetailsComponent},
+  { path: 'sellers/orders/:order_id', component: SellerOrdersDetailsComponent},
   { path: 'categories/:category/:subcategory', component: SubCategoryProductsComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'forgetPassword', component: ForgetPasswordComponent},
