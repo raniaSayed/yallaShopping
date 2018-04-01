@@ -229,7 +229,7 @@ router.get("/:productId/rate", [authMid, userAuthMid],function (request, respons
 });
 
 
-router.get("/:productId/avg", [authMid, userAuthMid], function (request, response) {
+router.get("/:productId/avg", function (request, response) {
 
   RatesModel.getAvgRates(+request.params.productId, function (err, result) {
     if (!err) {
