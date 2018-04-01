@@ -71,11 +71,8 @@ export class ProductDetailsComponent implements OnInit {
 
   editRate() {
     this.rateService.sendDataToServer3(this.id, this.userRate).subscribe((res) => {
-      // this.userRate=res;
-      console.log(this.userRate)
-      // console.log(this.productData)
-      // console.log(this.productData);
-
+      console.log("HELLO");
+      console.log(this.userRate);
     });
 
   }

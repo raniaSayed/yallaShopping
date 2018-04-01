@@ -163,7 +163,8 @@ router.get("/seller/:id/count", [authMid, sellerAuthMid], function (request, res
 
 //rate..
 // OK
-router.post("/:productID/rate", [authMid, userAuthMid], function (req, resp) {
+router.post("/:productID/rate", [authMid, userAuthMid], JSONParsermid, function (req, resp) {
+  console.log(req.decoded);
   RatesModel.rateProduct(+req.params.productID, +req.decoded.id, req.body.rate, (err, result) => {
     if (!err) {
       resp.json({
