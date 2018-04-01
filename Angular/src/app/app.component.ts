@@ -34,11 +34,21 @@ export class AppComponent {
     
     route.events.subscribe((event) => {
       if (event instanceof NavigationEnd && event.url=="/") {
-        this.AuthService.currentUser.subscribe(res => {
+        this.AuthService.checkToken().subscribe(res=>{
           console.log(res)
-          this.currentUser = res;
-          console.log(this.currentUser)
+          if (res['isAuthenticated']) {
+            this.currentUser = res
+            this.AuthService.user.next(this.currentUser)
+          }
         })
+
+
+
+        // this.AuthService.currentUser.subscribe(res => {
+        //   console.log(res)
+        //   this.currentUser = res;
+        //   console.log(this.currentUser)
+        // })
       } 
     });
 
