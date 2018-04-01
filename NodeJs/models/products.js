@@ -40,7 +40,10 @@ var products = new Schema(
 });
 
 // products plugins
-products.plugin(autoIncrement.plugin, 'products');
+products.plugin(autoIncrement.plugin, {
+  model: 'products',
+  startAt: 1,
+});
 // paginate
 
 // adding textsearch plugin...

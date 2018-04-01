@@ -27,8 +27,6 @@ fs.readdirSync(path.join(__dirname, "models")).forEach(function (model) {
   require(path.join(__dirname, "models", model))
 })
 
-// server.use(authMid);
-
 //make pagination
 server.use(paginate.middleware(5,10))
 
@@ -54,5 +52,5 @@ server.use("/categories", categoriesRouter)
 // server.use("/rates", ratesRouter)
 
 httpsServer.listen("9090", function () {
-  console.log("Starting in https server at port 9090..")
+  console.log("Starting in https server at port 9090..");
 })
