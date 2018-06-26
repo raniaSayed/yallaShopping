@@ -33,7 +33,7 @@ $ npm start
 start app via https://localhost:9090/
 
 
-<h4>Start Angular project for both Ubuntu & Windows: </h4> 
+<h4>Start Angular project: </h4> 
 
 $ cd {project_folder}/Angular/
 
@@ -66,7 +66,7 @@ start app via https://localhost:9090/
 
 
 
-<h4>Start Angular project for both Ubuntu & Windows: </h4> 
+<h4>Start Angular project: </h4> 
 
 open {project_folder}/Angular/ then type following commands:
 
