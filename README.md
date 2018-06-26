@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 <a href="https://nodejs.org/en/docs/">Node.js</a> v8.10.0 or above
 
-<a href="https://angular.io/docs/">Angular v5 or above</a>
+<a href="https://angular.io/docs/">Angular</a> v5 or above
 
 <a href="https://docs.mongodb.com/">MongoDB</a> database engine v3.6.3 or above
 
@@ -20,7 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
 <h3>To run App on Ububtu:</h3> 
 follow this commands
 
-Start NodeJs project:
+<h4>Start NodeJs project:</h4>
 
 $ sudo service mongod start
 
@@ -30,7 +30,18 @@ $ npm install
 
 $ npm start
 
-$ mongo
+start app via https://localhost:9090/
+
+
+<h4>Start Angular project for both Ubuntu & Windows: </h4> 
+
+$ cd {project_folder}/Angular/
+
+$ npm install
+
+$ npm start
+
+start app via https://localhost:3000/
 
 
 <h3>To run App on Windows</h3>
@@ -51,17 +62,13 @@ $ npm install
 
 $ npm start
 
-$ mongo
-
 start app via https://localhost:9090/
 
 
 
-<h3>Start Angular project for both Ubuntu & Windows: </h3> 
+<h4>Start Angular project for both Ubuntu & Windows: </h4> 
 
-$ sudo service mongod start
-
-$ cd {project_folder}/Angular/
+open {project_folder}/Angular/ then type following commands:
 
 $ npm install
 
