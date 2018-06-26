@@ -1,4 +1,4 @@
-<h2>Yall Shopping</h2>
+<h2>Yalla Shopping</h2>
 Web application developed by nodeJS, Angular frameworks and mongodb 
 
 
@@ -10,9 +10,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 <a href="https://nodejs.org/en/docs/">Node.js</a> v8.10.0 or above
 
-<a href="https://angular.io/docs/">Angular</a>
+<a href="https://angular.io/docs/">Angular v5 or above</a>
 
-<a href="https://docs.mongodb.com/">MongoDB</a> database engine v3.6.3
+<a href="https://docs.mongodb.com/">MongoDB</a> database engine v3.6.3 or above
 
 
 <h2>Installation</h2>
@@ -57,7 +57,7 @@ start app via https://localhost:9090/
 
 
 
-<h3>Start Angular project </h3> for both Ubuntu & Windows: 
+<h3>Start Angular project for both Ubuntu & Windows: </h3> 
 
 $ sudo service mongod start
 
@@ -71,5 +71,13 @@ start app via https://localhost:3000/
 
 
 
-<h2>Author</h2>
+<h2>Authors</h2>
+
 <a href="https://github.com/raniaSayed">Rania Sayed</a>
+
+<a href="https://github.com/mohamedgomran">Mohamed Omran</a>
+
+<a href="https://github.com/gemyero">Mohamed Gamal</a>
+
+<a href="https://github.com/MennaAnees">Menna Anees</a>
+
